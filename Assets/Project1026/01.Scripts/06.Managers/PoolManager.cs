@@ -104,6 +104,7 @@ public class PoolManager
 {
     #region Fields
     private Dictionary<GameObject, Pool> pools = new();
+    private readonly Dictionary<PoolType, GameObject> registeredPrefabs = new();
     private Transform root;
     #endregion
 
@@ -167,11 +168,37 @@ public class PoolManager
             pool.Clear();
 
         pools.Clear();
+        registeredPrefabs.Clear();
 
         if (root != null)
         {
             Object.Destroy(root.gameObject);
             root = null;
         }
+    }
+
+    public void Register(PoolType type, GameObject prefab)
+    {
+        if (prefab == null)
+        {
+            Debug.LogError($"[PoolManager] {type} 프리팹이 없습니다.");
+            return;
+        }
+
+        registeredPrefabs[type] = prefab;
+    }
+
+    public GameObject Pop(
+        PoolType type,
+        Vector3 position,
+        Quaternion rotation)
+    {
+        if (!registeredPrefabs.TryGetValue(type, out GameObject prefab))
+        {
+            Debug.LogError($"[PoolManager] {type} 프리팹이 등록되지 않았습니다.");
+            return null;
+        }
+
+        return Pop(prefab, position, rotation);
     }
 }
