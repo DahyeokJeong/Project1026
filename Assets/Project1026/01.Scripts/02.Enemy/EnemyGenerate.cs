@@ -9,7 +9,7 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField] private EnemyController rangedPrefab;
 
     [Header("Spawn Settings")]
-    [SerializeField, Min(1)] private int maxAliveCount = 200;
+    [SerializeField, Min(1)] private int maxCount = 200;
     [SerializeField, Min(1)] private int spawnCount = 5;
     [SerializeField, Min(0.01f)] private float spawnInterval = 2f;
     [SerializeField] private bool spawnImmediately;
@@ -26,8 +26,7 @@ public class EnemyGenerate : MonoBehaviour
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
     private float timer;
-
-    public int ActiveCount => activeEnemies.Count;
+    private int totalSpawned;
 
     private void Start()
     {
@@ -59,11 +58,10 @@ public class EnemyGenerate : MonoBehaviour
         if (area == null || area.Grid == null)
             return;
 
-        // 반환되거나 파괴된 몬스터를 활성 목록에서 제외합니다.
         activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
         ClearDestroyedCache();
 
-        int available = Mathf.Max(0, maxAliveCount - activeEnemies.Count);
+        int available = Mathf.Max(0, maxCount - totalSpawned);
         int count = Mathf.Min(spawnCount, available);
 
         for (int i = 0; i < count; i++)
@@ -87,7 +85,7 @@ public class EnemyGenerate : MonoBehaviour
         if (obj == null)
             return;
 
-        // 처음 받은 오브젝트만 검색하고 재사용 시에는 참조를 사용합니다.
+
         if (!enemyCache.TryGetValue(obj, out EnemyController enemy) || enemy == null)
         {
             enemy = obj.GetComponent<EnemyController>();
@@ -103,6 +101,7 @@ public class EnemyGenerate : MonoBehaviour
 
         enemy.Initialize(area);
         activeEnemies.Add(enemy);
+        totalSpawned++;
     }
 
     public bool Despawn(EnemyController enemy)
