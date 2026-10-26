@@ -96,8 +96,10 @@ public class EnemyController : MonoBehaviour
     public void Initialize(NavigationArea area)
     {
         NavArea?.Unregister(this);
-
         navArea = area;
+
+        ChangeState(chaseState);
+        attackState.ResetTimer();
 
         if(isActiveAndEnabled)
             this.NavArea?.Register(this);

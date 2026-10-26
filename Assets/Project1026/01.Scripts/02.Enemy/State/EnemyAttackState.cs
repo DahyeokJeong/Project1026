@@ -55,7 +55,11 @@ public class EnemyAttackState : IState
                 break;
         }
 
-        timer = Mathf.Max(0.01f, enemy.AttackTimer);
+        timer = Mathf.Max(0f, enemy.AttackTimer);
+    }
 
+    public void ResetTimer()
+    {
+        timer = Mathf.Max(0f, enemy.AttackTimer);
     }
 }
