@@ -44,7 +44,12 @@ public class NavigationArea : MonoBehaviour
 
         if (enemies.Count < 2 || agentRadius <= 0f)
             return;
+        Physical();
+        
+    }
 
+    private void Physical()
+    {
         Physics2D.SyncTransforms();
 
         ContactFilter2D filter = new ContactFilter2D();
@@ -53,9 +58,9 @@ public class NavigationArea : MonoBehaviour
 
         float dia = agentRadius * 2f + enemyGap;
 
-        foreach(EnemyController enemy in enemies.Keys)
+        foreach (EnemyController enemy in enemies.Keys)
         {
-            if(enemy == null)
+            if (enemy == null)
                 continue;
 
             Vector2 pos = enemy.transform.position;
@@ -63,11 +68,11 @@ public class NavigationArea : MonoBehaviour
 
             int count = Physics2D.OverlapCircle(pos, dia, filter, neighbors);
 
-            for(int i = 0; i < count; ++i)
+            for (int i = 0; i < count; ++i)
             {
                 EnemyController other = neighbors[i].GetComponentInParent<EnemyController>();
 
-                if (other == null || other == enemy || other.Area != this)
+                if (other == null || other == enemy || other.NavArea != this)
                     continue;
 
                 Vector2 offset = pos - (Vector2)other.transform.position;
@@ -79,11 +84,11 @@ public class NavigationArea : MonoBehaviour
 
                 Vector2 dir;
 
-                if(dis > 0.001f)
+                if (dis > 0.001f)
                 {
                     dir = offset / dis;
                 }
-                else 
+                else
                 {
                     if (!enemies.ContainsKey(other))
                         continue;
@@ -104,7 +109,7 @@ public class NavigationArea : MonoBehaviour
                 }
                 cor += dir * (dia - dis) * 0.5f;
             }
-            if(cor.magnitude > 0.001f)
+            if (cor.magnitude > 0.001f)
             {
                 Push(enemy.transform, cor);
                 Physics2D.SyncTransforms();

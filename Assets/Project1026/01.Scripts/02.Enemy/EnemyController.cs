@@ -15,21 +15,28 @@ public enum EnemyAttackType
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Nav AI")]
-    [SerializeField] private NavigationArea area;
-    public NavigationArea Area => area;
+    [Header("Nav Ai")]
+    [SerializeField] private NavigationArea navArea;
+    public NavigationArea NavArea => navArea;
+
+    public NavigationArea area { get; set; }
 
     [Header("attack & chase")]
+    [SerializeField, Min(0f)] private float attackTimer = 2f;
     [SerializeField, Min(0f)] private float attackRange = 1f;
     [SerializeField, Min(0f)] private float chaseMargin = 0.3f;
+    [SerializeField] private GameObject attackPrefab;
 
     [Header("Enemy Type")]
     [SerializeField] private EnemyAttackType type;
 
     [Header("Enmey Ranged Radius")]
     [SerializeField, Min(0.1f)] private float fireRaius = 0.3f;
+
+    public float AttackTimer => attackTimer;
+    public GameObject AttackPrefab => attackPrefab;
     public EnemyAttackType Type => type;
-    private Transform Target => Area != null ? area.Target : null;
+    private Transform Target => NavArea != null ? NavArea.Target : null;
     public bool CanAttack => CheckAttackRange(attackRange);
     public bool CanKeepAttack => CheckAttackRange(attackRange + chaseMargin);
 
@@ -88,12 +95,12 @@ public class EnemyController : MonoBehaviour
 
     public void Initialize(NavigationArea area)
     {
-        this.area?.Unregister(this);
+        NavArea?.Unregister(this);
 
-        this.area = area;
+        navArea = area;
 
         if(isActiveAndEnabled)
-            this.area?.Register(this);
+            this.NavArea?.Register(this);
     }
 
     private bool CheckAttackRange(float range)
@@ -110,19 +117,19 @@ public class EnemyController : MonoBehaviour
 
         if(type == EnemyAttackType.Melee)
         {
-            return Physics2D.Linecast(origin, target.position, Area.Obstacle).collider == null;
+            return Physics2D.Linecast(origin, target.position, NavArea.Obstacle).collider == null;
         }
 
-        return Physics2D.CircleCast(origin, fireRaius, shot.normalized, shot.magnitude, Area.Obstacle).collider == null;
+        return Physics2D.CircleCast(origin, fireRaius, shot.normalized, shot.magnitude, NavArea.Obstacle).collider == null;
     }
 
     private void OnEnable()
     {
-        area?.Register(this);
+        NavArea?.Register(this);
     }
 
     private void OnDisable()
     {
-        area?.Unregister(this);
+        NavArea?.Unregister(this);
     }
 }

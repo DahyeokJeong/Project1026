@@ -28,7 +28,7 @@ public class EnemyChaseState : IState
 
     public void Tick()
     {
-        dir = enemy.Area == null ? Vector2.zero : enemy.Area.GetDirection(enemy.transform.position);
+        dir = enemy.NavArea == null ? Vector2.zero : enemy.NavArea.GetDirection(enemy.transform.position);
 
         Vector3 movement = new Vector3(dir.x, dir.y, 0f);
 
