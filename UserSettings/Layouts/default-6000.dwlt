@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -221,8 +221,8 @@ MonoBehaviour:
     y: 0
     width: 196
     height: 941
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -581,12 +581,12 @@ MonoBehaviour:
       displayed: 1
       id: Play Mode Controls
       index: 0
-      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":-911.0,"y":-36.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":3,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
-      snapOffset: {x: -911, y: -36}
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 3
+      snapCorner: 0
       layout: 4
       size: {x: 0, y: 0}
       sizeOverridden: 0
@@ -1423,14 +1423,12 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs:
-      - m_rawData: 568105589213630926
+      m_SelectedIDs: []
       m_LastClickedID:
-        m_rawData: 568105589213630926
+        m_rawData: 0
       m_ExpandedIDs:
-      - m_rawData: 568105589213630926
-      - m_rawData: 568105589213631506
-      - m_rawData: 568105589213646204
+      - m_rawData: 568105589213658884
+      - m_rawData: 568105589213664048
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1508,7 +1506,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Project1026/01.Scripts/00.Interface
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1518,26 +1516,28 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Project1026/01.Scripts/00.Interface
+  - Assets
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\User\Project1026
+  m_LastProjectPath: C:\Users\User\Desktop\priject_1026
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_rawData: 568105584918896168
+    - m_rawData: 568105584918869646
     m_LastClickedID:
-      m_rawData: 568105584918896168
+      m_rawData: 568105584918869646
     m_ExpandedIDs:
-    - m_rawData: 568105589213645458
+    - m_rawData: 568105589213663294
     - m_rawData: 0
-    - m_rawData: 568105584918859132
-    - m_rawData: 568105584918896080
-    - m_rawData: 568105584918896152
-    - m_rawData: 568105584918896184
-    - m_rawData: 568105584918896406
+    - m_rawData: 568105584918869646
+    - m_rawData: 568105584918870514
+    - m_rawData: 568105584918870904
+    - m_rawData: 568105584918874442
+    - m_rawData: 568105584918876286
+    - m_rawData: 568105584918878944
+    - m_rawData: 568105584918880964
     - m_rawData: 568105587066273791
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1599,10 +1599,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_rawData: 568105589213630926
+    m_SelectedInstanceIDs: []
     m_LastClickedEntityId:
-      m_rawData: 568105589213630926
+      m_rawData: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_rawData: 568105584918852244
