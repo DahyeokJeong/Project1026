@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 24
+  controlID: 166
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -1232,9 +1232,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 2.7381284, y: -0.7319281, z: 0.027024036}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 2.7381284, y: -0.7319281, z: 0.027024036}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1285,9 +1285,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10
+    m_Target: 7.297605
     speed: 2
-    m_Value: 10
+    m_Value: 7.297605
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1427,8 +1427,20 @@ MonoBehaviour:
       m_LastClickedID:
         m_rawData: 0
       m_ExpandedIDs:
-      - m_rawData: 568105589213658884
-      - m_rawData: 568105589213664048
+      - m_rawData: 568105589213646212
+      - m_rawData: 568105589213646358
+      - m_rawData: 568105589213646520
+      - m_rawData: 568105589213646674
+      - m_rawData: 568105589213646828
+      - m_rawData: 568105589213646982
+      - m_rawData: 568105589213647136
+      - m_rawData: 568105589213648668
+      - m_rawData: 568105589213648672
+      - m_rawData: 568105589213650920
+      - m_rawData: 568105589213660360
+      - m_rawData: 568105589213662976
+      - m_rawData: 568105589213664012
+      - m_rawData: 568105589213757428
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1506,7 +1518,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Project1026/01.Scripts/08.Camera
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1516,19 +1528,21 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets
+  - Assets/Project1026/01.Scripts/08.Camera
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\User\Desktop\priject_1026
+  m_LastProjectPath: C:\Users\User\Documents\GitHub\Project1026
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 55}
     m_SelectedIDs:
-    - m_rawData: 568105584918869646
+    - m_rawData: 568105584918880342
     m_LastClickedID:
-      m_rawData: 568105584918869646
-    m_ExpandedIDs: []
+      m_rawData: 568105584918880342
+    m_ExpandedIDs:
+    - m_rawData: 0
+    - m_rawData: 568105584918849506
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1561,7 +1575,9 @@ MonoBehaviour:
     - m_rawData: 568105584918852984
     m_LastClickedID:
       m_rawData: 568105584918852984
-    m_ExpandedIDs: []
+    m_ExpandedIDs:
+    - m_rawData: 0
+    - m_rawData: 568105584918849506
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1605,6 +1621,7 @@ MonoBehaviour:
     - m_rawData: 568105584918846758
     - m_rawData: 568105584918878668
     - m_rawData: 568105584918861238
+    - m_rawData: 568105584918874468
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
