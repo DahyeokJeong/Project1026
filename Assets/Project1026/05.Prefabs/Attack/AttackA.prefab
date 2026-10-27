@@ -107,3 +107,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackA
   moveSpeed: 6
   lifeTime: 2
+  hitRadius: 0.3

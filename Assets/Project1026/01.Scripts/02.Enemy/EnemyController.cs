@@ -43,9 +43,22 @@ public class EnemyController : MonoBehaviour
     private IState currentState;
     private IState prevState;
 
+    private EnemyGenerate generate;
     private EnemyAttackState attackState;
     private EnemyChaseState chaseState;
 
+    public void Initialize(NavigationArea area, EnemyGenerate generate)
+    {
+        NavArea?.Unregister(this);
+        navArea = area;
+
+        this.generate = generate;
+        ChangeState(chaseState);
+        attackState.ResetTimer();
+
+        if (isActiveAndEnabled)
+            this.NavArea?.Register(this);
+    }
     private void Awake()
     {
         attackState = new EnemyAttackState(this);
@@ -93,18 +106,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void Initialize(NavigationArea area)
-    {
-        NavArea?.Unregister(this);
-        navArea = area;
-
-        ChangeState(chaseState);
-        attackState.ResetTimer();
-
-        if(isActiveAndEnabled)
-            this.NavArea?.Register(this);
-    }
-
     private bool CheckAttackRange(float range)
     {
         Transform target = Target;
@@ -123,6 +124,11 @@ public class EnemyController : MonoBehaviour
         }
 
         return Physics2D.CircleCast(origin, fireRaius, shot.normalized, shot.magnitude, NavArea.Obstacle).collider == null;
+    }
+
+    public void TakeDamage()
+    {
+        generate.Despawn(this);
     }
 
     private void OnEnable()

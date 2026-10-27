@@ -3,30 +3,40 @@ using UnityEngine;
 
 public class EnemyGenerate : MonoBehaviour
 {
+    #region Regerences
     [Header("References")]
     [SerializeField] private NavigationArea area;
     [SerializeField] private EnemyController meleePrefab;
     [SerializeField] private EnemyController rangedPrefab;
+    #endregion
 
+    #region Setting
     [Header("Spawn Settings")]
     [SerializeField, Min(1)] private int maxCount = 200;
     [SerializeField, Min(1)] private int spawnCount = 5;
     [SerializeField, Min(0.01f)] private float spawnInterval = 2f;
     [SerializeField] private bool spawnImmediately;
+    #endregion
 
+    #region Raio
     [Header("Spawn Ratio")]
     [SerializeField, Range(0f, 1f)] private float rangedRatio = 0.3f;
+    #endregion
 
+    #region Spawn
     [Header("Spawn Position")]
     [SerializeField, Min(0.01f)] private float enemyRadius = 0.5f;
     [SerializeField, Min(0f)] private float edgePadding = 0.15f;
     [SerializeField, Min(1)] private int positionAttempts = 20;
+    #endregion
 
+    #region 
     private readonly List<EnemyController> activeEnemies = new();
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
     private float timer;
     private int totalSpawned;
+    #endregion
 
     private void Start()
     {
@@ -99,7 +109,7 @@ public class EnemyGenerate : MonoBehaviour
             enemyCache[obj] = enemy;
         }
 
-        enemy.Initialize(area);
+        enemy.Initialize(area, this);
         activeEnemies.Add(enemy);
         totalSpawned++;
     }
@@ -153,7 +163,7 @@ public class EnemyGenerate : MonoBehaviour
             float distance = Random.Range(0f, perimeter);
             Vector2 candidate;
 
-            if (distance < width)
+            if (distance < width) 
             {
                 candidate = new Vector2(min.x + distance, min.y);
             }
@@ -184,6 +194,14 @@ public class EnemyGenerate : MonoBehaviour
             return true;
         }
 
+        /*      3번째
+           ← ← ← ← ←
+           ↑         ↑
+        4번째       2번째
+           ↓         ↑
+           → → → → →
+               1번째
+        */
         return false;
     }
 }

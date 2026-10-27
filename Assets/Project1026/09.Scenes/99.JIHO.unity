@@ -360,10 +360,10 @@ MonoBehaviour:
   target: {fileID: 1827888411}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 1073741824
+    m_Bits: 128
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 2147483648
+    m_Bits: 64
 --- !u!4 &943698263
 Transform:
   m_ObjectHideFlags: 0
@@ -394,10 +394,10 @@ MonoBehaviour:
   area: {fileID: 943698262}
   meleePrefab: {fileID: 156661654134334344, guid: d34e67caa5860214c8fd580d63045133, type: 3}
   rangedPrefab: {fileID: 156661654134334344, guid: a0d19dec02bff4d419a7418e8344e080, type: 3}
-  maxCount: 200
+  maxCount: 50
   spawnCount: 5
   spawnInterval: 2
-  spawnImmediately: 0
+  spawnImmediately: 1
   rangedRatio: 0.3
   enemyRadius: 0.5
   edgePadding: 0.15
@@ -701,8 +701,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.5}
+  m_Size: {x: 1, y: 1}
   m_Direction: 0
 --- !u!50 &1827888408
 Rigidbody2D:
@@ -860,7 +860,7 @@ SceneRoots:
   - {fileID: 1868925404}
   - {fileID: 1536316583}
   - {fileID: 360367507}
+  - {fileID: 943698263}
   - {fileID: 181466416}
   - {fileID: 1827888411}
-  - {fileID: 943698263}
   - {fileID: 159709150}
