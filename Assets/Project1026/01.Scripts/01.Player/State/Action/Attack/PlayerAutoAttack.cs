@@ -5,7 +5,6 @@ public class PlayerAutoAttack : MonoBehaviour
 {
     #region Components
     [Header("Component")]
-    [SerializeField] private PlayerMovement movement;
     [SerializeField] private Transform firePoint;
     [SerializeField] private PlayerModel model;
     #endregion
@@ -24,16 +23,14 @@ public class PlayerAutoAttack : MonoBehaviour
     {
         attacks.Add(new ProjectileAttack(
             firePoint,
-            movement,
+            model,
             PoolType.Piercing,
-            model.AttackDamage,
             piercingInterval));
 
         attacks.Add(new ProjectileAttack(
             firePoint,
-            movement,
+            model,
             PoolType.Normal,
-            model.AttackDamage,
             normalInterval));
     }
 

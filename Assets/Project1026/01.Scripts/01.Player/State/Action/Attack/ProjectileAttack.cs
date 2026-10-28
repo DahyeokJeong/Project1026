@@ -3,7 +3,7 @@ public class ProjectileAttack : IAttack
 {
     #region Components
     private readonly Transform firePoint;
-    private readonly PlayerMovement movement;
+    private readonly PlayerModel model;
     #endregion
 
     #region Attack Settings
@@ -12,28 +12,25 @@ public class ProjectileAttack : IAttack
     #endregion
 
     #region Fields
-    private int damage;
     private float attackTimer;
     #endregion
 
     public ProjectileAttack(
         Transform firePoint,
-        PlayerMovement movement,
+        PlayerModel model,
         PoolType poolType,
-        int damage,
         float attackInterval)
     {
         this.firePoint = firePoint;
-        this.movement = movement;
+        this.model = model;
         this.poolType = poolType;
         this.attackInterval = Mathf.Max(0.01f, attackInterval);
-        this.damage = damage;
         attackTimer = this.attackInterval;
     }
 
     public void Tick(float deltaTime)
     {
-        attackTimer -= deltaTime;
+        attackTimer -= deltaTime * Mathf.Max(0f, model.AttackSpeed);
 
         if (attackTimer > 0f)
             return;
@@ -53,8 +50,8 @@ public class ProjectileAttack : IAttack
         if (go != null &&
             go.TryGetComponent(out ProjectileBase projectile))
         {
-            projectile.SetDirection(movement.LastMoveDirection);
-            projectile.SetDamage(damage);
+            projectile.SetDirection(model.LastMoveDirection);
+            projectile.SetDamage(model.AttackDamage);
         }
     }
 }

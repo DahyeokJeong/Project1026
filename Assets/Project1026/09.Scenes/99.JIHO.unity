@@ -808,7 +808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20c470a58d60314aa2a8e7782154da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoAttack
-  movement: {fileID: 891278773}
   firePoint: {fileID: 891278770}
   model: {fileID: 891278779}
   piercingInterval: 1

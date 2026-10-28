@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
         float moveSpeed = model.MoveSpeed;
         Vector2 moveDir = moveInput.normalized;
-        LastMoveDirection = moveDir;
+        model.LastMoveDirection = moveDir;
 
         Vector2 nextPos =
             rb.position + moveDir * moveSpeed * Time.fixedDeltaTime;

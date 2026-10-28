@@ -22,10 +22,12 @@ public class PlayerController : MonoBehaviour
     // Properties
     public PlayerInputHandler InputHandler => inputHandler;
     public PlayerMovement Movement => movement;
+
     #endregion
 
     private void Awake()
     {
+
         idleState = new PlayerIdleState(this);
         moveState = new PlayerMoveState(this);
     }
