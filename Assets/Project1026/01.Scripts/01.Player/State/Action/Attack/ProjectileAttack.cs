@@ -12,6 +12,7 @@ public class ProjectileAttack : IAttack
     #endregion
 
     #region Fields
+    private int damage;
     private float attackTimer;
     #endregion
 
@@ -19,13 +20,14 @@ public class ProjectileAttack : IAttack
         Transform firePoint,
         PlayerMovement movement,
         PoolType poolType,
+        int damage,
         float attackInterval)
     {
         this.firePoint = firePoint;
         this.movement = movement;
         this.poolType = poolType;
         this.attackInterval = Mathf.Max(0.01f, attackInterval);
-
+        this.damage = damage;
         attackTimer = this.attackInterval;
     }
 
@@ -52,6 +54,7 @@ public class ProjectileAttack : IAttack
             go.TryGetComponent(out ProjectileBase projectile))
         {
             projectile.SetDirection(movement.LastMoveDirection);
+            projectile.SetDamage(damage);
         }
     }
 }

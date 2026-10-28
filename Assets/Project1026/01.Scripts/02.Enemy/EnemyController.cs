@@ -19,8 +19,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private NavigationArea navArea;
     public NavigationArea NavArea => navArea;
 
-    public NavigationArea area { get; set; }
-
     [Header("attack & chase")]
     [SerializeField, Min(0f)] private float attackTimer = 2f;
     [SerializeField, Min(0f)] private float attackRange = 1f;
@@ -33,6 +31,7 @@ public class EnemyController : MonoBehaviour
     [Header("Enmey Ranged Radius")]
     [SerializeField, Min(0.1f)] private float fireRaius = 0.3f;
 
+    public bool IsHit { get; set; } = false;
     public float AttackTimer => attackTimer;
     public GameObject AttackPrefab => attackPrefab;
     public EnemyAttackType Type => type;
@@ -41,11 +40,11 @@ public class EnemyController : MonoBehaviour
     public bool CanKeepAttack => CheckAttackRange(attackRange + chaseMargin);
 
     private IState currentState;
-    private IState prevState;
 
     private EnemyGenerate generate;
     private EnemyAttackState attackState;
     private EnemyChaseState chaseState;
+    private EnemyHitState hitState;
 
     public void Initialize(NavigationArea area, EnemyGenerate generate)
     {
@@ -63,6 +62,7 @@ public class EnemyController : MonoBehaviour
     {
         attackState = new EnemyAttackState(this);
         chaseState = new EnemyChaseState(this);
+        hitState = new EnemyHitState(this);
     }
 
     void Start()
@@ -88,7 +88,6 @@ public class EnemyController : MonoBehaviour
 
         currentState?.Exit();
 
-        prevState = currentState;
         currentState = newState;
 
         currentState?.Enter();
@@ -96,7 +95,12 @@ public class EnemyController : MonoBehaviour
 
     private void HandleStateChange()
     {
-        if(CanAttack)
+        if(IsHit)
+        {
+            attackState.ResetTimer();
+            ChangeState(hitState);
+        }
+        else if(CanAttack)
         {
             ChangeState(attackState);
         }
@@ -126,8 +130,10 @@ public class EnemyController : MonoBehaviour
         return Physics2D.CircleCast(origin, fireRaius, shot.normalized, shot.magnitude, NavArea.Obstacle).collider == null;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
+        IsHit = true;
+        hitState.GetDamage(damage);
         generate.Despawn(this);
     }
 

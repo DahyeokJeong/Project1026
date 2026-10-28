@@ -10,11 +10,13 @@ public abstract class ProjectileBase : MonoBehaviour
     #region Fields
     private Vector2 moveDirection;
     private float timer;
+    private int damage;
     #endregion
 
     #region Properties
     protected Vector2 MoveDirection => moveDirection;
     protected float MoveSpeed => moveSpeed;
+    protected int Damage => damage;
     #endregion
 
     protected virtual void OnEnable()
@@ -41,6 +43,11 @@ public abstract class ProjectileBase : MonoBehaviour
     public void SetDirection(Vector2 direction)
     {
         moveDirection = direction.normalized;
+    }
+
+    public void SetDamage(int attackDamage)
+    {
+        damage = attackDamage;
     }
 
     protected void Release()

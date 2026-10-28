@@ -7,6 +7,7 @@ public class PlayerAutoAttack : MonoBehaviour
     [Header("Component")]
     [SerializeField] private PlayerMovement movement;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private PlayerModel model;
     #endregion
 
     #region Attack Settings
@@ -25,12 +26,14 @@ public class PlayerAutoAttack : MonoBehaviour
             firePoint,
             movement,
             PoolType.Piercing,
+            model.AttackDamage,
             piercingInterval));
 
         attacks.Add(new ProjectileAttack(
             firePoint,
             movement,
             PoolType.Normal,
+            model.AttackDamage,
             normalInterval));
     }
 

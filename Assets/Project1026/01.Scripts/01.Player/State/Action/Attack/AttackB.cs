@@ -43,7 +43,7 @@ public class AttackB : MonoBehaviour
         if(!hit.TryGetComponent(out EnemyController enemy))
             return false;
 
-        enemy.TakeDamage();
+        //enemy.TakeDamage();
         Managers.Pool.Push(gameObject);
         return true;
     }

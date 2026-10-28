@@ -87,6 +87,15 @@ public class NormalProjectile : ProjectileBase
         if (count <= 0)
             return;
 
+        for(int i = 0; i < count; ++i)
+        {
+            Collider2D hit = hitBuffer[i];
+
+            if(hit.TryGetComponent<EnemyController>(out var enemy))
+            {
+                enemy.TakeDamage(Damage);
+            }
+        }
         // Hit 시스템 구현 시 실제 데미지 처리 연결
 
         Release();

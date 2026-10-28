@@ -5,11 +5,7 @@ public class PlayerMovement : MonoBehaviour
     #region Components
     [Header("Component")]
     [SerializeField] private Rigidbody2D rb;
-    #endregion
-
-    #region Move Settings
-    [Header("Move Settings")]
-    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private PlayerModel model;
     #endregion
 
     #region Properties
@@ -21,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.sqrMagnitude <= 0f)
             return;
 
+        float moveSpeed = model.MoveSpeed;
         Vector2 moveDir = moveInput.normalized;
         LastMoveDirection = moveDir;
 
