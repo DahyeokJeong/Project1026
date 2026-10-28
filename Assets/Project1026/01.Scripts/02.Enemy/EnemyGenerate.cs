@@ -18,7 +18,7 @@ public class EnemyGenerate : MonoBehaviour
     [SerializeField] private bool spawnImmediately;
     #endregion
 
-    #region Raio
+    #region Ratio
     [Header("Spawn Ratio")]
     [SerializeField, Range(0f, 1f)] private float rangedRatio = 0.3f;
     #endregion

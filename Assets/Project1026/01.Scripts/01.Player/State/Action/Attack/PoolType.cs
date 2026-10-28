@@ -1,5 +1,7 @@
 public enum PoolType
 {
     AttackA,
-    AttackB
+    AttackB,
+    Piercing,
+    Normal
 }

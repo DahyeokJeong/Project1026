@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     #endregion
 
-    #region Movement Settings
+    #region Move Settings
     [Header("Move Settings")]
     [SerializeField] private float moveSpeed = 3f;
     #endregion
@@ -23,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         Vector2 moveDir = moveInput.normalized;
-
         LastMoveDirection = moveDir;
 
-        Vector2 nextPos = rb.position + moveDir * moveSpeed * Time.fixedDeltaTime;
+        Vector2 nextPos =
+            rb.position + moveDir * moveSpeed * Time.fixedDeltaTime;
 
         rb.MovePosition(nextPos);
     }

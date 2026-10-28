@@ -2,20 +2,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Components")]
+    #region Component
+    [Header("Component")]
     [SerializeField] private PlayerInputHandler inputHandler;
     [SerializeField] private PlayerMovement movement;
+    #endregion
 
+    #region State
     // States
     private IState currentState;
     private IState prevState;
+    
 
     private PlayerIdleState idleState;
     private PlayerMoveState moveState;
+    #endregion
 
+    #region Properties
     // Properties
     public PlayerInputHandler InputHandler => inputHandler;
     public PlayerMovement Movement => movement;
+    #endregion
 
     private void Awake()
     {

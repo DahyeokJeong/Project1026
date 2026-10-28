@@ -26,6 +26,7 @@ public class NavigationArea : MonoBehaviour
     public Transform Target => target;
     public LayerMask Obstacle => obstacleLayer;
     public NavigationGrid Grid { get; private set; }
+
     private FlowField flowField;
     private Vector2Int? lastTargetCell;
 

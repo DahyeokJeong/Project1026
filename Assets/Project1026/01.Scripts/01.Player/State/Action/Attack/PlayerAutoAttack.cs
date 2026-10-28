@@ -11,9 +11,8 @@ public class PlayerAutoAttack : MonoBehaviour
 
     #region Attack Settings
     [Header("Attack Settings")]
-    [SerializeField] private float attackAInterval = 1f;
-    [SerializeField] private float attackBInterval = 2f;
-    [SerializeField] private float spreadAngle = 20f;
+    [SerializeField] private float piercingInterval = 1f;
+    [SerializeField] private float normalInterval = 2f;
     #endregion
 
     #region Fields
@@ -25,15 +24,14 @@ public class PlayerAutoAttack : MonoBehaviour
         attacks.Add(new ProjectileAttack(
             firePoint,
             movement,
-            attackAInterval
-        ));
+            PoolType.Piercing,
+            piercingInterval));
 
-        attacks.Add(new SpreadAttack(
+        attacks.Add(new ProjectileAttack(
             firePoint,
             movement,
-            attackBInterval,
-            spreadAngle
-        ));
+            PoolType.Normal,
+            normalInterval));
     }
 
     private void Update()
