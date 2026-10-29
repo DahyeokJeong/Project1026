@@ -1,0 +1,16 @@
+{
+    "Augments": [
+        {
+            "Id": "AUG001",
+            "ConfigKey": "SO_Augment_NormalCount",
+            "AttackConfigKey": "SO_Attack_Normal",
+            "Value": 1
+        },
+        {
+            "Id": "AUG002",
+            "ConfigKey": "SO_Augment_PiercingCount",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 1
+        }
+    ]
+}
