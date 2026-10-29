@@ -3,29 +3,36 @@ using System.Collections.Generic;
 
 public class NavigationArea : MonoBehaviour
 {
+    #region Grid
     [Header("Grid")]
     [SerializeField] private Vector2 worldSize = new Vector2(25, 10);
     [SerializeField, Min(0.05f)] private float cellSize = 0.5f;
+    #endregion
 
+    #region Obstacle
     [Header("Obstacle")]
     [SerializeField, Min(0.01f)] private float agentRadius = 0.5f;
     [SerializeField, Min(0f)] private float padding = 0.15f;
     [SerializeField, Min(0f)] private float enemyGap = 0.1f;
-
+    #endregion
+    #region Target
     [Header("Target")]
     [SerializeField] private Transform target;
-
+    #endregion
+    #region Layer
     [Header("LayerMask")]
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask enemyLayer;
-
+    #endregion
     //몬스터 등록
     private Dictionary<EnemyController, Vector2> enemies = new();
     private Collider2D[] neighbors = new Collider2D[64];
 
+    #region Property
     public Transform Target => target;
     public LayerMask Obstacle => obstacleLayer;
     public NavigationGrid Grid { get; private set; }
+    #endregion
 
     private FlowField flowField;
     private Vector2Int? lastTargetCell;
@@ -46,7 +53,7 @@ public class NavigationArea : MonoBehaviour
         if (enemies.Count < 2 || agentRadius <= 0f)
             return;
         Physical();
-        
+
     }
 
     private void Physical()
@@ -150,7 +157,7 @@ public class NavigationArea : MonoBehaviour
 
         float allowDis = hit.collider == null ? dis : Mathf.Max(0f, hit.distance - 0.01f);
 
-        Vector2 des= pos + dir * allowDis;
+        Vector2 des = pos + dir * allowDis;
 
         if (!Grid.TryWorldToCell(des, out Vector2Int cell))
             return;
@@ -158,7 +165,7 @@ public class NavigationArea : MonoBehaviour
         if (!Grid.IsWalkable(cell))
             return;
 
-        if (Physics2D.OverlapCircle(des, agentRadius + padding, obstacleLayer ) != null)
+        if (Physics2D.OverlapCircle(des, agentRadius + padding, obstacleLayer) != null)
             return;
 
         enemy.position += (Vector3)(des - pos);
@@ -179,9 +186,9 @@ public class NavigationArea : MonoBehaviour
 
         Physics2D.SyncTransforms();
 
-        for(int x = 0; x < Grid.Width; ++x)
+        for (int x = 0; x < Grid.Width; ++x)
         {
-            for(int y = 0; y < Grid.Height; ++y)
+            for (int y = 0; y < Grid.Height; ++y)
             {
                 Vector2Int cel = new Vector2Int(x, y);
                 Vector2 center = Grid.GetCellCenter(cel);
@@ -237,7 +244,7 @@ public class NavigationArea : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if(Grid == null)
+        if (Grid == null)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, 0.1f));

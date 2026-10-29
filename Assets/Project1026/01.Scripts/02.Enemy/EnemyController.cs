@@ -48,6 +48,10 @@ public class EnemyController : MonoBehaviour
 
     public void Initialize(NavigationArea area, EnemyGenerate generate)
     {
+        attackState = new EnemyAttackState(this);
+        chaseState = new EnemyChaseState(this);
+        hitState = new EnemyHitState(this);
+
         NavArea?.Unregister(this);
         navArea = area;
 
@@ -57,17 +61,6 @@ public class EnemyController : MonoBehaviour
 
         if (isActiveAndEnabled)
             this.NavArea?.Register(this);
-    }
-    private void Awake()
-    {
-        attackState = new EnemyAttackState(this);
-        chaseState = new EnemyChaseState(this);
-        hitState = new EnemyHitState(this);
-    }
-
-    void Start()
-    {
-        ChangeState(chaseState);
     }
 
     void Update()
@@ -135,11 +128,6 @@ public class EnemyController : MonoBehaviour
         IsHit = true;
         hitState.GetDamage(damage);
         generate.Despawn(this);
-    }
-
-    private void OnEnable()
-    {
-        NavArea?.Register(this);
     }
 
     private void OnDisable()
