@@ -43,9 +43,6 @@ public class EnemyGenerate : MonoBehaviour
         if (area == null || area.Grid == null || meleePrefab == null || rangedPrefab == null)
             return;
 
-        if (meleePrefab.Type != EnemyAttackType.Melee || rangedPrefab.Type != EnemyAttackType.Ranged)
-            return;
-
         timer = Mathf.Max(0.01f, spawnInterval);
 
         if (spawnImmediately)

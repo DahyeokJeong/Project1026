@@ -5,18 +5,19 @@ public abstract class ProjectileBase : MonoBehaviour
     [Header("Projectile Settings")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private float baseDamage = 1;
     #endregion
 
     #region Fields
     private Vector2 moveDirection;
     private float timer;
-    private int damage;
+    private float damage;
     #endregion
 
     #region Properties
     protected Vector2 MoveDirection => moveDirection;
     protected float MoveSpeed => moveSpeed;
-    protected int Damage => damage;
+    protected float Damage => damage; 
     #endregion
 
     protected virtual void OnEnable()
@@ -46,9 +47,11 @@ public abstract class ProjectileBase : MonoBehaviour
         UpdateRotation();
     }
 
-    public void SetDamage(int attackDamage)
+    public void SetDamage(float attackDamage, float critical)
     {
-        damage = attackDamage;
+        damage = baseDamage + attackDamage;
+        if (Random.value < Mathf.Clamp(critical, 0f, 100f) / 100f)
+            damage *= 1.5f;
     }
 
     private void UpdateRotation()

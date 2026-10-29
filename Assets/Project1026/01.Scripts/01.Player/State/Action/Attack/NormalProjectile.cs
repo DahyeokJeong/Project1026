@@ -91,10 +91,7 @@ public class NormalProjectile : ProjectileBase
         {
             Collider2D hit = hitBuffer[i];
 
-            if(hit.TryGetComponent<EnemyController>(out var enemy))
-            {
-                enemy.TakeDamage(Damage);
-            }
+            Managers.Damage.ApplyDamage(hit.transform, Damage);
         }
         // Hit 시스템 구현 시 실제 데미지 처리 연결
 

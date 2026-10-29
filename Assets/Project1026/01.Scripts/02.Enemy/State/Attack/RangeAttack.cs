@@ -10,6 +10,7 @@ public class RangeAttack : MonoBehaviour
 
     #region Fields
     private Vector2 moveDirection;
+    private float damage;
     private float timer;
     #endregion
 
@@ -28,15 +29,17 @@ public class RangeAttack : MonoBehaviour
             Managers.Pool.Push(gameObject);
     }
 
-    public void SetDirection(Vector2 direction)
+    public void Set(Vector2 direction, float damage)
     {
         moveDirection = direction.normalized;
+        this.damage = damage;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
+            Managers.Damage.ApplyDamage(other.transform, damage);
             Managers.Pool.Push(gameObject);
         }
     }

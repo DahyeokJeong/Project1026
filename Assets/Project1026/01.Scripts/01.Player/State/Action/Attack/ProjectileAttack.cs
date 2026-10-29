@@ -30,7 +30,7 @@ public class ProjectileAttack : IAttack
 
     public void Tick(float deltaTime)
     {
-        attackTimer -= deltaTime * Mathf.Max(0f, model.AttackSpeed);
+        attackTimer -= deltaTime;
 
         if (attackTimer > 0f)
             return;
@@ -51,7 +51,7 @@ public class ProjectileAttack : IAttack
             go.TryGetComponent(out ProjectileBase projectile))
         {
             projectile.SetDirection(model.LastMoveDirection);
-            projectile.SetDamage(model.AttackDamage);
+            projectile.SetDamage(model.AttackDamage, model.Critical);
         }
     }
 }

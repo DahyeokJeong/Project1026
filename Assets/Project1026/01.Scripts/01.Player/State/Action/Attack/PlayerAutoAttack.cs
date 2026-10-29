@@ -37,7 +37,7 @@ public class PlayerAutoAttack : MonoBehaviour
     private void Update()
     {
         foreach (IAttack attack in attacks)
-            attack.Tick(Time.deltaTime);
+            attack.Tick(Time.deltaTime * Mathf.Max(0f, model.AttackSpeed));
     }
 
     public void AddAttack(IAttack attack)

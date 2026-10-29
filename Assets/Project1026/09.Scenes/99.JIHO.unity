@@ -723,7 +723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NavigationArea
   worldSize: {x: 10, y: 10}
   cellSize: 0.5
-  agentRadius: 0.01
+  agentRadius: 0.19
   padding: 0.15
   enemyGap: 0.1
   target: {fileID: 891278770}

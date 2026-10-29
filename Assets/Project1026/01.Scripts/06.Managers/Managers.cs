@@ -17,11 +17,13 @@ public class Managers : MonoBehaviour
 
     #region Core
     private PoolManager pool = new PoolManager();
+    private DamageManager damage = new DamageManager();
     #endregion
 
     #region Properties
     public static bool Initialized => s_instance != null;
     public static PoolManager Pool => Instance.pool;
+    public static DamageManager Damage => Instance.damage;
     #endregion
 
     private void Awake()
@@ -42,6 +44,7 @@ public class Managers : MonoBehaviour
             return;
 
         pool.Clear();
+        damage.Clear();
         s_instance = null;
     }
 
