@@ -36,8 +36,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PlayerBody
+  - EnemyBody
   m_SortingLayers:
   - name: background
     uniqueID: 3752016729

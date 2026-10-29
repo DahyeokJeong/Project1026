@@ -64,6 +64,7 @@ public class PiercingProjectile : ProjectileBase
             wallLayer
         );
 
+        
         if (hit.collider != null)
         {
             float moveDistance = Mathf.Max(0f, hit.distance - 0.01f);

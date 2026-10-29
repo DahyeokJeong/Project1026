@@ -109,7 +109,7 @@ MonoBehaviour:
   lifeTime: 3
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2147483712
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
