@@ -1,0 +1,88 @@
+{
+    "Localizations": [
+        {
+            "Key": "STAT001",
+            "NameKO": "체력",
+            "DescriptionKO": "플레이어의 체력입니다. 체력이 0 이하가 되면 캐릭터가 사망합니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT002",
+            "NameKO": "체력 재생량 증가",
+            "DescriptionKO": "초당 회복되는 플레이어의 체력 재생량이 증가합니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT003",
+            "NameKO": "공격력",
+            "DescriptionKO": "플레이어의 공격력입니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT004",
+            "NameKO": "기본공격 사거리",
+            "DescriptionKO": "플레이어의 기본 공격 사거리입니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT005",
+            "NameKO": "공격속도",
+            "DescriptionKO": "속도에 따라 초당 공격 횟수를 나타냅니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT006",
+            "NameKO": "방어력",
+            "DescriptionKO": "플레이어의 방어력입니다. 피격 시 합연산으로 적용됩니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT007",
+            "NameKO": "이동속도",
+            "DescriptionKO": "이동 속도에 따라 초당 이동 거리가 결정됩니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT008",
+            "NameKO": "크리티컬 확률",
+            "DescriptionKO": "기본 공격과 스킬 공격에 크리티컬이 적용될 확률입니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT009",
+            "NameKO": "크리티컬 데미지",
+            "DescriptionKO": "크리티컬 발동 시 적에게 주는 피해에 적용됩니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT010",
+            "NameKO": "스킬 재사용 대기시간 감소",
+            "DescriptionKO": "유저가 보유한 스킬의 재사용 대기시간을 감소시킵니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT012",
+            "NameKO": "단일 공격 피해량 증가",
+            "DescriptionKO": "단일 공격 시 적에게 가하는 데미지가 증가합니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "STAT013",
+            "NameKO": "범위 공격 피해량 증가",
+            "DescriptionKO": "범위 공격 시 적에게 가하는 데미지가 증가합니다.",
+            "Category": "PlayerStat"
+        },
+        {
+            "Key": "AUG001",
+            "NameKO": "Normal 투사체 증가",
+            "DescriptionKO": "Normal 투사체 발사 수가 1 증가합니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG002",
+            "NameKO": "Piercing 투사체 증가",
+            "DescriptionKO": "Piercing 투사체 발사 수가 1 증가합니다.",
+            "Category": "Augment"
+        }
+    ]
+}

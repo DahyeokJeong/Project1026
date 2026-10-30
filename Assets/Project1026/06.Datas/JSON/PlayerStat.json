@@ -1,0 +1,52 @@
+{
+    "PlayerStats": [
+        {
+            "Id": "STAT001",
+            "BaseValue": 5.0
+        },
+        {
+            "Id": "STAT002",
+            "BaseValue": 6.0
+        },
+        {
+            "Id": "STAT003",
+            "BaseValue": 7.0
+        },
+        {
+            "Id": "STAT004",
+            "BaseValue": 8.0
+        },
+        {
+            "Id": "STAT005",
+            "BaseValue": 5.0
+        },
+        {
+            "Id": "STAT006",
+            "BaseValue": 6.0
+        },
+        {
+            "Id": "STAT007",
+            "BaseValue": 7.0
+        },
+        {
+            "Id": "STAT008",
+            "BaseValue": 8.0
+        },
+        {
+            "Id": "STAT009",
+            "BaseValue": 9.0
+        },
+        {
+            "Id": "STAT010",
+            "BaseValue": 10.0
+        },
+        {
+            "Id": "STAT012",
+            "BaseValue": 11.0
+        },
+        {
+            "Id": "STAT013",
+            "BaseValue": 12.0
+        }
+    ]
+}
