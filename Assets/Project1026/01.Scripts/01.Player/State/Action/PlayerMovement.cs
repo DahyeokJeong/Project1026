@@ -17,12 +17,11 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.sqrMagnitude <= 0f)
             return;
 
-        float moveSpeed = model.MoveSpeed;
         Vector2 moveDir = moveInput.normalized;
         model.LastMoveDirection = moveDir;
 
         Vector2 nextPos =
-            rb.position + moveDir * moveSpeed * Time.fixedDeltaTime;
+            rb.position + moveDir * model.MoveSpeed * Time.fixedDeltaTime;
 
         rb.MovePosition(nextPos);
     }

@@ -3,7 +3,8 @@ using UnityEngine;
 public class EnemyHitState : IState
 {
     private EnemyController enemy;
-    private int damage;
+    private float hitDuration = 0.2f;
+    private float timer;
 
     public EnemyHitState(EnemyController enemy)
     {
@@ -11,7 +12,7 @@ public class EnemyHitState : IState
     }
     public void Enter()
     {
-        enemy.IsHit = false;
+        timer = hitDuration;
     }
 
     public void Exit()
@@ -24,10 +25,8 @@ public class EnemyHitState : IState
 
     public void Tick()
     {
-    }
-
-    public void GetDamage(int damage)
-    {
-        this.damage = damage;
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
+            enemy.Model.IsHit = false;
     }
 }

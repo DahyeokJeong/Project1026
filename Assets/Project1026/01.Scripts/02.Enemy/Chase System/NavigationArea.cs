@@ -5,7 +5,7 @@ public class NavigationArea : MonoBehaviour
 {
     #region Grid
     [Header("Grid")]
-    [SerializeField] private Vector2 worldSize = new Vector2(25, 10);
+    [SerializeField] private SpriteRenderer mapRenderer;
     [SerializeField, Min(0.05f)] private float cellSize = 0.5f;
     #endregion
 
@@ -28,10 +28,15 @@ public class NavigationArea : MonoBehaviour
     private Dictionary<EnemyController, Vector2> enemies = new();
     private Collider2D[] neighbors = new Collider2D[64];
 
+    private NavigationSpace space;
+
     #region Property
+    public float AgentRadius => agentRadius;
+    public float Padding => padding;
     public Transform Target => target;
     public LayerMask Obstacle => obstacleLayer;
     public NavigationGrid Grid { get; private set; }
+    public NavigationSpace Space => space;
     #endregion
 
     private FlowField flowField;
@@ -159,13 +164,7 @@ public class NavigationArea : MonoBehaviour
 
         Vector2 des = pos + dir * allowDis;
 
-        if (!Grid.TryWorldToCell(des, out Vector2Int cell))
-            return;
-
-        if (!Grid.IsWalkable(cell))
-            return;
-
-        if (Physics2D.OverlapCircle(des, agentRadius + padding, obstacleLayer) != null)
+        if (!Space.IsValidPos(des))
             return;
 
         enemy.position += (Vector3)(des - pos);
@@ -173,9 +172,21 @@ public class NavigationArea : MonoBehaviour
 
     public void Initialize()
     {
-        Grid = new NavigationGrid(transform.position, worldSize, cellSize);
+        if(mapRenderer == null)
+        {
+            Debug.LogError("Map Renderer가 등록되지 않았습니다.");
+            return;
+        }
+
+        Vector2 center = mapRenderer.bounds.center;
+        Vector2 size = mapRenderer.bounds.size;
+
+        Grid = new NavigationGrid(center, size, cellSize);
+
+        space = new NavigationSpace(Grid, agentRadius, padding, obstacleLayer);
 
         flowField = new FlowField(Grid);
+
         RefreshObstacles();
     }
 
@@ -246,8 +257,20 @@ public class NavigationArea : MonoBehaviour
     {
         if (Grid == null)
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, 0.1f));
+            if (mapRenderer != null)
+            {
+                Gizmos.color = Color.yellow;
+
+                Gizmos.DrawWireCube(
+                    mapRenderer.bounds.center,
+                    new Vector3(
+                        mapRenderer.bounds.size.x,
+                        mapRenderer.bounds.size.y,
+                        0.1f
+                    )
+                );
+            }
+
             return;
         }
 
@@ -258,8 +281,18 @@ public class NavigationArea : MonoBehaviour
                 Vector2Int cell = new Vector2Int(x, y);
                 Vector2 center = Grid.GetCellCenter(cell);
 
-                Gizmos.color = Grid.IsWalkable(cell) ? Color.green : Color.red;
-                Gizmos.DrawWireCube(new Vector3(center.x, center.y, transform.position.z), new Vector3(Grid.CellSize, Grid.CellSize, 0.1f) * 0.9f);
+                Gizmos.color = Grid.IsWalkable(cell)
+                    ? Color.green
+                    : Color.red;
+
+                Gizmos.DrawWireCube(
+                    new Vector3(center.x, center.y, transform.position.z),
+                    new Vector3(
+                        Grid.CellSize,
+                        Grid.CellSize,
+                        0.1f
+                    ) * 0.9f
+                );
             }
         }
     }

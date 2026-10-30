@@ -106,10 +106,7 @@ public class PiercingProjectile : ProjectileBase
             if (!hitTargets.Add(target))
                 continue;
 
-            if(target.TryGetComponent<EnemyController>(out var enemy))
-            {
-                enemy.TakeDamage(Damage);
-            }
+            Managers.Damage.ApplyDamage(target.transform, Damage);
             // Hit 시스템 구현 시 실제 데미지 처리 연결
 
             pierceCount++;

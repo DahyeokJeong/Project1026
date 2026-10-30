@@ -10,11 +10,13 @@ public class PlayerAutoAttack : MonoBehaviour
         #region Attack Settings
         [SerializeField] private AttackConfigSO config;
         [SerializeField, Min(0.01f)] private float interval = 1f;
+        [SerializeField, Min(0)] private int projectileCount = 1;
         #endregion
 
         #region Properties
         public AttackConfigSO Config => config;
         public float Interval => interval;
+        public int ProjectileCount => projectileCount;
         #endregion
     }
 
@@ -31,11 +33,13 @@ public class PlayerAutoAttack : MonoBehaviour
 
     #region Fields
     private readonly List<IAttack> attacks = new();
+    private readonly Dictionary<string, int> projectileCounts = new();
     #endregion
 
     private void Start()
     {
         attacks.Clear();
+        projectileCounts.Clear();
 
         foreach (AttackSlot slot in attackSlots)
         {
@@ -48,18 +52,24 @@ public class PlayerAutoAttack : MonoBehaviour
                 continue;
             }
 
+            projectileCounts[slot.Config.name] = slot.ProjectileCount;
+
             attacks.Add(new ProjectileAttack(
                 firePoint,
                 model,
                 slot.Config,
-                slot.Interval));
+                slot.Interval,
+                GetProjectileCount(slot.Config.name)));
         }
+
+        Debug.Log(LocalizationHelper.GetName("AUG001"));
+        Debug.Log(LocalizationHelper.GetDescription("AUG001"));
     }
 
     private void Update()
     {
         foreach (IAttack attack in attacks)
-            attack.Tick(Time.deltaTime);
+            attack.Tick(Time.deltaTime * Mathf.Max(0f, model.AttackSpeed));
     }
 
     public void AddAttack(IAttack attack)
@@ -68,5 +78,20 @@ public class PlayerAutoAttack : MonoBehaviour
             return;
 
         attacks.Add(attack);
+    }
+
+    public void AddProjectileCount(string configKey, int value)
+    {
+        if (!projectileCounts.ContainsKey(configKey))
+            return;
+
+        projectileCounts[configKey] = value;
+    }
+
+    private int GetProjectileCount(string configKey)
+    {
+        if(projectileCounts.TryGetValue(configKey, out int count))
+            return count;
+        return 0;
     }
 }

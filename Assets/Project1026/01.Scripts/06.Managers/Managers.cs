@@ -17,6 +17,7 @@ public class Managers : MonoBehaviour
 
     #region Core
     private PoolManager pool = new PoolManager();
+    private DamageManager damage = new DamageManager();
     private DataManager data = new DataManager();
     private GameSceneManager scene = new GameSceneManager();
     private LoadingManager loading = new LoadingManager();
@@ -27,6 +28,7 @@ public class Managers : MonoBehaviour
     #region Properties
     public static bool Initialized => s_instance != null;
     public static PoolManager Pool => Instance.pool;
+    public static DamageManager Damage => Instance.damage;
     public static DataManager Data => Instance.data;
     public static GameSceneManager Scene => Instance.scene;
     public static LoadingManager Loading => Instance.loading;
@@ -53,6 +55,7 @@ public class Managers : MonoBehaviour
 
         loading.Clear();
         pool.Clear();
+        damage.Clear();
         data.Clear();
         gameState.Clear();
 

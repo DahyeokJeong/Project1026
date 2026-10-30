@@ -19,7 +19,8 @@ public class ProjectileAttack : IAttack
         Transform firePoint,
         PlayerModel model,
         AttackConfigSO config,
-        float attackInterval)
+        float attackInterval,
+        int projectileCount)
     {
         this.firePoint = firePoint;
         this.model = model;
@@ -31,7 +32,7 @@ public class ProjectileAttack : IAttack
 
     public void Tick(float deltaTime)
     {
-        attackTimer -= deltaTime * Mathf.Max(0f, model.AttackSpeed);
+        attackTimer -= deltaTime;
 
         if (attackTimer > 0f)
             return;
@@ -48,7 +49,7 @@ public class ProjectileAttack : IAttack
             go.TryGetComponent(out ProjectileBase projectile))
         {
             projectile.SetDirection(model.LastMoveDirection);
-            projectile.SetDamage(model.AttackDamage);
+            projectile.SetDamage(model.AttackDamage, model.Critical);
         }
     }
 }

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9347a0d445da442b67b34d73cfdcbb, type: 3}
   m_Name: PD
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  hp: 100
-  attackDamage: 10
-  attackSpeed: 1
+  maxHp: 100
+  attackPower: 50
+  attackSpeed: 2
   moveSpeed: 3
+  defense: 10
+  critical: 0
