@@ -18,12 +18,16 @@ public class Managers : MonoBehaviour
     #region Core
     private PoolManager pool = new PoolManager();
     private DataManager data = new DataManager();
+    private GameSceneManager scene = new GameSceneManager();
+    private LoadingManager loading = new LoadingManager();
     #endregion
 
     #region Properties
     public static bool Initialized => s_instance != null;
     public static PoolManager Pool => Instance.pool;
     public static DataManager Data => Instance.data;
+    public static GameSceneManager Scene => Instance.scene;
+    public static LoadingManager Loading => Instance.loading;
     #endregion
 
     private void Awake()
@@ -38,17 +42,12 @@ public class Managers : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    //임시 데이터 초기화 코드
-    private void Start()
-    {
-        data.Init();
-    }
-
     private void OnDestroy()
     {
         if (s_instance != this)
             return;
 
+        loading.Clear();
         pool.Clear();
         data.Clear();
         s_instance = null;
