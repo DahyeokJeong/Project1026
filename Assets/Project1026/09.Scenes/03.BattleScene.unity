@@ -884,10 +884,12 @@ GameObject:
   - component: {fileID: 1429643128}
   - component: {fileID: 1429643127}
   - component: {fileID: 1429643126}
+  - component: {fileID: 1429643130}
   - component: {fileID: 1429643125}
   - component: {fileID: 1429643124}
   - component: {fileID: 1429643123}
   - component: {fileID: 1429643122}
+  - component: {fileID: 1429643129}
   - component: {fileID: 1429643121}
   - component: {fileID: 1429643120}
   m_Layer: 0
@@ -1127,6 +1129,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1429643129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429643118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf0921a1aeacad438231b37f0d34385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAugment
+  auto: {fileID: 1429643122}
+--- !u!114 &1429643130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429643118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1490838784ff263459b637fa763abdec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Test
+  autoAttack: {fileID: 1429643122}
+  playerAugment: {fileID: 1429643129}
 --- !u!1 &1778008759
 GameObject:
   m_ObjectHideFlags: 0
