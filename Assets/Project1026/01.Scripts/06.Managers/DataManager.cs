@@ -14,22 +14,27 @@ public class DataManager
         Failed
     }
 
+    #region Events
     public event Action DataLoadCompleted;
     public event Action DataLoadFailed;
+    #endregion
 
+    #region Properties
     public InitState State { get; private set; } = InitState.None;
     public bool IsLoaded => State == InitState.Completed;
 
-    #region Properties
     public Dictionary<string, PlayerStatData> PlayerStatDic { get; private set; } = new();
     public Dictionary<string, AugmentData> AugmentDic { get; private set; } = new();
     public Dictionary<string, LocalizationData> LocalizationDic { get; private set; } = new();
     #endregion
 
+    #region Fields
     private readonly List<AsyncOperationHandle<TextAsset>> handles = new();
+    private readonly List<Action<int>> loadTasks = new();
 
     private int completedCount;
     private int loadVersion;
+    #endregion
 
     public void Init()
     {
@@ -39,16 +44,35 @@ public class DataManager
         Clear();
 
         State = InitState.Loading;
-        completedCount = 0;
 
         int version = loadVersion;
 
-        // 향후 새로운 데이터 추가될 때 자동 탐색 구조로 개선할 필요
-        LoadJson<PlayerStatLoader>("PlayerStat", loader => SetPlayerStats(loader), version);
+        RegisterLoadTasks();
 
-        LoadJson<AugmentLoader>("Augment", loader => SetAugments(loader), version);
+        if (loadTasks.Count == 0)
+        {
+            CompleteLoad();
+            return;
+        }
 
-        LoadJson<LocalizationLoader>("Localization_KO", loader => SetLocalizations(loader), version);
+        foreach (Action<int> task in loadTasks)
+        {
+            if (State != InitState.Loading)
+                break;
+
+            task.Invoke(version);
+        }
+    }
+
+    private void RegisterLoadTasks()
+    {
+        loadTasks.Clear();
+
+        loadTasks.Add(version => LoadJson<PlayerStatLoader>("PlayerStat", SetPlayerStats, version));
+
+        loadTasks.Add(version => LoadJson<AugmentLoader>("Augment", SetAugments, version));
+
+        loadTasks.Add(version => LoadJson<LocalizationLoader>("Localization_KO", SetLocalizations, version));
     }
 
     private void LoadJson<T>(
@@ -62,7 +86,8 @@ public class DataManager
 
         handle.Completed += operation =>
         {
-            if (version != loadVersion || State != InitState.Loading)
+            if (version != loadVersion ||
+                State != InitState.Loading)
                 return;
 
             if (operation.Status != AsyncOperationStatus.Succeeded ||
@@ -74,30 +99,39 @@ public class DataManager
 
             try
             {
-                T loader = JsonUtility.FromJson<T>(operation.Result.text);
+                T loader = JsonUtility.FromJson<T>(
+                    operation.Result.text);
 
                 if (loader == null)
                     throw new Exception("JSON 역직렬화 결과가 null입니다.");
 
                 onLoaded?.Invoke(loader);
-
-                completedCount++;
-
-                // 하드코딩 부분
-                if (completedCount == 3)
-                {
-                    State = InitState.Completed;
-                    Debug.Log("DataManager 초기화 완료");
-                    DataLoadCompleted?.Invoke();
-                }
             }
             catch (Exception e)
             {
                 Debug.LogError($"데이터 처리 실패 / Address: {address} / 오류: {e.Message}");
 
                 FailLoad(address);
+                return;
             }
+
+            completedCount++;
+
+            if (completedCount == loadTasks.Count)
+                CompleteLoad();
         };
+    }
+
+    private void CompleteLoad()
+    {
+        if (State != InitState.Loading)
+            return;
+
+        State = InitState.Completed;
+
+        Debug.Log("DataManager 초기화 완료");
+
+        DataLoadCompleted?.Invoke();
     }
 
     private void SetPlayerStats(PlayerStatLoader loader)
@@ -146,6 +180,10 @@ public class DataManager
 
         State = InitState.Failed;
 
+        PlayerStatDic = new();
+        AugmentDic = new();
+        LocalizationDic = new();
+
         Debug.LogError($"DataManager 초기화 실패 / Address: {address}");
 
         DataLoadFailed?.Invoke();
@@ -162,10 +200,11 @@ public class DataManager
         }
 
         handles.Clear();
+        loadTasks.Clear();
 
-        PlayerStatDic.Clear();
-        AugmentDic.Clear();
-        LocalizationDic.Clear();
+        PlayerStatDic = new();
+        AugmentDic = new();
+        LocalizationDic = new();
 
         completedCount = 0;
         State = InitState.None;

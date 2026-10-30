@@ -19,6 +19,10 @@ public class Managers : MonoBehaviour
     private PoolManager pool = new PoolManager();
     private DamageManager damage = new DamageManager();
     private DataManager data = new DataManager();
+    private GameSceneManager scene = new GameSceneManager();
+    private LoadingManager loading = new LoadingManager();
+    private GameStateManager gameState = new GameStateManager();
+    private SaveManager save = new SaveManager();
     #endregion
 
     #region Properties
@@ -26,6 +30,10 @@ public class Managers : MonoBehaviour
     public static PoolManager Pool => Instance.pool;
     public static DamageManager Damage => Instance.damage;
     public static DataManager Data => Instance.data;
+    public static GameSceneManager Scene => Instance.scene;
+    public static LoadingManager Loading => Instance.loading;
+    public static GameStateManager GameState => Instance.gameState;
+    public static SaveManager Save => Instance.save;
     #endregion
 
     private void Awake()
@@ -40,20 +48,17 @@ public class Managers : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    //�ӽ� ������ �ʱ�ȭ �ڵ�
-    private void Start()
-    {
-        data.Init();
-    }
-
     private void OnDestroy()
     {
         if (s_instance != this)
             return;
 
+        loading.Clear();
         pool.Clear();
         damage.Clear();
         data.Clear();
+        gameState.Clear();
+
         s_instance = null;
     }
 
