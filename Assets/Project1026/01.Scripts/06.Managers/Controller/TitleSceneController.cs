@@ -4,6 +4,6 @@ public class TitleSceneController : MonoBehaviour
 {
     public void OnClickStart()
     {
-        Managers.Scene.LoadGame("99.JIHO");
+        Managers.Scene.LoadGame("03.BattleScene");
     }
 }

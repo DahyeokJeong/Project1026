@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SO_Attack_Piercing
   m_EditorClassIdentifier: Assembly-CSharp::AttackConfigSO
   prefab: {fileID: 6719453655010788331, guid: bd63cae308b495043922932dfe1ac048, type: 3}
+  pattern: 1

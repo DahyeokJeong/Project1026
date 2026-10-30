@@ -34,21 +34,19 @@ public class EnemyGenerate : MonoBehaviour
     private readonly List<GameObject> destroyedKeys = new();
     private float timer;
     private int totalSpawned;
+    private bool isSpawning;
     #endregion
 
     private void Start()
     {
-        if (area == null || area.Grid == null || meleePrefab == null || rangedPrefab == null)
-            return;
-
-        timer = Mathf.Max(0.01f, spawnInterval);
-
-        if (spawnImmediately)
-            SpawnWave();
+        StartSpawning();
     }
 
     private void Update()
     {
+        if (!isSpawning)
+            return;
+
         timer -= Time.deltaTime;
 
         if (timer > 0f)
@@ -56,6 +54,35 @@ public class EnemyGenerate : MonoBehaviour
 
         timer = Mathf.Max(0.01f, spawnInterval);
         SpawnWave();
+    }
+
+    public void StartSpawning()
+    {
+        if (isSpawning)
+            return;
+
+        if (area == null || area.Grid == null || meleePrefab == null || rangedPrefab == null)
+        {
+            Debug.LogError("[EnemyGenerate] 생성에 필요한 참조가 준비되지 않았습니다.", this);
+            return;
+        }
+
+        activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+
+        // 새 실행을 시작할 때 기존 적의 추적 정보를 잃지 않도록 검사
+        if (activeEnemies.Count > 0)
+        {
+            Debug.LogError("[EnemyGenerate] 기존 적을 정리한 뒤 새 생성을 시작해야 합니다.", this);
+            return;
+        }
+        ClearDestroyedCache();
+
+        totalSpawned = 0;
+        timer = Mathf.Max(0.01f, spawnInterval);
+        isSpawning = true;
+
+        if (spawnImmediately)
+            SpawnWave();
     }
 
     private void SpawnWave()
@@ -107,6 +134,11 @@ public class EnemyGenerate : MonoBehaviour
         enemy.Initialize(area, this);
         activeEnemies.Add(enemy);
         totalSpawned++;
+    }
+
+    public void StopSpawning()
+    {
+        isSpawning = false;
     }
 
     public bool Despawn(EnemyController enemy)
@@ -186,5 +218,10 @@ public class EnemyGenerate : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnDisable()
+    {
+        StopSpawning();
     }
 }

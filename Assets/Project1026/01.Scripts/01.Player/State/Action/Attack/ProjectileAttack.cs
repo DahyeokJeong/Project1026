@@ -9,7 +9,6 @@ public class ProjectileAttack : IAttack
     #endregion
 
     #region Attack Settings
-    private const float spacing = 0.4f;
     private readonly float attackInterval;
     private readonly Func<int> projectileCount;
     #endregion
@@ -78,15 +77,15 @@ public class ProjectileAttack : IAttack
 
     private void FireSpread(int count)
     {
-        float spacing = 0.4f;
-        float startOffset = -(count - 1) * spacing * 0.5f;
+        float angleSpacing = 15f;
+        float startAngle = -(count - 1) * angleSpacing * 0.5f;
 
         for (int i = 0; i < count; i++)
         {
-            float offset = startOffset + i * spacing;
-            Vector2 spawnPosition = (Vector2)firePoint.position + Vector2.up * offset;
+            float angle = startAngle + i * angleSpacing;
+            Vector2 direction = Quaternion.Euler(0f, 0f, angle) * model.LastMoveDirection;
 
-            SpawnProjectile(spawnPosition, model.LastMoveDirection);
+            SpawnProjectile(firePoint.position, direction);
         }
     }
 
