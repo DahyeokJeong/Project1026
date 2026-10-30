@@ -17,12 +17,14 @@ public class Managers : MonoBehaviour
 
     #region Core
     private PoolManager pool = new PoolManager();
+    private DamageManager damage = new DamageManager();
     private DataManager data = new DataManager();
     #endregion
 
     #region Properties
     public static bool Initialized => s_instance != null;
     public static PoolManager Pool => Instance.pool;
+    public static DamageManager Damage => Instance.damage;
     public static DataManager Data => Instance.data;
     #endregion
 
@@ -38,7 +40,7 @@ public class Managers : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    //ÀÓ½Ã µ¥ÀÌÅÍ ÃÊ±âÈ­ ÄÚµå
+    //ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Úµï¿½
     private void Start()
     {
         data.Init();
@@ -50,6 +52,7 @@ public class Managers : MonoBehaviour
             return;
 
         pool.Clear();
+        damage.Clear();
         data.Clear();
         s_instance = null;
     }

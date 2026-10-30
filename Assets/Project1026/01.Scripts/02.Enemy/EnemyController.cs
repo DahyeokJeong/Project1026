@@ -15,29 +15,22 @@ public enum EnemyAttackType
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Nav Ai")]
-    [SerializeField] private NavigationArea navArea;
-    public NavigationArea NavArea => navArea;
+    [Header("Component")]
+    [SerializeField] private EnemyModel model;
+    [SerializeField] private EnemyAttack attack;
+
+    public EnemyModel Model => model;
+    public EnemyAttack Attack => attack;
 
     [Header("attack & chase")]
-    [SerializeField, Min(0f)] private float attackTimer = 2f;
-    [SerializeField, Min(0f)] private float attackRange = 1f;
-    [SerializeField, Min(0f)] private float chaseMargin = 0.3f;
     [SerializeField] private GameObject attackPrefab;
-
-    [Header("Enemy Type")]
-    [SerializeField] private EnemyAttackType type;
 
     [Header("Enmey Ranged Radius")]
     [SerializeField, Min(0.1f)] private float fireRaius = 0.3f;
 
-    public bool IsHit { get; set; } = false;
-    public float AttackTimer => attackTimer;
     public GameObject AttackPrefab => attackPrefab;
-    public EnemyAttackType Type => type;
     private Transform Target => NavArea != null ? NavArea.Target : null;
-    public bool CanAttack => CheckAttackRange(attackRange);
-    public bool CanKeepAttack => CheckAttackRange(attackRange + chaseMargin);
+    public bool CanAttack => CheckAttackRange(model.AttackRange);
 
     private IState currentState;
 
@@ -45,17 +38,19 @@ public class EnemyController : MonoBehaviour
     private EnemyAttackState attackState;
     private EnemyChaseState chaseState;
     private EnemyHitState hitState;
+    public NavigationArea NavArea { get; private set; }
 
     public void Initialize(NavigationArea area, EnemyGenerate generate)
     {
-        attackState = new EnemyAttackState(this);
+        Model.Init();
+        NavArea?.Unregister(this);
+        NavArea = area;
+        this.generate = generate;
+
+        attackState = new EnemyAttackState(this, Attack);
         chaseState = new EnemyChaseState(this);
         hitState = new EnemyHitState(this);
 
-        NavArea?.Unregister(this);
-        navArea = area;
-
-        this.generate = generate;
         ChangeState(chaseState);
         attackState.ResetTimer();
 
@@ -65,12 +60,22 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+
+        if (Model.IsDead)
+        {
+            generate.Despawn(this);
+            return;
+        }
+
         HandleStateChange();
         currentState.Tick();
     }
 
     private void FixedUpdate()
     {
+        if (Model.IsDead)
+            return;
+
         currentState.FixedTick();
     }
 
@@ -88,19 +93,17 @@ public class EnemyController : MonoBehaviour
 
     private void HandleStateChange()
     {
-        if(IsHit)
+        if(Model.IsHit)
         {
-            attackState.ResetTimer();
-            ChangeState(hitState);
+            if (currentState != hitState)
+            {
+                attackState.ResetTimer();
+                ChangeState(hitState);
+            }
+            return;
         }
-        else if(CanAttack)
-        {
-            ChangeState(attackState);
-        }
-        else if(!CanKeepAttack)
-        {
-            ChangeState(chaseState);
-        }
+
+        ChangeState(CanAttack ? attackState : chaseState);
     }
 
     private bool CheckAttackRange(float range)
@@ -115,7 +118,7 @@ public class EnemyController : MonoBehaviour
         if (shot.sqrMagnitude > range * range)
             return false;
 
-        if(type == EnemyAttackType.Melee)
+        if(model.AttackType == EnemyAttackType.Melee)
         {
             return Physics2D.Linecast(origin, target.position, NavArea.Obstacle).collider == null;
         }
@@ -123,15 +126,10 @@ public class EnemyController : MonoBehaviour
         return Physics2D.CircleCast(origin, fireRaius, shot.normalized, shot.magnitude, NavArea.Obstacle).collider == null;
     }
 
-    public void TakeDamage(int damage)
-    {
-        IsHit = true;
-        hitState.GetDamage(damage);
-        generate.Despawn(this);
-    }
-
     private void OnDisable()
     {
         NavArea?.Unregister(this);
+        if (Managers.Initialized)
+            Managers.Damage.Unregister(transform);
     }
 }

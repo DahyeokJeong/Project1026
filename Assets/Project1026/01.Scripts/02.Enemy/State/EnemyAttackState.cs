@@ -3,11 +3,14 @@ using UnityEngine;
 public class EnemyAttackState : IState
 {
     private EnemyController enemy;
+    private EnemyAttack attack;
     private float timer;
-    public EnemyAttackState(EnemyController enemy)
+    public EnemyAttackState(EnemyController enemy, EnemyAttack attack)
     {
         this.enemy = enemy;
-        timer = enemy.AttackTimer;
+        this.attack = attack;
+
+        ResetTimer();
     }
 
     public void Enter()
@@ -30,36 +33,14 @@ public class EnemyAttackState : IState
         if (timer > 0f)
             return;
 
-        Vector2 dir = enemy.NavArea.Target.position - enemy.transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+        Transform target = enemy.NavArea.Target;
 
-        switch (enemy.Type)
-        {
-            case EnemyAttackType.Melee:
-                break;
-            case EnemyAttackType.Ranged:
-                if (dir.sqrMagnitude > 0f)
-                {
-                    GameObject attackObject = Managers.Pool.Pop(
-                        enemy.AttackPrefab, 
-                        enemy.transform.position,
-                        Quaternion.Euler(0f, 0f, angle)
-                        );
-                    if (attackObject == null)
-                        return;
-                    if(attackObject.TryGetComponent(out RangeAttack attack))
-                    {
-                        attack.SetDirection(dir);
-                    }
-                }
-                break;
-        }
-
-        timer = Mathf.Max(0f, enemy.AttackTimer);
+        attack.Execute(target);
+        ResetTimer();
     }
 
     public void ResetTimer()
     {
-        timer = Mathf.Max(0f, enemy.AttackTimer);
+        timer = Mathf.Max(0f, enemy.Model.AttackInerval);
     }
 }

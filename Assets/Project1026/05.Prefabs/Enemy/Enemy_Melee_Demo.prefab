@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5774588273787353453}
   - component: {fileID: 4280059908129285721}
   - component: {fileID: 156661654134334344}
+  - component: {fileID: 2957561071366422464}
+  - component: {fileID: -5162048931040443494}
   - component: {fileID: -8131545058412978603}
   - component: {fileID: 5978956706480971641}
   m_Layer: 6
@@ -35,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 1292693324020891995}
   - {fileID: 6723478816262869915}
+  - {fileID: 2620237934445129840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4280059908129285721
@@ -110,12 +113,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   navArea: {fileID: 0}
-  attackTimer: 2
-  attackRange: 2
+  model: {fileID: -5162048931040443494}
+  attack: {fileID: 2957561071366422464}
   chaseMargin: 0.3
   attackPrefab: {fileID: 6943944905956832885, guid: 5e3f29d5a07033041bc9871dae9ab748, type: 3}
-  type: 0
   fireRaius: 0.3
+--- !u!114 &2957561071366422464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136431554869713440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46563ad8fd0cb8848883b5d5a3611035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  model: {fileID: -5162048931040443494}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1073741824
+  firePoint: {fileID: 2620237934445129840}
+  rangedPrefab: {fileID: 6943944905956832885, guid: 5e3f29d5a07033041bc9871dae9ab748, type: 3}
+--- !u!114 &-5162048931040443494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136431554869713440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024fc7a35b67ee2499656810eae7b946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyModel
+  data: {fileID: 11400000, guid: 579a4f68156ee5549bcd1b4a2b76c52e, type: 2}
 --- !u!114 &-8131545058412978603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +296,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.089, y: -0.061, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5774588273787353453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7744017263137960903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2620237934445129840}
+  m_Layer: 6
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2620237934445129840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7744017263137960903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.191, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
