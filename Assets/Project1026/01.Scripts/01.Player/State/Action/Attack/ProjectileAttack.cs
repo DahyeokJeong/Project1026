@@ -19,7 +19,8 @@ public class ProjectileAttack : IAttack
         Transform firePoint,
         PlayerModel model,
         AttackConfigSO config,
-        float attackInterval)
+        float attackInterval,
+        int projectileCount)
     {
         this.firePoint = firePoint;
         this.model = model;
