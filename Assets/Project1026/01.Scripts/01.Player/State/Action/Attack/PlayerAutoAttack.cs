@@ -59,7 +59,7 @@ public class PlayerAutoAttack : MonoBehaviour
                 model,
                 slot.Config,
                 slot.Interval,
-                GetProjectileCount(slot.Config.name)));
+                () => GetProjectileCount(slot.Config.name)));
         }
 
         Debug.Log(LocalizationHelper.GetName("AUG001"));
@@ -85,10 +85,10 @@ public class PlayerAutoAttack : MonoBehaviour
         if (!projectileCounts.ContainsKey(configKey))
             return;
 
-        projectileCounts[configKey] = value;
+        projectileCounts[configKey] += value;
     }
 
-    private int GetProjectileCount(string configKey)
+    public int GetProjectileCount(string configKey)
     {
         if(projectileCounts.TryGetValue(configKey, out int count))
             return count;
