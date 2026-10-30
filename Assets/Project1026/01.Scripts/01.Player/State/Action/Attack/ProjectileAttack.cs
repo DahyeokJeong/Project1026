@@ -4,10 +4,10 @@ public class ProjectileAttack : IAttack
     #region Components
     private readonly Transform firePoint;
     private readonly PlayerModel model;
+    private readonly AttackConfigSO config;
     #endregion
 
     #region Attack Settings
-    private readonly PoolType poolType;
     private readonly float attackInterval;
     #endregion
 
@@ -18,13 +18,14 @@ public class ProjectileAttack : IAttack
     public ProjectileAttack(
         Transform firePoint,
         PlayerModel model,
-        PoolType poolType,
+        AttackConfigSO config,
         float attackInterval)
     {
         this.firePoint = firePoint;
         this.model = model;
-        this.poolType = poolType;
+        this.config = config;
         this.attackInterval = Mathf.Max(0.01f, attackInterval);
+
         attackTimer = this.attackInterval;
     }
 
@@ -41,11 +42,7 @@ public class ProjectileAttack : IAttack
 
     private void Fire()
     {
-        GameObject go = Managers.Pool.Pop(
-            poolType,
-            firePoint.position,
-            Quaternion.identity
-        );
+        GameObject go = Managers.Pool.Pop(config.Prefab, firePoint.position, Quaternion.identity);
 
         if (go != null &&
             go.TryGetComponent(out ProjectileBase projectile))
