@@ -12,14 +12,17 @@ EditorBuildSettings:
     path: Assets/Project1026/09.Scenes/00.TitleScene.unity
     guid: aa1267ce2ddc775428c8f19b246404e0
   - enabled: 1
-    path: Assets/Project1026/09.Scenes/LoadingScene.unity
-    guid: 367d17e67a2e8c9429f8879212af10df
-  - enabled: 1
-    path: Assets/Project1026/09.Scenes/02.LobbyScene.unity
+    path: Assets/Project1026/09.Scenes/01.LobbyScene.unity
     guid: 15827fa95918b9441af75375a8442738
+  - enabled: 1
+    path: Assets/Project1026/09.Scenes/02.StageSelectScene.unity
+    guid: 43363c736b3677d43a5ea2bc87985d96
   - enabled: 1
     path: Assets/Project1026/09.Scenes/03.BattleScene.unity
     guid: d8b51c7679935344da77c62d4d094510
+  - enabled: 1
+    path: Assets/Project1026/09.Scenes/LoadingScene.unity
+    guid: 367d17e67a2e8c9429f8879212af10df
   - enabled: 1
     path: Assets/Project1026/09.Scenes/99.DAHK.unity
     guid: c3aa44022798f5741bdb5c2f45222955

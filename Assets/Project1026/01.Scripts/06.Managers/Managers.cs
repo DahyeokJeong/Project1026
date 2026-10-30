@@ -20,6 +20,8 @@ public class Managers : MonoBehaviour
     private DataManager data = new DataManager();
     private GameSceneManager scene = new GameSceneManager();
     private LoadingManager loading = new LoadingManager();
+    private GameStateManager gameState = new GameStateManager();
+    private SaveManager save = new SaveManager();
     #endregion
 
     #region Properties
@@ -28,6 +30,8 @@ public class Managers : MonoBehaviour
     public static DataManager Data => Instance.data;
     public static GameSceneManager Scene => Instance.scene;
     public static LoadingManager Loading => Instance.loading;
+    public static GameStateManager GameState => Instance.gameState;
+    public static SaveManager Save => Instance.save;
     #endregion
 
     private void Awake()
@@ -50,6 +54,8 @@ public class Managers : MonoBehaviour
         loading.Clear();
         pool.Clear();
         data.Clear();
+        gameState.Clear();
+
         s_instance = null;
     }
 
