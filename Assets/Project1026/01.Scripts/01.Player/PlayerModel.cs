@@ -3,32 +3,49 @@ using UnityEngine;
 
 public class PlayerModel : MonoBehaviour
 {
-    //임시 스크립트아블 연결
-    [SerializeField] private PlayerData data;
+    #region Properties
+    public int MaxHp { get; private set; }
+    public int AttackDamage { get; private set; }
+    public float AttackSpeed { get; private set; }
+    public float MoveSpeed { get; private set; }
+    public int Defense { get; private set; }
+    public float Critical { get; private set; }
 
-    public int MaxHp { get; set; }
-    public float AttackDamage { get; set; }
-    public float AttackSpeed { get; set; }
-    public float MoveSpeed { get; set; }
-    public float Critical { get; set; }
+    public float CurrentHp => currentHp;
     public Vector2 LastMoveDirection { get; set; }
+    #endregion
+
+    #region Fields
     private float currentHp;
+    #endregion
+
 
     // 추후 변경 Manager로 값 연동 예정
     private void Awake()
     {
-        Init();
+        if(Managers.Data.IsLoaded)
+        {
+            Init();
+            return;
+        }
+
+        Managers.Data.DataLoadCompleted += Init;
     }
 
     public void Init()
     {
-        MaxHp = data.MaxHp;
-        AttackDamage = data.AttackPower;
-        AttackSpeed = data.AttackSpeed;
-        MoveSpeed = data.MoveSpeed;
-        Critical = data.Critical;
+        if(Managers.Initialized)
+            Managers.Data.DataLoadCompleted -= Init;
+        MaxHp = Mathf.RoundToInt(GetStatValue("STAT001"));
+        AttackDamage = Mathf.RoundToInt(GetStatValue("STAT003"));
+        AttackSpeed = GetStatValue("STAT005");
+        Defense = Mathf.RoundToInt(GetStatValue("STAT006"));
+        MoveSpeed = GetStatValue("STAT007");
+        Critical = GetStatValue("STAT008");
+
         currentHp = MaxHp;
         LastMoveDirection = Vector2.down;
+
     }
 
     public void ReduceHP(float damage)
@@ -40,6 +57,14 @@ public class PlayerModel : MonoBehaviour
         Debug.Log(currentHp);
     }
 
+    private float GetStatValue(string id)
+    {
+        if (Managers.Data.PlayerStatDic.TryGetValue(id, out PlayerStatData stat))
+            return stat.BaseValue;
+        Debug.LogError($"[PlayerModel] PlayerStat을 찾을 수 없습니다. ID: {id}");
+        return 0f;
+    }
+
     private void OnEnable()
     {
         Managers.Damage.Register(transform, ReduceHP);
@@ -47,7 +72,9 @@ public class PlayerModel : MonoBehaviour
 
     private void OnDisable()
     {
-        if (Managers.Initialized)
-            Managers.Damage.Unregister(transform);
+        if (!Managers.Initialized)
+            return;
+        Managers.Damage.Unregister(transform);
+        Managers.Data.DataLoadCompleted -= Init;
     }
 }

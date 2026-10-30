@@ -801,7 +801,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.80304, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -878,8 +878,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoAttack
   firePoint: {fileID: 891278770}
   model: {fileID: 891278779}
-  piercingInterval: 1
-  normalInterval: 2
+  attackSlots:
+  - config: {fileID: 11400000, guid: 9b49dd7a9f857f7458e5c309ba9e4037, type: 2}
+    interval: 1
+  - config: {fileID: 11400000, guid: f85c5d365d55cd74988b7c90e050e24d, type: 2}
+    interval: 2
 --- !u!114 &891278773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b694b93c27e0ee4bab0960ad940e6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerModel
-  data: {fileID: 11400000, guid: dde00bfc9eb93f14eb8223f6c600f880, type: 2}
 --- !u!58 &891278780
 CircleCollider2D:
   m_ObjectHideFlags: 0
