@@ -25,8 +25,6 @@ public class EnemyGenerate : MonoBehaviour
 
     #region Spawn
     [Header("Spawn Position")]
-    [SerializeField, Min(0.01f)] private float enemyRadius = 0.5f;
-    [SerializeField, Min(0f)] private float edgePadding = 0.15f;
     [SerializeField, Min(1)] private int positionAttempts = 20;
     #endregion
 
@@ -141,7 +139,7 @@ public class EnemyGenerate : MonoBehaviour
         position = Vector2.zero;
 
         NavigationGrid grid = area.Grid;
-        float inset = enemyRadius + edgePadding;
+        float inset = area.AgentRadius + area.Padding;
 
         Vector2 min = grid.Origin + Vector2.one * inset;
 
@@ -178,27 +176,15 @@ public class EnemyGenerate : MonoBehaviour
                 candidate = new Vector2(min.x, max.y - (distance - width * 2f - height));
             }
 
-            if (!grid.TryWorldToCell(candidate, out Vector2Int cell))
+            if (!area.Space.IsValidPos(candidate))
+            {
                 continue;
-
-            if (!grid.IsWalkable(cell))
-                continue;
-
-            if (Physics2D.OverlapCircle( candidate, enemyRadius + edgePadding, area.Obstacle) != null)
-                continue;
+            }
 
             position = candidate;
             return true;
         }
 
-        /*      3번째
-           ← ← ← ← ←
-           ↑         ↑
-        4번째       2번째
-           ↓         ↑
-           → → → → →
-               1번째
-        */
         return false;
     }
 }

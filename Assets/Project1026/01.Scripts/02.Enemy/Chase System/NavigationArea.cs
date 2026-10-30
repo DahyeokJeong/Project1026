@@ -28,10 +28,15 @@ public class NavigationArea : MonoBehaviour
     private Dictionary<EnemyController, Vector2> enemies = new();
     private Collider2D[] neighbors = new Collider2D[64];
 
+    private NavigationSpace space;
+
     #region Property
+    public float AgentRadius => agentRadius;
+    public float Padding => padding;
     public Transform Target => target;
     public LayerMask Obstacle => obstacleLayer;
     public NavigationGrid Grid { get; private set; }
+    public NavigationSpace Space => space;
     #endregion
 
     private FlowField flowField;
@@ -159,13 +164,7 @@ public class NavigationArea : MonoBehaviour
 
         Vector2 des = pos + dir * allowDis;
 
-        if (!Grid.TryWorldToCell(des, out Vector2Int cell))
-            return;
-
-        if (!Grid.IsWalkable(cell))
-            return;
-
-        if (Physics2D.OverlapCircle(des, agentRadius + padding, obstacleLayer) != null)
+        if (!Space.IsValidPos(des))
             return;
 
         enemy.position += (Vector3)(des - pos);
@@ -183,6 +182,8 @@ public class NavigationArea : MonoBehaviour
         Vector2 size = mapRenderer.bounds.size;
 
         Grid = new NavigationGrid(center, size, cellSize);
+
+        space = new NavigationSpace(Grid, agentRadius, padding, obstacleLayer);
 
         flowField = new FlowField(Grid);
 

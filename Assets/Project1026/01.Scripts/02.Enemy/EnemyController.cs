@@ -23,7 +23,6 @@ public class EnemyController : MonoBehaviour
     public EnemyAttack Attack => attack;
 
     [Header("attack & chase")]
-    [SerializeField, Min(0f)] private float chaseMargin = 0.3f;
     [SerializeField] private GameObject attackPrefab;
 
     [Header("Enmey Ranged Radius")]
