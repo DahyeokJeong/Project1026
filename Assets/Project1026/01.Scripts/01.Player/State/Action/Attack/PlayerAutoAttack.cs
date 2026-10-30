@@ -1,8 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAutoAttack : MonoBehaviour
 {
+    [Serializable]
+    public class AttackSlot
+    {
+        #region Attack Settings
+        [SerializeField] private AttackConfigSO config;
+        [SerializeField, Min(0.01f)] private float interval = 1f;
+        #endregion
+
+        #region Properties
+        public AttackConfigSO Config => config;
+        public float Interval => interval;
+        #endregion
+    }
+
     #region Components
     [Header("Component")]
     [SerializeField] private Transform firePoint;
@@ -11,8 +26,7 @@ public class PlayerAutoAttack : MonoBehaviour
 
     #region Attack Settings
     [Header("Attack Settings")]
-    [SerializeField] private float piercingInterval = 1f;
-    [SerializeField] private float normalInterval = 2f;
+    [SerializeField] private List<AttackSlot> attackSlots = new();
     #endregion
 
     #region Fields
@@ -21,17 +35,25 @@ public class PlayerAutoAttack : MonoBehaviour
 
     private void Start()
     {
-        attacks.Add(new ProjectileAttack(
-            firePoint,
-            model,
-            PoolType.Piercing,
-            piercingInterval));
+        attacks.Clear();
 
-        attacks.Add(new ProjectileAttack(
-            firePoint,
-            model,
-            PoolType.Normal,
-            normalInterval));
+        foreach (AttackSlot slot in attackSlots)
+        {
+            if(slot == null || slot.Config == null)
+                continue;
+
+            if(slot.Config.Prefab == null)
+            {
+                Debug.LogWarning($"[PlayerAutoAttack] {slot.Config.name}에 프리팹이 없습니다.");
+                continue;
+            }
+
+            attacks.Add(new ProjectileAttack(
+                firePoint,
+                model,
+                slot.Config,
+                slot.Interval));
+        }
     }
 
     private void Update()
