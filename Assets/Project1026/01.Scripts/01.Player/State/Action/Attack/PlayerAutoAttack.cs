@@ -61,6 +61,9 @@ public class PlayerAutoAttack : MonoBehaviour
                 slot.Interval,
                 GetProjectileCount(slot.Config.name)));
         }
+
+        Debug.Log(LocalizationHelper.GetName("AUG001"));
+        Debug.Log(LocalizationHelper.GetDescription("AUG001"));
     }
 
     private void Update()
