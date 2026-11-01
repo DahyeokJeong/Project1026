@@ -6,6 +6,7 @@ public class EnemyGenerate : MonoBehaviour
     #region Regerences
     [Header("References")]
     [SerializeField] private NavigationArea area;
+    [SerializeField] private MapArea mapArea;
     [SerializeField] private EnemyController meleePrefab;
     [SerializeField] private EnemyController rangedPrefab;
     #endregion
@@ -26,12 +27,14 @@ public class EnemyGenerate : MonoBehaviour
     #region Spawn
     [Header("Spawn Position")]
     [SerializeField, Min(1)] private int positionAttempts = 20;
+    [SerializeField, Min(0f)] private float spawnClearance;
     #endregion
 
-    #region 
+    #region  fields
     private readonly List<EnemyController> activeEnemies = new();
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
+    private EnemySpawnPosition spawnPosition;
     private float timer;
     private int totalSpawned;
     private bool isSpawning;
@@ -61,21 +64,16 @@ public class EnemyGenerate : MonoBehaviour
         if (isSpawning)
             return;
 
-        if (area == null || area.Grid == null || meleePrefab == null || rangedPrefab == null)
-        {
-            Debug.LogError("[EnemyGenerate] 생성에 필요한 참조가 준비되지 않았습니다.", this);
+        if (mapArea == null || !mapArea.IsReady || area == null || !area.IsReady || meleePrefab == null || rangedPrefab == null)
             return;
-        }
 
         activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
 
-        // 새 실행을 시작할 때 기존 적의 추적 정보를 잃지 않도록 검사
         if (activeEnemies.Count > 0)
-        {
-            Debug.LogError("[EnemyGenerate] 기존 적을 정리한 뒤 새 생성을 시작해야 합니다.", this);
             return;
-        }
         ClearDestroyedCache();
+
+        spawnPosition = new EnemySpawnPosition(mapArea);
 
         totalSpawned = 0;
         timer = Mathf.Max(0.01f, spawnInterval);
@@ -87,7 +85,7 @@ public class EnemyGenerate : MonoBehaviour
 
     private void SpawnWave()
     {
-        if (area == null || area.Grid == null)
+        if (mapArea == null || !mapArea.IsReady || area == null || !area.IsReady)
             return;
 
         activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
@@ -98,10 +96,13 @@ public class EnemyGenerate : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            if (!TryGetSpawnPosition(out Vector2 position))
+            if (!spawnPosition.TryGetPosition(
+                spawnClearance,
+                positionAttempts,
+                out Vector2 position))
                 continue;
 
-            EnemyController prefab = Random.value < rangedRatio ? rangedPrefab : meleePrefab;
+            EnemyController prefab = EnemySpawnSelector.Select(meleePrefab, rangedPrefab, rangedRatio);
 
             SpawnEnemy(prefab, position);
         }
@@ -165,59 +166,6 @@ public class EnemyGenerate : MonoBehaviour
 
         foreach (GameObject key in destroyedKeys)
             enemyCache.Remove(key);
-    }
-    private bool TryGetSpawnPosition(out Vector2 position)
-    {
-        position = Vector2.zero;
-
-        NavigationGrid grid = area.Grid;
-        float inset = area.AgentRadius + area.Padding;
-
-        Vector2 min = grid.Origin + Vector2.one * inset;
-
-        Vector2 max =grid.Origin + new Vector2(grid.Width, grid.Height) * grid.CellSize - Vector2.one * inset;
-
-        float width = max.x - min.x;
-        float height = max.y - min.y;
-
-        if (width <= 0f || height <= 0f)
-            return false;
-
-        float perimeter = (width + height) * 2f;
-
-        for (int i = 0; i < positionAttempts; i++)
-        {
-            float distance = Random.Range(0f, perimeter);
-            Vector2 candidate;
-
-            if (distance < width) 
-            {
-                candidate = new Vector2(min.x + distance, min.y);
-            }
-            else if (distance < width + height)
-            {
-                candidate = new Vector2(max.x, min.y + distance - width);
-            }
-            else if (distance < width * 2f + height)
-            {
-                candidate = new Vector2(max.x - (distance - width - height), max.y
-                );
-            }
-            else
-            {
-                candidate = new Vector2(min.x, max.y - (distance - width * 2f - height));
-            }
-
-            if (!area.Space.IsValidPos(candidate))
-            {
-                continue;
-            }
-
-            position = candidate;
-            return true;
-        }
-
-        return false;
     }
 
     private void OnDisable()
