@@ -3,56 +3,86 @@ using UnityEngine;
 
 public class EnemyGenerate : MonoBehaviour
 {
-    #region Regerences
+    #region References
     [Header("References")]
     [SerializeField] private NavigationArea area;
     [SerializeField] private MapArea mapArea;
-
     #endregion
 
-    #region Prefab
-    [Header("Prefab")]
-    [SerializeField] private EnemyController meleePrefab;
-    [SerializeField] private EnemyController rangedPrefab;
-    #endregion
-
-    #region Setting
-    [Header("Spawn Settings")]
-    [SerializeField, Min(1)] private int maxCount = 200;
-    [SerializeField, Min(1)] private int spawnCount = 5;
-    [SerializeField, Min(0.01f)] private float spawnInterval = 2f;
-    [SerializeField] private bool spawnImmediately;
-    #endregion
-
-    #region Ratio
-    [Header("Spawn Ratio")]
-    [SerializeField, Range(0f, 1f)] private float rangedRatio = 0.3f;
-    #endregion
-
-    #region Spawn
+    #region Spawn Position
     [Header("Spawn Position")]
     [SerializeField, Min(1)] private int positionAttempts = 20;
     [SerializeField, Min(0f)] private float spawnClearance;
     #endregion
 
-    #region  fields
+    #region Fields
     private readonly List<EnemyController> activeEnemies = new();
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
+
     private EnemySpawnPosition spawnPosition;
+    private StageSpawnData spawnData;
+
     private float timer;
     private int totalSpawned;
     private bool isSpawning;
     #endregion
 
-    private void Start()
+    #region Properties
+    public bool IsSpawning => isSpawning;
+    public bool HasSpawnedAll => spawnData != null && totalSpawned >= spawnData.MaxCount;
+    public int ActiveEnemyCount => activeEnemies.Count;
+    #endregion
+
+    // Start()에서 자동으로 시작하지 않음.
+    // BattleSceneController가 데이터를 전달한 후 시작.
+
+    public void StartSpawning(StageSpawnData data)
     {
-        StartSpawning();
+        if (isSpawning)
+            return;
+
+        if (data == null || mapArea == null || !mapArea.IsReady || area == null || !area.IsReady)
+            return;
+
+        if (data.MaxCount <= 0 || data.SpawnCount <= 0 || data.SpawnInterval <= 0f)
+            return;
+
+        bool hasCandidate = false;
+
+        foreach (var entry in data.Enemies)
+        {
+            if (entry != null && entry.Prefab != null && entry.Weight > 0f)
+            {
+                hasCandidate = true;
+                break;
+            }
+        }
+
+        if (!hasCandidate)
+            return;
+
+        activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+
+        if (activeEnemies.Count > 0)
+            return;
+
+        ClearDestroyedCache();
+
+        spawnData = data;
+        spawnPosition = new EnemySpawnPosition(mapArea);
+
+        totalSpawned = 0;
+        timer = spawnData.SpawnInterval;
+        isSpawning = true;
+
+        if (spawnData.SpawnImmediately)
+            SpawnWave();
     }
 
     private void Update()
     {
-        if (!isSpawning)
+        if (!isSpawning || HasSpawnedAll)
             return;
 
         timer -= Time.deltaTime;
@@ -60,32 +90,8 @@ public class EnemyGenerate : MonoBehaviour
         if (timer > 0f)
             return;
 
-        timer = Mathf.Max(0.01f, spawnInterval);
+        timer = Mathf.Max(0.01f, spawnData.SpawnInterval);
         SpawnWave();
-    }
-
-    public void StartSpawning()
-    {
-        if (isSpawning)
-            return;
-
-        if (mapArea == null || !mapArea.IsReady || area == null || !area.IsReady || meleePrefab == null || rangedPrefab == null)
-            return;
-
-        activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
-
-        if (activeEnemies.Count > 0)
-            return;
-        ClearDestroyedCache();
-
-        spawnPosition = new EnemySpawnPosition(mapArea);
-
-        totalSpawned = 0;
-        timer = Mathf.Max(0.01f, spawnInterval);
-        isSpawning = true;
-
-        if (spawnImmediately)
-            SpawnWave();
     }
 
     private void SpawnWave()
@@ -94,35 +100,33 @@ public class EnemyGenerate : MonoBehaviour
             return;
 
         activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+
         ClearDestroyedCache();
 
-        int available = Mathf.Max(0, maxCount - totalSpawned);
-        int count = Mathf.Min(spawnCount, available);
+        int available = Mathf.Max(0,spawnData.MaxCount - totalSpawned);
+
+        int count = Mathf.Min(spawnData.SpawnCount, available);
 
         for (int i = 0; i < count; i++)
         {
-            if (!spawnPosition.TryGetPosition(
-                spawnClearance,
-                positionAttempts,
-                out Vector2 position))
+            if (!spawnPosition.TryGetPosition(spawnClearance, positionAttempts, out Vector2 position))
                 continue;
 
-            EnemyController prefab = EnemySpawnSelector.Select(meleePrefab, rangedPrefab, rangedRatio);
+            EnemyController prefab = EnemySpawnSelector.Select(spawnData.Enemies);
+
+            if (prefab == null)
+                continue;
 
             SpawnEnemy(prefab, position);
         }
     }
 
-    private void SpawnEnemy(EnemyController prefab, Vector2 position)
+    private void SpawnEnemy(EnemyController prefab,Vector2 position)
     {
-        if (prefab == null)
-            return;
-
         GameObject obj = Managers.Pool.Pop(prefab.gameObject, new Vector3(position.x, position.y, transform.position.z), Quaternion.identity);
 
         if (obj == null)
             return;
-
 
         if (!enemyCache.TryGetValue(obj, out EnemyController enemy) || enemy == null)
         {
@@ -163,7 +167,7 @@ public class EnemyGenerate : MonoBehaviour
     {
         destroyedKeys.Clear();
 
-        foreach (KeyValuePair<GameObject, EnemyController> entry in enemyCache)
+        foreach (var entry in enemyCache)
         {
             if (entry.Key == null || entry.Value == null)
                 destroyedKeys.Add(entry.Key);

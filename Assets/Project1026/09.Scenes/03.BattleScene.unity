@@ -387,7 +387,7 @@ Transform:
   m_GameObject: {fileID: 708862548}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.65, y: 16.81, z: 0}
+  m_LocalPosition: {x: -15.74, y: 16.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -453,8 +453,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!70 &708862552
-CapsuleCollider2D:
+--- !u!61 &708862552
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -487,9 +487,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.35, y: 0}
-  m_Size: {x: 11, y: 8.68}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.265625, y: 8.65625}
+    newSize: {x: 9.265625, y: 8.65625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 9.265625, y: 8.65625}
+  m_EdgeRadius: 0
 --- !u!1 &867346934
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +673,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1219093056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219093058}
+  - component: {fileID: 1219093057}
+  m_Layer: 0
+  m_Name: BattleSceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1219093057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219093056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288be799df90b284881eda5fbe53da97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleSceneController
+  enemyGenerate: {fileID: 1330538457}
+  stageSpawnDatas:
+  - {fileID: 11400000, guid: 9be9588a41b7e8e48985950bff224357, type: 2}
+  - {fileID: 11400000, guid: 7879a72d686b7144c995a679f27184ba, type: 2}
+  - {fileID: 11400000, guid: 68ce11d045faa0b4ab1a2446f878dc88, type: 2}
+--- !u!4 &1219093058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219093056}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.30905, y: -0.29483, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281853749
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,13 +895,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGenerate
   area: {fileID: 1330538458}
   mapArea: {fileID: 1330538461}
-  meleePrefab: {fileID: 156661654134334344, guid: d34e67caa5860214c8fd580d63045133, type: 3}
-  rangedPrefab: {fileID: 156661654134334344, guid: a0d19dec02bff4d419a7418e8344e080, type: 3}
-  maxCount: 100
-  spawnCount: 10
-  spawnInterval: 2
-  spawnImmediately: 1
-  rangedRatio: 0.3
   positionAttempts: 15
   spawnClearance: 1
 --- !u!114 &1330538458
@@ -1243,8 +1294,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!70 &1821671011
-CapsuleCollider2D:
+--- !u!61 &1821671011
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1277,9 +1328,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.48, y: 0}
-  m_Size: {x: 10.82, y: 7.32}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.28125, y: 6.625}
+    newSize: {x: 9.28125, y: 6.625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 9.28125, y: 6.625}
+  m_EdgeRadius: 0
 --- !u!1 &1823058925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,8 +1433,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!70 &1823058929
-CapsuleCollider2D:
+--- !u!61 &1823058929
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1407,9 +1467,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.6}
-  m_Size: {x: 10.95, y: 7}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 11, y: 7.5}
+    newSize: {x: 11, y: 7.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 11, y: 7.5}
+  m_EdgeRadius: 0
 --- !u!1 &1843888858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1948,7 @@ SceneRoots:
   - {fileID: 2033639014}
   - {fileID: 214679016}
   - {fileID: 1843888860}
+  - {fileID: 1219093058}
   - {fileID: 206074281}
   - {fileID: 1778008761}
   - {fileID: 9036023801707645308}
