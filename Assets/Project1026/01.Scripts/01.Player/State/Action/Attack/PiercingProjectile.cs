@@ -10,7 +10,7 @@ public class PiercingProjectile : ProjectileBase
 
     #region Projectile Settings
     [Header("Piercing Settings")]
-    [SerializeField] private float hitRadius = 0.3f;
+    [SerializeField] private float hitRadius = 0.2f;
     [SerializeField] private int maxPierceCount = 3;
     [SerializeField] private float wallRadius = 0.1f;
     #endregion
@@ -99,6 +99,7 @@ public class PiercingProjectile : ProjectileBase
             hitBuffer
         );
 
+
         for (int i = 0; i < count; i++)
         {
             Collider2D target = hitBuffer[i];
@@ -117,5 +118,11 @@ public class PiercingProjectile : ProjectileBase
                 return;
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, hitRadius);
     }
 }

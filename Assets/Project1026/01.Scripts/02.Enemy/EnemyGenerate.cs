@@ -6,6 +6,7 @@ public class EnemyGenerate : MonoBehaviour
     #region Regerences
     [Header("References")]
     [SerializeField] private NavigationArea area;
+    [SerializeField] private MapArea mapArea;
     [SerializeField] private EnemyController meleePrefab;
     [SerializeField] private EnemyController rangedPrefab;
     #endregion
@@ -26,29 +27,29 @@ public class EnemyGenerate : MonoBehaviour
     #region Spawn
     [Header("Spawn Position")]
     [SerializeField, Min(1)] private int positionAttempts = 20;
+    [SerializeField, Min(0f)] private float spawnClearance;
     #endregion
 
-    #region 
+    #region  fields
     private readonly List<EnemyController> activeEnemies = new();
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
+    private EnemySpawnPosition spawnPosition;
     private float timer;
     private int totalSpawned;
+    private bool isSpawning;
     #endregion
 
     private void Start()
     {
-        if (area == null || area.Grid == null || meleePrefab == null || rangedPrefab == null)
-            return;
-
-        timer = Mathf.Max(0.01f, spawnInterval);
-
-        if (spawnImmediately)
-            SpawnWave();
+        StartSpawning();
     }
 
     private void Update()
     {
+        if (!isSpawning)
+            return;
+
         timer -= Time.deltaTime;
 
         if (timer > 0f)
@@ -58,9 +59,33 @@ public class EnemyGenerate : MonoBehaviour
         SpawnWave();
     }
 
+    public void StartSpawning()
+    {
+        if (isSpawning)
+            return;
+
+        if (mapArea == null || !mapArea.IsReady || area == null || !area.IsReady || meleePrefab == null || rangedPrefab == null)
+            return;
+
+        activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+
+        if (activeEnemies.Count > 0)
+            return;
+        ClearDestroyedCache();
+
+        spawnPosition = new EnemySpawnPosition(mapArea);
+
+        totalSpawned = 0;
+        timer = Mathf.Max(0.01f, spawnInterval);
+        isSpawning = true;
+
+        if (spawnImmediately)
+            SpawnWave();
+    }
+
     private void SpawnWave()
     {
-        if (area == null || area.Grid == null)
+        if (mapArea == null || !mapArea.IsReady || area == null || !area.IsReady)
             return;
 
         activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
@@ -71,10 +96,13 @@ public class EnemyGenerate : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            if (!TryGetSpawnPosition(out Vector2 position))
+            if (!spawnPosition.TryGetPosition(
+                spawnClearance,
+                positionAttempts,
+                out Vector2 position))
                 continue;
 
-            EnemyController prefab = Random.value < rangedRatio ? rangedPrefab : meleePrefab;
+            EnemyController prefab = EnemySpawnSelector.Select(meleePrefab, rangedPrefab, rangedRatio);
 
             SpawnEnemy(prefab, position);
         }
@@ -109,6 +137,11 @@ public class EnemyGenerate : MonoBehaviour
         totalSpawned++;
     }
 
+    public void StopSpawning()
+    {
+        isSpawning = false;
+    }
+
     public bool Despawn(EnemyController enemy)
     {
         if (enemy == null || !activeEnemies.Contains(enemy))
@@ -134,57 +167,9 @@ public class EnemyGenerate : MonoBehaviour
         foreach (GameObject key in destroyedKeys)
             enemyCache.Remove(key);
     }
-    private bool TryGetSpawnPosition(out Vector2 position)
+
+    private void OnDisable()
     {
-        position = Vector2.zero;
-
-        NavigationGrid grid = area.Grid;
-        float inset = area.AgentRadius + area.Padding;
-
-        Vector2 min = grid.Origin + Vector2.one * inset;
-
-        Vector2 max =grid.Origin + new Vector2(grid.Width, grid.Height) * grid.CellSize - Vector2.one * inset;
-
-        float width = max.x - min.x;
-        float height = max.y - min.y;
-
-        if (width <= 0f || height <= 0f)
-            return false;
-
-        float perimeter = (width + height) * 2f;
-
-        for (int i = 0; i < positionAttempts; i++)
-        {
-            float distance = Random.Range(0f, perimeter);
-            Vector2 candidate;
-
-            if (distance < width) 
-            {
-                candidate = new Vector2(min.x + distance, min.y);
-            }
-            else if (distance < width + height)
-            {
-                candidate = new Vector2(max.x, min.y + distance - width);
-            }
-            else if (distance < width * 2f + height)
-            {
-                candidate = new Vector2(max.x - (distance - width - height), max.y
-                );
-            }
-            else
-            {
-                candidate = new Vector2(min.x, max.y - (distance - width * 2f - height));
-            }
-
-            if (!area.Space.IsValidPos(candidate))
-            {
-                continue;
-            }
-
-            position = candidate;
-            return true;
-        }
-
-        return false;
+        StopSpawning();
     }
 }

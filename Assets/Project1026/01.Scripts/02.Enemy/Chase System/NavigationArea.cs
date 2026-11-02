@@ -5,8 +5,8 @@ public class NavigationArea : MonoBehaviour
 {
     #region Grid
     [Header("Grid")]
-    [SerializeField] private SpriteRenderer mapRenderer;
     [SerializeField, Min(0.05f)] private float cellSize = 0.5f;
+    [SerializeField] private MapArea mapArea;
     #endregion
 
     #region Obstacle
@@ -21,26 +21,24 @@ public class NavigationArea : MonoBehaviour
     #endregion
     #region Layer
     [Header("LayerMask")]
-    [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask enemyLayer;
     #endregion
     //몬스터 등록
     private Dictionary<EnemyController, Vector2> enemies = new();
-    private Collider2D[] neighbors = new Collider2D[64];
+    private EnemySeparation separation;
 
-    private NavigationSpace space;
 
     #region Property
     public float AgentRadius => agentRadius;
     public float Padding => padding;
     public Transform Target => target;
-    public LayerMask Obstacle => obstacleLayer;
+    public LayerMask Obstacle => mapArea.Obs;
     public NavigationGrid Grid { get; private set; }
-    public NavigationSpace Space => space;
     #endregion
 
     private FlowField flowField;
     private Vector2Int? lastTargetCell;
+    public bool IsReady => mapArea != null && mapArea.IsReady && Grid != null && flowField != null;
 
     private void Awake()
     {
@@ -54,159 +52,42 @@ public class NavigationArea : MonoBehaviour
 
     private void LateUpdate()
     {
-
-        if (enemies.Count < 2 || agentRadius <= 0f)
+        if (!IsReady)
             return;
-        Physical();
-
-    }
-
-    private void Physical()
-    {
-        Physics2D.SyncTransforms();
-
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(enemyLayer);
-        filter.useTriggers = false;
-
-        float dia = agentRadius * 2f + enemyGap;
-
-        foreach (EnemyController enemy in enemies.Keys)
-        {
-            if (enemy == null)
-                continue;
-
-            Vector2 pos = enemy.transform.position;
-            Vector2 cor = Vector2.zero;
-
-            int count = Physics2D.OverlapCircle(pos, dia, filter, neighbors);
-
-            for (int i = 0; i < count; ++i)
-            {
-                EnemyController other = neighbors[i].GetComponentInParent<EnemyController>();
-
-                if (other == null || other == enemy || other.NavArea != this)
-                    continue;
-
-                Vector2 offset = pos - (Vector2)other.transform.position;
-
-                float dis = offset.magnitude;
-
-                if (dis >= dia)
-                    continue;
-
-                Vector2 dir;
-
-                if (dis > 0.001f)
-                {
-                    dir = offset / dis;
-                }
-                else
-                {
-                    if (!enemies.ContainsKey(other))
-                        continue;
-
-                    dir = Vector2.right;
-
-                    foreach (EnemyController register in enemies.Keys)
-                    {
-                        if (register == enemy)
-                        {
-                            dir = Vector2.left;
-                            break;
-                        }
-
-                        if (register == other)
-                            break;
-                    }
-                }
-                cor += dir * (dia - dis) * 0.5f;
-            }
-            if (cor.magnitude > 0.001f)
-            {
-                Push(enemy.transform, cor);
-                Physics2D.SyncTransforms();
-            }
-        }
-    }
-
-    private void Push(Transform enemy, Vector2 cor)
-    {
-        if (Grid == null)
-            return;
-
-        Vector2 pos = enemy.position;
-
-        Vector2 min = Grid.Origin + Vector2.one * agentRadius;
-
-        Vector2 max = Grid.Origin + new Vector2(Grid.Width, Grid.Height) * Grid.CellSize - Vector2.one * agentRadius;
-
-        if (min.x > max.x || min.y > max.y)
-            return;
-
-        Vector2 next = pos + cor;
-
-        next.x = Mathf.Clamp(next.x, min.x, max.x);
-        next.y = Mathf.Clamp(next.y, min.y, max.y);
-
-        cor = next - pos;
-
-        float dis = cor.magnitude;
-
-        if (dis < 0.0001f)
-            return;
-
-        Vector2 dir = cor / dis;
-
-        RaycastHit2D hit = Physics2D.CircleCast(enemy.position, agentRadius, dir, dis, obstacleLayer);
-
-        float allowDis = hit.collider == null ? dis : Mathf.Max(0f, hit.distance - 0.01f);
-
-        Vector2 des = pos + dir * allowDis;
-
-        if (!Space.IsValidPos(des))
-            return;
-
-        enemy.position += (Vector3)(des - pos);
+        
+        separation.Resolve(enemies);
     }
 
     public void Initialize()
     {
-        if(mapRenderer == null)
-        {
-            Debug.LogError("Map Renderer가 등록되지 않았습니다.");
+        if (mapArea == null || !mapArea.IsReady)
             return;
-        }
 
-        Vector2 center = mapRenderer.bounds.center;
-        Vector2 size = mapRenderer.bounds.size;
+        Bounds bounds = mapArea.worldBounds;
 
-        Grid = new NavigationGrid(center, size, cellSize);
-
-        space = new NavigationSpace(Grid, agentRadius, padding, obstacleLayer);
-
+        Grid = new NavigationGrid(bounds.center, bounds.size, cellSize);
         flowField = new FlowField(Grid);
+        separation = new EnemySeparation(mapArea, Grid, agentRadius, padding, enemyGap, enemyLayer);
 
         RefreshObstacles();
     }
 
     public void RefreshObstacles()
     {
-        if (Grid == null)
+        if (!IsReady)
             return;
 
         Physics2D.SyncTransforms();
+        float clearance = agentRadius + padding;
 
-        for (int x = 0; x < Grid.Width; ++x)
+        for(int x = 0; x < Grid.Width; ++x)
         {
-            for (int y = 0; y < Grid.Height; ++y)
+            for(int y = 0; y < Grid.Height; ++y)
             {
-                Vector2Int cel = new Vector2Int(x, y);
-                Vector2 center = Grid.GetCellCenter(cel);
+                Vector2Int cell = new Vector2Int(x, y);
+                Vector2 center = Grid.GetCellCenter(cell);
 
-                Collider2D obstacle = Physics2D.OverlapCircle(center, agentRadius + padding, obstacleLayer);
-
-                Grid.SetWalkable(cel, obstacle == null);
+                Grid.SetWalkable(cell, mapArea.CanPlace(center, clearance));
             }
         }
         RefreshFlowField(true);
@@ -253,30 +134,16 @@ public class NavigationArea : MonoBehaviour
         lastTargetCell = targetCell;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (Grid == null)
-        {
-            if (mapRenderer != null)
-            {
-                Gizmos.color = Color.yellow;
-
-                Gizmos.DrawWireCube(
-                    mapRenderer.bounds.center,
-                    new Vector3(
-                        mapRenderer.bounds.size.x,
-                        mapRenderer.bounds.size.y,
-                        0.1f
-                    )
-                );
-            }
-
             return;
-        }
 
-        for (int x = 0; x < Grid.Width; ++x)
+        Vector3 size = new Vector3(Grid.CellSize, Grid.CellSize, 0f);
+
+        for (int x = 0; x < Grid.Width; x++)
         {
-            for (int y = 0; y < Grid.Height; ++y)
+            for (int y = 0; y < Grid.Height; y++)
             {
                 Vector2Int cell = new Vector2Int(x, y);
                 Vector2 center = Grid.GetCellCenter(cell);
@@ -286,14 +153,10 @@ public class NavigationArea : MonoBehaviour
                     : Color.red;
 
                 Gizmos.DrawWireCube(
-                    new Vector3(center.x, center.y, transform.position.z),
-                    new Vector3(
-                        Grid.CellSize,
-                        Grid.CellSize,
-                        0.1f
-                    ) * 0.9f
-                );
+                    new Vector3(center.x, center.y, mapArea.worldBounds.center.z),
+                    size);
             }
         }
     }
+
 }

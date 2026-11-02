@@ -10,7 +10,7 @@ public class PlayerAutoAttack : MonoBehaviour
         #region Attack Settings
         [SerializeField] private AttackConfigSO config;
         [SerializeField, Min(0.01f)] private float interval = 1f;
-        [SerializeField, Min(0)] private int projectileCount = 1;
+        [SerializeField, Min(0)] private int projectileCount = 5;
         #endregion
 
         #region Properties

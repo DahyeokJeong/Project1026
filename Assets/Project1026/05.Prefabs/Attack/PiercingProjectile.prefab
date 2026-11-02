@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 8aa1fb93ba6e2664d89197cd09ef6143, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e2065c9fda1b764fb0a43f0dfbdff2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PiercingProjectile
   moveSpeed: 6
   lifeTime: 3
+  baseDamage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
