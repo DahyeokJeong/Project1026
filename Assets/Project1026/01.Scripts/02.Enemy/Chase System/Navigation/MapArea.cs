@@ -20,12 +20,11 @@ public class MapArea : MonoBehaviour
         if (!IsReady)
             return false;
 
-        clearance = Mathf.Max(0f, clearance);
 
         Bounds bounds = worldBounds;
 
-        min = (Vector2)bounds.min + Vector2.one * clearance;
-        max = (Vector2)bounds.max - Vector2.one * clearance;
+        min = (Vector2)bounds.min;
+        max = (Vector2)bounds.max;
 
         return min.x <= max.x && min.y <= max.y;
     }

@@ -45,9 +45,11 @@ GameObject:
   - component: {fileID: 681081248997300918}
   - component: {fileID: 2809400701567533494}
   - component: {fileID: 3761490361371094999}
+  - component: {fileID: 2034655861305010630}
   - component: {fileID: 3337697012970844914}
   - component: {fileID: 8458517836481200772}
   - component: {fileID: 1745637549850076173}
+  - component: {fileID: 214438431370435719}
   - component: {fileID: 3598012130301034723}
   m_Layer: 0
   m_Name: Player_Demo
@@ -202,6 +204,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 681081248997300918}
   model: {fileID: 3337697012970844914}
+--- !u!114 &2034655861305010630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855385415582002297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf0921a1aeacad438231b37f0d34385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAugment
+  auto: {fileID: 8458517836481200772}
 --- !u!114 &3337697012970844914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +266,20 @@ MonoBehaviour:
   - {fileID: 3941194654650018403}
   sortingPoint: {fileID: 7984876400950651297}
   isDynamic: 1
+--- !u!114 &214438431370435719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855385415582002297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1490838784ff263459b637fa763abdec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Test
+  autoAttack: {fileID: 8458517836481200772}
+  playerAugment: {fileID: 2034655861305010630}
 --- !u!70 &3598012130301034723
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

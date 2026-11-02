@@ -66,12 +66,16 @@ public class ProjectileAttack : IAttack
         float spacing = 0.4f;
         float startOffset = -(count - 1) * spacing * 0.5f;
 
+        Vector2 direction = model.LastMoveDirection.normalized;
+        Vector2 side = new Vector2(-direction.y, direction.x);
+
         for (int i = 0; i < count; i++)
         {
             float offset = startOffset + i * spacing;
-            Vector2 spawnPosition = (Vector2)firePoint.position + Vector2.up * offset;
+            Vector2 spawnPosition =
+                (Vector2)firePoint.position + side * offset;
 
-            SpawnProjectile(spawnPosition, model.LastMoveDirection);
+            SpawnProjectile(spawnPosition, direction);
         }
     }
 

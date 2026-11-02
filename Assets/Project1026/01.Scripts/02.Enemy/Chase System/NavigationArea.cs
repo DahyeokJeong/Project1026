@@ -134,4 +134,29 @@ public class NavigationArea : MonoBehaviour
         lastTargetCell = targetCell;
     }
 
+    private void OnDrawGizmos()
+    {
+        if (Grid == null)
+            return;
+
+        Vector3 size = new Vector3(Grid.CellSize, Grid.CellSize, 0f);
+
+        for (int x = 0; x < Grid.Width; x++)
+        {
+            for (int y = 0; y < Grid.Height; y++)
+            {
+                Vector2Int cell = new Vector2Int(x, y);
+                Vector2 center = Grid.GetCellCenter(cell);
+
+                Gizmos.color = Grid.IsWalkable(cell)
+                    ? Color.green
+                    : Color.red;
+
+                Gizmos.DrawWireCube(
+                    new Vector3(center.x, center.y, mapArea.worldBounds.center.z),
+                    size);
+            }
+        }
+    }
+
 }
