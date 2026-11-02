@@ -7,6 +7,11 @@ public class EnemyGenerate : MonoBehaviour
     [Header("References")]
     [SerializeField] private NavigationArea area;
     [SerializeField] private MapArea mapArea;
+
+    #endregion
+
+    #region Prefab
+    [Header("Prefab")]
     [SerializeField] private EnemyController meleePrefab;
     [SerializeField] private EnemyController rangedPrefab;
     #endregion

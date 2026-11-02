@@ -57,12 +57,4 @@ public class EnemyAttack : MonoBehaviour
             Managers.Pool.Push(go);
         }
     }
-    private void OnDrawGizmosSelected()
-    {
-        if (model == null || !Application.isPlaying)
-            return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, model.AttackRange);
-    }
 }

@@ -4,12 +4,13 @@ public class EnemyAttackState : IState
 {
     private EnemyController enemy;
     private EnemyAttack attack;
-    private float timer;
+    Transform target;
+    private float timer = 2f;
     public EnemyAttackState(EnemyController enemy, EnemyAttack attack)
     {
         this.enemy = enemy;
         this.attack = attack;
-
+        target = enemy.NavArea.Target;
         ResetTimer();
     }
 
@@ -33,7 +34,6 @@ public class EnemyAttackState : IState
         if (timer > 0f)
             return;
 
-        Transform target = enemy.NavArea.Target;
 
         attack.Execute(target);
         ResetTimer();

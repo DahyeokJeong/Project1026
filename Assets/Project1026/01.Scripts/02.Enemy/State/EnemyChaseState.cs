@@ -5,7 +5,7 @@ public class EnemyChaseState : IState
     private EnemyController enemy;
 
     private Vector2 dir;
-
+    private Vector3 movement;
     public EnemyChaseState(EnemyController enemy)
     {
         this.enemy = enemy;
@@ -22,14 +22,12 @@ public class EnemyChaseState : IState
 
     public void FixedTick()
     {
+        enemy.transform.position += movement * enemy.Model.MoveSpeed * Time.deltaTime;
     }
 
     public void Tick()
     {
         dir = enemy.NavArea == null ? Vector2.zero : enemy.NavArea.GetDirection(enemy.transform.position);
-
-        Vector3 movement = new Vector3(dir.x, dir.y, 0f);
-
-        enemy.transform.position += movement * enemy.Model.MoveSpeed * Time.deltaTime;
+        movement = new Vector3(dir.x, dir.y, 0f);
     }
 }
