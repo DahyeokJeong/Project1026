@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [Header("Component")]
     [SerializeField] private PlayerInputHandler inputHandler;
     [SerializeField] private PlayerMovement movement;
+    [SerializeField] private PlayerView view;
     #endregion
 
     #region State
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleStateChange();
         currentState?.Tick();
+        view.SetMoveAnimation(inputHandler.MoveInput);
     }
 
     private void FixedUpdate()

@@ -21,18 +21,25 @@ public class RangeAttack : MonoBehaviour
 
     private void Update()
     {
-        transform.position += (Vector3)(moveDirection * moveSpeed * Time.deltaTime);
-
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
             Managers.Pool.Push(gameObject);
     }
 
+    private void FixedUpdate()
+    {
+        transform.position += (Vector3)(moveDirection * moveSpeed * Time.deltaTime);
+    }
+
     public void Set(Vector2 direction, float damage)
     {
         moveDirection = direction.normalized;
         this.damage = damage;
+
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

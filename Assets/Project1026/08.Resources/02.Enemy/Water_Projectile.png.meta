@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1fe7695d244c4d64e80389e4f983b35d
+guid: 258261c29b0a4f54d962a7cd96abb583
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -630438339824099988
-    second: "\uC950_Idle_\uC9C0_0"
+      213: 319514557100625487
+    second: Water_Projectile_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,8 +49,8 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.6, y: 0.32}
   spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uC950_Idle_\uC9C0_0"
+      name: Water_Projectile_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 72
-        height: 79
+        x: 2
+        y: 3
+        width: 60
+        height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c6d5ffd8bab3047f0800000000000000
-      internalID: -630438339824099988
+      spriteID: f4e8c8cfbc42f6400800000000000000
+      internalID: 319514557100625487
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uC950_Idle_\uC9C0_0": -630438339824099988
+      Water_Projectile_0: 319514557100625487
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

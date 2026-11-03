@@ -976,13 +976,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGenerate
   area: {fileID: 1330538458}
   mapArea: {fileID: 1330538461}
-  meleePrefab: {fileID: 156661654134334344, guid: d34e67caa5860214c8fd580d63045133, type: 3}
-  rangedPrefab: {fileID: 156661654134334344, guid: a0d19dec02bff4d419a7418e8344e080, type: 3}
-  maxCount: 100
-  spawnCount: 10
-  spawnInterval: 2
-  spawnImmediately: 1
-  rangedRatio: 0.3
   positionAttempts: 15
   spawnClearance: 1
 --- !u!114 &1330538458
@@ -1593,6 +1586,52 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.421875, y: 5.765625}
   m_EdgeRadius: 0
+--- !u!1 &1992266293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992266295}
+  - component: {fileID: 1992266294}
+  m_Layer: 0
+  m_Name: BattleSceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1992266294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992266293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288be799df90b284881eda5fbe53da97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleSceneController
+  enemyGenerate: {fileID: 1330538457}
+  stageSpawnDatas: []
+--- !u!4 &1992266295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992266293}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.59661, y: -2.31385, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2033639011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1859,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 2033639014}
   - {fileID: 214679016}
+  - {fileID: 1992266295}
   - {fileID: 1843888860}
   - {fileID: 206074281}
   - {fileID: 1778008761}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8131545058412978603}
   - component: {fileID: 122271199989623146}
   m_Layer: 6
-  m_Name: Enemy_Range_Demo
+  m_Name: Snake_Range_Demo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
