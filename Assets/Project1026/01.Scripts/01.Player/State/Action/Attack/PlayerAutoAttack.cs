@@ -7,17 +7,29 @@ public class PlayerAutoAttack : MonoBehaviour
     [Serializable]
     public class AttackSlot
     {
-        #region Attack Settings
-        [SerializeField] private AttackConfigSO config;
+        #region Settings
+        [SerializeField] private AttackConfigBaseSO config;
+        [SerializeField] private bool initiallyOwned;
         [SerializeField, Min(0.01f)] private float interval = 1f;
-        [SerializeField, Min(0)] private int projectileCount = 5;
         #endregion
 
         #region Properties
-        public AttackConfigSO Config => config;
+        public AttackConfigBaseSO Config => config;
+        public bool InitiallyOwned => initiallyOwned;
         public float Interval => interval;
-        public int ProjectileCount => projectileCount;
         #endregion
+    }
+
+    private sealed class AttackEntry
+    {
+        public AttackRuntimeData Data { get; }
+        public IAttack Attack { get; }
+
+        public AttackEntry(AttackRuntimeData data, IAttack attack)
+        {
+            Data = data;
+            Attack = attack;
+        }
     }
 
     #region Components
@@ -32,63 +44,98 @@ public class PlayerAutoAttack : MonoBehaviour
     #endregion
 
     #region Fields
-    private readonly List<IAttack> attacks = new();
-    private readonly Dictionary<string, int> projectileCounts = new();
+    private readonly Dictionary<string, AttackEntry> attacks = new();
     #endregion
 
-    private void Start()
+    private void Awake()
     {
-        attacks.Clear();
-        projectileCounts.Clear();
+        if (model == null)
+        {
+            Debug.LogError("[PlayerAutoAttack] PlayerModel이 연결되지 않았습니다.", this);
+
+            enabled = false;
+            return;
+        }
 
         foreach (AttackSlot slot in attackSlots)
         {
-            if(slot == null || slot.Config == null)
-                continue;
-
-            if(slot.Config.Prefab == null)
+            if (slot == null || slot.Config == null)
             {
-                Debug.LogWarning($"[PlayerAutoAttack] {slot.Config.name}에 프리팹이 없습니다.");
+                Debug.LogError("[PlayerAutoAttack] 공격 슬롯의 Config가 없습니다.", this);
                 continue;
             }
 
-            projectileCounts[slot.Config.name] = slot.ProjectileCount;
+            AttackConfigBaseSO config = slot.Config;
+            string key = config.ConfigKey;
 
-            attacks.Add(new ProjectileAttack(
-                firePoint,
-                model,
-                slot.Config,
-                slot.Interval,
-                () => GetProjectileCount(slot.Config.name)));
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                Debug.LogError($"[PlayerAutoAttack] 공격 키가 없습니다: {config.name}", this);
+                continue;
+            }
+
+            if (attacks.ContainsKey(key))
+            {
+                Debug.LogError($"[PlayerAutoAttack] 중복된 공격 키입니다: {key}", this);
+                continue;
+            }
+
+            AttackRuntimeData data = Managers.RunData.GetOrCreateAttackData(config, slot.InitiallyOwned);
+
+            if (data == null)
+                continue;
+
+            IAttack attack = config.CreateAttack(firePoint, model, data, slot.Interval);
+
+            if (attack == null)
+                continue;
+
+            attacks.Add(key, new AttackEntry(data, attack));
         }
     }
 
     private void Update()
     {
-        foreach (IAttack attack in attacks)
-            attack.Tick(Time.deltaTime * Mathf.Max(0f, model.AttackSpeed));
+        foreach (AttackEntry entry in attacks.Values)
+        {
+            if (entry.Data.IsOwned)
+                entry.Attack.Tick(Time.deltaTime);
+        }
     }
 
-    public void AddAttack(IAttack attack)
+    public bool HasAttack(string configKey)
     {
-        if (attack == null)
-            return;
-
-        attacks.Add(attack);
+        return !string.IsNullOrWhiteSpace(configKey) && attacks.ContainsKey(configKey);
     }
 
-    public void AddProjectileCount(string configKey, int value)
+    public bool TryGetAttackData<T>(string configKey, out T data) where T : AttackRuntimeData
     {
-        if (!projectileCounts.ContainsKey(configKey))
-            return;
+        data = null;
 
-        projectileCounts[configKey] += value;
+        if (string.IsNullOrWhiteSpace(configKey) || !attacks.TryGetValue(configKey, out AttackEntry entry))
+            return false;
+
+        data = entry.Data as T;
+        return data != null;
+    }
+
+    public bool IsOwned(string configKey)
+    {
+        return TryGetAttackData(configKey, out AttackRuntimeData data) && data.IsOwned;
+    }
+
+    public bool TryAcquireAttack(string configKey)
+    {
+        return TryGetAttackData(configKey, out AttackRuntimeData data) && data.TryAcquire();
+    }
+
+    public bool AddProjectileCount(string configKey, int value)
+    {
+        return TryGetAttackData( configKey, out ProjectileAttackRuntimeData data) && data.AddProjectileCount(value);
     }
 
     public int GetProjectileCount(string configKey)
     {
-        if(projectileCounts.TryGetValue(configKey, out int count))
-            return count;
-        return 0;
+        return TryGetAttackData( configKey, out ProjectileAttackRuntimeData data) ? data.ProjectileCount : 0;
     }
 }

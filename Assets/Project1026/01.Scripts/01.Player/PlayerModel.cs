@@ -6,7 +6,8 @@ public class PlayerModel : MonoBehaviour
     #region Properties
     public int MaxHp { get; private set; }
     public float MaxExp { get; private set; }
-    public int AttackDamage { get; private set; }
+    public int BaseAttackDamage { get; private set; }
+    public int AttackDamage => BaseAttackDamage + Managers.RunData.PlayerAttackDamageBonus;
     public float AttackSpeed { get; private set; }
     public float MoveSpeed { get; private set; }
     public int Defense { get; private set; }
@@ -37,7 +38,7 @@ public class PlayerModel : MonoBehaviour
         if(Managers.Initialized)
             Managers.Data.DataLoadCompleted -= Init;
         MaxHp = Mathf.RoundToInt(GetStatValue("STAT001"));
-        AttackDamage = Mathf.RoundToInt(GetStatValue("STAT003"));
+        BaseAttackDamage = Mathf.RoundToInt(GetStatValue("STAT003"));
         AttackSpeed = GetStatValue("STAT005");
         Defense = Mathf.RoundToInt(GetStatValue("STAT006"));
         MoveSpeed = GetStatValue("STAT007");

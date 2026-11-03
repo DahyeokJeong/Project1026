@@ -74,14 +74,38 @@
         },
         {
             "Key": "AUG001",
-            "NameKO": "Normal 투사체 증가",
-            "DescriptionKO": "Normal 투사체 발사 수가 1 증가합니다.",
+            "NameKO": "일반탄 수 증가",
+            "DescriptionKO": "일반 공격의 투사체 수가 1 증가합니다.",
             "Category": "Augment"
         },
         {
             "Key": "AUG002",
-            "NameKO": "Piercing 투사체 증가",
-            "DescriptionKO": "Piercing 투사체 발사 수가 1 증가합니다.",
+            "NameKO": "관통탄 수 증가",
+            "DescriptionKO": "관통 공격의 투사체 수가 1 증가합니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG003",
+            "NameKO": "관통 공격 획득",
+            "DescriptionKO": "관통탄 1발을 발사하는 자동 공격을 획득합니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG004",
+            "NameKO": "일반 공격 피해 증가",
+            "DescriptionKO": "일반 공격의 피해량이 5 증가합니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG005",
+            "NameKO": "관통 공격 피해 증가",
+            "DescriptionKO": "관통 공격의 피해량이 5 증가합니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG006",
+            "NameKO": "공격력 증가",
+            "DescriptionKO": "플레이어 공격력이 5 증가하여 모든 자동 공격에 적용됩니다.",
             "Category": "Augment"
         }
     ]

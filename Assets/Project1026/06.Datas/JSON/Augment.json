@@ -11,6 +11,30 @@
             "ConfigKey": "SO_Augment_PiercingCount",
             "AttackConfigKey": "SO_Attack_Piercing",
             "Value": 1
+        },
+        {
+            "Id": "AUG003",
+            "ConfigKey": "SO_Augment_PiercingAcquire",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 1
+        },
+        {
+            "Id": "AUG004",
+            "ConfigKey": "SO_Augment_NormalDamage",
+            "AttackConfigKey": "SO_Attack_Normal",
+            "Value": 5
+        },
+        {
+            "Id": "AUG005",
+            "ConfigKey": "SO_Augment_PiercingDamage",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 5
+        },
+        {
+            "Id": "AUG006",
+            "ConfigKey": "SO_Augment_PlayerAttackDamage",
+            "AttackConfigKey": "",
+            "Value": 5
         }
     ]
 }

@@ -10,32 +10,27 @@ public class ProjectileAttack : IAttack
 
     #region Attack Settings
     private readonly float attackInterval;
-    private readonly Func<int> projectileCount;
+    private readonly ProjectileAttackRuntimeData data;
     #endregion
 
     #region Fields
     private float attackTimer;
     #endregion
 
-    public ProjectileAttack(
-        Transform firePoint,
-        PlayerModel model,
-        AttackConfigSO config,
-        float attackInterval,
-        Func<int> projectileCount)
+    public ProjectileAttack(Transform firePoint, PlayerModel model, AttackConfigSO config, float attackInterval, ProjectileAttackRuntimeData data)
     {
         this.firePoint = firePoint;
         this.model = model;
         this.config = config;
         this.attackInterval = Mathf.Max(0.01f, attackInterval);
-        this.projectileCount = projectileCount;
+        this.data = data;
 
         attackTimer = this.attackInterval;
     }
 
     public void Tick(float deltaTime)
     {
-        attackTimer -= deltaTime;
+        attackTimer -= deltaTime * Mathf.Max(0f, model.AttackSpeed);
 
         if (attackTimer > 0f)
             return;
@@ -46,7 +41,7 @@ public class ProjectileAttack : IAttack
 
     private void Fire()
     {
-        int count = projectileCount();
+        int count = data.ProjectileCount;
 
         if (count <= 0)
             return;
@@ -61,6 +56,20 @@ public class ProjectileAttack : IAttack
                 break;
         }
     }
+
+    private void SpawnProjectile(Vector2 position, Vector2 direction)
+    {
+        GameObject go = Managers.Pool.Pop(config.Prefab, position, Quaternion.identity);
+
+        if (go != null && go.TryGetComponent(out ProjectileBase projectile))
+        {
+            float attackDamage = model.AttackDamage + data.DamageBonus;
+
+            projectile.SetDirection(direction);
+            projectile.SetDamage(attackDamage, model.Critical);
+        }
+    }
+
     private void FireParallel(int count)
     {
         float spacing = 0.4f;
@@ -93,15 +102,5 @@ public class ProjectileAttack : IAttack
         }
     }
 
-    private void SpawnProjectile(Vector2 position, Vector2 direction)
-    {
-        GameObject go = Managers.Pool.Pop(config.Prefab, position, Quaternion.identity);
-
-        if (go != null && go.TryGetComponent(out ProjectileBase projectile))
-        {
-            projectile.SetDirection(direction);
-            projectile.SetDamage(model.AttackDamage, model.Critical);
-        }
-    }
 
 }
