@@ -12,15 +12,13 @@ public class PlayerModel : MonoBehaviour
     public int Defense { get; private set; }
     public float Critical { get; private set; }
     public float CurrentHp => currentHp;
-    public float CurrentExp => currentExp;
-    public int Level => level;
     public Vector2 LastMoveDirection { get; set; }
+    public float CurrentExp => Managers.RunData.CurrentExp;
+    public int Level => Managers.RunData.Level;
     #endregion
 
     #region Fields
     private float currentHp;
-    private float currentExp;
-    private int level;
     #endregion
 
     private void Awake()
@@ -47,7 +45,6 @@ public class PlayerModel : MonoBehaviour
         MaxExp = GetStatValue("STAT009");
 
         currentHp = MaxHp;
-        currentExp = 0f;
         LastMoveDirection = Vector2.down;
 
     }
@@ -69,11 +66,24 @@ public class PlayerModel : MonoBehaviour
         return 0f;
     }
 
-    public void AddExp(float amount)
+    public int CalculateExp(RunDataManager runData, float amount)
     {
-        currentExp += amount;
+        int levelUpCount = 0;
+
+        runData.CurrentExp += amount;
+
+        while (runData.CurrentExp >= MaxExp)
+        {
+            runData.CurrentExp -= MaxExp;
+            runData.Level++;
+
+            levelUpCount++;
+        }
+
+        return levelUpCount;
     }
 
+    #region Able
     private void OnEnable()
     {
         Managers.Damage.Register(transform, ReduceHP);
@@ -86,4 +96,5 @@ public class PlayerModel : MonoBehaviour
         Managers.Damage.Unregister(transform);
         Managers.Data.DataLoadCompleted -= Init;
     }
+    #endregion
 }

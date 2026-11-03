@@ -7,6 +7,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private RectTransform currentExp;
     [SerializeField] private TMP_Text expTxt;
+    [SerializeField] private TMP_Text levelTxt;
     #endregion
 
     #region field
@@ -14,10 +15,14 @@ public class PlayerView : MonoBehaviour
     private PlayerExpView expView = new();
     #endregion
 
-    public void Init(PlayerModel model)
+    public void InitAnimation()
     {
         animationView.Init(animator);
-        expView.Init(currentExp, expTxt, model.MaxExp);
+    }
+
+    public void InitExp(float maxExp)
+    {
+        expView.Init(currentExp, expTxt,levelTxt, maxExp);
     }
     public void SetMoveAnimation(Vector2 moveInput)
     {
@@ -29,8 +34,8 @@ public class PlayerView : MonoBehaviour
         animationView.SetIdleAnimation();
     }
 
-    public void SetExp(float currentExp)
+    public void SetExp(float currentExp, int currentLevel)
     {
-        expView.SetExp(currentExp);
+        expView.SetExp(currentExp, currentLevel);
     }
 }

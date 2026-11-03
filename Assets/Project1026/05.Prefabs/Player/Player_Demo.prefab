@@ -41,8 +41,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5530833077823482181}
   - component: {fileID: 3941194654650018403}
+  - component: {fileID: 2674221592639270946}
   - component: {fileID: 8261899557118859982}
   - component: {fileID: 681081248997300918}
+  - component: {fileID: 5708921384191213310}
   - component: {fileID: 2809400701567533494}
   - component: {fileID: 3337697012970844914}
   - component: {fileID: 3761490361371094999}
@@ -135,6 +137,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!95 &2674221592639270946
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855385415582002297}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a0ffabe14de9142429bc950728d64671, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8261899557118859982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4acb711f97b0404d9ca7f3c8adec0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  model: {fileID: 0}
+  model: {fileID: 3337697012970844914}
+  view: {fileID: 5708921384191213310}
   inputHandler: {fileID: 2809400701567533494}
   movement: {fileID: 3761490361371094999}
 --- !u!50 &681081248997300918
@@ -177,6 +202,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5708921384191213310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855385415582002297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ab58d16510ef9409968484bddc8be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerView
+  animator: {fileID: 2674221592639270946}
+  currentExp: {fileID: 0}
+  expTxt: {fileID: 0}
 --- !u!114 &2809400701567533494
 MonoBehaviour:
   m_ObjectHideFlags: 0

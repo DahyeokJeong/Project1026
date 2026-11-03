@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         idleState = new PlayerIdleState(this);
         moveState = new PlayerMoveState(this);
-        Managers.Exp.SetPlayer(model);
-        view.Init(model);
+        view.InitAnimation();
+        Managers.RunData.SetPlayer(model, view);
     }
 
     private void Start()

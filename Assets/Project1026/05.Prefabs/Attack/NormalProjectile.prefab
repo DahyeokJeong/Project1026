@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6424283817944284668}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.29463, y: 3.48641, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 8aa1fb93ba6e2664d89197cd09ef6143, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc8e82ac7c0036f4492cd4ec1afd27c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 0.96, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NormalProjectile
   moveSpeed: 6
   lifeTime: 3
+  baseDamage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
@@ -115,3 +116,5 @@ MonoBehaviour:
     m_Bits: 8
   hitRadius: 0.3
   wallRadius: 0.1
+  wallOffset: 0.02
+  maxBouncePerFrame: 3

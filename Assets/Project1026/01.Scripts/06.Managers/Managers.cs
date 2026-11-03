@@ -23,7 +23,7 @@ public class Managers : MonoBehaviour
     private LoadingManager loading = new LoadingManager();
     private GameStateManager gameState = new GameStateManager();
     private SaveManager save = new SaveManager();
-    private ExperienceManager exp = new ExperienceManager();
+    private RunDataManager runData = new RunDataManager();
     #endregion
 
     #region Properties
@@ -35,7 +35,7 @@ public class Managers : MonoBehaviour
     public static LoadingManager Loading => Instance.loading;
     public static GameStateManager GameState => Instance.gameState;
     public static SaveManager Save => Instance.save;
-    public static ExperienceManager Exp => Instance.exp;
+    public static RunDataManager RunData => Instance.runData;
     #endregion
 
     private void Awake()
@@ -60,6 +60,7 @@ public class Managers : MonoBehaviour
         damage.Clear();
         data.Clear();
         gameState.Clear();
+        runData.Reset();
 
         s_instance = null;
     }

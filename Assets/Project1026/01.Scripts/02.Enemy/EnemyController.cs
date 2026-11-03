@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
 
         if (Model.IsDead)
         {
-            Managers.Exp.AddExp(model.RewardExp);
+            Managers.RunData.AddExp(model.RewardExp);
             generate.Despawn(this);
             return;
         }
