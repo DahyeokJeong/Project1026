@@ -23,6 +23,7 @@ public class Managers : MonoBehaviour
     private LoadingManager loading = new LoadingManager();
     private GameStateManager gameState = new GameStateManager();
     private SaveManager save = new SaveManager();
+    private ExperienceManager exp = new ExperienceManager();
     #endregion
 
     #region Properties
@@ -34,6 +35,7 @@ public class Managers : MonoBehaviour
     public static LoadingManager Loading => Instance.loading;
     public static GameStateManager GameState => Instance.gameState;
     public static SaveManager Save => Instance.save;
+    public static ExperienceManager Exp => Instance.exp;
     #endregion
 
     private void Awake()

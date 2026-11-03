@@ -50,7 +50,7 @@
         },
         {
             "Key": "STAT009",
-            "NameKO": "크리티컬 데미지",
+            "NameKO": "최대 경험치",
             "DescriptionKO": "크리티컬 발동 시 적에게 주는 피해에 적용됩니다.",
             "Category": "PlayerStat"
         },

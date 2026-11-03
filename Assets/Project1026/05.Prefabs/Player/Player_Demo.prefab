@@ -44,12 +44,11 @@ GameObject:
   - component: {fileID: 8261899557118859982}
   - component: {fileID: 681081248997300918}
   - component: {fileID: 2809400701567533494}
+  - component: {fileID: 3337697012970844914}
   - component: {fileID: 3761490361371094999}
   - component: {fileID: 2034655861305010630}
-  - component: {fileID: 3337697012970844914}
   - component: {fileID: 8458517836481200772}
   - component: {fileID: 1745637549850076173}
-  - component: {fileID: 214438431370435719}
   - component: {fileID: 3598012130301034723}
   m_Layer: 0
   m_Name: Player_Demo
@@ -66,7 +65,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5855385415582002297}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -148,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4acb711f97b0404d9ca7f3c8adec0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  model: {fileID: 0}
   inputHandler: {fileID: 2809400701567533494}
   movement: {fileID: 3761490361371094999}
 --- !u!50 &681081248997300918
@@ -173,7 +173,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -190,6 +190,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
   moveAction: {fileID: 4958756566987290717, guid: 09fb870edfea5474f895aa79e971f0c8, type: 3}
+--- !u!114 &3337697012970844914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855385415582002297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b694b93c27e0ee4bab0960ad940e6c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerModel
 --- !u!114 &3761490361371094999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,18 +229,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAugment
   auto: {fileID: 8458517836481200772}
---- !u!114 &3337697012970844914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855385415582002297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b694b93c27e0ee4bab0960ad940e6c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerModel
 --- !u!114 &8458517836481200772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,10 +246,10 @@ MonoBehaviour:
   attackSlots:
   - config: {fileID: 11400000, guid: 9b49dd7a9f857f7458e5c309ba9e4037, type: 2}
     interval: 1
-    projectileCount: 1
+    projectileCount: 5
   - config: {fileID: 11400000, guid: f85c5d365d55cd74988b7c90e050e24d, type: 2}
     interval: 2
-    projectileCount: 1
+    projectileCount: 4
 --- !u!114 &1745637549850076173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,20 +266,6 @@ MonoBehaviour:
   - {fileID: 3941194654650018403}
   sortingPoint: {fileID: 7984876400950651297}
   isDynamic: 1
---- !u!114 &214438431370435719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855385415582002297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1490838784ff263459b637fa763abdec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Test
-  autoAttack: {fileID: 8458517836481200772}
-  playerAugment: {fileID: 2034655861305010630}
 --- !u!70 &3598012130301034723
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

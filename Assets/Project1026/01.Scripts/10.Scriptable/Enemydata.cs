@@ -10,6 +10,7 @@ public class Enemydata : ScriptableObject
     [SerializeField] private int defense;
     [SerializeField] private float attackRange;
     [SerializeField] private EnemyAttackType attackType;
+    [SerializeField] private float rewardExp;
 
     public float MaxHp => maxHp;
     public float AttackDamage => attackDamage;
@@ -18,4 +19,5 @@ public class Enemydata : ScriptableObject
     public int Defense => defense;
     public float AttackRange => attackRange;
     public EnemyAttackType AttackType => attackType;
+    public float RewardExp => rewardExp;
 }

@@ -16,6 +16,8 @@ public class EnemyModel : MonoBehaviour
 
     public EnemyAttackType AttackType { get; set; }
 
+    public float RewardExp { get; private set; }
+
     public bool IsHit { get; set; }
     public bool IsDead => CurrentHp <= 0f;
 
@@ -34,6 +36,7 @@ public class EnemyModel : MonoBehaviour
         AttackInerval = data.AttackSpeed;
         MoveSpeed = data.MoveSpeed;
         AttackType = data.AttackType;
+        RewardExp = data.RewardExp;
         IsHit = false;
     }
 

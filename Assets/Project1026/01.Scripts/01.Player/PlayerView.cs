@@ -1,26 +1,36 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
+    #region Component
     [SerializeField] private Animator animator;
+    [SerializeField] private RectTransform currentExp;
+    [SerializeField] private TMP_Text expTxt;
+    #endregion
 
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-    private static readonly int MoveX = Animator.StringToHash("MoveX");
-    private static readonly int MoveY = Animator.StringToHash("MoveY");
+    #region field
+    private PlayerAnimationView animationView = new();
+    private PlayerExpView expView = new();
+    #endregion
 
+    public void Init(PlayerModel model)
+    {
+        animationView.Init(animator);
+        expView.Init(currentExp, expTxt, model.MaxExp);
+    }
     public void SetMoveAnimation(Vector2 moveInput)
     {
-        animator.SetBool(IsMoving, moveInput.sqrMagnitude > 0f);
-
-        if (moveInput.sqrMagnitude > 0f)
-        {
-            animator.SetFloat(MoveX, moveInput.x);
-            animator.SetFloat(MoveY, moveInput.y);
-        }
+        animationView.SetMoveAnimation(moveInput);
     }
 
     public void SetIdleAnimation()
     {
-        animator.SetBool(IsMoving, false);
+        animationView.SetIdleAnimation();
+    }
+
+    public void SetExp(float currentExp)
+    {
+        expView.SetExp(currentExp);
     }
 }

@@ -5,22 +5,24 @@ public class PlayerModel : MonoBehaviour
 {
     #region Properties
     public int MaxHp { get; private set; }
+    public float MaxExp { get; private set; }
     public int AttackDamage { get; private set; }
     public float AttackSpeed { get; private set; }
     public float MoveSpeed { get; private set; }
     public int Defense { get; private set; }
     public float Critical { get; private set; }
-
     public float CurrentHp => currentHp;
+    public float CurrentExp => currentExp;
+    public int Level => level;
     public Vector2 LastMoveDirection { get; set; }
     #endregion
 
     #region Fields
     private float currentHp;
+    private float currentExp;
+    private int level;
     #endregion
 
-
-    // 추후 변경 Manager로 값 연동 예정
     private void Awake()
     {
         if(Managers.Data.IsLoaded)
@@ -42,8 +44,10 @@ public class PlayerModel : MonoBehaviour
         Defense = Mathf.RoundToInt(GetStatValue("STAT006"));
         MoveSpeed = GetStatValue("STAT007");
         Critical = GetStatValue("STAT008");
+        MaxExp = GetStatValue("STAT009");
 
         currentHp = MaxHp;
+        currentExp = 0f;
         LastMoveDirection = Vector2.down;
 
     }
@@ -63,6 +67,11 @@ public class PlayerModel : MonoBehaviour
             return stat.BaseValue;
         Debug.LogError($"[PlayerModel] PlayerStat을 찾을 수 없습니다. ID: {id}");
         return 0f;
+    }
+
+    public void AddExp(float amount)
+    {
+        currentExp += amount;
     }
 
     private void OnEnable()
