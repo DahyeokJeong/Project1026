@@ -7,13 +7,16 @@ public class BattleSceneController : MonoBehaviour
     [Header("References")]
     [SerializeField] private EnemyGenerate enemyGenerate;
     #endregion
+
     #region Data
     [Header("Stage Data")]
     [SerializeField] private List<StageSpawnData> stageSpawnDatas = new();
     #endregion
+
     #region fields
     private IStageClearCondition condition;
     #endregion
+
     private void Start()
     {
         if (enemyGenerate == null || !Managers.Data.IsLoaded)
