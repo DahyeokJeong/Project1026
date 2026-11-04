@@ -29,8 +29,9 @@ public class DataManager
     #endregion
 
     #region Fields
-    private readonly List<AsyncOperationHandle<TextAsset>> handles = new();
+    private readonly List<AsyncOperationHandle> handles = new();
     private readonly List<Action<int>> loadTasks = new();
+    private Dictionary<string, AugmentEffectSO> augmentEffects = new();
 
     private int completedCount;
     private int loadVersion;
@@ -73,6 +74,53 @@ public class DataManager
         loadTasks.Add(version => LoadJson<AugmentLoader>("Augment", SetAugments, version));
 
         loadTasks.Add(version => LoadJson<LocalizationLoader>("Localization_KO", SetLocalizations, version));
+
+        loadTasks.Add(LoadAugmentEffects);
+    }
+
+    private void LoadAugmentEffects(int version)
+    {
+        const string label = "AugmentEffects";
+        var handle = Addressables.LoadAssetsAsync<AugmentEffectSO>(label, null);
+        handles.Add(handle);
+
+        handle.Completed += operation =>
+        {
+            if (version != loadVersion || State != InitState.Loading)
+                return;
+
+            if (operation.Status != AsyncOperationStatus.Succeeded ||
+                operation.Result == null || operation.Result.Count == 0)
+            {
+                FailLoad(label);
+                return;
+            }
+
+            Dictionary<string, AugmentEffectSO> effects = new();
+
+            foreach (AugmentEffectSO effect in operation.Result)
+            {
+                if (effect == null || string.IsNullOrWhiteSpace(effect.ConfigKey))
+                {
+                    Debug.LogError("증강 효과 SO 또는 ConfigKey가 비어 있습니다.");
+                    FailLoad(label);
+                    return;
+                }
+
+                if (!effects.TryAdd(effect.ConfigKey, effect))
+                {
+                    Debug.LogError($"중복된 증강 효과 ConfigKey: {effect.ConfigKey}");
+                    FailLoad(label);
+                    return;
+                }
+            }
+
+            augmentEffects = effects;
+            completedCount++;
+
+            if (completedCount == loadTasks.Count)
+                CompleteLoad();
+        };
     }
 
     private void LoadJson<T>(
@@ -173,6 +221,16 @@ public class DataManager
         LocalizationDic = dictionary;
     }
 
+    public bool TryGetAugmentEffect(string configKey, out AugmentEffectSO effect)
+    {
+        effect = null;
+
+        if (!IsLoaded || string.IsNullOrWhiteSpace(configKey))
+            return false;
+
+        return augmentEffects.TryGetValue(configKey, out effect);
+    }
+
     private void FailLoad(string address)
     {
         if (State != InitState.Loading)
@@ -182,6 +240,7 @@ public class DataManager
 
         PlayerStatDic = new();
         AugmentDic = new();
+        augmentEffects.Clear();
         LocalizationDic = new();
 
         Debug.LogError($"DataManager 초기화 실패 / Address: {address}");
@@ -193,7 +252,7 @@ public class DataManager
     {
         loadVersion++;
 
-        foreach (AsyncOperationHandle<TextAsset> handle in handles)
+        foreach (AsyncOperationHandle handle in handles)
         {
             if (handle.IsValid())
                 Addressables.Release(handle);
@@ -204,6 +263,7 @@ public class DataManager
 
         PlayerStatDic = new();
         AugmentDic = new();
+        augmentEffects.Clear();
         LocalizationDic = new();
 
         completedCount = 0;
