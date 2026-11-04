@@ -13,4 +13,5 @@ public abstract class AttackConfigBaseSO : ScriptableObject
     public abstract AttackRuntimeData CreateRuntimeData(bool initiallyOwned);
 
     public abstract IAttack CreateAttack(Transform firePoint, PlayerModel model, AttackRuntimeData data, float interval);
+
 }

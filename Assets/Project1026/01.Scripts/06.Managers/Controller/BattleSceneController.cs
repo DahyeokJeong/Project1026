@@ -6,6 +6,7 @@ public class BattleSceneController : MonoBehaviour
     #region References
     [Header("References")]
     [SerializeField] private EnemyGenerate enemyGenerate;
+    [SerializeField] private AugmentPanelUI augment;
     #endregion
 
     #region Data
@@ -19,6 +20,8 @@ public class BattleSceneController : MonoBehaviour
 
     private void Start()
     {
+        Managers.BattleState.Reset();
+
         if (enemyGenerate == null || !Managers.Data.IsLoaded)
             return;
 
@@ -80,5 +83,32 @@ public class BattleSceneController : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public void LevelUP()
+    {
+        OnLevelUp(3);
+    }
+
+    private void OnLevelUp(int levelUpCount)
+    {
+        if (levelUpCount <= 0 || augment == null)
+            return;
+
+        Managers.BattleState.SetState(BattleState.AugmentSelecting);
+
+        augment.Show(levelUpCount);
+    }
+
+    private void OnEnable()
+    {
+        Managers.RunData.LevelUpOccurred += OnLevelUp;
+    }
+    private void OnDisable()
+    {
+        if (!Managers.Initialized)
+            return;
+
+        Managers.RunData.LevelUpOccurred -= OnLevelUp;
     }
 }

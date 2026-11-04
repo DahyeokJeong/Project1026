@@ -24,6 +24,7 @@ public class Managers : MonoBehaviour
     private GameStateManager gameState = new GameStateManager();
     private SaveManager save = new SaveManager();
     private RunDataManager runData = new RunDataManager();
+    private BattleStateManager battleState = new BattleStateManager();
     #endregion
 
     #region Properties
@@ -36,6 +37,7 @@ public class Managers : MonoBehaviour
     public static GameStateManager GameState => Instance.gameState;
     public static SaveManager Save => Instance.save;
     public static RunDataManager RunData => Instance.runData;
+    public static BattleStateManager BattleState => Instance.battleState;
     #endregion
 
     private void Awake()
@@ -61,6 +63,7 @@ public class Managers : MonoBehaviour
         data.Clear();
         gameState.Clear();
         runData.Reset();
+        battleState.Reset();
 
         s_instance = null;
     }

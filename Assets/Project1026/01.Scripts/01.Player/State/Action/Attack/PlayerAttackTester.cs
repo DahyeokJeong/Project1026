@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerAttackTester : MonoBehaviour
 {
+    [SerializeField] private AugmentPanelUI augmentPanelUI;
+
     #region References
     [Header("Attack")]
     [SerializeField] private PlayerAutoAttack auto;
@@ -16,7 +18,6 @@ public class PlayerAttackTester : MonoBehaviour
     #endregion
 
     #region Test Settings
-    [SerializeField, Min(1)] private int projectileIncrease = 1;
     [SerializeField] private string augmentId;
     #endregion
 
@@ -70,73 +71,23 @@ public class PlayerAttackTester : MonoBehaviour
         }
     }
 
-    [ContextMenu("Attack Test/2. 대상 공격 획득")]
-    private void AcquireTarget()
+    [ContextMenu("Augment Test/증강 UI 표시")]
+    private void ShowAugmentUI()
     {
-        if (!TryGetTargetKey(out string key))
-            return;
+        Debug.Log("[AugmentTest] UI 표시 요청", this);
 
-        bool success = auto.TryAcquireAttack(key);
-
-        Debug.Log(
-            $"[AttackTest] 획득 요청: {key}"
-            + $" / 성공: {success}",
-            this);
-
-        PrintState();
-    }
-
-    [ContextMenu("Attack Test/3. 대상 투사체 수 증가")]
-    private void IncreaseProjectileCount()
-    {
-        if (!TryGetTargetKey(out string key))
-            return;
-
-        bool success =
-            auto.AddProjectileCount(key, projectileIncrease);
-
-        Debug.Log(
-            $"[AttackTest] 투사체 증가 요청: {key}"
-            + $" / 증가량: {projectileIncrease}"
-            + $" / 성공: {success}",
-            this);
-
-        PrintState();
-    }
-
-    [ContextMenu("Augment Test/선택 ID 적용")]
-    private void ApplyAugment()
-    {
         if (!CanRun())
             return;
 
-        if (!Managers.Data.IsLoaded)
+        if (augmentPanelUI == null)
         {
-            Debug.LogWarning(
-                "[AugmentTest] 데이터 로딩이 완료되지 않았습니다.",
-                this);
+            Debug.LogError("[AugmentTest] AugmentPanelUI 참조 없음", this);
             return;
         }
 
-        if (playerAugment == null
-            || string.IsNullOrWhiteSpace(augmentId))
-        {
-            Debug.LogError(
-                "[AugmentTest] PlayerAugment와 증강 ID를 설정하세요.",
-                this);
-            return;
-        }
+        Debug.Log("[AugmentTest] AugmentPanelUI.Show() 호출", this);
 
-        bool canApply = playerAugment.CanApply(augmentId);
-        bool success = playerAugment.TryApply(augmentId);
-
-        Debug.Log(
-            $"[AugmentTest] ID: {augmentId}"
-            + $" / 적용 전 선택 가능: {canApply}"
-            + $" / 적용 성공: {success}",
-            this);
-
-        PrintState();
+        //augmentPanelUI.Show();
     }
 
     private bool CanRun()

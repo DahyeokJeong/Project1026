@@ -38,6 +38,9 @@ public class NormalProjectile : ProjectileBase
 
     protected override void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         base.Update();
 
         if (!gameObject.activeInHierarchy)

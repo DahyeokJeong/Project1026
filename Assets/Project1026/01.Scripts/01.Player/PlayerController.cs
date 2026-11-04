@@ -42,12 +42,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         HandleStateChange();
         currentState?.Tick();
     }
 
     private void FixedUpdate()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         currentState?.FixedTick();
     }
 

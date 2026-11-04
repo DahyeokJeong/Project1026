@@ -27,6 +27,9 @@ public abstract class ProjectileBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         Move();
 
         timer -= Time.deltaTime;

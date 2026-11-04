@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class RunDataManager
 {
@@ -11,6 +12,10 @@ public class RunDataManager
     #region Properties
     public float CurrentExp { get; set; }
     public int Level { get; set; } = 1;
+    #endregion
+
+    #region Events
+    public event Action<int> LevelUpOccurred;
     #endregion
 
     #region Attack
@@ -79,7 +84,10 @@ public class RunDataManager
 
     private void OnLevelUp(int levelUpCount)
     {
-        // 추후 증강 시스템 연결
+        if (levelUpCount <= 0)
+            return;
+
+        LevelUpOccurred?.Invoke(levelUpCount);
     }
 
     public void Reset()
@@ -90,6 +98,7 @@ public class RunDataManager
         PlayerAttackDamageBonus = 0;
         attackData.Clear();
 
+        LevelUpOccurred = null;
         model = null;
         view = null;
     }

@@ -51,6 +51,9 @@ public class PiercingProjectile : ProjectileBase
 
     protected override void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         base.Update();
 
         if (!gameObject.activeInHierarchy)
@@ -124,7 +127,6 @@ public class PiercingProjectile : ProjectileBase
         ref Vector2 position,
         ref Vector2 direction)
     {
-        bool resolved = false;
 
         for (int iteration = 0; iteration < 8; iteration++)
         {
@@ -172,7 +174,6 @@ public class PiercingProjectile : ProjectileBase
                 }
 
                 moved = true;
-                resolved = true;
             }
 
             if (!moved)

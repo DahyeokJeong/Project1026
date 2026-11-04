@@ -51,8 +51,6 @@ public class PlayerAutoAttack : MonoBehaviour
     {
         if (model == null)
         {
-            Debug.LogError("[PlayerAutoAttack] PlayerModel이 연결되지 않았습니다.", this);
-
             enabled = false;
             return;
         }
@@ -60,25 +58,16 @@ public class PlayerAutoAttack : MonoBehaviour
         foreach (AttackSlot slot in attackSlots)
         {
             if (slot == null || slot.Config == null)
-            {
-                Debug.LogError("[PlayerAutoAttack] 공격 슬롯의 Config가 없습니다.", this);
                 continue;
-            }
 
             AttackConfigBaseSO config = slot.Config;
             string key = config.ConfigKey;
 
             if (string.IsNullOrWhiteSpace(key))
-            {
-                Debug.LogError($"[PlayerAutoAttack] 공격 키가 없습니다: {config.name}", this);
                 continue;
-            }
 
             if (attacks.ContainsKey(key))
-            {
-                Debug.LogError($"[PlayerAutoAttack] 중복된 공격 키입니다: {key}", this);
                 continue;
-            }
 
             AttackRuntimeData data = Managers.RunData.GetOrCreateAttackData(config, slot.InitiallyOwned);
 
@@ -96,6 +85,9 @@ public class PlayerAutoAttack : MonoBehaviour
 
     private void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         foreach (AttackEntry entry in attacks.Values)
         {
             if (entry.Data.IsOwned)

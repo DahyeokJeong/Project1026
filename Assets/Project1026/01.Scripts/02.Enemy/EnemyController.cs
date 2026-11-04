@@ -67,6 +67,8 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
 
         if (Model.IsDead)
         {
@@ -81,8 +83,8 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Model.IsDead)
-            return;
+        if (!Managers.BattleState.CanUpdate || Model.IsDead)
+            return; 
 
         currentState.FixedTick();
     }
