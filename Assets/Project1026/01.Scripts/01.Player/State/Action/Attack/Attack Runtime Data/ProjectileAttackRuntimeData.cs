@@ -4,6 +4,7 @@ public sealed class ProjectileAttackRuntimeData : AttackRuntimeData
 {
     #region Properties
     public int ProjectileCount { get; private set; }
+    public int PierceBonus { get; private set; }
     #endregion
 
     public ProjectileAttackRuntimeData(
@@ -29,6 +30,15 @@ public sealed class ProjectileAttackRuntimeData : AttackRuntimeData
             return false;
 
         ProjectileCount += amount;
+        return true;
+    }
+
+    public bool AddPierceCount(int amount)
+    {
+        if (!IsOwned || amount <= 0)
+            return false;
+
+        PierceBonus += amount;
         return true;
     }
 }

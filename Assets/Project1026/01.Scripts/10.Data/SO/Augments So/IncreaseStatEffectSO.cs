@@ -8,6 +8,7 @@ public enum AugmentStatTarget
 
 public enum AugmentStatType
 {
+    PierceCount,
     ProjectileCount,
     Damage
 }
@@ -30,14 +31,16 @@ public class IncreaseStatEffectSO : AugmentEffectSO
         return (target, stat) switch
         {
             // 플레이어 공격력 증가
-            (AugmentStatTarget.Player, AugmentStatType.Damage) =>
-                string.IsNullOrWhiteSpace(data.AttackConfigKey),
+            (AugmentStatTarget.Player, AugmentStatType.Damage) => string.IsNullOrWhiteSpace(data.AttackConfigKey),
 
             // 보유 공격의 추가 피해 증가
             (AugmentStatTarget.Attack, AugmentStatType.Damage) => auto != null && auto.TryGetAttackData(data.AttackConfigKey, out AttackRuntimeData attackData)&& attackData.IsOwned,
 
             // 보유 투사체 공격의 발사 수 증가
             (AugmentStatTarget.Attack, AugmentStatType.ProjectileCount) => auto != null && auto.TryGetAttackData(data.AttackConfigKey,out ProjectileAttackRuntimeData projectileData) && projectileData.IsOwned,
+
+            //보유 투사체 공격의 관통 횟수 증가
+            (AugmentStatTarget.Attack, AugmentStatType.PierceCount) => auto != null && auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData projectileData) &&  projectileData.IsOwned,
 
             _ => false
         };
@@ -55,7 +58,11 @@ public class IncreaseStatEffectSO : AugmentEffectSO
 
             (AugmentStatTarget.Attack, AugmentStatType.Damage) => auto.TryGetAttackData(data.AttackConfigKey, out AttackRuntimeData attackData) && attackData.AddDamage(data.Value),
 
-            (AugmentStatTarget.Attack, AugmentStatType.ProjectileCount) => auto.AddProjectileCount(data.AttackConfigKey, data.Value), _ => false
+            (AugmentStatTarget.Attack, AugmentStatType.ProjectileCount) => auto.AddProjectileCount(data.AttackConfigKey, data.Value), 
+            
+            (AugmentStatTarget.Attack, AugmentStatType.PierceCount) => auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData attackData) && attackData.AddPierceCount(data.Value),
+
+            _ => false
         };
     }
 }
