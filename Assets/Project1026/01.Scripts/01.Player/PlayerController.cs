@@ -4,9 +4,10 @@ public class PlayerController : MonoBehaviour
 {
     #region Component
     [Header("Component")]
+    [SerializeField] private PlayerModel model;
+    [SerializeField] private PlayerView view;
     [SerializeField] private PlayerInputHandler inputHandler;
     [SerializeField] private PlayerMovement movement;
-    [SerializeField] private PlayerView view;
     #endregion
 
     #region State
@@ -14,7 +15,6 @@ public class PlayerController : MonoBehaviour
     private IState currentState;
     private IState prevState;
     
-
     private PlayerIdleState idleState;
     private PlayerMoveState moveState;
     #endregion
@@ -23,14 +23,16 @@ public class PlayerController : MonoBehaviour
     // Properties
     public PlayerInputHandler InputHandler => inputHandler;
     public PlayerMovement Movement => movement;
-
+    public PlayerModel Model => model;
+    public PlayerView View => view;
     #endregion
 
     private void Awake()
     {
-
         idleState = new PlayerIdleState(this);
         moveState = new PlayerMoveState(this);
+        view.InitAnimation();
+        Managers.RunData.SetPlayer(model, view);
     }
 
     private void Start()
@@ -40,13 +42,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         HandleStateChange();
         currentState?.Tick();
-        view.SetMoveAnimation(inputHandler.MoveInput);
     }
 
     private void FixedUpdate()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         currentState?.FixedTick();
     }
 

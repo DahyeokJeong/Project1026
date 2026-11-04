@@ -82,6 +82,9 @@ public class EnemyGenerate : MonoBehaviour
 
     private void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
         if (!isSpawning || HasSpawnedAll)
             return;
 

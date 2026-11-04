@@ -9,6 +9,7 @@ public class PlayerIdleState : IState
 
     public void Enter()
     {
+        //controller.View.SetIdleAnimation();
     }
 
     public void Tick()

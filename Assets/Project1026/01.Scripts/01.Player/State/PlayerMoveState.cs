@@ -13,6 +13,7 @@ public class PlayerMoveState : IState
 
     public void Tick()
     {
+        //controller.View.SetMoveAnimation(controller.InputHandler.MoveInput);
     }
 
     public void FixedTick()

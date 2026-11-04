@@ -5,22 +5,23 @@ public class PlayerModel : MonoBehaviour
 {
     #region Properties
     public int MaxHp { get; private set; }
-    public int AttackDamage { get; private set; }
+    public float MaxExp { get; private set; }
+    public int BaseAttackDamage { get; private set; }
+    public int AttackDamage => BaseAttackDamage + Managers.RunData.PlayerAttackDamageBonus;
     public float AttackSpeed { get; private set; }
     public float MoveSpeed { get; private set; }
     public int Defense { get; private set; }
     public float Critical { get; private set; }
-
     public float CurrentHp => currentHp;
     public Vector2 LastMoveDirection { get; set; }
+    public float CurrentExp => Managers.RunData.CurrentExp;
+    public int Level => Managers.RunData.Level;
     #endregion
 
     #region Fields
     private float currentHp;
     #endregion
 
-
-    // 추후 변경 Manager로 값 연동 예정
     private void Awake()
     {
         if(Managers.Data.IsLoaded)
@@ -37,11 +38,12 @@ public class PlayerModel : MonoBehaviour
         if(Managers.Initialized)
             Managers.Data.DataLoadCompleted -= Init;
         MaxHp = Mathf.RoundToInt(GetStatValue("STAT001"));
-        AttackDamage = Mathf.RoundToInt(GetStatValue("STAT003"));
+        BaseAttackDamage = Mathf.RoundToInt(GetStatValue("STAT003"));
         AttackSpeed = GetStatValue("STAT005");
         Defense = Mathf.RoundToInt(GetStatValue("STAT006"));
         MoveSpeed = GetStatValue("STAT007");
         Critical = GetStatValue("STAT008");
+        MaxExp = GetStatValue("STAT009");
 
         currentHp = MaxHp;
         LastMoveDirection = Vector2.down;
@@ -65,6 +67,24 @@ public class PlayerModel : MonoBehaviour
         return 0f;
     }
 
+    public int CalculateExp(RunDataManager runData, float amount)
+    {
+        int levelUpCount = 0;
+
+        runData.CurrentExp += amount;
+
+        while (runData.CurrentExp >= MaxExp)
+        {
+            runData.CurrentExp -= MaxExp;
+            runData.Level++;
+
+            levelUpCount++;
+        }
+
+        return levelUpCount;
+    }
+
+    #region Able
     private void OnEnable()
     {
         Managers.Damage.Register(transform, ReduceHP);
@@ -77,4 +97,5 @@ public class PlayerModel : MonoBehaviour
         Managers.Damage.Unregister(transform);
         Managers.Data.DataLoadCompleted -= Init;
     }
+    #endregion
 }

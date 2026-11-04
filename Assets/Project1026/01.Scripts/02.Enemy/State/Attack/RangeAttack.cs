@@ -21,6 +21,8 @@ public class RangeAttack : MonoBehaviour
 
     private void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
@@ -29,6 +31,8 @@ public class RangeAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
         transform.position += (Vector3)(moveDirection * moveSpeed * Time.deltaTime);
     }
 
@@ -44,7 +48,10 @@ public class RangeAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (!Managers.BattleState.CanUpdate)
+            return;
+
+        if (other.CompareTag("Player"))
         {
             Managers.Damage.ApplyDamage(other.transform, damage);
             Managers.Pool.Push(gameObject);

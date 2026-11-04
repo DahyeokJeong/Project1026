@@ -15,30 +15,37 @@ public enum EnemyAttackType
 
 public class EnemyController : MonoBehaviour
 {
+    #region Component
     [Header("Component")]
     [SerializeField] private EnemyModel model;
     [SerializeField] private EnemyAttack attack;
+    #endregion
 
-    public EnemyModel Model => model;
-    public EnemyAttack Attack => attack;
-
+    #region Attack
     [Header("attack & chase")]
     [SerializeField] private GameObject attackPrefab;
 
     [Header("Enmey Ranged Radius")]
     [SerializeField, Min(0.1f)] private float fireRaius = 0.3f;
+    #endregion
 
-    public GameObject AttackPrefab => attackPrefab;
-    private Transform Target => NavArea != null ? NavArea.Target : null;
-    public bool CanAttack => CheckAttackRange(model.AttackRange);
-
+    #region field
     private IState currentState;
 
     private EnemyGenerate generate;
     private EnemyAttackState attackState;
     private EnemyChaseState chaseState;
     private EnemyHitState hitState;
+    #endregion
+
+    #region Property
     public NavigationArea NavArea { get; private set; }
+    private Transform Target => NavArea != null ? NavArea.Target : null;
+    public EnemyModel Model => model;
+    public EnemyAttack Attack => attack;
+    public bool CanAttack => CheckAttackRange(model.AttackRange);
+    public GameObject AttackPrefab => attackPrefab;
+    #endregion
 
     public void Initialize(NavigationArea area, EnemyGenerate generate)
     {
@@ -60,9 +67,12 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (!Managers.BattleState.CanUpdate)
+            return;
 
         if (Model.IsDead)
         {
+            Managers.RunData.AddExp(model.RewardExp);
             generate.Despawn(this);
             return;
         }
@@ -73,8 +83,8 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Model.IsDead)
-            return;
+        if (!Managers.BattleState.CanUpdate || Model.IsDead)
+            return; 
 
         currentState.FixedTick();
     }
@@ -93,6 +103,8 @@ public class EnemyController : MonoBehaviour
 
     private void HandleStateChange()
     {
+        if (Model.IsDead)
+            return;
         if(Model.IsHit)
         {
             if (currentState != hitState)
