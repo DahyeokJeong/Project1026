@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IncreaseStatEffectSO
   configKey: SO_Augment_PiercingDamage
   target: 0
-  stat: 1
+  stat: 2
