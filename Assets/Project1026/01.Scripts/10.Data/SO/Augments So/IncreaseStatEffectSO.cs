@@ -10,7 +10,8 @@ public enum AugmentStatType
 {
     PierceCount,
     ProjectileCount,
-    Damage
+    Damage,
+    Radius
 }
 
 [CreateAssetMenu(
@@ -42,6 +43,9 @@ public class IncreaseStatEffectSO : AugmentEffectSO
             //보유 투사체 공격의 관통 횟수 증가
             (AugmentStatTarget.Attack, AugmentStatType.PierceCount) => auto != null && auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData projectileData) &&  projectileData.IsOwned,
 
+            //보유 오라 범위 증가
+            (AugmentStatTarget.Attack, AugmentStatType.Radius) => auto != null && auto.TryGetAttackData(data.AttackConfigKey, out AuraAttackRuntimeData auraData) && auraData.IsOwned,
+
             _ => false
         };
     }
@@ -61,6 +65,8 @@ public class IncreaseStatEffectSO : AugmentEffectSO
             (AugmentStatTarget.Attack, AugmentStatType.ProjectileCount) => auto.AddProjectileCount(data.AttackConfigKey, data.Value), 
             
             (AugmentStatTarget.Attack, AugmentStatType.PierceCount) => auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData attackData) && attackData.AddPierceCount(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.Radius) => auto.TryGetAttackData(data.AttackConfigKey, out AuraAttackRuntimeData auraData) && auraData.AddRadius(data.Value),
 
             _ => false
         };

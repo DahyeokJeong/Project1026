@@ -1,62 +1,36 @@
-using NUnit.Framework;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AuraAttack : IAttack
+public class AuraAttack : IActivatableAttack
 {
+    private readonly Transform firePoint;
     private readonly PlayerModel model;
-    private readonly AttackRuntimeData data;
-    private readonly float radius;
+    private readonly AuraAttackConfigSO config;
+    private readonly AuraAttackRuntimeData data;
     private readonly float interval;
-    private readonly ContactFilter2D enemyFilter;
 
-    private readonly List<Collider2D> hits = new();
-    private readonly HashSet<EnemyModel> damagedEnemies = new();
-
-    private float timer;
-
-    public AuraAttack(PlayerModel model, AttackRuntimeData data, float radius, float intervbal, LayerMask enemyLayer)
+    public AuraAttack(Transform firePoint ,PlayerModel model, AuraAttackConfigSO config, AuraAttackRuntimeData data, float interval)
     {
+        this.firePoint = firePoint;
         this.model = model;
+        this.config = config;
         this.data = data;
-        this.radius = radius;
-        this.interval = Mathf.Max(0.01f, interval);
-
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(enemyLayer);
-        filter.useTriggers = true;
-        enemyFilter = filter;
-
-        timer = this.interval;
+        this.interval = interval;
     }
 
-    public void Tick(float deltaTime)
+    public void Activate()
     {
-        timer -= deltaTime;
+        GameObject go = Managers.Pool.Pop(config.Prefab, firePoint.position, Quaternion.identity);
 
-        if (timer > 0f)
+        if (go == null)
             return;
 
-        timer = interval;
-        DamageEnemies();
-    }
-
-    private void DamageEnemies()
-    {
-        damagedEnemies.Clear();
-        Physics2D.OverlapCircle(model.transform.position, radius, enemyFilter, hits);
-
-        float damage = model.AttackDamage + data.DamageBonus;
-
-        foreach (Collider2D hit in hits)
+        if (!go.TryGetComponent(out AuraBase aura))
         {
-            if (hit == null)
-                continue;
-
-            EnemyModel enemy = hit.GetComponentInParent<EnemyModel>();
-
-            if (enemy != null && damagedEnemies.Add(enemy))
-                Managers.Damage.ApplyDamage(enemy.transform, damage);
+            Managers.Pool.Push(go);
+            return;
         }
+
+        aura.SetAttack(model, firePoint, data, interval);
     }
+
 }

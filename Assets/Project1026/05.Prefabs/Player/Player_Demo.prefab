@@ -123,7 +123,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1692618629
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6143b5909d9b19240aeb77028ebf3e10, type: 3}
@@ -217,6 +217,7 @@ MonoBehaviour:
   animator: {fileID: 2674221592639270946}
   currentExp: {fileID: 0}
   expTxt: {fileID: 0}
+  levelTxt: {fileID: 0}
 --- !u!114 &2809400701567533494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,11 +286,14 @@ MonoBehaviour:
   model: {fileID: 3337697012970844914}
   attackSlots:
   - config: {fileID: 11400000, guid: 9b49dd7a9f857f7458e5c309ba9e4037, type: 2}
+    initiallyOwned: 1
     interval: 1
-    projectileCount: 5
   - config: {fileID: 11400000, guid: f85c5d365d55cd74988b7c90e050e24d, type: 2}
+    initiallyOwned: 0
     interval: 2
-    projectileCount: 4
+  - config: {fileID: 11400000, guid: c5212533ee3e4194da55e6639f0388bb, type: 2}
+    initiallyOwned: 0
+    interval: 2
 --- !u!114 &1745637549850076173
 MonoBehaviour:
   m_ObjectHideFlags: 0

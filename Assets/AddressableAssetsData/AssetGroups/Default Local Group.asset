@@ -26,6 +26,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65eeba33c7776754098e040c9798e84d
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_AuraAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fc6850da31647e40b6c5e41d22c4fa8
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_FireAuraRange.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8212b71c5e86a854a9ca3e67c012a507
     m_Address: Augment
     m_ReadOnly: 0

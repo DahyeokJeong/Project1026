@@ -7,15 +7,12 @@ public sealed class ProjectileAttackRuntimeData : AttackRuntimeData
     public int PierceBonus { get; private set; }
     #endregion
 
-    public ProjectileAttackRuntimeData(
-        bool initiallyOwned,
-        int initialProjectileCount)
-        : base(initiallyOwned)
+    public ProjectileAttackRuntimeData(bool initiallyOwned,int initialProjectileCount) : base(initiallyOwned)
     {
         ProjectileCount = Math.Max(1, initialProjectileCount);
     }
 
-    public bool TryAcquire(int initialProjectileCount)
+    public override bool TryAcquire(int initialProjectileCount)
     {
         if (initialProjectileCount <= 0 || !base.TryAcquire())
             return false;

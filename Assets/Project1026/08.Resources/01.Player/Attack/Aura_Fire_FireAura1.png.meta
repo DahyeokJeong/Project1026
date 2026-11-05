@@ -3,26 +3,26 @@ guid: ab26dd802bde7ae4ea485956df251969
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5737841705387311319
-    second: Oora_Fire_FireOora1_0
+      213: 6670261015824622608
+    second: Aura_Fire_FireOora1_0
   - first:
-      213: -6811584757152327753
-    second: Oora_Fire_FireOora1_1
+      213: 6272889663042319242
+    second: Aura_Fire_FireOora1_1
   - first:
-      213: 7971421940444766443
-    second: Oora_Fire_FireOora1_2
+      213: 1183620852515824162
+    second: Aura_Fire_FireOora1_2
   - first:
-      213: 151689910024315152
-    second: Oora_Fire_FireOora1_3
+      213: 1049971927290222212
+    second: Aura_Fire_FireOora1_3
   - first:
-      213: 4476662690555400445
-    second: Oora_Fire_FireOora1_4
+      213: -5536704785896841224
+    second: Aura_Fire_FireOora1_4
   - first:
-      213: -8061283884384508679
-    second: Oora_Fire_FireOora1_5
+      213: -2872635816253288958
+    second: Aura_Fire_FireOora1_5
   - first:
-      213: -4411718553563713951
-    second: Oora_Fire_FireOora1_6
+      213: -7437382160307148452
+    second: Aura_Fire_FireOora1_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -131,7 +131,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_0
+      name: Aura_Fire_FireOora1_0
       rect:
         serializedVersion: 2
         x: 3
@@ -146,14 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 92fb7fc8e571f50b0800000000000000
-      internalID: -5737841705387311319
+      spriteID: 014ec57ad07819c50800000000000000
+      internalID: 6670261015824622608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_1
+      name: Aura_Fire_FireOora1_1
       rect:
         serializedVersion: 2
         x: 32
@@ -168,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b75870b0c36871a0800000000000000
-      internalID: -6811584757152327753
+      spriteID: a837bd0d9e7cd0750800000000000000
+      internalID: 6272889663042319242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_2
+      name: Aura_Fire_FireOora1_2
       rect:
         serializedVersion: 2
         x: 67
@@ -190,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: be027fa350e20ae60800000000000000
-      internalID: 7971421940444766443
+      spriteID: 22263fee4e01d6010800000000000000
+      internalID: 1183620852515824162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_3
+      name: Aura_Fire_FireOora1_3
       rect:
         serializedVersion: 2
         x: 59
@@ -212,14 +212,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 011a2036b29ea1200800000000000000
-      internalID: 151689910024315152
+      spriteID: 4861446a7ef329e00800000000000000
+      internalID: 1049971927290222212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_4
+      name: Aura_Fire_FireOora1_4
       rect:
         serializedVersion: 2
         x: 71
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: df09cc9affc402e30800000000000000
-      internalID: 4476662690555400445
+      spriteID: 8ffd96af45ca923b0800000000000000
+      internalID: -5536704785896841224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_5
+      name: Aura_Fire_FireOora1_5
       rect:
         serializedVersion: 2
         x: 50
@@ -256,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f42ea58401902090800000000000000
-      internalID: -8061283884384508679
+      spriteID: 20e882be1f85228d0800000000000000
+      internalID: -2872635816253288958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oora_Fire_FireOora1_6
+      name: Aura_Fire_FireOora1_6
       rect:
         serializedVersion: 2
         x: 90
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16ea5dd895d66c2c0800000000000000
-      internalID: -4411718553563713951
+      spriteID: c59a014845c19c890800000000000000
+      internalID: -7437382160307148452
       vertices: []
       indices: 
       edges: []
@@ -298,13 +298,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Oora_Fire_FireOora1_0: -5737841705387311319
-      Oora_Fire_FireOora1_1: -6811584757152327753
-      Oora_Fire_FireOora1_2: 7971421940444766443
-      Oora_Fire_FireOora1_3: 151689910024315152
-      Oora_Fire_FireOora1_4: 4476662690555400445
-      Oora_Fire_FireOora1_5: -8061283884384508679
-      Oora_Fire_FireOora1_6: -4411718553563713951
+      Aura_Fire_FireOora1_0: 6670261015824622608
+      Aura_Fire_FireOora1_1: 6272889663042319242
+      Aura_Fire_FireOora1_2: 1183620852515824162
+      Aura_Fire_FireOora1_3: 1049971927290222212
+      Aura_Fire_FireOora1_4: -5536704785896841224
+      Aura_Fire_FireOora1_5: -2872635816253288958
+      Aura_Fire_FireOora1_6: -7437382160307148452
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

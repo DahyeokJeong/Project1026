@@ -92,20 +92,32 @@
         },
         {
             "Key": "AUG004",
+            "NameKO": "화염 오라 공격 획득",
+            "DescriptionKO": "\t주변 적에게 주기적으로 피해를 주는 화염 오라를 습득합니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG005",
             "NameKO": "일반 공격 피해 증가",
             "DescriptionKO": "일반 공격의 피해량이 5 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG005",
+            "Key": "AUG006",
             "NameKO": "관통 공격 피해 증가",
             "DescriptionKO": "관통 공격의 피해량이 5 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG006",
+            "Key": "AUG007",
             "NameKO": "공격력 증가",
             "DescriptionKO": "플레이어 공격력이 5 증가하여 모든 자동 공격에 적용됩니다.",
+            "Category": "Augment"
+        },
+        {
+            "Key": "AUG008",
+            "NameKO": "오라 공격 범위 증가",
+            "DescriptionKO": "화염 오라의 크기가 기본 크기의 20%만큼 증가합니다.",
             "Category": "Augment"
         }
     ]

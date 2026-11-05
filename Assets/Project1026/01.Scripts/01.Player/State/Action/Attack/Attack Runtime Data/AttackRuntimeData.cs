@@ -19,6 +19,11 @@ public class AttackRuntimeData
         return true;
     }
 
+    public virtual bool TryAcquire(int value)
+    {
+        return TryAcquire();
+    }
+
     public bool AddDamage(int amount)
     {
         if (!IsOwned || amount <= 0)

@@ -25,4 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(nextPos);
     }
+
+    public void Dash(Vector2 dir)
+    {
+
+    }
 }

@@ -83,6 +83,15 @@ public class PlayerAutoAttack : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        foreach(AttackEntry entry in attacks.Values)
+        {
+            if(entry.Data.IsOwned && entry.Attack is IActivatableAttack attack)
+                attack.Activate();
+        }
+    }
+
     private void Update()
     {
         if (!Managers.BattleState.CanUpdate)
@@ -90,8 +99,8 @@ public class PlayerAutoAttack : MonoBehaviour
 
         foreach (AttackEntry entry in attacks.Values)
         {
-            if (entry.Data.IsOwned)
-                entry.Attack.Tick(Time.deltaTime);
+            if (entry.Data.IsOwned && entry.Attack is ITickAttack attack)
+                attack.Tick(Time.deltaTime);
         }
     }
 
@@ -116,9 +125,16 @@ public class PlayerAutoAttack : MonoBehaviour
         return TryGetAttackData(configKey, out AttackRuntimeData data) && data.IsOwned;
     }
 
-    public bool TryAcquireAttack(string configKey)
+    public bool TryAcquireAttack(string configKey, int value = 1)
     {
-        return TryGetAttackData(configKey, out AttackRuntimeData data) && data.TryAcquire();
+        if (string.IsNullOrWhiteSpace(configKey) || !attacks.TryGetValue(configKey, out AttackEntry entry) 
+            || !entry.Data.TryAcquire(value))
+            return false;
+
+        if(entry.Attack is IActivatableAttack attack)
+            attack.Activate();
+
+        return true;
     }
 
     public bool AddProjectileCount(string configKey, int value)

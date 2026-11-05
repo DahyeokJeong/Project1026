@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-public class ProjectileAttack : IAttack
+public class ProjectileAttack : ITickAttack
 {
     #region Components
     private readonly Transform firePoint;
