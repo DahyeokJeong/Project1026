@@ -15,10 +15,12 @@ public class PlayerDashState : IState
 
     public void Exit()
     {
+        player.Movement.CancelDash();
     }
 
     public void FixedTick()
     {
+        player.Movement.TickDash(Time.fixedDeltaTime);
     }
 
     public void Tick()

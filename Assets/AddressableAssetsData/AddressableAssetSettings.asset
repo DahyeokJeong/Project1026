@@ -106,6 +106,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - AugmentEffects
+    - AttackConfigs
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9f28046cd82ed12429040a48ddeab000, type: 2}

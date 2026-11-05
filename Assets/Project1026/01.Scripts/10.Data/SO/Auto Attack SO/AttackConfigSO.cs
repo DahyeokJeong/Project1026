@@ -7,11 +7,13 @@ public class AttackConfigSO : AttackConfigBaseSO
     [Header("Projectile Settings")]
     [SerializeField] private GameObject prefab;
     [SerializeField] private ProjectilePattern pattern;
+    [SerializeField] private bool usePlayerStat;
     [SerializeField, Min(1)] private int initialProjectileCount = 1;
     #endregion
 
     #region Properties
     public GameObject Prefab => prefab;
+    public bool UsePlayerStat => usePlayerStat;
     public ProjectilePattern Pattern => pattern;
     #endregion
 

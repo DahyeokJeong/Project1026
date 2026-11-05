@@ -5,6 +5,7 @@ public sealed class ProjectileAttackRuntimeData : AttackRuntimeData
     #region Properties
     public int ProjectileCount { get; private set; }
     public int PierceBonus { get; private set; }
+    public int BounceCount { get; private set; }
     #endregion
 
     public ProjectileAttackRuntimeData(bool initiallyOwned,int initialProjectileCount) : base(initiallyOwned)
@@ -36,6 +37,15 @@ public sealed class ProjectileAttackRuntimeData : AttackRuntimeData
             return false;
 
         PierceBonus += amount;
+        return true;
+    }
+
+    public bool AddBounceCount(int amount)
+    {
+        if (!IsOwned || amount <= 0)
+            return false;
+
+        BounceCount += amount;
         return true;
     }
 }

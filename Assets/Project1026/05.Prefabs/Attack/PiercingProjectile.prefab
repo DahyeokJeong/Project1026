@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8027056480570085526}
   - component: {fileID: 6603465446860044626}
   - component: {fileID: 1704069014990538751}
+  - component: {fileID: 5641740122377128318}
   m_Layer: 0
   m_Name: PiercingProjectile
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 222443097
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 9e2065c9fda1b764fb0a43f0dfbdff2d, type: 3}
@@ -111,11 +112,23 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
+  hitRadius: 0.3
+  maxPierceCount: 3
+--- !u!114 &5641740122377128318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719453655010788331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb75af288e71aa4185b138ade8f4dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileWallCollision
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
-  hitRadius: 0.3
-  maxPierceCount: 3
   wallRadius: 0.1
   wallOffset: 0.02
-  maxBouncePerFrame: 3
+  maxCollisionsPerFrame: 3

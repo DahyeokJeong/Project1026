@@ -49,6 +49,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9139600bd299ab24ea73057b4dc8bcf3
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Homing.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b49dd7a9f857f7458e5c309ba9e4037
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Normal.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b504cd54e2f3014449a0676b859caacc
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_NormalDamage.asset
     m_ReadOnly: 0
@@ -66,6 +78,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5212533ee3e4194da55e6639f0388bb
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_FireAura.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ce20f1df61f83014f805e3244b31ea27
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_NormalCount.asset
     m_ReadOnly: 0
@@ -77,6 +95,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f85c5d365d55cd74988b7c90e050e24d
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Piercing.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ffc8670e1977bc4479c6dcef4efcca1d, type: 2}

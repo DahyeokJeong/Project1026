@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     
     private PlayerIdleState idleState;
     private PlayerMoveState moveState;
+    private PlayerDashState dashState;
     #endregion
 
     #region Properties
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         idleState = new PlayerIdleState(this);
         moveState = new PlayerMoveState(this);
+        dashState = new PlayerDashState(this);
+
         view.InitAnimation();
         Managers.RunData.SetPlayer(model, view);
     }
@@ -44,6 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!Managers.BattleState.CanUpdate)
             return;
+
+        movement.TickCooldown(Time.deltaTime);
 
         HandleStateChange();
         currentState?.Tick();
@@ -59,13 +64,18 @@ public class PlayerController : MonoBehaviour
 
     private void HandleStateChange()
     {
-        bool isMoving = inputHandler.MoveInput.sqrMagnitude > 0f;
+        if (currentState == dashState && movement.IsDashing)
+            return;
 
-        if (currentState == idleState && isMoving)
+        if (inputHandler.DashPressed && movement.TryStartDash(inputHandler.MoveInput))
         {
-            ChangeState(moveState);
+            ChangeState(dashState);
+            return;
         }
-        else if (currentState == moveState && !isMoving)
+
+        if(inputHandler.MoveInput.sqrMagnitude > 0f)
+            ChangeState(moveState);
+        else
         {
             ChangeState(idleState);
         }
@@ -82,5 +92,10 @@ public class PlayerController : MonoBehaviour
         currentState = newState;
 
         currentState?.Enter();
+    }
+
+    private void OnDisable()
+    {
+        movement?.CancelDash();
     }
 }

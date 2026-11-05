@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7225922083757616105}
   - component: {fileID: 2731029333833793000}
   - component: {fileID: 8918685349986795296}
+  - component: {fileID: 8340046552492993676}
   m_Layer: 0
   m_Name: NormalProjectile
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 222443097
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: cc8e82ac7c0036f4492cd4ec1afd27c1, type: 3}
@@ -118,3 +119,21 @@ MonoBehaviour:
   wallRadius: 0.1
   wallOffset: 0.02
   maxBouncePerFrame: 3
+--- !u!114 &8340046552492993676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424283817944284668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb75af288e71aa4185b138ade8f4dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileWallCollision
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wallRadius: 0.1
+  wallOffset: 0.02
+  maxCollisionsPerFrame: 3

@@ -8,8 +8,8 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private InputActionReference dashAction;
 
     // Input Values
-    public Vector2 MoveInput { get; private set; }
-    public bool DashPressed => dashAction.action.WasPressedThisFrame();
+    public Vector2 MoveInput => moveAction != null && moveAction.action != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
+    public bool DashPressed => dashAction != null && dashAction.action != null && dashAction.action.WasPressedThisFrame();
 
     private void OnEnable()
     {
@@ -21,12 +21,5 @@ public class PlayerInputHandler : MonoBehaviour
     {
         moveAction.action.Disable();
         dashAction.action.Disable();
-
-        MoveInput = Vector2.zero;
-    }
-
-    private void Update()
-    {
-        MoveInput = moveAction.action.ReadValue<Vector2>();
     }
 }

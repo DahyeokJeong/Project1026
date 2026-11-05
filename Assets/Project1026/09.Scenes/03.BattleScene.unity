@@ -3990,59 +3990,6 @@ RectTransform:
   m_AnchoredPosition: {x: -4, y: 0}
   m_SizeDelta: {x: -8, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1778008759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1778008761}
-  - component: {fileID: 1778008760}
-  m_Layer: 0
-  m_Name: PoolRegistry
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1778008760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778008759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8036ce98c896d9449eaa5dff101b522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PoolRegistry
-  entries:
-  - type: 0
-    prefab: {fileID: 6943944905956832885, guid: a372fac7add8acc4da2614e583cb4fc8, type: 3}
-  - type: 1
-    prefab: {fileID: 9074526310868153693, guid: 44b6922cefd2b6d46ac24d89d289524b, type: 3}
-  - type: 2
-    prefab: {fileID: 6719453655010788331, guid: bd63cae308b495043922932dfe1ac048, type: 3}
-  - type: 3
-    prefab: {fileID: 6424283817944284668, guid: f414981c6e649244e99c1ed5c2f0c7f3, type: 3}
---- !u!4 &1778008761
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778008759}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.56138, y: 0.7888, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793529808
 GameObject:
   m_ObjectHideFlags: 0
@@ -5157,10 +5104,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2809400701567533494, guid: 21dffa55c546a544385d6c7a8e4d2c8a, type: 3}
-      propertyPath: dashAction
-      value: 
-      objectReference: {fileID: 4958756566987290717, guid: 09fb870edfea5474f895aa79e971f0c8, type: 3}
     - target: {fileID: 5530833077823482181, guid: 21dffa55c546a544385d6c7a8e4d2c8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5243,7 +5186,6 @@ SceneRoots:
   - {fileID: 1992266295}
   - {fileID: 1843888860}
   - {fileID: 206074281}
-  - {fileID: 1778008761}
   - {fileID: 9036023801707645308}
   - {fileID: 1330538460}
   - {fileID: 867346935}

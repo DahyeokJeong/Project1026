@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class PlayerAutoAttack : MonoBehaviour
 {
-    [Serializable]
-    public class AttackSlot
-    {
-        #region Settings
-        [SerializeField] private AttackConfigBaseSO config;
-        [SerializeField] private bool initiallyOwned;
-        [SerializeField, Min(0.01f)] private float interval = 1f;
-        #endregion
-
-        #region Properties
-        public AttackConfigBaseSO Config => config;
-        public bool InitiallyOwned => initiallyOwned;
-        public float Interval => interval;
-        #endregion
-    }
-
     private sealed class AttackEntry
     {
         public AttackRuntimeData Data { get; }
@@ -38,13 +22,11 @@ public class PlayerAutoAttack : MonoBehaviour
     [SerializeField] private PlayerModel model;
     #endregion
 
-    #region Attack Settings
-    [Header("Attack Settings")]
-    [SerializeField] private List<AttackSlot> attackSlots = new();
-    #endregion
-
     #region Fields
     private readonly Dictionary<string, AttackEntry> attacks = new();
+
+    private DataManager dataManager;
+    private bool attacksInitialized;
     #endregion
 
     private void Awake()
@@ -54,37 +36,45 @@ public class PlayerAutoAttack : MonoBehaviour
             enabled = false;
             return;
         }
-
-        foreach (AttackSlot slot in attackSlots)
-        {
-            if (slot == null || slot.Config == null)
-                continue;
-
-            AttackConfigBaseSO config = slot.Config;
-            string key = config.ConfigKey;
-
-            if (string.IsNullOrWhiteSpace(key))
-                continue;
-
-            if (attacks.ContainsKey(key))
-                continue;
-
-            AttackRuntimeData data = Managers.RunData.GetOrCreateAttackData(config, slot.InitiallyOwned);
-
-            if (data == null)
-                continue;
-
-            IAttack attack = config.CreateAttack(firePoint, model, data, slot.Interval);
-
-            if (attack == null)
-                continue;
-
-            attacks.Add(key, new AttackEntry(data, attack));
-        }
     }
 
     private void Start()
     {
+        if (!enabled)
+            return;
+
+        dataManager = Managers.Data;
+
+        if(dataManager.IsLoaded)
+            InitializeAttacks();
+        else
+            dataManager.DataLoadCompleted += InitializeAttacks;
+    }
+
+    private void InitializeAttacks()
+    {
+        dataManager.DataLoadCompleted -= InitializeAttacks;
+
+        if (attacksInitialized)
+            return;
+
+        attacksInitialized = true;
+
+        foreach(AttackConfigBaseSO config in dataManager.AttackConfigs.Values)
+        {
+            AttackRuntimeData data = Managers.RunData.GetOrCreateAttackData(config, config.InitiallyOwned);
+
+            if(data == null)
+                continue;
+
+            IAttack attack = config.CreateAttack(firePoint, model, data, config.Interval);
+
+            if (attack == null)
+                continue;
+
+            attacks.Add(config.ConfigKey, new AttackEntry(data, attack));
+        }
+
         foreach(AttackEntry entry in attacks.Values)
         {
             if(entry.Data.IsOwned && entry.Attack is IActivatableAttack attack)
@@ -145,5 +135,11 @@ public class PlayerAutoAttack : MonoBehaviour
     public int GetProjectileCount(string configKey)
     {
         return TryGetAttackData( configKey, out ProjectileAttackRuntimeData data) ? data.ProjectileCount : 0;
+    }
+
+    private void OnDestroy()
+    {
+        if (dataManager != null)
+            dataManager.DataLoadCompleted -= InitializeAttacks;
     }
 }

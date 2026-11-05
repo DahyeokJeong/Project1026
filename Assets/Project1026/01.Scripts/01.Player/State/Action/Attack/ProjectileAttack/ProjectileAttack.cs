@@ -30,7 +30,8 @@ public class ProjectileAttack : ITickAttack
 
     public void Tick(float deltaTime)
     {
-        attackTimer -= deltaTime * Mathf.Max(0f, model.AttackSpeed);
+        float speed = config.UsePlayerStat ? Mathf.Max(0f, model.AttackSpeed) : 1f;
+        attackTimer -= deltaTime * speed;
 
         if (attackTimer > 0f)
             return;
@@ -67,6 +68,7 @@ public class ProjectileAttack : ITickAttack
 
             projectile.SetDirection(direction);
             projectile.SetDamage(attackDamage, model.Critical);
+            projectile.SetBounceCount(1);
         }
     }
 

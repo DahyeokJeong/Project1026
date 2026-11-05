@@ -23,6 +23,29 @@ public class DamageManager
         receivers.Remove(target);
     }
 
+    public bool IsRegistered(Transform target)
+    {
+        return target != null && receivers.ContainsKey(target);
+    }
+
+    public bool TryGetTarget(Transform hit, out Transform target)
+    {
+        target = null;
+        Transform current = hit;
+
+        while (current != null)
+        {
+            if(receivers.ContainsKey(current))
+            {
+                target = current;
+                return true;
+            }
+
+            current = current.parent;
+        }
+        return false;
+    }
+
     public void ApplyDamage(Transform target, float damage)
     {
         if (target == null || damage <= 0f)

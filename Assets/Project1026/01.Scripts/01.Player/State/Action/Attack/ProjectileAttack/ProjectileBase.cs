@@ -9,9 +9,11 @@ public abstract class ProjectileBase : MonoBehaviour
     #endregion
 
     #region Fields
+    private ProjectileWallCollision wallCollision;
     private Vector2 moveDirection;
     private float timer;
     private float damage;
+    private int remainingBounces;
     #endregion
 
     #region Properties
@@ -23,6 +25,10 @@ public abstract class ProjectileBase : MonoBehaviour
     protected virtual void OnEnable()
     {
         timer = lifeTime;
+        remainingBounces = 0;
+
+        if(wallCollision == null)
+            wallCollision = GetComponent<ProjectileWallCollision>();
     }
 
     protected virtual void Update()
@@ -40,8 +46,16 @@ public abstract class ProjectileBase : MonoBehaviour
 
     protected virtual void Move()
     {
-        transform.position +=
-            (Vector3)(moveDirection * moveSpeed * Time.deltaTime);
+        Vector2 pos = transform.position;
+        Vector2 dir = moveDirection;
+
+        bool canContinue = wallCollision.TryMove(ref pos, ref dir, moveSpeed * Time.deltaTime, ref remainingBounces);
+
+        transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+        SetDirection(dir);
+
+        if(!canContinue)
+            Release();
     }
 
     public void SetDirection(Vector2 direction)
@@ -57,18 +71,16 @@ public abstract class ProjectileBase : MonoBehaviour
             damage *= 1.5f;
     }
 
+    public void SetBounceCount(int count)
+    {
+        remainingBounces = Mathf.Max(0, count);
+    }
+
     private void UpdateRotation()
     {
-        float angle = Mathf.Atan2(
-            moveDirection.y,
-            moveDirection.x
-        ) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2( moveDirection.y, moveDirection.x ) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(
-            0f,
-            0f,
-            angle
-        );
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     protected void Release()

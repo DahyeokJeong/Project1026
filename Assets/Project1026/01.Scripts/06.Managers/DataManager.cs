@@ -26,12 +26,14 @@ public class DataManager
     public Dictionary<string, PlayerStatData> PlayerStatDic { get; private set; } = new();
     public Dictionary<string, AugmentData> AugmentDic { get; private set; } = new();
     public Dictionary<string, LocalizationData> LocalizationDic { get; private set; } = new();
+    public Dictionary<string, AttackConfigBaseSO> AttackConfigs => attackConfigs;
     #endregion
 
     #region Fields
     private readonly List<AsyncOperationHandle> handles = new();
     private readonly List<Action<int>> loadTasks = new();
     private Dictionary<string, AugmentEffectSO> augmentEffects = new();
+    private Dictionary<string, AttackConfigBaseSO> attackConfigs = new();
 
     private int completedCount;
     private int loadVersion;
@@ -76,6 +78,8 @@ public class DataManager
         loadTasks.Add(version => LoadJson<LocalizationLoader>("Localization_KO", SetLocalizations, version));
 
         loadTasks.Add(LoadAugmentEffects);
+
+        loadTasks.Add(LoadAttackConfigs);
     }
 
     private void LoadAugmentEffects(int version)
@@ -122,6 +126,50 @@ public class DataManager
                 CompleteLoad();
         };
     }
+
+    private void LoadAttackConfigs(int version)
+    {
+        const string label = "AttackConfigs";
+
+        var handle = Addressables.LoadAssetsAsync<AttackConfigBaseSO>(label, null);
+        handles.Add(handle);
+
+        handle.Completed += operation =>
+        {
+            if (version != loadVersion || State != InitState.Loading)
+                return;
+
+            if (operation.Status != AsyncOperationStatus.Succeeded || operation.Result == null || operation.Result.Count == 0)
+            {
+                FailLoad(label);
+                return;
+            }
+
+            Dictionary<string, AttackConfigBaseSO> configs = new();
+
+            foreach(AttackConfigBaseSO config in operation.Result)
+            {
+                if(config == null || string.IsNullOrWhiteSpace(config.ConfigKey))
+                {
+                    FailLoad(label);
+                    return;
+                }
+
+                if(!configs.TryAdd(config.ConfigKey, config))
+                {
+                    FailLoad(label);
+                    return;
+                }
+            }
+
+            attackConfigs = configs;
+            completedCount++;
+
+            if(completedCount == loadTasks.Count)
+                CompleteLoad();
+        };
+    }
+
 
     private void LoadJson<T>(
         string address,
@@ -241,6 +289,7 @@ public class DataManager
         PlayerStatDic = new();
         AugmentDic = new();
         augmentEffects.Clear();
+        attackConfigs.Clear();
         LocalizationDic = new();
 
         Debug.LogError($"DataManager 초기화 실패 / Address: {address}");
@@ -264,6 +313,7 @@ public class DataManager
         PlayerStatDic = new();
         AugmentDic = new();
         augmentEffects.Clear();
+        attackConfigs.Clear();
         LocalizationDic = new();
 
         completedCount = 0;
