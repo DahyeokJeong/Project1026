@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 67d40524fe9e6c8478125cdc8c831083
   m_SerializeEntries:
+  - m_GUID: 14d0efaea9ed80a43b6107b552cc0c7c
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Explosion.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 200ab280be8602e4aae5c32cb04f754d
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PiercingDamage.asset
     m_ReadOnly: 0

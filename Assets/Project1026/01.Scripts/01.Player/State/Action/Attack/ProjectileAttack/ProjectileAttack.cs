@@ -55,6 +55,9 @@ public class ProjectileAttack : ITickAttack
             case ProjectilePattern.Spread:
                 FireSpread(count);
                 break;
+            case ProjectilePattern.Homing:
+                FireHoming(count);
+                break;
         }
     }
 
@@ -68,7 +71,7 @@ public class ProjectileAttack : ITickAttack
 
             projectile.SetDirection(direction);
             projectile.SetDamage(attackDamage, model.Critical);
-            projectile.SetBounceCount(1);
+            projectile.SetBounceCount(data.BounceCount);
         }
     }
 
@@ -104,5 +107,13 @@ public class ProjectileAttack : ITickAttack
         }
     }
 
+    private void FireHoming(int count)
+    {
+        Vector2 direction = model.LastMoveDirection.normalized;
 
+        for(int i = 0; i < count; ++i)
+        {
+            SpawnProjectile(firePoint.position, direction);
+        }
+    }
 }

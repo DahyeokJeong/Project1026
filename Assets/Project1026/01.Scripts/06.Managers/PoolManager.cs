@@ -104,6 +104,8 @@ public class PoolManager
     #region Fields
     private Dictionary<GameObject, Pool> pools = new();
     private readonly Dictionary<PoolType, GameObject> registeredPrefabs = new();
+    private readonly HashSet<GameObject> activeObjects = new();
+    private bool isClearing;
     private Transform root;
     #endregion
 
@@ -116,6 +118,7 @@ public class PoolManager
             {
                 GameObject go = new GameObject("@Pool");
                 root = go.transform;
+
                 Object.DontDestroyOnLoad(go);
             }
 
@@ -129,7 +132,7 @@ public class PoolManager
         Vector3 position,
         Quaternion rotation)
     {
-        if (prefab == null)
+        if (prefab == null || isClearing)
             return null;
 
         if (!pools.TryGetValue(prefab, out Pool pool))
@@ -137,8 +140,12 @@ public class PoolManager
             pool = new Pool(prefab, Root);
             pools.Add(prefab, pool);
         }
+        GameObject go = pool.Pop(position, rotation);
 
-        return pool.Pop(position, rotation);
+        if(go != null)
+            activeObjects.Add(go);
+
+        return go;
     }
 
     public bool Push(GameObject go)
@@ -155,24 +162,58 @@ public class PoolManager
         if (pooledObject.Owner.IsDisposed)
             return false;
 
+        if(!activeObjects.Remove(go))
+            return false;
+
         pooledObject.MarkReleased();
         pooledObject.Owner.Push(go);
 
         return true;
     }
 
+    public void ReturnAll()
+    {
+        GameObject[] objects = new GameObject[activeObjects.Count];
+        activeObjects.CopyTo(objects);
+
+        foreach(GameObject go in objects)
+        {
+            if (go == null)
+                continue;
+
+            Push(go);
+        }
+
+        activeObjects.Clear();
+    }
+
     public void Clear()
     {
-        foreach (Pool pool in pools.Values)
-            pool.Clear();
+        if (isClearing)
+            return;
 
-        pools.Clear();
-        registeredPrefabs.Clear();
+        isClearing = true;
 
-        if (root != null)
+        try
         {
-            Object.Destroy(root.gameObject);
-            root = null;
+            ReturnAll();
+
+            foreach (Pool pool in pools.Values)
+                pool.Clear();
+
+            pools.Clear();
+            registeredPrefabs.Clear();
+            activeObjects.Clear();
+
+            if(root != null)
+            {
+                Object.Destroy(root.gameObject);
+                root = null;
+            }
+        }
+        finally
+        {
+            isClearing = false;
         }
     }
 

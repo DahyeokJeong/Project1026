@@ -57,7 +57,6 @@ public class BattleSceneController : MonoBehaviour
 
     private void ReturnToStageSelect()
     {
-        Managers.Pool.Clear();
         Managers.Scene.LoadGame("02.StageSelectScene");
     }
 

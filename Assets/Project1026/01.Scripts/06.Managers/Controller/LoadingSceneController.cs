@@ -21,6 +21,8 @@ public class LoadingSceneController : MonoBehaviour
 
     private void Start()
     {
+        Managers.Pool.Clear();
+
         Managers.Loading.StartLoading(this);
         StartCoroutine(WaitForLoading());
     }
