@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3158295381166669339}
   - component: {fileID: 917030584790514646}
-  - component: {fileID: 7033896563795889204}
   - component: {fileID: 4727290965583411148}
   m_Layer: 0
   m_Name: ExplosionEffect
@@ -94,28 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!95 &7033896563795889204
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192837210289080540}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8a83941b923a94b47953d29ea1334e1e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4727290965583411148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,5 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5e8d9e17f8c8849b06b8212d711d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionEffect
-  anim: {fileID: 7033896563795889204}
   lifeTime: 0.15

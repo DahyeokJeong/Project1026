@@ -179,13 +179,16 @@ public class PoolManager
         foreach(GameObject go in objects)
         {
             if (go == null)
+            {
+                activeObjects.Remove(go);
                 continue;
-
+            }
             Push(go);
         }
 
         activeObjects.Clear();
     }
+
 
     public void Clear()
     {
@@ -198,14 +201,16 @@ public class PoolManager
         {
             ReturnAll();
 
-            foreach (Pool pool in pools.Values)
-                pool.Clear();
+            foreach (var entry in pools)
+            {
+                entry.Value.Clear();
+            }
 
             pools.Clear();
             registeredPrefabs.Clear();
             activeObjects.Clear();
 
-            if(root != null)
+            if (root != null)
             {
                 Object.Destroy(root.gameObject);
                 root = null;
@@ -216,6 +221,7 @@ public class PoolManager
             isClearing = false;
         }
     }
+
 
     public void Register(PoolType type, GameObject prefab)
     {

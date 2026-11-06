@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ExplosiveProjectile : ProjectileBase
+public class ExplosionProjectile : ProjectileBase
 {
     #region Settings
     [Header("Settings")]
@@ -38,6 +38,9 @@ public class ExplosiveProjectile : ProjectileBase
             return;
 
         base.Update();
+
+        if (!gameObject.activeInHierarchy)
+            return;
 
         CheckHit();
     }

@@ -40,6 +40,9 @@ public class HomingProjectile : ProjectileBase
 
         base.Update();
 
+        if (!gameObject.activeInHierarchy)
+            return;
+
         CheckHit();
     }
 

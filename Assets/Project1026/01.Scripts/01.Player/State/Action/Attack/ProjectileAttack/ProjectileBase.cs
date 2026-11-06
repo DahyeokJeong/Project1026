@@ -38,6 +38,9 @@ public abstract class ProjectileBase : MonoBehaviour
 
         Move();
 
+        if (!gameObject.activeInHierarchy)
+            return;
+
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
