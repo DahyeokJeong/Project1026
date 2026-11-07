@@ -47,6 +47,48 @@
             "ConfigKey": "SO_Augment_FireAuraRange",
             "AttackConfigKey": "SO_Attack_FireAura",
             "Value": 20
+        },
+        {
+            "Id": "AUG009",
+            "ConfigKey": "SO_Augment_PlayerMaxHp",
+            "AttackConfigKey": "",
+            "Value": 50
+        },
+        {
+            "Id": "AUG010",
+            "ConfigKey": "SO_Augment_PlayerHealthRegen",
+            "AttackConfigKey": "",
+            "Value": 3
+        },
+        {
+            "Id": "AUG011",
+            "ConfigKey": "SO_Augment_PlayerAttackSpeed",
+            "AttackConfigKey": "",
+            "Value": 10
+        },
+        {
+            "Id": "AUG012",
+            "ConfigKey": "SO_Augment_PlayerDefense",
+            "AttackConfigKey": "",
+            "Value": 3
+        },
+        {
+            "Id": "AUG013",
+            "ConfigKey": "SO_Augment_PlayerMoveSpeed",
+            "AttackConfigKey": "",
+            "Value": 10
+        },
+        {
+            "Id": "AUG014",
+            "ConfigKey": "SO_Augment_PlayerCritical",
+            "AttackConfigKey": "",
+            "Value": 10
+        },
+        {
+            "Id": "AUG015",
+            "ConfigKey": "SO_Augment_PlayerAutoCooldown",
+            "AttackConfigKey": "",
+            "Value": 1
         }
     ]
 }

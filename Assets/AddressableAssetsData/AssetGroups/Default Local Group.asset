@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 67d40524fe9e6c8478125cdc8c831083
   m_SerializeEntries:
+  - m_GUID: 0daf8fa8de03f6c4cbdb1944bcd8ef00
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerHealthRegen.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 14d0efaea9ed80a43b6107b552cc0c7c
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Explosion.asset
     m_ReadOnly: 0
@@ -61,11 +67,35 @@ MonoBehaviour:
     m_SerializedLabels:
     - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93b4d84c7224f544da16a5ce00233e2a
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerAttackSpeed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b49dd7a9f857f7458e5c309ba9e4037
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Normal.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6d7f2825a2597c4f92df4b528a0cb7e
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerAutoCooldown.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b355cbcd6ef431942bfb8b3760a4119c
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerCritical.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b36c181db56732f4593ad04dadede6b7
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerMoveSpeed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b504cd54e2f3014449a0676b859caacc
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_NormalDamage.asset
@@ -102,11 +132,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e67a32460df28cc42a58d0042cca32cd
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerMaxHp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f85c5d365d55cd74988b7c90e050e24d
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Piercing.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc30af0ac55f88c40b135554ba01da3f
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerDefense.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ffc8670e1977bc4479c6dcef4efcca1d, type: 2}

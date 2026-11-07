@@ -49,14 +49,71 @@ public class RunDataManager
 
     #region Player Stat
     public int PlayerAttackDamageBonus { get; private set; }
+    public int PlayerMaxHpBonus { get; private set; }
+    public int PlayerHealthRegenBonus { get; private set; }
+    public int PlayerDefenseBonus { get; private set; }
+
+    public float PlayerAttackSpeedMultiplier { get; private set; } = 1f;
+    public float PlayerMoveSpeedMultiplier { get; private set; } = 1f;
+    public float PlayerCriticalBonus { get; private set; }
+    public float PlayerAutoAttackCooldownMultiplier { get; private set; } = 1f;
 
     public bool AddPlayerAttackDamage(int amount)
     {
-        if (amount <= 0)
+        return AddPlayerStat(PlayerAugmentStat.AttackDamage, amount);
+    }
+
+    public bool AddPlayerStat(PlayerAugmentStat stat, int amount)
+    {
+        if(amount <= 0)
             return false;
 
-        PlayerAttackDamageBonus += amount;
+        switch (stat)
+        {
+            case PlayerAugmentStat.MaxHp:
+                PlayerMaxHpBonus += amount;
+                break;
+            case PlayerAugmentStat.HealthRegen:
+                PlayerHealthRegenBonus += amount;
+                break;
+            case PlayerAugmentStat.AttackDamage:
+                PlayerAttackDamageBonus += amount;
+                break;
+            case PlayerAugmentStat.AttackSpeed:
+                PlayerAttackSpeedMultiplier *= 1f + amount / 100f;
+                break;
+            case PlayerAugmentStat.Defense:
+                PlayerDefenseBonus += amount;
+                break;
+            case PlayerAugmentStat.MoveSpeed:
+                PlayerMoveSpeedMultiplier *= 1f + amount / 100f;
+                break;
+            case PlayerAugmentStat.Critical:
+                PlayerCriticalBonus += amount;
+                break;
+            case PlayerAugmentStat.AutoAttackCooldown:
+                if (amount >= 100)
+                    return false;
+
+                PlayerAutoAttackCooldownMultiplier *= 1f - amount / 100f;
+                break;
+            default:
+                return false;
+        }
         return true;
+    }
+
+    private void ResetPlayerStats()
+    {
+        PlayerAttackDamageBonus = 0;
+        PlayerMaxHpBonus = 0;
+        PlayerHealthRegenBonus = 0;
+        PlayerDefenseBonus = 0;
+
+        PlayerAttackSpeedMultiplier = 1f;
+        PlayerMoveSpeedMultiplier = 1f;
+        PlayerCriticalBonus = 0f;
+        PlayerAutoAttackCooldownMultiplier = 1f;
     }
     #endregion
 
@@ -95,7 +152,7 @@ public class RunDataManager
         CurrentExp = 0f;
         Level = 1;
 
-        PlayerAttackDamageBonus = 0;
+        ResetPlayerStats();
         attackData.Clear();
 
         LevelUpOccurred = null;

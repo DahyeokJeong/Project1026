@@ -27,7 +27,7 @@ public class WaveAttack : ITickAttack
             return;
 
         float speed = config.UsePlayerStat ? Mathf.Max(0f, model.AttackSpeed) : 1f;
-        attackTimer -= deltaTime * speed;
+        attackTimer -= deltaTime * speed / model.AutoAttackCooldownMultiplier;
 
         if (attackTimer > 0f)
             return;
@@ -40,7 +40,7 @@ public class WaveAttack : ITickAttack
     {
         GameObject go = Managers.Pool.Pop(config.Prefab, firePoint.position, Quaternion.identity);
 
-        if (go = null)
+        if (go == null)
             return;
 
         if(!go.TryGetComponent(out WaveBase wave))
