@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a414134a8b33b564aad0920620d133fa, type: 3}
+  m_Name: SO_Attack_IndependentSummon
+  m_EditorClassIdentifier: Assembly-CSharp::SummonAttackConfigSO
+  configKey: SO_Attack_IndependentSummon
+  interval: 5
+  initiallyOwned: 0
+  prefab: {fileID: 3530950055281727504, guid: 55ce51c8c74e472fa63ca5680a3c0ca5, type: 3}

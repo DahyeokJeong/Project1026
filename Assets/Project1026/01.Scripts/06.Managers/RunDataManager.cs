@@ -58,11 +58,6 @@ public class RunDataManager
     public float PlayerCriticalBonus { get; private set; }
     public float PlayerAutoAttackCooldownMultiplier { get; private set; } = 1f;
 
-    public bool AddPlayerAttackDamage(int amount)
-    {
-        return AddPlayerStat(PlayerAugmentStat.AttackDamage, amount);
-    }
-
     public bool AddPlayerStat(PlayerAugmentStat stat, int amount)
     {
         if(amount <= 0)

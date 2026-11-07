@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b9f5c75bf368c4baa1af872a4f9627, type: 3}
+  m_Name: SO_Attack_Wave
+  m_EditorClassIdentifier: Assembly-CSharp::WaveAttackConfigSO
+  configKey: SO_Attack_Wave
+  interval: 3
+  initiallyOwned: 0
+  prefab: {fileID: 3530950055281727504, guid: 9114e4a695ed44f992dfa3be2744cefc, type: 3}
+  usePlayerStat: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackConfigSO
   configKey: SO_Attack_Normal
   interval: 0.7
-  initiallyOwned: 0
+  initiallyOwned: 1
   prefab: {fileID: 6424283817944284668, guid: f414981c6e649244e99c1ed5c2f0c7f3, type: 3}
   pattern: 0
   usePlayerStat: 1

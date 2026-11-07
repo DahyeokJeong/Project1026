@@ -12,9 +12,7 @@ public enum PlayerAugmentStat
     AutoAttackCooldown = 7
 }
 
-[CreateAssetMenu(
-    fileName = "SO_Augment_PlayerStat",
-    menuName = "Game/Augment/Player Stat")]
+[CreateAssetMenu(fileName = "SO_Augment_PlayerStat", menuName = "Game/Augment/Player Stat")]
 public class PlayerStatEffectSO : AugmentEffectSO
 {
     [SerializeField] private PlayerAugmentStat stat;

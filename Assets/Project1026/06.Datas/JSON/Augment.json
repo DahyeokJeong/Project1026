@@ -2,93 +2,129 @@
     "Augments": [
         {
             "Id": "AUG001",
-            "ConfigKey": "SO_Augment_NormalCount",
-            "AttackConfigKey": "SO_Attack_Normal",
-            "Value": 1
-        },
-        {
-            "Id": "AUG002",
-            "ConfigKey": "SO_Augment_PiercingCount",
-            "AttackConfigKey": "SO_Attack_Piercing",
-            "Value": 1
-        },
-        {
-            "Id": "AUG003",
-            "ConfigKey": "SO_Augment_PiercingAcquire",
-            "AttackConfigKey": "SO_Attack_Piercing",
-            "Value": 1
-        },
-        {
-            "Id": "AUG004",
-            "ConfigKey": "SO_Augment_AuraAcquire",
-            "AttackConfigKey": "SO_Attack_FireAura",
-            "Value": 1
-        },
-        {
-            "Id": "AUG005",
-            "ConfigKey": "SO_Augment_NormalDamage",
-            "AttackConfigKey": "SO_Attack_Normal",
-            "Value": 5
-        },
-        {
-            "Id": "AUG006",
-            "ConfigKey": "SO_Augment_PiercingDamage",
-            "AttackConfigKey": "SO_Attack_Piercing",
-            "Value": 5
-        },
-        {
-            "Id": "AUG007",
             "ConfigKey": "SO_Augment_PlayerAttackDamage",
             "AttackConfigKey": "",
             "Value": 5
         },
         {
-            "Id": "AUG008",
-            "ConfigKey": "SO_Augment_FireAuraRange",
-            "AttackConfigKey": "SO_Attack_FireAura",
-            "Value": 20
-        },
-        {
-            "Id": "AUG009",
+            "Id": "AUG002",
             "ConfigKey": "SO_Augment_PlayerMaxHp",
             "AttackConfigKey": "",
             "Value": 50
         },
         {
-            "Id": "AUG010",
+            "Id": "AUG003",
             "ConfigKey": "SO_Augment_PlayerHealthRegen",
             "AttackConfigKey": "",
             "Value": 3
         },
         {
-            "Id": "AUG011",
+            "Id": "AUG004",
             "ConfigKey": "SO_Augment_PlayerAttackSpeed",
             "AttackConfigKey": "",
             "Value": 10
         },
         {
-            "Id": "AUG012",
+            "Id": "AUG005",
             "ConfigKey": "SO_Augment_PlayerDefense",
             "AttackConfigKey": "",
             "Value": 3
         },
         {
-            "Id": "AUG013",
+            "Id": "AUG006",
             "ConfigKey": "SO_Augment_PlayerMoveSpeed",
             "AttackConfigKey": "",
             "Value": 10
         },
         {
-            "Id": "AUG014",
+            "Id": "AUG007",
             "ConfigKey": "SO_Augment_PlayerCritical",
             "AttackConfigKey": "",
             "Value": 10
         },
         {
-            "Id": "AUG015",
+            "Id": "AUG008",
             "ConfigKey": "SO_Augment_PlayerAutoCooldown",
             "AttackConfigKey": "",
             "Value": 1
+        },
+        {
+            "Id": "AUG009",
+            "ConfigKey": "SO_Augment_PiercingAcquire",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 1
+        },
+        {
+            "Id": "AUG010",
+            "ConfigKey": "SO_Augment_AuraAcquire",
+            "AttackConfigKey": "SO_Attack_FireAura",
+            "Value": 1
+        },
+        {
+            "Id": "AUG011",
+            "ConfigKey": "SO_Augment_ExplosionAcquire",
+            "AttackConfigKey": "SO_Attack_Explosion",
+            "Value": 1
+        },
+        {
+            "Id": "AUG012",
+            "ConfigKey": "SO_Augment_HomingAcquire",
+            "AttackConfigKey": "SO_Attack_Homing",
+            "Value": 1
+        },
+        {
+            "Id": "AUG013",
+            "ConfigKey": "SO_Augment_LightningFallingAcquire",
+            "AttackConfigKey": "SO_Attack_LightningFalling",
+            "Value": 1
+        },
+        {
+            "Id": "AUG014",
+            "ConfigKey": "SO_Augment_WaveAcquire",
+            "AttackConfigKey": "SO_Attack_Wave",
+            "Value": 1
+        },
+        {
+            "Id": "AUG015",
+            "ConfigKey": "SO_Augment_OrbitSummonAcquire",
+            "AttackConfigKey": "SO_Attack_OrbitSummon",
+            "Value": 1
+        },
+        {
+            "Id": "AUG016",
+            "ConfigKey": "SO_Augment_IndependentSummonAcquire",
+            "AttackConfigKey": "SO_Attack_IndependentSummon",
+            "Value": 1
+        },
+        {
+            "Id": "AUG017",
+            "ConfigKey": "SO_Augment_NormalCount",
+            "AttackConfigKey": "SO_Attack_Normal",
+            "Value": 1
+        },
+        {
+            "Id": "AUG018",
+            "ConfigKey": "SO_Augment_PiercingCount",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 1
+        },
+        {
+            "Id": "AUG019",
+            "ConfigKey": "SO_Augment_NormalDamage",
+            "AttackConfigKey": "SO_Attack_Normal",
+            "Value": 5
+        },
+        {
+            "Id": "AUG020",
+            "ConfigKey": "SO_Augment_PiercingDamage",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 5
+        },
+        {
+            "Id": "AUG021",
+            "ConfigKey": "SO_Augment_FireAuraRange",
+            "AttackConfigKey": "SO_Attack_FireAura",
+            "Value": 20
         }
     ]
 }

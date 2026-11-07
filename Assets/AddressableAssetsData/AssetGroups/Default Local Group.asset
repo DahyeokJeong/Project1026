@@ -38,6 +38,30 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52eab2282aa8b154b9651cfd652d6143
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_OrbitSummon.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 542ba64c8be22e9448e988ccc662ecb7
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_IndependentSummonAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56da87fa8f6d7b241b741d41fe79cbe1
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Wave.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 570e300a2545ff145b9273c0a8d97f7c
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_FireAuraAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 65eeba33c7776754098e040c9798e84d
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_AuraAcquire.asset
     m_ReadOnly: 0
@@ -57,6 +81,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 82c28b5e45dec3d4ba25df4f1cdf5459
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_PiercingAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8684aae8981f1f546bc91baba21f912e
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_OrbitSummonAcquire.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
@@ -97,11 +127,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4dac3526af27ea4ba4b681299f90f0a
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_HomingAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b504cd54e2f3014449a0676b859caacc
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_NormalDamage.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b810439a083b78f4699d0a531074ea33
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_IndependentSummon.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bdbadd216f4e67342868f091d22f82d8
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PlayerAttackDamage.asset
@@ -126,6 +168,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce43d54ebfdf9b84abc9c9df426ecd7a
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_WaveAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d364bf6fe8c27ed4eb6209e01e9b90bb
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PiercingCount.asset
     m_ReadOnly: 0
@@ -138,8 +186,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0daf4f29b9647846ab24696127a90f2
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_LightningFallingAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6b3660884a68d745bd1eee8d502c68c
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_ExplosionAcquire.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f85c5d365d55cd74988b7c90e050e24d
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Piercing.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb8501fe38b01b546a4d1037726fdf07
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_LightningFalling.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AttackConfigs

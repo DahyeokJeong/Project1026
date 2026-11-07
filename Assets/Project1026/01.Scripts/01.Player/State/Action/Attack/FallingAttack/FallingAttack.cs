@@ -73,25 +73,21 @@ public class FallingAttack : ITickAttack
     {
         pos = Vector2.zero;
 
-        Bounds bounds = mapArea.worldBounds;
-        const float margin = 0.5f;
+        const float strikeRange = 5f;
+        const float placementClearance = 0.2f;
+        Vector2 center = model.transform.position;
 
-        if(bounds.size.x <= margin * 2f || bounds.size.y <= margin * 2f)
-            return false;
-
-        for(int i = 0; i < 20; ++i)
+        for (int i = 0; i < 20; ++i)
         {
-            Vector2 candidate = new Vector2(
-                Random.Range(bounds.min.x + margin, bounds.max.x - margin),
-                Random.Range(bounds.min.y + margin, bounds.max.y - margin)
-                );
+            Vector2 candidate = center + Random.insideUnitCircle * strikeRange;
 
-            if(!mapArea.CanPlace(candidate, 0.2f))
+            if (!mapArea.CanPlace(candidate, placementClearance))
                 continue;
 
             pos = candidate;
             return true;
         }
+
         return false;
     }
 }
