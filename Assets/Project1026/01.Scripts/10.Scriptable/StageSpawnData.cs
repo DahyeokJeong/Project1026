@@ -22,6 +22,13 @@ public class StageSpawnData : ScriptableObject
     [SerializeField, Min(1)] private int stageId = 1;
     #endregion
 
+    #region Waves
+    [Header("Waves")]
+    [SerializeField, Min(1)] private int waveCount = 3;
+    [SerializeField, Min(0.01f)] private float waveDuration = 180f;
+    [SerializeField, Min(1)] private int maxCount = 200; 
+    #endregion
+
     #region Enemies
     [Header("Enemies")]
     [SerializeField] private List<EnemyEntry> enemies = new();
@@ -29,7 +36,6 @@ public class StageSpawnData : ScriptableObject
 
     #region Spawn Settings
     [Header("Spawn Settings")]
-    [SerializeField, Min(1)] private int maxCount = 200;
     [SerializeField, Min(1)] private int spawnCount = 5;
     [SerializeField, Min(0.01f)] private float spawnInterval = 2f;
     [SerializeField] private bool spawnImmediately;
@@ -37,9 +43,11 @@ public class StageSpawnData : ScriptableObject
 
     #region Properties
     public int StageId => stageId;
+    public int WaveCount => waveCount;
+    public float WaveDuration => waveDuration;
+    public int MaxCount => maxCount;
     public IReadOnlyList<EnemyEntry> Enemies => enemies;
 
-    public int MaxCount => maxCount;
     public int SpawnCount => spawnCount;
     public float SpawnInterval => spawnInterval;
     public bool SpawnImmediately => spawnImmediately;

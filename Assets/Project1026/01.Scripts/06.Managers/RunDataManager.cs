@@ -21,8 +21,7 @@ public class RunDataManager
     #region Attack
     private readonly Dictionary<string, AttackRuntimeData> attackData = new();
 
-    public AttackRuntimeData GetOrCreateAttackData(
-        AttackConfigBaseSO config, bool initiallyOwned)
+    public AttackRuntimeData GetOrCreateAttackData(AttackConfigBaseSO config, bool initiallyOwned)
     {
         if (config == null || string.IsNullOrWhiteSpace(config.ConfigKey))
         {

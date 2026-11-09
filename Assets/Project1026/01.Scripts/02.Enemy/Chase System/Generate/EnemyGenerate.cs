@@ -17,6 +17,7 @@ public class EnemyGenerate : MonoBehaviour
 
     #region Fields
     private readonly List<EnemyController> activeEnemies = new();
+    private readonly HashSet<EnemyController> currentWaveEnemies = new();
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
 
@@ -26,12 +27,14 @@ public class EnemyGenerate : MonoBehaviour
     private float timer;
     private int totalSpawned;
     private bool isSpawning;
+    private bool IsSpawnAreaReady => mapArea != null && mapArea.IsReady && area != null && area.IsReady;
     #endregion
 
     #region Properties
     public bool IsSpawning => isSpawning;
     public bool HasSpawnedAll => spawnData != null && totalSpawned >= spawnData.MaxCount;
     public int ActiveEnemyCount => activeEnemies.Count;
+    public int CurrentWaveActiveEnemyCount => currentWaveEnemies.Count;
     #endregion
 
     // Start()에서 자동으로 시작하지 않음.
@@ -39,45 +42,43 @@ public class EnemyGenerate : MonoBehaviour
 
     public void StartSpawning(StageSpawnData data)
     {
-        if (isSpawning)
+        if (!CanStartSpawning(data))
             return;
 
-        if (data == null || mapArea == null || !mapArea.IsReady || area == null || !area.IsReady)
-            return;
-
-        if (data.MaxCount <= 0 || data.SpawnCount <= 0 || data.SpawnInterval <= 0f)
-            return;
-
-        bool hasCandidate = false;
-
-        foreach (var entry in data.Enemies)
-        {
-            if (entry != null && entry.Prefab != null && entry.Weight > 0f)
-            {
-                hasCandidate = true;
-                break;
-            }
-        }
-
-        if (!hasCandidate)
-            return;
-
-        activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
-
-        if (activeEnemies.Count > 0)
-            return;
+        activeEnemies.RemoveAll(IsInactiveEnemy);
 
         ClearDestroyedCache();
 
         spawnData = data;
         spawnPosition = new EnemySpawnPosition(mapArea);
 
+        currentWaveEnemies.Clear();
         totalSpawned = 0;
         timer = spawnData.SpawnInterval;
         isSpawning = true;
 
         if (spawnData.SpawnImmediately)
-            SpawnWave();
+            SpawnBatch();
+    }
+
+    private bool CanStartSpawning(StageSpawnData data)
+    {
+        if (isSpawning || data == null)
+            return false;
+
+        if (!IsSpawnAreaReady)
+            return false;
+
+        if (data.MaxCount <= 0 || data.SpawnCount <= 0 || data.SpawnInterval <= 0f)
+            return false;
+
+        foreach (var entry in data.Enemies)
+        {
+            if (entry != null && entry.Prefab != null && entry.Weight > 0f)
+                return true;
+        }
+
+        return false;
     }
 
     private void Update()
@@ -94,15 +95,16 @@ public class EnemyGenerate : MonoBehaviour
             return;
 
         timer = Mathf.Max(0.01f, spawnData.SpawnInterval);
-        SpawnWave();
+        SpawnBatch();
     }
 
-    private void SpawnWave()
+    private void SpawnBatch()
     {
-        if (mapArea == null || !mapArea.IsReady || area == null || !area.IsReady)
+        if (!IsSpawnAreaReady)
             return;
 
-        activeEnemies.RemoveAll(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+        activeEnemies.RemoveAll(IsInactiveEnemy);
+        currentWaveEnemies.RemoveWhere(IsInactiveEnemy);
 
         ClearDestroyedCache();
 
@@ -146,6 +148,7 @@ public class EnemyGenerate : MonoBehaviour
 
         enemy.Initialize(area, this);
         activeEnemies.Add(enemy);
+        currentWaveEnemies.Add(enemy);
         totalSpawned++;
     }
 
@@ -163,6 +166,7 @@ public class EnemyGenerate : MonoBehaviour
             return false;
 
         activeEnemies.Remove(enemy);
+        currentWaveEnemies.Remove(enemy);
         return true;
     }
 
@@ -178,6 +182,11 @@ public class EnemyGenerate : MonoBehaviour
 
         foreach (GameObject key in destroyedKeys)
             enemyCache.Remove(key);
+    }
+
+    private static bool IsInactiveEnemy(EnemyController enemy)
+    {
+        return enemy == null || !enemy.gameObject.activeInHierarchy;
     }
 
     private void OnDisable()

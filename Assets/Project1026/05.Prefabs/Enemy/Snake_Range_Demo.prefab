@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5774588273787353453}
   - component: {fileID: 4280059908129285721}
   - component: {fileID: 156661654134334344}
+  - component: {fileID: 170593806340296857}
   - component: {fileID: 5554547424604134426}
   - component: {fileID: 2008560642160845290}
   - component: {fileID: -8131545058412978603}
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1692618629
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 05ee7e177086291459fa4664c215d8b7, type: 3}
@@ -114,8 +115,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   model: {fileID: 2008560642160845290}
   attack: {fileID: 5554547424604134426}
+  view: {fileID: 170593806340296857}
   attackPrefab: {fileID: 6943944905956832885, guid: 5e3f29d5a07033041bc9871dae9ab748, type: 3}
   fireRaius: 0.3
+  expPrefab: {fileID: 6726932268036279307, guid: 587fe3b966da8944785a3c561cf3f520, type: 3}
+--- !u!114 &170593806340296857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136431554869713440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e02b6a425ef50943b202bb3594d7cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyView
+  spriteRenderer: {fileID: 4280059908129285721}
+  hitFlash: {fileID: -876546973899608171, guid: eebb2e3c5378127438068b732d1065e6, type: 3}
+  deathMaterial: {fileID: -876546973899608171, guid: bc2ce2cf934de5f4693668a9e7e7c9e1, type: 3}
 --- !u!114 &5554547424604134426
 MonoBehaviour:
   m_ObjectHideFlags: 0

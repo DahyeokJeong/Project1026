@@ -11,7 +11,6 @@ public class DefeatAllEnemiesCondition : IStageClearCondition
 
     public bool IsSatisfied()
     {
-        return generate.HasSpawnedAll &&
-               generate.ActiveEnemyCount == 0;
+        return generate.ActiveEnemyCount == 0;
     }
 }

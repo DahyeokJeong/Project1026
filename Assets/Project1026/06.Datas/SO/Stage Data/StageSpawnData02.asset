@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: StageSpawnData02
   m_EditorClassIdentifier: Assembly-CSharp::StageSpawnData
   stageId: 2
+  waveCount: 3
+  waveDuration: 180
+  maxCount: 60
   enemies:
   - prefab: {fileID: 156661654134334344, guid: 3cbea06a3a904bb479e3c6d742809627, type: 3}
     weight: 7
   - prefab: {fileID: 156661654134334344, guid: a0d19dec02bff4d419a7418e8344e080, type: 3}
     weight: 3
-  maxCount: 200
   spawnCount: 10
-  spawnInterval: 2
+  spawnInterval: 5
   spawnImmediately: 0
