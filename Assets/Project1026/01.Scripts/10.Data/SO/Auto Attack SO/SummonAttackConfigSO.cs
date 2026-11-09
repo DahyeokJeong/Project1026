@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 [CreateAssetMenu(fileName = "SO_Attack_Summon", menuName = "Game/Attack/Summon")]
 public class SummonAttackConfigSO : AttackConfigBaseSO
 {
@@ -10,10 +9,17 @@ public class SummonAttackConfigSO : AttackConfigBaseSO
 
     public override AttackRuntimeData CreateRuntimeData(bool initiallyOwned)
     {
+        if (prefab != null && prefab.TryGetComponent(out OrbitSummon _))
+            return new ProjectileAttackRuntimeData(initiallyOwned, 1);
+
         return new AttackRuntimeData(initiallyOwned);
     }
 
-    public override IAttack CreateAttack(Transform firePoint, PlayerModel model, AttackRuntimeData data, float interval)
+    public override IAttack CreateAttack(
+        Transform firePoint,
+        PlayerModel model,
+        AttackRuntimeData data,
+        float interval)
     {
         if (prefab == null || model == null || data == null)
             return null;
@@ -21,6 +27,6 @@ public class SummonAttackConfigSO : AttackConfigBaseSO
         if (!prefab.TryGetComponent(out SummonBase _))
             return null;
 
-        return new SummonAttack(model, this, data, interval);
+        return new SummonAttack(firePoint, model, this, data, interval);
     }
 }

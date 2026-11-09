@@ -83,12 +83,6 @@ public class BattleSceneController : MonoBehaviour
 
         return true;
     }
-
-    public void LevelUP()
-    {
-        OnLevelUp(3);
-    }
-
     private void OnLevelUp(int levelUpCount)
     {
         if (levelUpCount <= 0 || augment == null)

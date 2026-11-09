@@ -25,7 +25,7 @@ public class ExplosionEffect : MonoBehaviour
 
         if (timer <= 0f)
         {
-            enabled = false;
+            Managers.Pool.Push(gameObject);
         }
     }
 }

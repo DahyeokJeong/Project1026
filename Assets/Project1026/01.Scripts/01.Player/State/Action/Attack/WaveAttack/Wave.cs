@@ -8,14 +8,17 @@ public class Wave : WaveBase
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private SpriteRenderer waveSprite;
     [SerializeField] private Vector2 maxRadius = new Vector2(4f, 2f);
+
+    [Header("Sprite Animation")]
+    [SerializeField] private Sprite[] waveFrames;
     #endregion
 
     #region Fields
     private readonly List<Collider2D> hitBuffer = new(64);
     private readonly HashSet<Transform> hitTargets = new();
+
     private ContactFilter2D contactFilter;
     private Vector2 spriteSize;
-    private Color initialColor;
     #endregion
 
     private void Awake()
@@ -27,37 +30,58 @@ public class Wave : WaveBase
         }
 
         spriteSize = waveSprite.sprite.bounds.size;
-        initialColor = waveSprite.color;
+
         contactFilter = new ContactFilter2D();
         contactFilter.SetLayerMask(enemyLayer);
         contactFilter.useTriggers = true;
     }
 
-
     protected override void OnWaveInitialized()
     {
         hitTargets.Clear();
         hitBuffer.Clear();
-        waveSprite.color = initialColor;
+
+        UpdateSpriteFrame(0f);
         waveSprite.transform.localScale = Vector3.zero;
     }
 
     protected override void UpdateWave(float progress)
     {
-        Vector2 radius = new Vector2(Mathf.Max(0.01f, maxRadius.x), Mathf.Max(0.01f, maxRadius.y)) * progress;
-        RefreshVisual(radius, progress);
+        Vector2 radius = new Vector2(
+            Mathf.Max(0.01f, maxRadius.x),
+            Mathf.Max(0.01f, maxRadius.y)) * progress;
+
+        UpdateSpriteFrame(progress);
+        RefreshVisual(radius);
         CheckHit(radius);
     }
 
-    private void RefreshVisual(Vector2 radius, float progress)
+    private void UpdateSpriteFrame(float progress)
+    {
+        if (waveFrames == null || waveFrames.Length == 0)
+            return;
+
+        int frameIndex = Mathf.Min(
+            Mathf.FloorToInt(progress * waveFrames.Length),
+            waveFrames.Length - 1);
+
+        Sprite frame = waveFrames[frameIndex];
+        if (frame == null || waveSprite.sprite == frame)
+            return;
+
+        waveSprite.sprite = frame;
+        spriteSize = frame.bounds.size;
+    }
+
+    private void RefreshVisual(Vector2 radius)
     {
         float width = radius.x * 2f;
         float height = radius.y * 2f;
-        waveSprite.transform.localScale = new Vector3(width / spriteSize.x, height / spriteSize.y, 1f);
 
-        Color color = initialColor;
-        color.a *= 1f - progress;
-        waveSprite.color = color;
+        waveSprite.transform.localScale = new Vector3(
+            width / spriteSize.x,
+            height / spriteSize.y,
+            1f);
     }
 
     private void CheckHit(Vector2 radius)
@@ -99,8 +123,5 @@ public class Wave : WaveBase
         base.OnDisable();
         hitTargets.Clear();
         hitBuffer.Clear();
-
-        if (waveSprite != null)
-            waveSprite.color = initialColor;
     }
 }

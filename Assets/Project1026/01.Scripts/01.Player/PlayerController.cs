@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        Managers.RunData.SetPlayer(model, view);
         ChangeState(idleState);
     }
 

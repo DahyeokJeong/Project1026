@@ -19,4 +19,4 @@ MonoBehaviour:
   defense: 10
   attackRange: 3
   attackType: 1
-  rewardExp: 30
+  rewardExp: 2

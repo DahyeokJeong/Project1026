@@ -1,20 +1,32 @@
 using UnityEngine;
 
-public class SummonAttack : IActivatableAttack
+public class SummonAttack : IActivatableAttack, ITickAttack
 {
-    #region Fields
+    private readonly Transform firePoint;
     private readonly PlayerModel model;
     private readonly SummonAttackConfigSO config;
     private readonly AttackRuntimeData data;
+    private readonly ProjectileAttackRuntimeData wispData;
     private readonly float interval;
-    #endregion
 
-    public SummonAttack(PlayerModel model, SummonAttackConfigSO config, AttackRuntimeData data, float interval)
+    private OrbitSummon activeWisp;
+    private float summonTimer;
+
+    public SummonAttack(
+        Transform firePoint,
+        PlayerModel model,
+        SummonAttackConfigSO config,
+        AttackRuntimeData data,
+        float interval)
     {
+        this.firePoint = firePoint;
         this.model = model;
         this.config = config;
         this.data = data;
         this.interval = Mathf.Max(0.01f, interval);
+
+        wispData = data as ProjectileAttackRuntimeData;
+        summonTimer = this.interval;
     }
 
     public void Activate()
@@ -23,20 +35,47 @@ public class SummonAttack : IActivatableAttack
             return;
 
         Vector2 direction = model.LastMoveDirection.normalized;
-        if (direction.sqrMagnitude <= 0f)
+        if (direction == Vector2.zero)
             direction = Vector2.down;
 
-        Vector3 position = model.transform.position + new Vector3(direction.x, direction.y, 0f);
-        GameObject go = Managers.Pool.Pop(config.Prefab, position, Quaternion.identity);
-        if (go == null)
+        Transform center = wispData != null && firePoint != null
+            ? firePoint
+            : model.transform;
+
+        Vector3 position = center.position + (Vector3)direction;
+        GameObject instance = Managers.Pool.Pop(config.Prefab, position, Quaternion.identity);
+
+        if (instance == null)
             return;
 
-        if (!go.TryGetComponent(out SummonBase summon))
+        if (!instance.TryGetComponent(out SummonBase summon))
         {
-            Managers.Pool.Push(go);
+            Managers.Pool.Push(instance);
             return;
         }
 
         summon.Initialize(model, data, interval);
+
+        if (summon is OrbitSummon wisp && wispData != null)
+        {
+            wisp.SetOrbit(center, direction, wispData);
+
+            if (activeWisp != null && activeWisp != wisp)
+                activeWisp.Despawn(wispData);
+
+            activeWisp = wisp;
+        }
+
+        summonTimer = interval;
+    }
+
+    public void Tick(float deltaTime)
+    {
+        if (wispData == null)
+            return;
+
+        summonTimer = Mathf.Max(0f, summonTimer - deltaTime);
+        if (summonTimer <= 0f)
+            Activate();
     }
 }

@@ -3,15 +3,7 @@ using UnityEngine;
 
 public class LoadingSceneController : MonoBehaviour
 {
-    #region Settings
-    [Header("Loading Settings")]
-    [SerializeField] private float minimumLoadingTime = 3f;
-    #endregion
-
-    #region Fields
     private bool isLoadingCompleted;
-    private float elapsedTime;
-    #endregion
 
     private void OnEnable()
     {
@@ -19,21 +11,19 @@ public class LoadingSceneController : MonoBehaviour
         Managers.Loading.LoadingFailed += OnLoadingFailed;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         Managers.Pool.Clear();
+        yield return null;
 
-        Managers.Loading.StartLoading(this);
         StartCoroutine(WaitForLoading());
+        Managers.Loading.StartLoading(this);
     }
 
     private IEnumerator WaitForLoading()
     {
-        while (!isLoadingCompleted || elapsedTime < minimumLoadingTime)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
+        while (!isLoadingCompleted)
             yield return null;
-        }
 
         Managers.Scene.ActivateTargetScene();
     }

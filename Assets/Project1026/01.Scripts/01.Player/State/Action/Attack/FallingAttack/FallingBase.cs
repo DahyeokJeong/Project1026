@@ -15,19 +15,27 @@ public abstract class FallingBase : MonoBehaviour
     #endregion
 
     #region Fields
-    private float fallTimer;
+    private enum FallState
+    {
+        Inactive,
+        Falling,
+        Landed
+    }
+
+    private FallState state;
+    private float elapsedTime;
     private float damage;
-    private bool isFalling;
     #endregion
 
     #region Properties
     protected float Damage => damage;
+    protected virtual float LandingDuration => 0f;
     #endregion
 
     protected virtual void OnEnable()
     {
-        fallTimer = 0f;
-        isFalling = false;
+        state = FallState.Inactive;
+        elapsedTime = 0f;
 
         if (visual != null)
             visual.localPosition = Vector3.up * fallHeight;
@@ -40,37 +48,69 @@ public abstract class FallingBase : MonoBehaviour
         if (Random.value < Mathf.Clamp(critical, 0f, 100f) / 100f)
             damage *= 1.5f;
 
-        fallTimer = 0f;
-        isFalling = true;
+        elapsedTime = 0f;
+        state = FallState.Falling;
 
         if (visual != null)
             visual.localPosition = Vector3.up * fallHeight;
+
+        OnFallProgress(0f);
     }
 
     protected virtual void Update()
     {
-        if (!Managers.BattleState.CanUpdate || !isFalling || visual == null)
+        if (state == FallState.Inactive || !Managers.BattleState.CanUpdate)
             return;
 
-        fallTimer += Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
-        float ratio = Mathf.Clamp01(fallTimer / fallDuration);
+        if (state == FallState.Landed)
+        {
+            float duration = LandingDuration;
+            if (elapsedTime >= duration)
+            {
+                Release();
+                return;
+            }
 
-        visual.localPosition = Vector3.Lerp(Vector3.up * fallHeight, Vector3.zero, ratio);
-
-        if (ratio < 1f)
+            OnLandingProgress(elapsedTime / duration);
             return;
+        }
 
-        isFalling |= false;
+        float progress = Mathf.Clamp01(elapsedTime / Mathf.Max(0.01f, fallDuration));
 
+        if (visual != null)
+            visual.localPosition = Vector3.Lerp(Vector3.up * fallHeight, Vector3.zero, progress);
+
+        if (progress < 1f)
+        {
+            OnFallProgress(progress);
+            return;
+        }
+
+        state = FallState.Landed;
+        elapsedTime = 0f;
+
+        OnLandingProgress(0f);
         OnLanded();
-        Release();
+
+        if (state == FallState.Landed && LandingDuration <= 0f)
+            Release();
+    }
+
+    protected virtual void OnFallProgress(float progress)
+    {
+    }
+
+    protected virtual void OnLandingProgress(float progress)
+    {
     }
 
     protected abstract void OnLanded();
 
     protected void Release()
     {
+        state = FallState.Inactive;
         Managers.Pool.Push(gameObject);
     }
 }

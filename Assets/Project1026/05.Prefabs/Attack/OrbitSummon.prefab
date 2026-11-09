@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: e4b60f5dbe0c40c7bfda7a53f6d627b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc38be8c71b06274b8ede59ffc688dce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 0.71, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,10 +105,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fefbb27326082549a70c74429422227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbitSummon
-  baseDamage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
-  attackRadius: 0.5
+  baseDamage: 1
   angularSpeed: 180
-  verticalRatio: 0.5
+  lifeTime: 5
+  projectilePrefab: {fileID: 8943616692216685008, guid: edfb2f0a4a4b48b46b9637f7cf0b4b13, type: 3}
+  spriteRenderer: {fileID: 8011878112511495004}
+  idleFrames:
+  - {fileID: 21300000, guid: bc38be8c71b06274b8ede59ffc688dce, type: 3}
+  - {fileID: 21300000, guid: 2379ff484184427429ea00ea5d6ef4ab, type: 3}
+  - {fileID: 21300000, guid: b704db0ffbbc60b46a8108f6aeec5d33, type: 3}
+  - {fileID: 21300000, guid: 469f82a89be664c4e94a0ab490cd21a8, type: 3}
+  framesPerSecond: 8

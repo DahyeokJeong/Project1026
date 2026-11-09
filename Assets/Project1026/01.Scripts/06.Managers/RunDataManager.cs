@@ -1,6 +1,6 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class RunDataManager
 {
@@ -21,7 +21,8 @@ public class RunDataManager
     #region Attack
     private readonly Dictionary<string, AttackRuntimeData> attackData = new();
 
-    public AttackRuntimeData GetOrCreateAttackData(AttackConfigBaseSO config, bool initiallyOwned)
+    public AttackRuntimeData GetOrCreateAttackData(
+        AttackConfigBaseSO config, bool initiallyOwned)
     {
         if (config == null || string.IsNullOrWhiteSpace(config.ConfigKey))
         {
@@ -30,12 +31,10 @@ public class RunDataManager
         }
 
         string key = config.ConfigKey;
-
         if (attackData.TryGetValue(key, out AttackRuntimeData data))
             return data;
 
         data = config.CreateRuntimeData(initiallyOwned);
-
         if (data == null)
         {
             Debug.LogError($"[RunDataManager] 공격 런타임 데이터 생성에 실패했습니다: {key}");
@@ -60,7 +59,7 @@ public class RunDataManager
 
     public bool AddPlayerStat(PlayerAugmentStat stat, int amount)
     {
-        if(amount <= 0)
+        if (amount <= 0)
             return false;
 
         switch (stat)
@@ -95,6 +94,7 @@ public class RunDataManager
             default:
                 return false;
         }
+
         return true;
     }
 

@@ -4,89 +4,126 @@ using UnityEngine;
 public class IndependentSummon : SummonBase
 {
     #region Settings
-    [Header("Movement Settings")]
+    [Header("Tornado Settings")]
     [SerializeField, Min(0f)] private float moveSpeed = 3f;
-    [SerializeField, Min(0.01f)] private float searchRadius = 6f;
-    [SerializeField, Min(0f)] private float stopDistance = 0.2f;
-    [SerializeField, Min(0.01f)] private float searchInterval = 0.2f;
+    [SerializeField, Min(0.01f)] private float attackRadius = 0.5f;
     #endregion
 
     #region Fields
-    private readonly List<Collider2D> searchBuffer = new(32);
-    private Transform target;
-    private float searchTimer;
+    private readonly List<Collider2D> overlaps = new(32);
+    private readonly List<RaycastHit2D> enemyHits = new(32);
+    private readonly List<RaycastHit2D> wallHits = new(8);
+    private readonly HashSet<Transform> damagedTargets = new();
+
+    private ContactFilter2D wallFilter;
+    private Vector2 moveDirection;
     #endregion
 
-    protected override void OnSummonInitialized()
+    protected override void Awake()
     {
-        target = null;
-        searchTimer = 0f;
-        searchBuffer.Clear();
+        base.Awake();
+
+        wallFilter = new ContactFilter2D();
+        wallFilter.SetLayerMask(LayerMask.GetMask("Wall"));
+        wallFilter.useTriggers = false;
     }
 
-    protected override void Move(float deltaTime)
+    protected override void OnSummonInitialized(float interval)
     {
-        if (!IsValidTarget())
-            target = null;
+        moveDirection = Owner.LastMoveDirection.normalized;
+        if (moveDirection == Vector2.zero)
+            moveDirection = Vector2.down;
 
-        searchTimer -= deltaTime;
-        if (searchTimer <= 0f)
-        {
-            SelectTarget();
-            searchTimer = Mathf.Max(0.01f, searchInterval);
-        }
+        damagedTargets.Clear();
+    }
 
-        if (target == null)
+    private void Update()
+    {
+        if (!CanUpdateSummon())
             return;
 
         Vector2 position = transform.position;
-        Vector2 offset = (Vector2)target.position - position;
-        float distance = offset.magnitude;
-        float moveDistance = Mathf.Min(moveSpeed * deltaTime, Mathf.Max(0f, distance - stopDistance));
-
-        if (moveDistance <= 0f)
+        if (Physics2D.OverlapCircle(position, attackRadius, wallFilter, overlaps) > 0)
+        {
+            Release();
             return;
+        }
 
-        position += offset.normalized * moveDistance;
+        float distance = moveSpeed * Time.deltaTime;
+        bool hitWall = LimitDistanceAtWall(position, ref distance);
+        DamageEnemiesAlongPath(position, distance, hitWall);
+
+        if (hitWall)
+        {
+            Release();
+            return;
+        }
+
+        position += moveDirection * distance;
         transform.position = new Vector3(position.x, position.y, transform.position.z);
     }
 
-    private bool IsValidTarget()
+    private bool LimitDistanceAtWall(Vector2 position, ref float distance)
     {
-        return target != null && target.gameObject.activeInHierarchy && Managers.Damage.IsRegistered(target);
+        if (distance <= 0f)
+            return false;
+
+        Physics2D.CircleCast(
+            position, attackRadius, moveDirection, wallFilter, wallHits, distance);
+
+        bool hitWall = false;
+        foreach (RaycastHit2D hit in wallHits)
+        {
+            if (hit.collider == null || hit.distance > distance)
+                continue;
+
+            distance = hit.distance;
+            hitWall = true;
+        }
+
+        return hitWall;
     }
 
-    private void SelectTarget()
+    private void DamageEnemiesAlongPath(Vector2 position, float distance, bool hitWall)
     {
-        Physics2D.OverlapCircle(transform.position, searchRadius, EnemyFilter, searchBuffer);
+        float damage = CalculateDamage();
+        Physics2D.OverlapCircle(position, attackRadius, EnemyFilter, overlaps);
 
-        target = null;
-        float nearestDistance = searchRadius * searchRadius;
+        foreach (Collider2D overlap in overlaps)
+            TryDamage(overlap, damage);
 
-        foreach (Collider2D hit in searchBuffer)
+        if (distance <= 0f)
+            return;
+
+        Physics2D.CircleCast(
+            position, attackRadius, moveDirection, EnemyFilter, enemyHits, distance);
+
+        foreach (RaycastHit2D hit in enemyHits)
         {
-            if (hit == null)
+            if (hitWall && hit.distance >= distance)
                 continue;
 
-            if (!Managers.Damage.TryGetTarget(hit.transform, out Transform candidate))
-                continue;
-
-            if (!candidate.gameObject.activeInHierarchy)
-                continue;
-
-            float distance = (candidate.position - transform.position).sqrMagnitude;
-            if (distance > nearestDistance)
-                continue;
-
-            nearestDistance = distance;
-            target = candidate;
+            TryDamage(hit.collider, damage);
         }
+    }
+
+    private void TryDamage(Collider2D hit, float damage)
+    {
+        if (hit == null || !Managers.Damage.TryGetTarget(hit.transform, out Transform target))
+            return;
+
+        if (!target.gameObject.activeInHierarchy || !damagedTargets.Add(target))
+            return;
+
+        Managers.Damage.ApplyDamage(target, damage);
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        target = null;
-        searchBuffer.Clear();
+        overlaps.Clear();
+        enemyHits.Clear();
+        wallHits.Clear();
+        damagedTargets.Clear();
     }
 }

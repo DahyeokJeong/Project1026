@@ -8,6 +8,10 @@ public class LoadingManager
     public event Action LoadingFailed;
     #endregion
 
+    #region Fields
+    private MonoBehaviour runner;
+    #endregion
+
     #region Properties
     public bool IsLoading { get; private set; }
     public bool IsDataLoaded { get; private set; }
@@ -20,6 +24,7 @@ public class LoadingManager
         if (IsLoading)
             return;
 
+        this.runner = runner;
         IsLoading = true;
         IsDataLoaded = false;
         IsSceneLoaded = false;
@@ -29,27 +34,20 @@ public class LoadingManager
         Managers.Scene.SceneLoadReady += OnSceneLoadReady;
 
         if (Managers.Data.IsLoaded)
-        {
             OnDataLoadCompleted();
-        }
         else
-        {
             Managers.Data.Init();
-        }
-
-        Managers.Scene.LoadTargetSceneAsync(runner);
     }
 
     private void OnDataLoadCompleted()
     {
-        if (!IsLoading)
+        if (!IsLoading || IsDataLoaded)
             return;
 
         IsDataLoaded = true;
-
         Debug.Log("LoadingManager : 데이터 로딩 완료");
 
-        CheckLoadingCompleted();
+        Managers.Scene.LoadTargetSceneAsync(runner);
     }
 
     private void OnSceneLoadReady()
@@ -58,7 +56,6 @@ public class LoadingManager
             return;
 
         IsSceneLoaded = true;
-
         Debug.Log("LoadingManager : 씬 로딩 준비 완료");
 
         CheckLoadingCompleted();
@@ -70,10 +67,10 @@ public class LoadingManager
             return;
 
         IsLoading = false;
-
         Debug.LogError("LoadingManager : 데이터 로딩 실패");
 
         UnsubscribeEvents();
+        runner = null;
 
         LoadingFailed?.Invoke();
     }
@@ -84,10 +81,10 @@ public class LoadingManager
             return;
 
         IsLoading = false;
-
         Debug.Log("LoadingManager : 모든 로딩 완료");
 
         UnsubscribeEvents();
+        runner = null;
 
         LoadingCompleted?.Invoke();
     }
@@ -102,6 +99,7 @@ public class LoadingManager
     public void Clear()
     {
         UnsubscribeEvents();
+        runner = null;
 
         IsLoading = false;
         IsDataLoaded = false;

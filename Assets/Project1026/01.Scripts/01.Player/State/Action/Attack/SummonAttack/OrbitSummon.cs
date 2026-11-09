@@ -1,41 +1,182 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OrbitSummon : SummonBase
 {
-    #region Settins
+    #region Settings
     [Header("Orbit Settings")]
     [SerializeField] private float angularSpeed = 180f;
-    [SerializeField, Range(0.1f, 1f)] private float verticalRatio = 0.5f;
+    [SerializeField, Min(0.01f)] private float lifeTime = 5f;
+
+    [Header("Projectile Settings")]
+    [SerializeField] private WispProjectile projectilePrefab;
+
+    [Header("Sprite Animation")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite[] idleFrames;
+    [SerializeField, Min(1f)] private float framesPerSecond = 8f;
+    #endregion
+
+    #region Constants
+    private const float OrbitRadius = 1f;
+    private const float DetectionRadius = 3f;
+    private const float BaseFireInterval = 1.2f;
     #endregion
 
     #region Fields
+    private readonly List<Collider2D> searchBuffer = new(32);
+
+    private Transform orbitCenter;
+    private ProjectileAttackRuntimeData projectileData;
+    private float remainingLifetime;
+    private float fireCooldown;
     private float angle;
-    private float orbitRadius;
-    private float orbitVerticalRatio;
-    private float zOffset;
     #endregion
 
-    protected override void OnSummonInitialized()
+    protected override void OnSummonInitialized(float interval)
     {
-        Vector3 offset = transform.position - Owner.transform.position;
-
-        orbitVerticalRatio = Mathf.Clamp(verticalRatio, 0.1f, 1f);
-        Vector2 orbitOffset = new Vector2(offset.x, offset.y / orbitVerticalRatio);
-
-        orbitRadius = orbitOffset.magnitude;
-        angle = Mathf.Atan2(orbitOffset.y, orbitOffset.x);
-        zOffset = offset.z;
+        remainingLifetime = Mathf.Max(0.01f, lifeTime);
+        fireCooldown = 0f;
+        UpdateIdleSprite(0f);
     }
 
-    protected override void Move(float deltaTime)
+    public void SetOrbit(
+        Transform center,
+        Vector2 direction,
+        ProjectileAttackRuntimeData data)
     {
-        angle = Mathf.Repeat(angle + angularSpeed * Mathf.Deg2Rad * deltaTime, Mathf.PI * 2f);
+        orbitCenter = center;
+        projectileData = data;
+        angle = Mathf.Atan2(direction.y, direction.x);
+    }
 
-        Vector3 offset = new Vector3(
-            Mathf.Cos(angle) * orbitRadius,
-            Mathf.Sin(angle) * orbitRadius * orbitVerticalRatio,
-            zOffset);
+    public void Despawn(ProjectileAttackRuntimeData data)
+    {
+        if (projectileData == data)
+            Release();
+    }
 
-        transform.position = Owner.transform.position + offset;
+    private void Update()
+    {
+        if (!CanUpdateSummon())
+            return;
+
+        float deltaTime = Time.deltaTime;
+        remainingLifetime -= deltaTime;
+
+        if (remainingLifetime <= 0f || orbitCenter == null || projectileData == null)
+        {
+            Release();
+            return;
+        }
+
+        UpdateIdleSprite(Mathf.Max(0.01f, lifeTime) - remainingLifetime);
+
+        float attackSpeed = 1f + projectileData.AutoAttackSpeedBonusPercent / 100f;
+        fireCooldown = Mathf.Max(0f, fireCooldown - deltaTime * attackSpeed);
+
+        Transform target = FindTarget();
+        if (target == null)
+        {
+            Move(deltaTime);
+            return;
+        }
+
+        if (fireCooldown <= 0f && TryFireVolley(target))
+            fireCooldown = BaseFireInterval;
+    }
+
+    private void UpdateIdleSprite(float elapsedTime)
+    {
+        if (spriteRenderer == null || idleFrames == null || idleFrames.Length == 0)
+            return;
+
+        int frameIndex = Mathf.FloorToInt(elapsedTime * framesPerSecond)
+            % idleFrames.Length;
+
+        Sprite frame = idleFrames[frameIndex];
+        if (frame != null && spriteRenderer.sprite != frame)
+            spriteRenderer.sprite = frame;
+    }
+
+    private void Move(float deltaTime)
+    {
+        Vector2 offset = transform.position - orbitCenter.position;
+        if (offset.sqrMagnitude > 0.000001f)
+            angle = Mathf.Atan2(offset.y, offset.x);
+
+        angle = Mathf.Repeat(
+            angle + angularSpeed * Mathf.Deg2Rad * deltaTime,
+            Mathf.PI * 2f);
+
+        Vector3 orbitOffset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
+        transform.position = orbitCenter.position + orbitOffset * OrbitRadius;
+    }
+
+    private Transform FindTarget()
+    {
+        Vector2 position = transform.position;
+        Physics2D.OverlapCircle(position, DetectionRadius, EnemyFilter, searchBuffer);
+
+        Transform nearest = null;
+        float nearestDistance = DetectionRadius * DetectionRadius;
+
+        foreach (Collider2D hit in searchBuffer)
+        {
+            if (hit == null || !Managers.Damage.TryGetTarget(hit.transform, out Transform candidate))
+                continue;
+
+            if (!candidate.gameObject.activeInHierarchy)
+                continue;
+
+            float distance = ((Vector2)candidate.position - position).sqrMagnitude;
+            if (distance > nearestDistance)
+                continue;
+
+            nearest = candidate;
+            nearestDistance = distance;
+        }
+
+        return nearest;
+    }
+
+    private bool TryFireVolley(Transform target)
+    {
+        if (projectilePrefab == null)
+            return false;
+
+        Vector2 direction = target.position - transform.position;
+        if (direction == Vector2.zero)
+            direction = Owner.LastMoveDirection;
+
+        if (direction == Vector2.zero)
+            direction = Vector2.down;
+
+        float damage = CalculateDamage();
+        bool fired = false;
+
+        for (int i = 0; i < projectileData.ProjectileCount; i++)
+        {
+            GameObject instance = Managers.Pool.Pop(
+                projectilePrefab.gameObject, transform.position, Quaternion.identity);
+
+            if (instance == null)
+                break;
+
+            WispProjectile projectile = instance.GetComponent<WispProjectile>();
+            projectile.SetDirection(direction);
+            projectile.SetDamage(damage, 0f);
+            fired = true;
+        }
+
+        return fired;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        orbitCenter = null;
+        projectileData = null;
+        searchBuffer.Clear();
     }
 }

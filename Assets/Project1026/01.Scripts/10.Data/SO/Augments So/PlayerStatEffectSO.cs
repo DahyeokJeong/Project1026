@@ -9,7 +9,8 @@ public enum PlayerAugmentStat
     Defense = 4,
     MoveSpeed = 5,
     Critical = 6,
-    AutoAttackCooldown = 7
+    AutoAttackSpeed = 7,
+    AutoAttackCooldown = 8
 }
 
 [CreateAssetMenu(fileName = "SO_Augment_PlayerStat", menuName = "Game/Augment/Player Stat")]
@@ -39,7 +40,7 @@ public class PlayerStatEffectSO : AugmentEffectSO
 
             case PlayerAugmentStat.AutoAttackCooldown:
                 return data.Value < 100;
-
+            case PlayerAugmentStat.AutoAttackSpeed:
             default:
                 return false;
         }

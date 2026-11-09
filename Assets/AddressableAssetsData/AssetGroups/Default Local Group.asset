@@ -44,12 +44,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 542ba64c8be22e9448e988ccc662ecb7
-    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_IndependentSummonAcquire.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AugmentEffects
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 56da87fa8f6d7b241b741d41fe79cbe1
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Wave.asset
     m_ReadOnly: 0
@@ -138,12 +132,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b810439a083b78f4699d0a531074ea33
-    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_IndependentSummon.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bdbadd216f4e67342868f091d22f82d8
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PlayerAttackDamage.asset

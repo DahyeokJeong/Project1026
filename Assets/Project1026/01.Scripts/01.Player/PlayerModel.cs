@@ -30,7 +30,7 @@ public class PlayerModel : MonoBehaviour
     [SerializeField] private float dashCooldown = 3f;
     #endregion
 
-    #region Health Properties
+    #region Properties
     public int MaxHp =>
         baseMaxHp + Managers.RunData.PlayerMaxHpBonus;
 
@@ -41,9 +41,6 @@ public class PlayerModel : MonoBehaviour
     public int Defense =>  baseDefense + Managers.RunData.PlayerDefenseBonus;
 
     public bool IsDead => initialized && currentHp <= 0f;
-    #endregion
-
-    #region Attack Properties
     public int BaseAttackDamage { get; private set; }
 
     public int AttackDamage => BaseAttackDamage + Managers.RunData.PlayerAttackDamageBonus;
@@ -53,21 +50,12 @@ public class PlayerModel : MonoBehaviour
     public float Critical => Mathf.Clamp(baseCritical + Managers.RunData.PlayerCriticalBonus, 0f, 100f);
 
     public float AutoAttackCooldownMultiplier => Mathf.Max(0.01f, Managers.RunData.PlayerAutoAttackCooldownMultiplier);
-    #endregion
-
-    #region Movement Properties
     public float MoveSpeed => baseMoveSpeed * Managers.RunData.PlayerMoveSpeedMultiplier;
 
     public Vector2 LastMoveDirection { get; set; }
-    #endregion
-
-    #region Dash Properties
     public float DashDistance => dashDistance;
     public float DashDuration => dashDuration;
     public float DashCooldown => dashCooldown;
-    #endregion
-
-    #region Experience Properties
     public float MaxExp { get; private set; }
     public float CurrentExp => Managers.RunData.CurrentExp;
     public int Level => Managers.RunData.Level;
@@ -103,8 +91,6 @@ public class PlayerModel : MonoBehaviour
         Managers.Data.DataLoadCompleted -= Init;
     }
     #endregion
-
-    #region Initialization Methods
     private void TryInitialize()
     {
         if (initialized)
@@ -162,9 +148,6 @@ public class PlayerModel : MonoBehaviour
 
         return 0f;
     }
-    #endregion
-
-    #region Health Methods
     public void ReduceHP(float damage)
     {
         if (!initialized || IsDead || damage <= 0f)
@@ -188,9 +171,6 @@ public class PlayerModel : MonoBehaviour
 
         currentHp = Mathf.Min(MaxHp, currentHp + amount);
     }
-    #endregion
-
-    #region Experience Methods
     public int CalculateExp(RunDataManager runData, float amount)
     {
         if (!initialized ||
@@ -215,5 +195,4 @@ public class PlayerModel : MonoBehaviour
 
         return levelUpCount;
     }
-    #endregion
 }
