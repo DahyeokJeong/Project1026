@@ -65,6 +65,7 @@ public class RunDataManager
         {
             case PlayerAugmentStat.MaxHp:
                 PlayerMaxHpBonus += amount;
+                RefreshPlayerHp(model);
                 break;
             case PlayerAugmentStat.HealthRegen:
                 PlayerHealthRegenBonus += amount;
@@ -116,8 +117,15 @@ public class RunDataManager
         this.model = model;
         this.view = view;
 
+        RefreshPlayerHp(model);
         view.InitExp(model.MaxExp);
         view.SetExp(CurrentExp, Level);
+    }
+
+    public void RefreshPlayerHp(PlayerModel player)
+    {
+        if (player != null && player == model)
+            view?.SetHp(player.CurrentHp, player.MaxHp);
     }
 
     public void AddExp(float amount)

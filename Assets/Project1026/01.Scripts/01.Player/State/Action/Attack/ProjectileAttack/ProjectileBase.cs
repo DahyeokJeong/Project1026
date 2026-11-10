@@ -49,7 +49,7 @@ public abstract class ProjectileBase : MonoBehaviour
 
         timer -= Time.deltaTime;
 
-        if (timer <= 0f)
+        if (lifeTime > 0f && timer <= 0f)
             Release();
     }
 
@@ -59,7 +59,7 @@ public abstract class ProjectileBase : MonoBehaviour
         Vector2 dir = moveDirection;
 
         if (homing != null)
-            dir = homing.GetDirection(pos);
+            dir = homing.GetDirection(dir);
 
         bool canContinue = wallCollision.TryMove(ref pos, ref dir, MoveSpeed * Time.deltaTime, ref remainingBounces);
 

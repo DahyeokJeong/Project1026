@@ -88,8 +88,8 @@ public class ExplosionProjectile : ProjectileBase
                 continue;
 
             Vector2 offset = (Vector2)hit.ClosestPoint(center) - center;
-            float x = offset.x / explosionRadius.x;
-            float y = offset.y / explosionRadius.y;
+            float x = offset.x / radius.x;
+            float y = offset.y / radius.y;
 
             if (x * x + y * y > 1f)
                 continue;

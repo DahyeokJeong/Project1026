@@ -11,6 +11,8 @@ public class AugmentCardUI : MonoBehaviour
     [SerializeField] private Button rerollButton;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text descripText;
+    [SerializeField] private Image iconImage;
+    [SerializeField] private Image iconBackground;
     #endregion
 
     #region Fields
@@ -52,6 +54,18 @@ public class AugmentCardUI : MonoBehaviour
 
         nameText.text = LocalizationHelper.GetName(data.Id);
         descripText.text = LocalizationHelper.GetDescription(data.Id);
+
+        if (iconImage == null)
+            return;
+
+        Sprite icon = null;
+        if (Managers.Data.TryGetAugmentEffect(data.ConfigKey, out AugmentEffectSO effect))
+            icon = effect.Icon;
+
+        iconImage.sprite = icon;
+        iconImage.enabled = icon != null;
+        if (iconBackground != null)
+            iconBackground.enabled = icon != null;
     }
 
     private void OnCardClicked()

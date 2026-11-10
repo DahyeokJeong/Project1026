@@ -48,9 +48,11 @@ public class EnemyController : MonoBehaviour
     public NavigationArea NavArea { get; private set; }
     private Transform Target => NavArea != null ? NavArea.Target : null;
     public EnemyModel Model => model;
+    public Collider2D MovementCollider { get; private set; }
     public EnemyView View => view;
     public EnemyAttack Attack => attack;
     public bool CanAttack => CheckAttackRange(model.AttackRange);
+    public bool IsHoldingAttackPosition => attackState != null && currentState == attackState;
     public GameObject AttackPrefab => attackPrefab;
     #endregion
 
@@ -61,6 +63,7 @@ public class EnemyController : MonoBehaviour
     public void Initialize(NavigationArea area, EnemyGenerate generate)
     {
         Model.Init();
+        MovementCollider = GetComponent<Collider2D>();
         NavArea?.Unregister(this);
         NavArea = area;
         this.generate = generate;

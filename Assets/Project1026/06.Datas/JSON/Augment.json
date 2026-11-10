@@ -13,12 +13,6 @@
             "Value": 50
         },
         {
-            "Id": "AUG003",
-            "ConfigKey": "SO_Augment_PlayerHealthRegen",
-            "AttackConfigKey": "",
-            "Value": 3
-        },
-        {
             "Id": "AUG004",
             "ConfigKey": "SO_Augment_PlayerAttackSpeed",
             "AttackConfigKey": "",
@@ -56,7 +50,7 @@
         },
         {
             "Id": "AUG010",
-            "ConfigKey": "SO_Augment_AuraAcquire",
+            "ConfigKey": "SO_Augment_FireAuraAcquire",
             "AttackConfigKey": "SO_Attack_FireAura",
             "Value": 1
         },
@@ -124,7 +118,67 @@
             "Id": "AUG021",
             "ConfigKey": "SO_Augment_FireAuraRange",
             "AttackConfigKey": "SO_Attack_FireAura",
+            "Value": 30
+        },
+        {
+            "Id": "AUG022",
+            "ConfigKey": "SO_Augment_PiercingSize",
+            "AttackConfigKey": "SO_Attack_Piercing",
+            "Value": 10
+        },
+        {
+            "Id": "AUG023",
+            "ConfigKey": "SO_Augment_ExplosionRange",
+            "AttackConfigKey": "SO_Attack_Explosion",
             "Value": 20
+        },
+        {
+            "Id": "AUG024",
+            "ConfigKey": "SO_Augment_FireballHoming",
+            "AttackConfigKey": "SO_Attack_Explosion",
+            "Value": 1
+        },
+        {
+            "Id": "AUG025",
+            "ConfigKey": "SO_Augment_WaveRange",
+            "AttackConfigKey": "SO_Attack_Wave",
+            "Value": 30
+        },
+        {
+            "Id": "AUG026",
+            "ConfigKey": "SO_Augment_FallingCount",
+            "AttackConfigKey": "SO_Attack_LightningFalling",
+            "Value": 1
+        },
+        {
+            "Id": "AUG027",
+            "ConfigKey": "SO_Augment_FallingSize",
+            "AttackConfigKey": "SO_Attack_LightningFalling",
+            "Value": 20
+        },
+        {
+            "Id": "AUG028",
+            "ConfigKey": "SO_Augment_IndependentSummonDuration",
+            "AttackConfigKey": "SO_Attack_IndependentSummon",
+            "Value": 20
+        },
+        {
+            "Id": "AUG029",
+            "ConfigKey": "SO_Augment_IndependentSummonCount",
+            "AttackConfigKey": "SO_Attack_IndependentSummon",
+            "Value": 1
+        },
+        {
+            "Id": "AUG030",
+            "ConfigKey": "SO_Augment_OrbitSummonAttackSpeed",
+            "AttackConfigKey": "SO_Attack_OrbitSummon",
+            "Value": 10
+        },
+        {
+            "Id": "AUG031",
+            "ConfigKey": "SO_Augment_OrbitSummonProjectileCount",
+            "AttackConfigKey": "SO_Attack_OrbitSummon",
+            "Value": 1
         }
     ]
 }

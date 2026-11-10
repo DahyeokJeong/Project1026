@@ -67,7 +67,7 @@ public class PiercingProjectile : ProjectileBase
             Managers.Damage.ApplyDamage(target.transform, Damage);
             pierceCount++;
 
-            if (pierceCount >= maxPierceCount)
+            if (maxPierceCount > 0 && pierceCount >= maxPierceCount)
             {
                 Release();
                 return;

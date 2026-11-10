@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2bd34f4a49cd34e9369677aac6b565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WispProjectile
-  moveSpeed: 6
+  moveSpeed: 7
   lifeTime: 3
   baseDamage: 0
   enemyLayer:

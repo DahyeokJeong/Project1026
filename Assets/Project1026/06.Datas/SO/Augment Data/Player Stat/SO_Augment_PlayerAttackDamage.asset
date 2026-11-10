@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28ab0cd1ced96934ab2bf734afbf2fee, type: 3}
-  m_Name: SO_Augment_PlayerHealthRegen
+  m_Name: SO_Augment_PlayerAttackDamage
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatEffectSO
-  configKey: SO_Augment_PlayerHealthRegen
-  stat: 0
+  configKey: SO_Augment_PlayerAttackDamage
+  icon: {fileID: 21300000, guid: 0f898ad0b85cc294291c314e0ed85f72, type: 3}
+  stat: 2

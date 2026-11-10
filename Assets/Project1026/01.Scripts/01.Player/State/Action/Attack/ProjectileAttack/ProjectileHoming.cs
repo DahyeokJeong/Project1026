@@ -15,7 +15,6 @@ public class ProjectileHoming : MonoBehaviour
 
     private ContactFilter2D contactFilter;
     private Transform target;
-    private bool targetSelected;
     private bool homingEnabled;
     #endregion
 
@@ -29,7 +28,6 @@ public class ProjectileHoming : MonoBehaviour
     private void OnEnable()
     {
         target = null;
-        targetSelected = false;
         homingEnabled = false;
     }
 
@@ -43,20 +41,15 @@ public class ProjectileHoming : MonoBehaviour
         if (!homingEnabled)
             return currentDirection;
 
-        if (!targetSelected)
+        if (target == null || !target.gameObject.activeInHierarchy ||
+            !Managers.Damage.IsRegistered(target))
         {
+            target = null;
             SelectTarget();
-            targetSelected = true;
         }
 
         if (target == null)
             return currentDirection;
-
-        if (!target.gameObject.activeInHierarchy || !Managers.Damage.IsRegistered(target))
-        {
-            target = null;
-            return currentDirection;
-        }
 
         Vector2 direction = target.position - transform.position;
 

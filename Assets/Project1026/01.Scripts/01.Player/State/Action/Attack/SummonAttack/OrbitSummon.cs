@@ -6,6 +6,7 @@ public class OrbitSummon : SummonBase
     #region Settings
     [Header("Orbit Settings")]
     [SerializeField] private float angularSpeed = 180f;
+    [SerializeField, Min(0.01f)] private float orbitRadius = 1f;
     [SerializeField, Min(0.01f)] private float lifeTime = 5f;
 
     [Header("Projectile Settings")]
@@ -18,7 +19,6 @@ public class OrbitSummon : SummonBase
     #endregion
 
     #region Constants
-    private const float OrbitRadius = 1f;
     private const float DetectionRadius = 3f;
     private const float BaseFireInterval = 1.2f;
     #endregion
@@ -110,7 +110,7 @@ public class OrbitSummon : SummonBase
             Mathf.PI * 2f);
 
         Vector3 orbitOffset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
-        transform.position = orbitCenter.position + orbitOffset * OrbitRadius;
+        transform.position = orbitCenter.position + orbitOffset * orbitRadius;
     }
 
     private Transform FindTarget()

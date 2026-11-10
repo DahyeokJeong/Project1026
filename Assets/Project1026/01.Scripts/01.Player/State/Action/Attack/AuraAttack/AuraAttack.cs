@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class AuraAttack : IActivatableAttack
+public class AuraAttack : IActivatableAttack, ITickAttack
 {
     private readonly Transform firePoint;
     private readonly PlayerModel model;
     private readonly AuraAttackConfigSO config;
     private readonly AuraAttackRuntimeData data;
     private readonly float interval;
+    private float remainingTime;
 
     public AuraAttack(Transform firePoint ,PlayerModel model, AuraAttackConfigSO config, AuraAttackRuntimeData data, float interval)
     {
@@ -14,11 +15,15 @@ public class AuraAttack : IActivatableAttack
         this.model = model;
         this.config = config;
         this.data = data;
-        this.interval = interval;
+        this.interval = Mathf.Max(0.01f, interval);
     }
 
     public void Activate()
     {
+        remainingTime = interval;
+        if (model == null || !model.gameObject.activeInHierarchy || firePoint == null)
+            return;
+
         GameObject go = Managers.Pool.Pop(config.Prefab, firePoint.position, Quaternion.identity);
 
         if (go == null)
@@ -30,7 +35,13 @@ public class AuraAttack : IActivatableAttack
             return;
         }
 
-        aura.SetAttack(model, firePoint, data, interval);
+        aura.SetAttack(model, firePoint, data);
     }
 
+    public void Tick(float deltaTime)
+    {
+        remainingTime -= deltaTime;
+        if (remainingTime <= 0f)
+            Activate();
+    }
 }

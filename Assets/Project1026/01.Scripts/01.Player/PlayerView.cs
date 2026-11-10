@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private SpriteRenderer bodyRenderer;
     [SerializeField] private SpriteRenderer dashEffect;
     [SerializeField] private Sprite[] dashFrames;
+    [SerializeField] private Image currentHp;
     [SerializeField] private RectTransform currentExp;
     [SerializeField] private TMP_Text expTxt;
     [SerializeField] private TMP_Text levelTxt;
+    [SerializeField, Min(0.01f)] private float expFillSmoothTime = 0.18f;
     #endregion
 
     #region Fields
@@ -25,7 +28,12 @@ public class PlayerView : MonoBehaviour
 
     public void InitExp(float maxExp)
     {
-        expView.Init(currentExp, expTxt, levelTxt, maxExp);
+        expView.Init(currentExp, expTxt, levelTxt, maxExp, expFillSmoothTime);
+    }
+
+    private void Update()
+    {
+        expView.Tick(Time.unscaledDeltaTime);
     }
 
     public void SetBattleUIVisible(bool visible)
@@ -63,6 +71,12 @@ public class PlayerView : MonoBehaviour
     private void OnDisable()
     {
         StopDashAnimation();
+    }
+
+    public void SetHp(float current, float maximum)
+    {
+        if (currentHp != null)
+            currentHp.fillAmount = maximum > 0f ? Mathf.Clamp01(current / maximum) : 0f;
     }
 
     public void SetExp(float currentExp, int currentLevel)

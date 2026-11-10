@@ -10,6 +10,7 @@ public class FireAura : AuraBase
     [Header("Aura Settings")]
     [SerializeField] private CapsuleCollider2D hitArea;
     [SerializeField] private Vector2 positionOffset;
+    [SerializeField, Min(0.01f)] private float duration = 6f;
     #endregion
 
     #region Fields
@@ -19,6 +20,7 @@ public class FireAura : AuraBase
     private ContactFilter2D contactFilter;
     private float sizeMultiplier = 1f;
     private float tickTimer;
+    private float remainingDuration;
     #endregion
 
     private void Awake()
@@ -33,6 +35,7 @@ public class FireAura : AuraBase
     protected override void OnAttackInitialized()
     {
         tickTimer = TickInterval;
+        remainingDuration = duration;
         RefreshSize();
     }
 
@@ -44,13 +47,18 @@ public class FireAura : AuraBase
         RefreshSize();
         base.Update();
 
-        tickTimer -= Time.deltaTime;
+        float elapsed = Mathf.Min(Time.deltaTime, remainingDuration);
+        remainingDuration -= elapsed;
+        tickTimer -= elapsed;
 
-        if (tickTimer > 0f)
-            return;
+        while (tickTimer <= 0f)
+        {
+            CheckHit();
+            tickTimer += TickInterval;
+        }
 
-        tickTimer = TickInterval;
-        CheckHit();
+        if (remainingDuration <= 0f)
+            Managers.Pool.Push(gameObject);
     }
 
     private void RefreshSize()

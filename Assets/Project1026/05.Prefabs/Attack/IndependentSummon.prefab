@@ -110,7 +110,8 @@ MonoBehaviour:
     m_Bits: 2147483648
   baseDamage: 0.5
   attackRadius: 0.5
-  moveSpeed: 3
+  moveSpeed: 2
+  lifeTime: 5
   searchRadius: 6
   stopDistance: 0.2
   searchInterval: 0.2

@@ -6,6 +6,7 @@ public class IndependentSummon : SummonBase
     #region Settings
     [Header("Tornado Settings")]
     [SerializeField, Min(0f)] private float moveSpeed = 3f;
+    [SerializeField, Min(0.01f)] private float lifeTime = 5f;
     [SerializeField, Min(0.01f)] private float attackRadius = 0.5f;
     #endregion
 
@@ -36,7 +37,7 @@ public class IndependentSummon : SummonBase
             moveDirection = Vector2.down;
 
         damagedTargets.Clear();
-        remainingLifetime = interval;
+        remainingLifetime = lifeTime;
     }
 
     public void SetDurationBonus(float durationBonus)

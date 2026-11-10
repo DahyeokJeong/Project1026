@@ -109,8 +109,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   baseDamage: 1
-  angularSpeed: 180
-  lifeTime: 5
+  angularSpeed: 120
+  orbitRadius: 1.5
+  lifeTime: 12
   projectilePrefab: {fileID: 8943616692216685008, guid: edfb2f0a4a4b48b46b9637f7cf0b4b13, type: 3}
   spriteRenderer: {fileID: 8011878112511495004}
   idleFrames:

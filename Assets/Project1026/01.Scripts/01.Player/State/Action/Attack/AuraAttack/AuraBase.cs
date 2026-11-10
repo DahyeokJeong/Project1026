@@ -5,6 +5,7 @@ public abstract class AuraBase : MonoBehaviour
     #region Aura Settings
     [Header("Aura Settings")]
     [SerializeField] private float damageMultiplier = 1f;
+    [SerializeField, Min(0.01f)] private float tickInterval = 1f;
     #endregion
 
     #region Fields
@@ -37,11 +38,11 @@ public abstract class AuraBase : MonoBehaviour
             transform.position = target.position;
     }
 
-    public void SetAttack(PlayerModel owner,Transform fierPoint ,AuraAttackRuntimeData data, float interval)
+    public void SetAttack(PlayerModel owner,Transform fierPoint ,AuraAttackRuntimeData data)
     {
         Owner = owner;
         RuntimeData = data;
-        TickInterval = Mathf.Max(0.01f, interval);
+        TickInterval = Mathf.Max(0.01f, tickInterval);
 
         SetTarget(fierPoint);
         OnAttackInitialized();

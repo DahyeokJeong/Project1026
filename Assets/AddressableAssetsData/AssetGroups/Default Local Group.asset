@@ -15,8 +15,8 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 67d40524fe9e6c8478125cdc8c831083
   m_SerializeEntries:
-  - m_GUID: 0daf8fa8de03f6c4cbdb1944bcd8ef00
-    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerHealthRegen.asset
+  - m_GUID: 129817649cebd6a42b1e47aa9f4764ff
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_ExplosionRange.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
@@ -33,8 +33,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 198dda56f60a4ba69ecdd6edf57c4455
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_IndependentSummonCount.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 200ab280be8602e4aae5c32cb04f754d
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PiercingDamage.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e1e997b472e4473b86eb8291762db23
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_FallingSize.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
@@ -44,7 +56,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
-        FlaggedDuringContentUpdateRestriction: 0
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 38a13db747bc419e8ea5aa96cdb1970a
     m_Address: SoulBookPanel
     m_ReadOnly: 0
@@ -54,6 +66,12 @@ MonoBehaviour:
     m_Address: Localization_KO
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 472612286eb04917aff8dac98c5dcdab
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_IndependentSummonDuration.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 52eab2282aa8b154b9651cfd652d6143
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_OrbitSummon.asset
@@ -81,12 +99,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6346c31fc9d78ac46b60a647882964ec
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_FallingCount.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AugmentEffects
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 65eeba33c7776754098e040c9798e84d
-    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_AuraAcquire.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
@@ -132,6 +144,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a23caddefd614d19880762b045359ca0
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_ProjectileSpeed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a5e1ec038ab8c9f4f884c9374e1c9200
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_OrbitSummonProjectileCount.asset
     m_ReadOnly: 0
@@ -164,6 +182,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b504cd54e2f3014449a0676b859caacc
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_NormalDamage.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8335a582a3c4b0b93d8136081749954
+    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PierceCount.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects

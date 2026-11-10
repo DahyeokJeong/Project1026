@@ -5,6 +5,7 @@ public class EnemyChaseState : IState
     private EnemyController enemy;
 
     private Vector2 dir;
+    private Vector2 approachOffset;
     private Vector3 movement;
     public EnemyChaseState(EnemyController enemy)
     {
@@ -18,6 +19,8 @@ public class EnemyChaseState : IState
     public void Exit()
     {
         dir = Vector2.zero;
+        approachOffset = Vector2.zero;
+        movement = Vector3.zero;
     }
 
     public void FixedTick()
@@ -29,7 +32,7 @@ public class EnemyChaseState : IState
 
     public void Tick()
     {
-        dir = enemy.NavArea == null ? Vector2.zero : enemy.NavArea.GetDirection(enemy.transform.position);
+        dir = enemy.NavArea == null ? Vector2.zero : enemy.NavArea.GetDirection(enemy, ref approachOffset);
         movement = new Vector3(dir.x, dir.y, 0f);
     }
 }
