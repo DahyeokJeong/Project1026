@@ -11,6 +11,7 @@ public abstract class SummonBase : MonoBehaviour
 
     #region Fields
     private bool initialized;
+    private AttackRuntimeData runtimeData;
     #endregion
 
     #region Properties
@@ -42,12 +43,13 @@ public abstract class SummonBase : MonoBehaviour
 
     protected float CalculateDamage()
     {
-        return Owner.AttackDamage * baseDamage;
+        return Owner.AttackDamage * baseDamage + runtimeData.DamageBonus;
     }
 
     public void Initialize(PlayerModel owner, AttackRuntimeData data, float interval)
     {
         Owner = owner;
+        runtimeData = data;
         OnSummonInitialized(interval);
         initialized = true;
     }
@@ -64,5 +66,6 @@ public abstract class SummonBase : MonoBehaviour
     {
         initialized = false;
         Owner = null;
+        runtimeData = null;
     }
 }

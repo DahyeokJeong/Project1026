@@ -7,6 +7,7 @@ public class SummonAttack : IActivatableAttack, ITickAttack
     private readonly SummonAttackConfigSO config;
     private readonly AttackRuntimeData data;
     private readonly ProjectileAttackRuntimeData wispData;
+    private readonly IndependentSummonRuntimeData independentData;
     private readonly float interval;
 
     private OrbitSummon activeWisp;
@@ -26,6 +27,7 @@ public class SummonAttack : IActivatableAttack, ITickAttack
         this.interval = Mathf.Max(0.01f, interval);
 
         wispData = data as ProjectileAttackRuntimeData;
+        independentData = data as IndependentSummonRuntimeData;
         summonTimer = this.interval;
     }
 
@@ -42,7 +44,22 @@ public class SummonAttack : IActivatableAttack, ITickAttack
             ? firePoint
             : model.transform;
 
-        Vector3 position = center.position + (Vector3)direction;
+        Vector2 side = new Vector2(-direction.y, direction.x);
+        int count = independentData?.SummonCount ?? 1;
+        const float spacing = 0.5f;
+
+        for (int i = 0; i < count; i++)
+        {
+            float offset = (i - (count - 1) * 0.5f) * spacing;
+            Vector3 position = center.position + (Vector3)(direction + side * offset);
+            SpawnSummon(position, center, direction);
+        }
+
+        summonTimer = interval;
+    }
+
+    private void SpawnSummon(Vector3 position, Transform center, Vector2 direction)
+    {
         GameObject instance = Managers.Pool.Pop(config.Prefab, position, Quaternion.identity);
 
         if (instance == null)
@@ -56,6 +73,9 @@ public class SummonAttack : IActivatableAttack, ITickAttack
 
         summon.Initialize(model, data, interval);
 
+        if (summon is IndependentSummon independent && independentData != null)
+            independent.SetDurationBonus(independentData.DurationBonus);
+
         if (summon is OrbitSummon wisp && wispData != null)
         {
             wisp.SetOrbit(center, direction, wispData);
@@ -65,13 +85,11 @@ public class SummonAttack : IActivatableAttack, ITickAttack
 
             activeWisp = wisp;
         }
-
-        summonTimer = interval;
     }
 
     public void Tick(float deltaTime)
     {
-        if (wispData == null)
+        if (wispData == null && independentData == null)
             return;
 
         summonTimer = Mathf.Max(0f, summonTimer - deltaTime);

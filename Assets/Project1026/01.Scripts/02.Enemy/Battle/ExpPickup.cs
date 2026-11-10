@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExpPickup : MonoBehaviour
+public class ExpPickup : MonoBehaviour, IMagnetPickup
 {
     [SerializeField, Min(0.1f)] private float pullSpeed = 8f;
 
@@ -25,10 +25,13 @@ public class ExpPickup : MonoBehaviour
         target = null;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public bool TryBeginPull(Transform pullTarget)
     {
-        if (other.CompareTag("ExpMagnet"))
-            target = other.transform;
+        if (target != null || pullTarget == null)
+            return false;
+
+        target = pullTarget;
+        return true;
     }
 
     private void Update()

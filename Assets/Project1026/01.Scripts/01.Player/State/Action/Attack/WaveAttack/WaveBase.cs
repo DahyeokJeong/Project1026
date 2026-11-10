@@ -4,7 +4,7 @@ public abstract class WaveBase : MonoBehaviour
 {
     #region Settings
     [Header("Settings")]
-    [SerializeField, Min(0f)] private float baseDamage = 1f;
+    [SerializeField, Min(0f)] private float damageMultiplier = 1f;
     [SerializeField, Min(0.01f)] private float expandDuration = 0.8f;
     #endregion
 
@@ -38,9 +38,9 @@ public abstract class WaveBase : MonoBehaviour
             Release();
     }
 
-    public void Initialize(float attackDamage, float critical)
+    public void Initialize(float attackDamage, float critical, float damageBonus = 0f)
     {
-        Damage = baseDamage + attackDamage;
+        Damage = attackDamage * damageMultiplier + damageBonus;
 
         if (Random.value < Mathf.Clamp(critical, 0f, 100f) / 100f)
             Damage *= 1.5f;

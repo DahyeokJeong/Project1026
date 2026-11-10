@@ -140,7 +140,7 @@ MonoBehaviour:
   visual: {fileID: 2002}
   fallDuration: 0.6
   fallHeight: 4
-  baseDamage: 1
+  damageMultiplier: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648

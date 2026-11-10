@@ -19,6 +19,7 @@ public class Wave : WaveBase
 
     private ContactFilter2D contactFilter;
     private Vector2 spriteSize;
+    private float radiusMultiplier = 1f;
     #endregion
 
     private void Awake()
@@ -38,6 +39,7 @@ public class Wave : WaveBase
 
     protected override void OnWaveInitialized()
     {
+        radiusMultiplier = 1f;
         hitTargets.Clear();
         hitBuffer.Clear();
 
@@ -45,11 +47,16 @@ public class Wave : WaveBase
         waveSprite.transform.localScale = Vector3.zero;
     }
 
+    public void SetRadiusBonus(float radiusBonus)
+    {
+        radiusMultiplier = 1f + radiusBonus;
+    }
+
     protected override void UpdateWave(float progress)
     {
         Vector2 radius = new Vector2(
             Mathf.Max(0.01f, maxRadius.x),
-            Mathf.Max(0.01f, maxRadius.y)) * progress;
+            Mathf.Max(0.01f, maxRadius.y)) * (progress * radiusMultiplier);
 
         UpdateSpriteFrame(progress);
         RefreshVisual(radius);

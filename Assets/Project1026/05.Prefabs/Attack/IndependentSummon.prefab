@@ -108,7 +108,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
-  baseDamage: 1
+  baseDamage: 0.5
   attackRadius: 0.5
   moveSpeed: 3
   searchRadius: 6

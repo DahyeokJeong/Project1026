@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5421189146371418550}
   - component: {fileID: 2225571390520302390}
   - component: {fileID: 5649135855190504706}
-  m_Layer: 0
-  m_Name: Exp
+  m_Layer: 29
+  m_Name: ExpDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,4 +142,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 3
+  m_Radius: 0.1

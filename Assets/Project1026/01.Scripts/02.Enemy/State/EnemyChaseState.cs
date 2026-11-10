@@ -22,7 +22,9 @@ public class EnemyChaseState : IState
 
     public void FixedTick()
     {
-        enemy.transform.position += movement * enemy.Model.MoveSpeed * Time.deltaTime;
+        Vector3 displacement = movement * enemy.Model.MoveSpeed * Time.deltaTime;
+        enemy.transform.position += displacement;
+        enemy.View.SetMovementFacing(displacement);
     }
 
     public void Tick()

@@ -15,7 +15,7 @@ public class ExplosionProjectile : ProjectileBase
     #region Fields
     private readonly List<Collider2D> hits = new();
     private readonly HashSet<Transform> damagedTargets = new();
-
+    private float explosionRadiusMultiplier = 1f;
     private ContactFilter2D contactFilter;
     #endregion
 
@@ -69,7 +69,9 @@ public class ExplosionProjectile : ProjectileBase
     private void Explode()
     {
         Vector2 center = transform.position;
-        float searchRadius = Mathf.Max(explosionRadius.x, explosionRadius.y);
+        Vector2 radius = explosionRadius * explosionRadiusMultiplier;
+        float searchRadius = Mathf.Max(radius.x, radius.y);
+
         Physics2D.OverlapCircle(center, searchRadius, contactFilter, hits);
 
         damagedTargets.Clear();
@@ -99,6 +101,11 @@ public class ExplosionProjectile : ProjectileBase
         }
 
         Release();
+    }
+
+    public void SetExplosionRadiusBonus(int bonusPercent)
+    {
+        explosionRadiusMultiplier = 1f + bonusPercent * 0.01f;
     }
 
     private void OnDrawGizmosSelected()

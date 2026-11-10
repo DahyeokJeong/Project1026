@@ -4,7 +4,7 @@ public abstract class AuraBase : MonoBehaviour
 {
     #region Aura Settings
     [Header("Aura Settings")]
-    [SerializeField] private float baseDamage = 1f;
+    [SerializeField] private float damageMultiplier = 1f;
     #endregion
 
     #region Fields
@@ -51,7 +51,7 @@ public abstract class AuraBase : MonoBehaviour
 
     protected float CalculateDamage()
     {
-        float damage = baseDamage + Owner.AttackDamage + RuntimeData.DamageBonus;
+        float damage = Owner.AttackDamage * damageMultiplier + RuntimeData.DamageBonus;
         float critical = Mathf.Clamp(Owner.Critical, 0f, 100f) / 100f;
 
         if (Random.value < critical)

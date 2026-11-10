@@ -17,6 +17,7 @@ public class IndependentSummon : SummonBase
 
     private ContactFilter2D wallFilter;
     private Vector2 moveDirection;
+    private float remainingLifetime;
     #endregion
 
     protected override void Awake()
@@ -35,12 +36,21 @@ public class IndependentSummon : SummonBase
             moveDirection = Vector2.down;
 
         damagedTargets.Clear();
+        remainingLifetime = interval;
+    }
+
+    public void SetDurationBonus(float durationBonus)
+    {
+        remainingLifetime *= 1f + durationBonus;
     }
 
     private void Update()
     {
         if (!CanUpdateSummon())
             return;
+
+        float deltaTime = Mathf.Min(Time.deltaTime, remainingLifetime);
+        remainingLifetime -= deltaTime;
 
         Vector2 position = transform.position;
         if (Physics2D.OverlapCircle(position, attackRadius, wallFilter, overlaps) > 0)
@@ -49,7 +59,7 @@ public class IndependentSummon : SummonBase
             return;
         }
 
-        float distance = moveSpeed * Time.deltaTime;
+        float distance = moveSpeed * deltaTime;
         bool hitWall = LimitDistanceAtWall(position, ref distance);
         DamageEnemiesAlongPath(position, distance, hitWall);
 
@@ -61,6 +71,9 @@ public class IndependentSummon : SummonBase
 
         position += moveDirection * distance;
         transform.position = new Vector3(position.x, position.y, transform.position.z);
+
+        if (remainingLifetime <= 0f)
+            Release();
     }
 
     private bool LimitDistanceAtWall(Vector2 position, ref float distance)

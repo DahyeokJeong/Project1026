@@ -112,7 +112,29 @@ public class NavigationArea : MonoBehaviour
 
     public Vector2 GetDirection(Vector2 pos)
     {
-        return flowField == null ? Vector2.zero : flowField.GetDirection(pos);
+        if (!IsReady || target == null)
+            return Vector2.zero;
+
+        Vector2 destination = target.position;
+        Vector2 toTarget = destination - pos;
+        float distance = toTarget.magnitude;
+
+        if (distance <= Mathf.Epsilon)
+            return Vector2.zero;
+
+        float clearance = agentRadius + padding;
+        Vector2 direction = toTarget / distance;
+
+        if (mapArea.TryGetInserBounds(clearance, out Vector2 min, out Vector2 max)
+            && pos.x >= min.x && pos.x <= max.x && pos.y >= min.y && pos.y <= max.y
+            && destination.x >= min.x && destination.x <= max.x
+            && destination.y >= min.y && destination.y <= max.y
+            && Physics2D.CircleCast(pos, clearance, direction, distance, Obstacle).collider == null)
+        {
+            return direction;
+        }
+
+        return flowField.GetDirection(pos);
     }
 
     private void RefreshFlowField(bool force = false)

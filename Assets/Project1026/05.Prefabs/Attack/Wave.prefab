@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae66471ae5f31843b71d3a08cd400e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wave
-  baseDamage: 1
+  damageMultiplier: 0.5
   expandDuration: 0.8
   enemyLayer:
     serializedVersion: 2

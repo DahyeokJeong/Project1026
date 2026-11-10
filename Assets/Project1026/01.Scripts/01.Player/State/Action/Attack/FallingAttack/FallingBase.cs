@@ -11,7 +11,7 @@ public abstract class FallingBase : MonoBehaviour
     [Header("Settings")]
     [SerializeField, Min(0.01f)] private float fallDuration = 0.6f;
     [SerializeField, Min(0f)] private float fallHeight = 4f;
-    [SerializeField] private float baseDamage = 1f;
+    [SerializeField] private float damageMultiplier = 1f;
     #endregion
 
     #region Fields
@@ -41,9 +41,9 @@ public abstract class FallingBase : MonoBehaviour
             visual.localPosition = Vector3.up * fallHeight;
     }
 
-    public void Initialize(float attackDamage, float critical)
+    public void Initialize(float attackDamage, float critical, float damageBonus = 0f)
     {
-        damage = baseDamage + attackDamage;
+        damage = attackDamage * damageMultiplier + damageBonus;
 
         if (Random.value < Mathf.Clamp(critical, 0f, 100f) / 100f)
             damage *= 1.5f;

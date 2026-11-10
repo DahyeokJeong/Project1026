@@ -134,6 +134,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4280059908129285721}
   hitFlash: {fileID: -876546973899608171, guid: eebb2e3c5378127438068b732d1065e6, type: 3}
   deathMaterial: {fileID: -876546973899608171, guid: bc2ce2cf934de5f4693668a9e7e7c9e1, type: 3}
+  model: {fileID: -5162048931040443494}
+  attack: {fileID: 2957561071366422464}
+  moveFrames:
+  - {fileID: -178879206056528158, guid: 7e1e03d329820c2469102b55e1a9d2df, type: 3}
+  - {fileID: 6194066525478709647, guid: c6998b6f28546f34497c7162af9cec13, type: 3}
+  attackFrames:
+  - {fileID: -2228628980026776535, guid: 2662830e4ad57ba4a8c456eb1601a648, type: 3}
+  - {fileID: -8205867832375761011, guid: 2cfa323c41dd77341a2f1296bec0b969, type: 3}
+  moveFrameDuration: 0.12
+  attackDuration: 0.18
 --- !u!114 &2957561071366422464
 MonoBehaviour:
   m_ObjectHideFlags: 0

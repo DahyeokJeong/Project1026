@@ -12,7 +12,15 @@ public enum AugmentStatType
     ProjectileCount,
     Damage,
     Radius,
-    AutoAttackSpeed
+    AutoAttackSpeed,
+    FallingCount,
+    ProjectileSpeed,
+    ProjectileSize,
+    ExplosionRadius,
+    WaveRadius,
+    FallingSize,
+    SummonDuration,
+    SummonCount
 }
 
 [CreateAssetMenu(
@@ -52,6 +60,38 @@ public class IncreaseStatEffectSO : AugmentEffectSO
                 auto.TryGetAttackData(data.AttackConfigKey, out AttackRuntimeData speedData)
                 && speedData.IsOwned,
 
+            (AugmentStatTarget.Attack, AugmentStatType.FallingCount) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out FallingAttackRuntimeData fallingData)
+                && fallingData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.ProjectileSpeed) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData projectileSpeedData)
+                && projectileSpeedData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.ProjectileSize) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData sizeData)
+                && sizeData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.ExplosionRadius) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData explosionData)
+                && explosionData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.WaveRadius) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out WaveAttackRuntimeData waveData)
+                && waveData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.SummonCount) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out IndependentSummonRuntimeData countData)
+                && countData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.SummonDuration) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out IndependentSummonRuntimeData durationData)
+                && durationData.IsOwned,
+
+            (AugmentStatTarget.Attack, AugmentStatType.FallingSize) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out FallingAttackRuntimeData fallingSizeData)
+                && fallingSizeData.IsOwned,
+
             _ => false
         };
     }
@@ -81,6 +121,38 @@ public class IncreaseStatEffectSO : AugmentEffectSO
             (AugmentStatTarget.Attack, AugmentStatType.AutoAttackSpeed) =>
                 auto.TryGetAttackData(data.AttackConfigKey, out AttackRuntimeData speedData)
                 && speedData.AddAutoAttackSpeed(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.FallingCount) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out FallingAttackRuntimeData fallingData)
+                && fallingData.AddFallingCount(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.ProjectileSpeed) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData projectileSpeedData)
+                && projectileSpeedData.AddProjectileSpeed(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.ProjectileSize) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData sizeData)
+                && sizeData.AddProjectileSize(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.ExplosionRadius) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out ProjectileAttackRuntimeData explosionData)
+                && explosionData.AddExplosionRadius(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.WaveRadius) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out WaveAttackRuntimeData waveData)
+                && waveData.AddRadius(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.SummonCount) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out IndependentSummonRuntimeData countData)
+                && countData.AddSummonCount(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.SummonDuration) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out IndependentSummonRuntimeData durationData)
+                && durationData.AddDuration(data.Value),
+
+            (AugmentStatTarget.Attack, AugmentStatType.FallingSize) =>
+                auto.TryGetAttackData(data.AttackConfigKey, out FallingAttackRuntimeData fallingSizeData)
+                && fallingSizeData.AddSize(data.Value),
 
             _ => false
         };

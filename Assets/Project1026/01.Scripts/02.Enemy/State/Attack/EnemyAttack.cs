@@ -12,6 +12,8 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject rangedPrefab;
 
+    public event System.Action<Vector2> AttackPerformed;
+
     private Vector2 dir;
     private float angle;
 
@@ -22,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
         switch (model.AttackType)
         {
             case EnemyAttackType.Melee:
+                AttackPerformed?.Invoke((Vector2)(target.position - transform.position));
                 MeleeAttack(target);
                     break;
             case EnemyAttackType.Ranged:
@@ -51,7 +54,10 @@ public class EnemyAttack : MonoBehaviour
             return;
 
         if(go.TryGetComponent(out RangeAttack attack))
+        {
             attack.Set(dir, model.AttackDamage);
+            AttackPerformed?.Invoke(dir);
+        }
         else
         {
             Managers.Pool.Push(go);

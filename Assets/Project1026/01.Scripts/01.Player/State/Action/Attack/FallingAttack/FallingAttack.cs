@@ -63,8 +63,11 @@ public class FallingAttack : ITickAttack
                 continue;
             }
 
-            float damage = model.AttackDamage + data.DamageBonus;
-            falling.Initialize(damage, model.Critical);
+            float damage = model.AttackDamage;
+            if (falling is LightningFalling lightning)
+                lightning.SetSizeBonus(data.SizeBonus);
+
+            falling.Initialize(damage, model.Critical, data.DamageBonus);
         }
 
     }

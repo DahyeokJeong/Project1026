@@ -27,6 +27,6 @@ public class WaveAttackConfigSO : AttackConfigBaseSO
 
     public override AttackRuntimeData CreateRuntimeData(bool initiallyOwned)
     {
-        return new AttackRuntimeData(initiallyOwned);
+        return new WaveAttackRuntimeData(initiallyOwned);
     }
 }

@@ -23,4 +23,4 @@ MonoBehaviour:
     weight: 3
   spawnCount: 10
   spawnInterval: 5
-  spawnImmediately: 0
+  spawnImmediately: 1

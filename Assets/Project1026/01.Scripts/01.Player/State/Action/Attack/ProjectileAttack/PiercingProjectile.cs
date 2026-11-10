@@ -15,6 +15,9 @@ public class PiercingProjectile : ProjectileBase
     private readonly HashSet<Collider2D> hitTargets = new();
     private readonly Collider2D[] hitBuffer = new Collider2D[32];
 
+    private Vector3 initialScale;
+    private float sizeMultiplier = 1f;
+
     private ContactFilter2D contactFilter;
     private int pierceCount;
     #endregion
@@ -24,6 +27,8 @@ public class PiercingProjectile : ProjectileBase
         contactFilter = new ContactFilter2D();
         contactFilter.SetLayerMask(enemyLayer);
         contactFilter.useTriggers = true;
+
+        initialScale = transform.localScale;
     }
 
     protected override void OnEnable()
@@ -32,6 +37,7 @@ public class PiercingProjectile : ProjectileBase
 
         pierceCount = 0;
         hitTargets.Clear();
+        SetProjectileSizeBonus(0);
     }
 
     protected override void Update()
@@ -49,7 +55,7 @@ public class PiercingProjectile : ProjectileBase
 
     private void CheckHit()
     {
-        int count = Physics2D.OverlapCircle(transform.position, hitRadius, contactFilter, hitBuffer);
+        int count = Physics2D.OverlapCircle(transform.position, hitRadius * sizeMultiplier, contactFilter, hitBuffer);
 
         for (int i = 0; i < count; ++i)
         {
@@ -68,10 +74,15 @@ public class PiercingProjectile : ProjectileBase
             }
         }
     }
+    public void SetProjectileSizeBonus(int bonusPercent)
+    {
+        sizeMultiplier = 1f + bonusPercent * 0.01f;
+        transform.localScale = initialScale * sizeMultiplier;
+    }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, hitRadius);
+        Gizmos.DrawWireSphere(transform.position, hitRadius * sizeMultiplier);
     }
 }
