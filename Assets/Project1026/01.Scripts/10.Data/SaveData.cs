@@ -6,4 +6,6 @@ public class SaveData
 {
     public List<int> clearedStages = new();
     public List<string> completedEvents = new();
+    public int soulEssence;
+    public List<int> soulBookLevels = new();
 }

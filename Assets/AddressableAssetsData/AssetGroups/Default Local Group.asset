@@ -33,6 +33,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38a13db747bc419e8ea5aa96cdb1970a
+    m_Address: SoulBookPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 45025049967454b49b514c515a2974d7
     m_Address: Localization_KO
     m_ReadOnly: 0

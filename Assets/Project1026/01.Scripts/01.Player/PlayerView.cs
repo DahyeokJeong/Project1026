@@ -10,7 +10,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text levelTxt;
     #endregion
 
-    #region field
+    #region Fields
     private PlayerAnimationView animationView = new();
     private PlayerExpView expView = new();
     #endregion
@@ -22,8 +22,21 @@ public class PlayerView : MonoBehaviour
 
     public void InitExp(float maxExp)
     {
-        expView.Init(currentExp, expTxt,levelTxt, maxExp);
+        expView.Init(currentExp, expTxt, levelTxt, maxExp);
     }
+
+    public void SetBattleUIVisible(bool visible)
+    {
+        if (currentExp != null)
+            currentExp.gameObject.SetActive(visible);
+
+        if (expTxt != null)
+            expTxt.gameObject.SetActive(visible);
+
+        if (levelTxt != null)
+            levelTxt.gameObject.SetActive(visible);
+    }
+
     public void SetMoveAnimation(Vector2 moveInput)
     {
         animationView.SetMoveAnimation(moveInput);

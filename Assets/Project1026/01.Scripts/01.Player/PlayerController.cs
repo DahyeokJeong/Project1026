@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,21 +12,22 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region State
-    // States
     private IState currentState;
     private IState prevState;
-    
+
     private PlayerIdleState idleState;
     private PlayerMoveState moveState;
     private PlayerDashState dashState;
     #endregion
 
     #region Properties
-    // Properties
     public PlayerInputHandler InputHandler => inputHandler;
     public PlayerMovement Movement => movement;
     public PlayerModel Model => model;
     public PlayerView View => view;
+
+    private bool IsBattleScene =>
+        SceneManager.GetActiveScene().name == "03.BattleScene";
     #endregion
 
     private void Awake()
@@ -35,18 +37,19 @@ public class PlayerController : MonoBehaviour
         dashState = new PlayerDashState(this);
 
         view.InitAnimation();
-        Managers.RunData.SetPlayer(model, view);
     }
 
     private void Start()
     {
-        Managers.RunData.SetPlayer(model, view);
+        if (IsBattleScene)
+            Managers.RunData.SetPlayer(model, view);
+
         ChangeState(idleState);
     }
 
     private void Update()
     {
-        if (!Managers.BattleState.CanUpdate)
+        if (IsBattleScene && !Managers.BattleState.CanUpdate)
             return;
 
         movement.TickCooldown(Time.deltaTime);
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!Managers.BattleState.CanUpdate)
+        if (IsBattleScene && !Managers.BattleState.CanUpdate)
             return;
 
         currentState?.FixedTick();
@@ -68,18 +71,17 @@ public class PlayerController : MonoBehaviour
         if (currentState == dashState && movement.IsDashing)
             return;
 
-        if (inputHandler.DashPressed && movement.TryStartDash(inputHandler.MoveInput))
+        if (inputHandler.DashPressed &&
+            movement.TryStartDash(inputHandler.MoveInput))
         {
             ChangeState(dashState);
             return;
         }
 
-        if(inputHandler.MoveInput.sqrMagnitude > 0f)
+        if (inputHandler.MoveInput.sqrMagnitude > 0f)
             ChangeState(moveState);
         else
-        {
             ChangeState(idleState);
-        }
     }
 
     public void ChangeState(IState newState)

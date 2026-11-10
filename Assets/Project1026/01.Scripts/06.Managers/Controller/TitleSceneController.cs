@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TitleSceneController : MonoBehaviour
 {
-    public void OnClickStart()
+    public void OnClickGameStart()
     {
-        Managers.Scene.LoadGame("02.StageSelectScene");
+        Managers.Scene.LoadGame("01.LobbyScene");
     }
 }

@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class PlayerModel : MonoBehaviour
 {
+    private const float AttackDamagePerLevel = 0.05f;
+    private const float AttackSpeedPerLevel = 0.05f;
+    private const float CriticalChancePerLevel = 2f;
+    private const float AutoAttackCooldownPerLevel = 0.03f;
+    private const int HealthRegenPerLevel = 1;
+    private const float MoveSpeedPerLevel = 0.05f;
+    private const float ExperienceGainPerLevel = 0.05f;
+
     #region Health Fields
     private float currentHp;
 
@@ -36,21 +44,27 @@ public class PlayerModel : MonoBehaviour
 
     public float CurrentHp => currentHp;
 
-    public int HealthRegen => baseHealthRegen + Managers.RunData.PlayerHealthRegenBonus;
+    public int HealthRegen => baseHealthRegen + Managers.RunData.PlayerHealthRegenBonus +
+        SoulBookLevel(SoulBookNode.HealthRegen) * HealthRegenPerLevel;
 
     public int Defense =>  baseDefense + Managers.RunData.PlayerDefenseBonus;
 
     public bool IsDead => initialized && currentHp <= 0f;
     public int BaseAttackDamage { get; private set; }
 
-    public int AttackDamage => BaseAttackDamage + Managers.RunData.PlayerAttackDamageBonus;
+    public int AttackDamage => BaseAttackDamage + Managers.RunData.PlayerAttackDamageBonus +
+        Mathf.RoundToInt(BaseAttackDamage * SoulBookLevel(SoulBookNode.AttackDamage) * AttackDamagePerLevel);
 
-    public float AttackSpeed => baseAttackSpeed * Managers.RunData.PlayerAttackSpeedMultiplier;
+    public float AttackSpeed => baseAttackSpeed * Managers.RunData.PlayerAttackSpeedMultiplier *
+        (1f + SoulBookLevel(SoulBookNode.AttackSpeed) * AttackSpeedPerLevel);
 
-    public float Critical => Mathf.Clamp(baseCritical + Managers.RunData.PlayerCriticalBonus, 0f, 100f);
+    public float Critical => Mathf.Clamp(baseCritical + Managers.RunData.PlayerCriticalBonus +
+        SoulBookLevel(SoulBookNode.CriticalChance) * CriticalChancePerLevel, 0f, 100f);
 
-    public float AutoAttackCooldownMultiplier => Mathf.Max(0.01f, Managers.RunData.PlayerAutoAttackCooldownMultiplier);
-    public float MoveSpeed => baseMoveSpeed * Managers.RunData.PlayerMoveSpeedMultiplier;
+    public float AutoAttackCooldownMultiplier => Mathf.Max(0.01f, Managers.RunData.PlayerAutoAttackCooldownMultiplier *
+        (1f - SoulBookLevel(SoulBookNode.AutoAttackCooldown) * AutoAttackCooldownPerLevel));
+    public float MoveSpeed => baseMoveSpeed * Managers.RunData.PlayerMoveSpeedMultiplier *
+        (1f + SoulBookLevel(SoulBookNode.MoveSpeed) * MoveSpeedPerLevel);
 
     public Vector2 LastMoveDirection { get; set; }
     public float DashDistance => dashDistance;
@@ -171,6 +185,8 @@ public class PlayerModel : MonoBehaviour
 
         currentHp = Mathf.Min(MaxHp, currentHp + amount);
     }
+    private static int SoulBookLevel(SoulBookNode node) => Managers.GameState.GetSoulBookLevel(node);
+
     public int CalculateExp(RunDataManager runData, float amount)
     {
         if (!initialized ||
@@ -183,7 +199,7 @@ public class PlayerModel : MonoBehaviour
 
         int levelUpCount = 0;
 
-        runData.CurrentExp += amount;
+        runData.CurrentExp += amount * (1f + SoulBookLevel(SoulBookNode.ExperienceGain) * ExperienceGainPerLevel);
 
         while (runData.CurrentExp >= MaxExp)
         {

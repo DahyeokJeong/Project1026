@@ -50,14 +50,14 @@ public class BattleSceneController : MonoBehaviour
     {
         int stageId = Managers.GameState.SelectedStage;
 
-        Managers.GameState.ClearStage(stageId);
+        Managers.GameState.CompleteBattleStage(stageId);
 
-        ReturnToStageSelect();
+        ReturnToLobby();
     }
 
-    private void ReturnToStageSelect()
+    private void ReturnToLobby()
     {
-        Managers.Scene.LoadGame("02.StageSelectScene");
+        Managers.Scene.LoadGame("01.LobbyScene");
     }
 
     private bool TryGetStageData(int stageId, out StageSpawnData selectedData)
