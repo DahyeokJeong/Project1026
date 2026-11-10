@@ -5,6 +5,14 @@ using UnityEngine;
 
 public static class AddressableRegistrar
 {
+    [MenuItem("Tools/Data/Register Soul Book Panel")]
+    private static void RegisterSoulBookPanel()
+    {
+        const string prefabGuid = "38a13db747bc419e8ea5aa96cdb1970a";
+        string assetPath = AssetDatabase.GUIDToAssetPath(prefabGuid);
+        Register(assetPath, SoulBookPanelUI.PrefabAddress);
+    }
+
     public static bool Register(string assetPath, string address)
     {
         AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;

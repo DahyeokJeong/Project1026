@@ -48,7 +48,7 @@ TagManager:
   - name: Aura Effect
     uniqueID: 676396531
     locked: 0
-  - name: Character
+  - name: Object
     uniqueID: 1692618629
     locked: 0
   - name: Effect

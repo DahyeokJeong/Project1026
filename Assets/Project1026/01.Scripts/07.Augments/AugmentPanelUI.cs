@@ -13,7 +13,8 @@ public class AugmentPanelUI : MonoBehaviour
 
     #region Fields
     private readonly List<AugmentData> currentChoices = new();
-    private readonly bool[] rerollUsed = new bool[3];
+    private const int BonusRerollsPerLevel = 1;
+    private readonly int[] rerollsRemaining = new int[3];
     private int choiceCount;
     #endregion
 
@@ -42,9 +43,10 @@ public class AugmentPanelUI : MonoBehaviour
         currentChoices.Clear();
         currentChoices.AddRange(choices);
 
+        int rerollsPerCard = 1 + Managers.GameState.GetSoulBookLevel(SoulBookNode.AugmentRerolls) * BonusRerollsPerLevel;
         for(int i = 0; i < cards.Length; ++i)
         {
-            rerollUsed[i] = false;
+            rerollsRemaining[i] = rerollsPerCard;
 
             cards[i].SetData(currentChoices[i], OnCardSelected, OnCardReroll);
 
@@ -86,7 +88,7 @@ public class AugmentPanelUI : MonoBehaviour
 
         int index = currentChoices.FindIndex(data => data.Id == augmentId);
 
-        if (index < 0 || rerollUsed[index])
+        if (index < 0 || rerollsRemaining[index] <= 0)
             return;
 
         HashSet<string> excludedIds = new();
@@ -116,10 +118,10 @@ public class AugmentPanelUI : MonoBehaviour
         AugmentData newData = choices[0];
 
         currentChoices[index] = newData;
-        rerollUsed[index] = true;
 
         cards[index].SetData(newData, OnCardSelected, OnCardReroll);
-        cards[index].SetRerollInteractable(false);
+        rerollsRemaining[index]--;
+        cards[index].SetRerollInteractable(rerollsRemaining[index] > 0);
         Debug.Log($"[AugmentPanelUI] 카드 {index + 1} 리롤 완료: {augmentId} → {newData.Id}", this);
     }
 }
