@@ -3,7 +3,14 @@ using UnityEngine;
 
 public class LoadingSceneController : MonoBehaviour
 {
+    #region Components
+    [Header("Component")]
+    [SerializeField] private LoadingUI loadingUI;
+    #endregion
+
+    #region Fields
     private bool isLoadingCompleted;
+    #endregion
 
     private void OnEnable()
     {
@@ -14,6 +21,7 @@ public class LoadingSceneController : MonoBehaviour
     private IEnumerator Start()
     {
         Managers.Pool.Clear();
+
         yield return null;
 
         StartCoroutine(WaitForLoading());
@@ -24,6 +32,10 @@ public class LoadingSceneController : MonoBehaviour
     {
         while (!isLoadingCompleted)
             yield return null;
+
+        loadingUI?.CompleteLoading();
+
+        yield return null;
 
         Managers.Scene.ActivateTargetScene();
     }
