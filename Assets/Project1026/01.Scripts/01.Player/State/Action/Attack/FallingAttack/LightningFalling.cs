@@ -12,6 +12,7 @@ public class LightningFalling : FallingBase
     [SerializeField] private SpriteRenderer visualRenderer;
     [SerializeField] private Sprite[] fallFrames;
     [SerializeField, Min(0.01f)] private float landingFrameDuration = 0.1f;
+    [SerializeField] private bool useGroundImpactVisual = true;
     #endregion
 
     #region Fields
@@ -20,6 +21,7 @@ public class LightningFalling : FallingBase
     private ContactFilter2D contactFilter;
     private Vector3 initialVisualScale;
     private float sizeMultiplier = 1f;
+    private GroundImpactVisual groundImpactVisual;
     #endregion
 
     protected override float LandingDuration => Mathf.Max(0.01f, landingFrameDuration) * 2f;
@@ -40,6 +42,7 @@ public class LightningFalling : FallingBase
         hitTargets.Clear();
         SetSizeBonus(0f);
         SetFrame(0);
+        groundImpactVisual?.Hide();
     }
 
     public void SetSizeBonus(float sizeBonus)
@@ -57,12 +60,56 @@ public class LightningFalling : FallingBase
 
     protected override void OnFallProgress(float progress)
     {
-        SetFrame(progress < 0.5f ? 0 : 1);
+        bool firstFrame = progress < 0.5f;
+        SetFrame(firstFrame ? 0 : 1);
+        if (visualRenderer != null)
+            visualRenderer.transform.position -= GetStrikeOffset(firstFrame ? 0f : 0.08f);
+
+        ShowGroundImpact(1f, new Color(0.55f, 0.75f, 1f, Mathf.Lerp(0.12f, 0.35f, progress)));
     }
 
     protected override void OnLandingProgress(float progress)
     {
-        SetFrame(progress < 0.5f ? 2 : 3);
+        bool impactFrame = progress < 0.5f;
+        SetFrame(impactFrame ? 2 : 3);
+        ShowGroundImpact(Mathf.Lerp(0.55f, 1f, progress * 2f), new Color(0.85f, 0.93f, 1f, 1f - progress));
+
+        if (visualRenderer == null || fallFrames == null || fallFrames.Length <= 2 || fallFrames[2] == null)
+            return;
+
+        // Use the impact frame for both landing frames so the fading frame retains its proportions.
+        Transform visual = visualRenderer.transform;
+        float parentScale = visual.parent != null ? Mathf.Abs(visual.parent.lossyScale.x) : 1f;
+        float impactWidth = fallFrames[2].bounds.size.x * Mathf.Abs(initialVisualScale.x) * parentScale;
+        if (impactWidth <= 0f)
+            return;
+
+        float scale = 2f * hitRadius * sizeMultiplier / impactWidth;
+        visual.localScale = new Vector3(initialVisualScale.x * scale, initialVisualScale.y * scale, initialVisualScale.z);
+        visual.position = transform.position - GetStrikeOffset(impactFrame ? 0.13f : 0.5f);
+    }
+
+    private Vector3 GetStrikeOffset(float normalizedHeight)
+    {
+        Sprite frame = visualRenderer.sprite;
+        if (frame == null)
+            return Vector3.zero;
+
+        Vector2 strikePixel = Vector2.Scale(frame.rect.size, new Vector2(0.5f, normalizedHeight));
+        Vector2 offset = (strikePixel - frame.pivot) / frame.pixelsPerUnit;
+        return visualRenderer.transform.TransformVector(offset);
+    }
+
+    private void ShowGroundImpact(float scale, Color color)
+    {
+        if (!useGroundImpactVisual || visualRenderer == null)
+        {
+            groundImpactVisual?.Hide();
+            return;
+        }
+
+        groundImpactVisual ??= new GroundImpactVisual(transform, visualRenderer);
+        groundImpactVisual.Show(Vector2.one * (hitRadius * sizeMultiplier * scale), color);
     }
 
     private void SetFrame(int index)

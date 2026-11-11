@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd0e8686c51fc64a9487919024b27bb, type: 3}
   m_Name: Melee ED
   m_EditorClassIdentifier: Assembly-CSharp::Enemydata
-  maxHp: 120
+  maxHp: 40
   attackDamage: 15
   attackSpeed: 2
   moveSpeed: 2
   defense: 20
   attackRange: 1
   attackType: 0
-  rewardExp: 5
+  rewardExp: 10

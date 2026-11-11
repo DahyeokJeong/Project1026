@@ -42,19 +42,18 @@ public class NormalProjectile : ProjectileBase
             hitBuffer
         );
 
-        if (count <= 0)
-            return;
-
         for (int i = 0; i < count; ++i)
         {
             Collider2D hit = hitBuffer[i];
+            if (hit == null || !Managers.Damage.TryGetTarget(hit.transform, out Transform target))
+                continue;
 
-            Managers.Damage.ApplyDamage(
-                hit.transform,
-                Damage
-            );
+            if (!target.gameObject.activeInHierarchy)
+                continue;
+
+            Managers.Damage.ApplyDamage(target, Damage);
+            Release();
+            return;
         }
-
-        Release();
     }
 }

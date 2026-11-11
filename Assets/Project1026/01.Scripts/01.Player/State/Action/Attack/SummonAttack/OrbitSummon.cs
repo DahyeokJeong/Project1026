@@ -75,14 +75,12 @@ public class OrbitSummon : SummonBase
         float attackSpeed = 1f + projectileData.AutoAttackSpeedBonusPercent / 100f;
         fireCooldown = Mathf.Max(0f, fireCooldown - deltaTime * attackSpeed);
 
-        Transform target = FindTarget();
-        if (target == null)
-        {
-            Move(deltaTime);
+        Move(deltaTime);
+        if (fireCooldown > 0f)
             return;
-        }
 
-        if (fireCooldown <= 0f && TryFireVolley(target))
+        Transform target = FindTarget();
+        if (target != null && TryFireVolley(target))
             fireCooldown = BaseFireInterval;
     }
 
@@ -154,11 +152,16 @@ public class OrbitSummon : SummonBase
 
         float damage = CalculateDamage();
         bool fired = false;
+        int count = projectileData.ProjectileCount;
+        Vector2 side = Vector2.Perpendicular(direction.normalized);
+        const float spacing = 0.4f;
 
-        for (int i = 0; i < projectileData.ProjectileCount; i++)
+        for (int i = 0; i < count; i++)
         {
+            float offset = (i - (count - 1) * 0.5f) * spacing;
+            Vector2 spawnPosition = (Vector2)transform.position + side * offset;
             GameObject instance = Managers.Pool.Pop(
-                projectilePrefab.gameObject, transform.position, Quaternion.identity);
+                projectilePrefab.gameObject, spawnPosition, Quaternion.identity);
 
             if (instance == null)
                 break;

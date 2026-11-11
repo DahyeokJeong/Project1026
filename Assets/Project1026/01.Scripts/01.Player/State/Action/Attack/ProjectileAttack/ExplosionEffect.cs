@@ -5,15 +5,43 @@ public class ExplosionEffect : MonoBehaviour
     #region Settings
     [Header("Settings")]
     [SerializeField, Min(0.01f)] private float lifeTime = 0.25f;
+    [SerializeField] private bool useGroundImpactVisual = true;
     #endregion
 
     #region Fields
     private float timer;
+    private SpriteRenderer visualRenderer;
+    private GroundImpactVisual groundImpactVisual;
+    private Vector2 impactRadius;
     #endregion
+
+    private void Awake()
+    {
+        visualRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void SetSize(Vector2 diameter)
+    {
+        if (visualRenderer == null)
+            return;
+
+        Vector3 currentSize = visualRenderer.bounds.size;
+        if (currentSize.x <= 0f || currentSize.y <= 0f)
+            return;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= diameter.x / currentSize.x;
+        scale.y *= diameter.y / currentSize.y;
+        transform.localScale = scale;
+        impactRadius = diameter * 0.5f;
+        UpdateGroundImpact(0f);
+    }
 
     private void OnEnable()
     {
         timer = lifeTime;
+        impactRadius = Vector2.zero;
+        groundImpactVisual?.Hide();
     }
 
     private void Update()
@@ -22,10 +50,25 @@ public class ExplosionEffect : MonoBehaviour
             return;
 
         timer -= Time.deltaTime;
+        UpdateGroundImpact(1f - Mathf.Clamp01(timer / lifeTime));
 
         if (timer <= 0f)
         {
             Managers.Pool.Push(gameObject);
         }
+    }
+
+    private void UpdateGroundImpact(float progress)
+    {
+        if (!useGroundImpactVisual || visualRenderer == null || impactRadius == Vector2.zero)
+        {
+            groundImpactVisual?.Hide();
+            return;
+        }
+
+        groundImpactVisual ??= new GroundImpactVisual(transform, visualRenderer);
+        Color color = Color.Lerp(new Color(1f, 0.93f, 0.68f), new Color(1f, 0.34f, 0.08f), progress);
+        color.a = 1f - progress;
+        groundImpactVisual.Show(impactRadius * Mathf.Lerp(0.4f, 1f, progress * 2f), color);
     }
 }

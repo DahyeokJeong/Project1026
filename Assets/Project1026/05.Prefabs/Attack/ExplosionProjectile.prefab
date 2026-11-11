@@ -114,8 +114,8 @@ MonoBehaviour:
   enemtLayer:
     serializedVersion: 2
     m_Bits: 2147483648
-  hitRadius: 0.3
-  explosionRadius: {x: 3, y: 3}
+  hitRadius: 0.43
+  explosionRadius: {x: 2.133333, y: 2.133333}
   explosionPrefab: {fileID: 1192837210289080540, guid: 0d5dee4299dc0344089c80bd9602bd15, type: 3}
 --- !u!114 &8340046552492993676
 MonoBehaviour:

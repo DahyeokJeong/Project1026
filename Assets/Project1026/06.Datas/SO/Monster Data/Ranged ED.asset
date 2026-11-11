@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd0e8686c51fc64a9487919024b27bb, type: 3}
   m_Name: Ranged ED
   m_EditorClassIdentifier: Assembly-CSharp::Enemydata
-  maxHp: 100
+  maxHp: 40
   attackDamage: 10
   attackSpeed: 2
   moveSpeed: 3
   defense: 10
   attackRange: 3
   attackType: 1
-  rewardExp: 2
+  rewardExp: 10

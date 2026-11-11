@@ -12,14 +12,13 @@ public class PiercingProjectile : ProjectileBase
     #endregion
 
     #region Fields
-    private readonly HashSet<Collider2D> hitTargets = new();
+    private readonly HashSet<Transform> hitTargets = new();
     private readonly Collider2D[] hitBuffer = new Collider2D[32];
 
     private Vector3 initialScale;
     private float sizeMultiplier = 1f;
 
     private ContactFilter2D contactFilter;
-    private int pierceCount;
     #endregion
 
     private void Awake()
@@ -35,7 +34,6 @@ public class PiercingProjectile : ProjectileBase
     {
         base.OnEnable();
 
-        pierceCount = 0;
         hitTargets.Clear();
         SetProjectileSizeBonus(0);
     }
@@ -59,15 +57,16 @@ public class PiercingProjectile : ProjectileBase
 
         for (int i = 0; i < count; ++i)
         {
-            Collider2D target = hitBuffer[i];
-
-            if (!hitTargets.Add(target))
+            Collider2D hit = hitBuffer[i];
+            if (hit == null || !Managers.Damage.TryGetTarget(hit.transform, out Transform target))
                 continue;
 
-            Managers.Damage.ApplyDamage(target.transform, Damage);
-            pierceCount++;
+            if (!target.gameObject.activeInHierarchy || !hitTargets.Add(target))
+                continue;
 
-            if (maxPierceCount > 0 && pierceCount >= maxPierceCount)
+            Managers.Damage.ApplyDamage(target, Damage);
+
+            if (maxPierceCount > 0 && hitTargets.Count >= maxPierceCount)
             {
                 Release();
                 return;
