@@ -12,6 +12,9 @@ public class SummonAttackConfigSO : AttackConfigBaseSO
         if (prefab != null && prefab.TryGetComponent(out OrbitSummon _))
             return new ProjectileAttackRuntimeData(initiallyOwned, 1);
 
+        if (prefab != null && prefab.TryGetComponent(out IndependentSummon _))
+            return new IndependentSummonRuntimeData(initiallyOwned);
+
         return new AttackRuntimeData(initiallyOwned);
     }
 

@@ -32,6 +32,6 @@ public class AuraAttackConfigSO : AttackConfigBaseSO
             return null;
         }
 
-        return new AuraAttack(firePoint ,model, this, auraData, interval);
+        return new AuraAttack(firePoint, model, this, auraData, interval);
     }
 }

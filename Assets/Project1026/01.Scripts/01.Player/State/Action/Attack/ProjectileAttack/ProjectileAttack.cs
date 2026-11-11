@@ -67,11 +67,17 @@ public class ProjectileAttack : ITickAttack
 
         if (go != null && go.TryGetComponent(out ProjectileBase projectile))
         {
-            float attackDamage = model.AttackDamage + data.DamageBonus;
+            float attackDamage = model.AttackDamage;
 
             projectile.SetDirection(direction);
-            projectile.SetDamage(attackDamage, model.Critical);
+            projectile.SetDamage(attackDamage, model.Critical, data.DamageBonus);
             projectile.SetBounceCount(data.BounceCount);
+            if (go.TryGetComponent(out ProjectileHoming homing))
+                homing.SetHomingEnabled(data.HomingEnabled);
+            if (projectile is PiercingProjectile piercingProjectile)
+                piercingProjectile.SetProjectileSizeBonus(data.ProjectileSizeBonusPercent);
+            if (projectile is ExplosionProjectile explosionProjectile)
+                explosionProjectile.SetExplosionRadiusBonus(data.ExplosionRadiusBonusPercent);
         }
     }
 

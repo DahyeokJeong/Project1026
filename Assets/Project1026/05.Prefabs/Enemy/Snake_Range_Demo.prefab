@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5774588273787353453}
   - component: {fileID: 4280059908129285721}
   - component: {fileID: 156661654134334344}
+  - component: {fileID: 170593806340296857}
   - component: {fileID: 5554547424604134426}
   - component: {fileID: 2008560642160845290}
   - component: {fileID: -8131545058412978603}
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1692618629
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 05ee7e177086291459fa4664c215d8b7, type: 3}
@@ -114,8 +115,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   model: {fileID: 2008560642160845290}
   attack: {fileID: 5554547424604134426}
-  attackPrefab: {fileID: 6943944905956832885, guid: 5e3f29d5a07033041bc9871dae9ab748, type: 3}
+  view: {fileID: 170593806340296857}
+  attackPrefab: {fileID: 6943944905956832885, guid: 4e2e7fc2bdc7405382aa64cd9e82cedd, type: 3}
   fireRaius: 0.3
+  expPrefab: {fileID: 6726932268036279307, guid: 587fe3b966da8944785a3c561cf3f520, type: 3}
+--- !u!114 &170593806340296857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136431554869713440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e02b6a425ef50943b202bb3594d7cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyView
+  spriteRenderer: {fileID: 4280059908129285721}
+  hitFlash: {fileID: -876546973899608171, guid: eebb2e3c5378127438068b732d1065e6, type: 3}
+  deathMaterial: {fileID: -876546973899608171, guid: bc2ce2cf934de5f4693668a9e7e7c9e1, type: 3}
+  model: {fileID: 2008560642160845290}
+  attack: {fileID: 5554547424604134426}
+  moveFrames:
+  - {fileID: -3553977919165874087, guid: 92f9b9d8b5347864f90412950cd91ff2, type: 3}
+  - {fileID: -5241326210532137984, guid: 3f9484b2e909ae04c8eacd68e41d249b, type: 3}
+  attackFrames:
+  - {fileID: 6927889941178264468, guid: aed79b3b0d5f48f4db187dcb8cbb151e, type: 3}
+  moveFrameDuration: 0.12
+  attackDuration: 0.18
 --- !u!114 &5554547424604134426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +160,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1073741824
   firePoint: {fileID: 1882886371035440063}
-  rangedPrefab: {fileID: 6943944905956832885, guid: 5e3f29d5a07033041bc9871dae9ab748, type: 3}
+  rangedPrefab: {fileID: 6943944905956832885, guid: 4e2e7fc2bdc7405382aa64cd9e82cedd, type: 3}
 --- !u!114 &2008560642160845290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +225,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.18}
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 0.6, y: 0.4}
   m_Direction: 1
 --- !u!1 &2879066687522471171
 GameObject:
@@ -297,7 +324,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.06, y: 0}
   m_Size: {x: 0.8, y: 1.48}
   m_Direction: 0
 --- !u!1 &6016056321930997493

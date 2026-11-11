@@ -49,6 +49,9 @@ public class WaveAttack : ITickAttack
             return;
         }
 
-        wave.Initialize(model.AttackDamage + data.DamageBonus, model.Critical);
+        wave.Initialize(model.AttackDamage, model.Critical, data.DamageBonus);
+
+        if (wave is Wave earthquake && data is WaveAttackRuntimeData waveData)
+            earthquake.SetRadiusBonus(waveData.RadiusBonus);
     }
 }

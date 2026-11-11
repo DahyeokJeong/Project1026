@@ -145,6 +145,7 @@ public class PlayerModel : MonoBehaviour
         LastMoveDirection = Vector2.down;
 
         initialized = true;
+        Managers.RunData.RefreshPlayerHp(this);
     }
 
     private float GetStatValue(string id)
@@ -169,6 +170,7 @@ public class PlayerModel : MonoBehaviour
 
         float finalDamage = Mathf.Max(0f, damage - Defense);
         currentHp = Mathf.Max(0f, currentHp - finalDamage);
+        Managers.RunData.RefreshPlayerHp(this);
 
         Debug.Log($"[PlayerModel] 현재 체력: {currentHp}", this);
 
@@ -180,10 +182,11 @@ public class PlayerModel : MonoBehaviour
 
     public void Heal(float amount)
     {
-        if (!initialized || IsDead || amount <= 0f)
+        if (!initialized || IsDead || amount <= 0f || currentHp == MaxHp)
             return;
 
         currentHp = Mathf.Min(MaxHp, currentHp + amount);
+        Managers.RunData.RefreshPlayerHp(this);
     }
     private static int SoulBookLevel(SoulBookNode node) => Managers.GameState.GetSoulBookLevel(node);
 

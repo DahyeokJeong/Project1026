@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SO_Augment_NormalDamage
   m_EditorClassIdentifier: Assembly-CSharp::IncreaseStatEffectSO
   configKey: SO_Augment_NormalDamage
+  icon: {fileID: 21300000, guid: 202a34bce2040904eb49bc3ae2c1f527, type: 3}
   target: 0
   stat: 2

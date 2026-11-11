@@ -105,13 +105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae66471ae5f31843b71d3a08cd400e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wave
-  baseDamage: 1
-  expandDuration: 0.8
+  damageMultiplier: 0.5
+  expandDuration: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
   waveSprite: {fileID: 8011878112511495004}
-  maxRadius: {x: 4, y: 2}
+  maxRadius: {x: 5, y: 2.5}
   waveFrames:
   - {fileID: 21300000, guid: a3ec3d735d6047c48b50711fd0dceae6, type: 3}
   - {fileID: 21300000, guid: 0cf5cd3cf04473e4d94f9c3e7c4795e8, type: 3}

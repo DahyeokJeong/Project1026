@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SO_Attack_LightningFalling
   m_EditorClassIdentifier: Assembly-CSharp::FallingAttackConfigSO
   configKey: SO_Attack_LightningFalling
-  interval: 2
+  icon: {fileID: 21300000, guid: 6d4838eb4831cf2498077c8c559c3060, type: 3}
+  interval: 4
   initiallyOwned: 0
   prefab: {fileID: 3530950055281727504, guid: ba28fddff6ca48fcbf5295f89efd2349, type: 3}
   initialFallingCount: 1

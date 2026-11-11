@@ -16,6 +16,18 @@ public class BattleSceneController : MonoBehaviour
 
     #region fields
     private IStageClearCondition condition;
+    private StageSpawnData currentStageData;
+    private int currentWave;
+    private float waveTimeRemaining;
+    private bool allWavesEnded;
+    #endregion
+
+    #region Properties
+    public StageSpawnData CurrentStageData => currentStageData;
+    public EnemyGenerate EnemyGenerate => enemyGenerate;
+    public int CurrentWave => currentWave;
+    public float StageTimeRemaining =>
+    currentStageData == null || allWavesEnded ? 0f : Mathf.Max(0f, waveTimeRemaining) + (currentStageData.WaveCount - currentWave) * currentStageData.WaveDuration;
     #endregion
 
     private void Start()
@@ -30,20 +42,67 @@ public class BattleSceneController : MonoBehaviour
         if (!TryGetStageData(stageId, out StageSpawnData data))
             return;
 
+        currentStageData = data;
         condition = new DefeatAllEnemiesCondition(enemyGenerate);
-        enemyGenerate.StartSpawning(data);
+        StartNextWave();
     }
 
     private void Update()
     {
-        if (condition == null || !enemyGenerate.IsSpawning)
+        if (condition == null)
             return;
 
-        if (!condition.IsSatisfied())
+        if (allWavesEnded)
+        {
+            if (condition.IsSatisfied())
+            {
+                condition = null;
+                OnBattleCleared();
+            }
+
+            return;
+        }
+
+        if (!Managers.BattleState.CanUpdate || !enemyGenerate.IsSpawning)
             return;
 
+        waveTimeRemaining -= Time.deltaTime;
+
+        bool currentWaveDefeated =
+            enemyGenerate.HasSpawnedAll &&
+            enemyGenerate.CurrentWaveActiveEnemyCount == 0;
+
+        if (waveTimeRemaining > 0f && !currentWaveDefeated)
+            return;
+
+        EndCurrentWave();
+    }
+
+    private void EndCurrentWave()
+    {
         enemyGenerate.StopSpawning();
-        OnBattleCleared();
+
+        if (currentWave < currentStageData.WaveCount)
+        {
+            StartNextWave();
+            return;
+        }
+
+        allWavesEnded = true;
+    }
+
+    private void StartNextWave()
+    {
+        enemyGenerate.StartSpawning(currentStageData);
+
+        if(!enemyGenerate.IsSpawning)
+        {
+            condition = null;
+            return;
+        }
+
+        currentWave++;
+        waveTimeRemaining = currentStageData.WaveDuration;
     }
 
     private void OnBattleCleared()

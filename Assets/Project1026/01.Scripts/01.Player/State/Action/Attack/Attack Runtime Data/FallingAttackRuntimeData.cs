@@ -4,6 +4,7 @@ public sealed class FallingAttackRuntimeData : AttackRuntimeData
 {
     #region Properties
     public int FallingCount { get; private set; }
+    public float SizeBonus { get; private set; }
     #endregion
 
 
@@ -27,6 +28,15 @@ public sealed class FallingAttackRuntimeData : AttackRuntimeData
             return false;
 
         FallingCount += amount;
+        return true;
+    }
+
+    public bool AddSize(int percentage)
+    {
+        if (!IsOwned || percentage <= 0)
+            return false;
+
+        SizeBonus += percentage * 0.01f;
         return true;
     }
 }

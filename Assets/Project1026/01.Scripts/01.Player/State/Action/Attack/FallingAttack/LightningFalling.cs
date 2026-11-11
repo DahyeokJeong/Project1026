@@ -18,12 +18,17 @@ public class LightningFalling : FallingBase
     private readonly Collider2D[] hitBuffer = new Collider2D[64];
     private readonly HashSet<Transform> hitTargets = new();
     private ContactFilter2D contactFilter;
+    private Vector3 initialVisualScale;
+    private float sizeMultiplier = 1f;
     #endregion
 
     protected override float LandingDuration => Mathf.Max(0.01f, landingFrameDuration) * 2f;
 
     private void Awake()
     {
+        if (visualRenderer != null)
+            initialVisualScale = visualRenderer.transform.localScale;
+
         contactFilter = new ContactFilter2D();
         contactFilter.SetLayerMask(enemyLayer);
         contactFilter.useTriggers = true;
@@ -33,7 +38,21 @@ public class LightningFalling : FallingBase
     {
         base.OnEnable();
         hitTargets.Clear();
+        SetSizeBonus(0f);
         SetFrame(0);
+    }
+
+    public void SetSizeBonus(float sizeBonus)
+    {
+        sizeMultiplier = 1f + sizeBonus;
+
+        if (visualRenderer != null)
+        {
+            visualRenderer.transform.localScale = new Vector3(
+                initialVisualScale.x * sizeMultiplier,
+                initialVisualScale.y * sizeMultiplier,
+                initialVisualScale.z);
+        }
     }
 
     protected override void OnFallProgress(float progress)
@@ -61,7 +80,7 @@ public class LightningFalling : FallingBase
         hitTargets.Clear();
 
         int count = Physics2D.OverlapCircle(
-            transform.position, hitRadius, contactFilter, hitBuffer);
+            transform.position, hitRadius * sizeMultiplier, contactFilter, hitBuffer);
 
         for (int i = 0; i < count; i++)
         {

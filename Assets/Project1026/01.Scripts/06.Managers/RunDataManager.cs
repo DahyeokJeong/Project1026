@@ -21,8 +21,7 @@ public class RunDataManager
     #region Attack
     private readonly Dictionary<string, AttackRuntimeData> attackData = new();
 
-    public AttackRuntimeData GetOrCreateAttackData(
-        AttackConfigBaseSO config, bool initiallyOwned)
+    public AttackRuntimeData GetOrCreateAttackData(AttackConfigBaseSO config, bool initiallyOwned)
     {
         if (config == null || string.IsNullOrWhiteSpace(config.ConfigKey))
         {
@@ -66,6 +65,7 @@ public class RunDataManager
         {
             case PlayerAugmentStat.MaxHp:
                 PlayerMaxHpBonus += amount;
+                RefreshPlayerHp(model);
                 break;
             case PlayerAugmentStat.HealthRegen:
                 PlayerHealthRegenBonus += amount;
@@ -117,8 +117,15 @@ public class RunDataManager
         this.model = model;
         this.view = view;
 
+        RefreshPlayerHp(model);
         view.InitExp(model.MaxExp);
         view.SetExp(CurrentExp, Level);
+    }
+
+    public void RefreshPlayerHp(PlayerModel player)
+    {
+        if (player != null && player == model)
+            view?.SetHp(player.CurrentHp, player.MaxHp);
     }
 
     public void AddExp(float amount)

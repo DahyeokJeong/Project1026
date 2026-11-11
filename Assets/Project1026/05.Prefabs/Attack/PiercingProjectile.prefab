@@ -107,13 +107,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PiercingProjectile
   moveSpeed: 6
-  lifeTime: 3
-  baseDamage: 1
+  lifeTime: 0
+  baseDamage: 0
+  damageMultiplier: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
   hitRadius: 0.3
-  maxPierceCount: 3
+  maxPierceCount: 0
 --- !u!114 &5641740122377128318
 MonoBehaviour:
   m_ObjectHideFlags: 0

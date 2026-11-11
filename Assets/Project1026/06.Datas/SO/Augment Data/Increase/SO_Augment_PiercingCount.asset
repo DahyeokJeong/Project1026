@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SO_Augment_PiercingCount
   m_EditorClassIdentifier: Assembly-CSharp::IncreaseStatEffectSO
   configKey: SO_Augment_PiercingCount
+  icon: {fileID: 21300000, guid: c1d4ff354a9df6046a6f844f0ece7d94, type: 3}
   target: 0
   stat: 1

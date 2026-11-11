@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     [Header("Component")]
     [SerializeField] private EnemyModel model;
     [SerializeField] private EnemyAttack attack;
+    [SerializeField] private EnemyView view;
     #endregion
 
     #region Attack
@@ -29,27 +30,40 @@ public class EnemyController : MonoBehaviour
     [SerializeField, Min(0.1f)] private float fireRaius = 0.3f;
     #endregion
 
-    #region field
+    #region ExpPrefab
+    [SerializeField] private GameObject expPrefab;
+    #endregion
+
+    #region fields
     private IState currentState;
 
     private EnemyGenerate generate;
     private EnemyAttackState attackState;
     private EnemyChaseState chaseState;
     private EnemyHitState hitState;
+    private EnemyDeadState deadState;
     #endregion
 
     #region Property
     public NavigationArea NavArea { get; private set; }
     private Transform Target => NavArea != null ? NavArea.Target : null;
     public EnemyModel Model => model;
+    public Collider2D MovementCollider { get; private set; }
+    public EnemyView View => view;
     public EnemyAttack Attack => attack;
     public bool CanAttack => CheckAttackRange(model.AttackRange);
+    public bool IsHoldingAttackPosition => attackState != null && currentState == attackState;
     public GameObject AttackPrefab => attackPrefab;
+    #endregion
+
+    #region Event
+    public static event System.Action<EnemyGenerate> EnemyDead;
     #endregion
 
     public void Initialize(NavigationArea area, EnemyGenerate generate)
     {
         Model.Init();
+        MovementCollider = GetComponent<Collider2D>();
         NavArea?.Unregister(this);
         NavArea = area;
         this.generate = generate;
@@ -57,6 +71,7 @@ public class EnemyController : MonoBehaviour
         attackState = new EnemyAttackState(this, Attack);
         chaseState = new EnemyChaseState(this);
         hitState = new EnemyHitState(this);
+        deadState = new EnemyDeadState(this);
 
         ChangeState(chaseState);
         attackState.ResetTimer();
@@ -72,13 +87,31 @@ public class EnemyController : MonoBehaviour
 
         if (Model.IsDead)
         {
-            Managers.RunData.AddExp(model.RewardExp);
-            generate.Despawn(this);
-            return;
+            if (deadState == null)
+            {
+                CompleteDeath();
+                return;
+            }
+
+            ChangeState(deadState);
+        }
+        else
+        {
+            HandleStateChange();
         }
 
-        HandleStateChange();
         currentState.Tick();
+    }
+
+    public void CompleteDeath()
+    {
+        Vector3 deathPosition = transform.position;
+
+        if (!generate.Despawn(this))
+            return;
+
+        ExpPickup.Spawn(expPrefab, deathPosition, model.RewardExp);
+        EnemyDead?.Invoke(generate);
     }
 
     private void FixedUpdate()

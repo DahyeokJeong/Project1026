@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 222443097
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 030713b8d52569045a3b8551e746a7bb, type: 3}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2bd34f4a49cd34e9369677aac6b565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WispProjectile
-  moveSpeed: 6
+  moveSpeed: 7
   lifeTime: 3
   baseDamage: 0
   enemyLayer:
