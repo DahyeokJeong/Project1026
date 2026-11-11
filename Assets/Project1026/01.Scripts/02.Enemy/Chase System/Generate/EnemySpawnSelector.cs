@@ -4,7 +4,7 @@ using UnityEngine;
 public static class EnemySpawnSelector
 {
     public static EnemyController Select(
-        IReadOnlyList<StageSpawnData.EnemyEntry> entries)
+        IReadOnlyList<WaveDataSO.EnemyEntry> entries)
     {
         float totalWeight = 0f;
 
@@ -35,7 +35,7 @@ public static class EnemySpawnSelector
             random -= entry.Weight;
         }
 
-        // Random.value°¡ »óÇÑ°ªÀÎ 1À» ¹ÝÈ¯ÇÑ °æ¿ì Ã³¸®
+        // Random.valueï¿½ï¿½ ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
         return lastCandidate;
     }
 }

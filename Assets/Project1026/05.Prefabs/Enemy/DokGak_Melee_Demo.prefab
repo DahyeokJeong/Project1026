@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.41, y: -0.65, z: 0}
-  m_LocalScale: {x: 0.4557, y: 0.4727, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1292693324020891995}
@@ -117,7 +117,6 @@ MonoBehaviour:
   attack: {fileID: 2957561071366422464}
   view: {fileID: 999632104335658963}
   attackPrefab: {fileID: 6943944905956832885, guid: 5e3f29d5a07033041bc9871dae9ab748, type: 3}
-  fireRaius: 0.3
   expPrefab: {fileID: 6726932268036279307, guid: 587fe3b966da8944785a3c561cf3f520, type: 3}
 --- !u!114 &999632104335658963
 MonoBehaviour:

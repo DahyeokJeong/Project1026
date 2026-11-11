@@ -156,12 +156,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a8750d20dfa86954b82f3ee932492abf
-    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_WaterDrop.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AttackConfigs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b355cbcd6ef431942bfb8b3760a4119c
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerCritical.asset
     m_ReadOnly: 0

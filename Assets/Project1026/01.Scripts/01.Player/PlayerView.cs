@@ -7,8 +7,6 @@ public class PlayerView : MonoBehaviour
     #region Component
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer bodyRenderer;
-    [SerializeField] private SpriteRenderer dashEffect;
-    [SerializeField] private Sprite[] dashFrames;
     [SerializeField] private Image currentHp;
     [SerializeField] private RectTransform currentExp;
     [SerializeField] private TMP_Text levelTxt;
@@ -22,7 +20,7 @@ public class PlayerView : MonoBehaviour
 
     public void InitAnimation()
     {
-        animationView.Init(animator, bodyRenderer, dashEffect, dashFrames);
+        animationView.Init(animator, bodyRenderer);
     }
 
     public void InitExp(float maxExp)
@@ -52,21 +50,6 @@ public class PlayerView : MonoBehaviour
     public void SetIdleAnimation()
     {
         animationView.SetIdleAnimation();
-    }
-
-    public void SetDashAnimation(Vector2 direction, float progress)
-    {
-        animationView.SetDashAnimation(direction, progress);
-    }
-
-    public void StopDashAnimation()
-    {
-        animationView.StopDashAnimation();
-    }
-
-    private void OnDisable()
-    {
-        StopDashAnimation();
     }
 
     public void SetHp(float current, float maximum)

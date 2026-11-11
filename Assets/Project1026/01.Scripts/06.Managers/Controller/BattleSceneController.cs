@@ -3,32 +3,33 @@ using UnityEngine;
 
 public class BattleSceneController : MonoBehaviour
 {
-    #region References
     [Header("References")]
     [SerializeField] private EnemyGenerate enemyGenerate;
     [SerializeField] private AugmentPanelUI augment;
-    #endregion
+    [SerializeField] private PlayerModel player;
 
-    #region Data
     [Header("Stage Data")]
-    [SerializeField] private List<StageSpawnData> stageSpawnDatas = new();
-    #endregion
+    [SerializeField] private List<StageDataSO> stageSpawnDatas = new();
 
-    #region fields
-    private IStageClearCondition condition;
-    private StageSpawnData currentStageData;
-    private int currentWave;
+    private StageDataSO currentStageData;
+    private int roundIndex;
+    private int waveIndex;
     private float waveTimeRemaining;
-    private bool allWavesEnded;
-    #endregion
+    private float roundDuration;
+    private float remainingLaterWavesDuration;
+    private bool battleRunning;
+    private bool waitingForRoundKills;
 
-    #region Properties
-    public StageSpawnData CurrentStageData => currentStageData;
+    public RoundDataSO CurrentRoundData => currentStageData == null ? null : currentStageData.Rounds[roundIndex];
+
     public EnemyGenerate EnemyGenerate => enemyGenerate;
-    public int CurrentWave => currentWave;
-    public float StageTimeRemaining =>
-    currentStageData == null || allWavesEnded ? 0f : Mathf.Max(0f, waveTimeRemaining) + (currentStageData.WaveCount - currentWave) * currentStageData.WaveDuration;
-    #endregion
+    public int CurrentRound => currentStageData == null ? 0 : roundIndex + 1;
+    public int CurrentWave => currentStageData == null ? 0 : waveIndex + 1;
+    public int RoundWaveCount => currentStageData == null ? 0 : CurrentRoundData.Waves.Count;
+    public float RoundTimeRemaining { get; private set; }
+    public float RoundProgress => roundDuration > 0f
+        ? Mathf.Clamp01(1f - RoundTimeRemaining / roundDuration)
+        : 0f;
 
     private void Start()
     {
@@ -38,95 +39,125 @@ public class BattleSceneController : MonoBehaviour
             return;
 
         int stageId = Managers.GameState.SelectedStage;
-
-        if (!TryGetStageData(stageId, out StageSpawnData data))
-            return;
-
-        currentStageData = data;
-        condition = new DefeatAllEnemiesCondition(enemyGenerate);
-        StartNextWave();
-    }
-
-    private void Update()
-    {
-        if (condition == null)
-            return;
-
-        if (allWavesEnded)
+        if (player == null || !TryGetStageData(stageId, out StageDataSO data))
         {
-            if (condition.IsSatisfied())
-            {
-                condition = null;
-                OnBattleCleared();
-            }
-
+            Debug.LogError($"Battle setup is missing a player or a unique stage asset for stage {stageId}.", this);
             return;
         }
 
-        if (!Managers.BattleState.CanUpdate || !enemyGenerate.IsSpawning)
+        if (!HasValidRounds(data))
+        {
+            Debug.LogError($"Stage {stageId} must have rounds with valid waves and durations.", data);
+            return;
+        }
+
+        currentStageData = data;
+        battleRunning = true;
+        StartRound();
+    }
+
+    private void LateUpdate()
+    {
+        if (!battleRunning)
             return;
 
-        waveTimeRemaining -= Time.deltaTime;
+        if (player == null || player.IsDead)
+        {
+            EndBattle(false);
+            return;
+        }
 
-        bool currentWaveDefeated =
-            enemyGenerate.HasSpawnedAll &&
-            enemyGenerate.CurrentWaveActiveEnemyCount == 0;
-
-        if (waveTimeRemaining > 0f && !currentWaveDefeated)
+        if (!Managers.BattleState.CanUpdate)
             return;
 
-        EndCurrentWave();
+        if (waitingForRoundKills)
+        {
+            TryCompleteRound();
+            return;
+        }
+
+        waveTimeRemaining = Mathf.Max(0f, waveTimeRemaining - Time.deltaTime);
+        RoundTimeRemaining = Mathf.Max(0f, remainingLaterWavesDuration + waveTimeRemaining);
+        if (waveTimeRemaining <= 0f)
+            EndCurrentWave();
+    }
+
+    private void StartRound()
+    {
+        waitingForRoundKills = false;
+        waveIndex = 0;
+        roundDuration = 0f;
+        foreach (WaveDataSO wave in CurrentRoundData.Waves)
+            roundDuration += wave.Duration;
+
+        RoundTimeRemaining = roundDuration;
+        enemyGenerate.BeginRound();
+        StartWave();
+    }
+
+    private void StartWave()
+    {
+        WaveDataSO wave = CurrentRoundData.Waves[waveIndex];
+        waveTimeRemaining = wave.Duration;
+        remainingLaterWavesDuration = Mathf.Max(0f, RoundTimeRemaining - wave.Duration);
+        enemyGenerate.StartSpawning(wave);
+
+        if (!enemyGenerate.IsSpawning)
+        {
+            Debug.LogError($"Could not start stage {currentStageData.StageId}, round {CurrentRound}, wave {CurrentWave}.", wave);
+            EndBattle(false);
+        }
     }
 
     private void EndCurrentWave()
     {
         enemyGenerate.StopSpawning();
 
-        if (currentWave < currentStageData.WaveCount)
+        if (waveIndex + 1 < RoundWaveCount)
         {
-            StartNextWave();
+            waveIndex++;
+            StartWave();
             return;
         }
 
-        allWavesEnded = true;
+        waitingForRoundKills = true;
+        TryCompleteRound();
     }
 
-    private void StartNextWave()
+    private void TryCompleteRound()
     {
-        enemyGenerate.StartSpawning(currentStageData);
+        if (enemyGenerate.RoundKillCount < enemyGenerate.RoundSpawnedCount)
+            return;
 
-        if(!enemyGenerate.IsSpawning)
+        if (roundIndex + 1 < currentStageData.Rounds.Count)
         {
-            condition = null;
+            roundIndex++;
+            StartRound();
             return;
         }
 
-        currentWave++;
-        waveTimeRemaining = currentStageData.WaveDuration;
+        EndBattle(true);
     }
 
-    private void OnBattleCleared()
+    private void EndBattle(bool cleared)
     {
-        int stageId = Managers.GameState.SelectedStage;
+        battleRunning = false;
+        enemyGenerate.StopSpawning();
+        Managers.BattleState.SetState(cleared ? BattleState.Cleared : BattleState.Failed);
 
-        Managers.GameState.CompleteBattleStage(stageId);
+        if (cleared)
+            Managers.GameState.CompleteBattleStage(currentStageData.StageId);
 
-        ReturnToLobby();
-    }
-
-    private void ReturnToLobby()
-    {
         Managers.Scene.LoadGame("01.LobbyScene");
     }
 
-    private bool TryGetStageData(int stageId, out StageSpawnData selectedData)
+    private bool TryGetStageData(int stageId, out StageDataSO selectedData)
     {
         selectedData = null;
-
         if (stageId <= 0)
             return false;
 
-        foreach (StageSpawnData data in stageSpawnDatas)
+        foreach (StageDataSO data in stageSpawnDatas)
         {
             if (data == null || data.StageId != stageId)
                 continue;
@@ -137,18 +168,35 @@ public class BattleSceneController : MonoBehaviour
             selectedData = data;
         }
 
-        if (selectedData == null)
+        return selectedData != null;
+    }
+
+    private static bool HasValidRounds(StageDataSO stage)
+    {
+        if (stage.Rounds.Count == 0)
             return false;
+
+        foreach (RoundDataSO round in stage.Rounds)
+        {
+            if (round == null || round.Waves.Count == 0)
+                return false;
+
+            foreach (WaveDataSO wave in round.Waves)
+            {
+                if (wave == null || wave.Duration <= 0f)
+                    return false;
+            }
+        }
 
         return true;
     }
+
     private void OnLevelUp(int levelUpCount)
     {
-        if (levelUpCount <= 0 || augment == null)
+        if (!battleRunning || levelUpCount <= 0 || augment == null)
             return;
 
         Managers.BattleState.SetState(BattleState.AugmentSelecting);
-
         augment.Show(levelUpCount);
     }
 
@@ -156,11 +204,10 @@ public class BattleSceneController : MonoBehaviour
     {
         Managers.RunData.LevelUpOccurred += OnLevelUp;
     }
+
     private void OnDisable()
     {
-        if (!Managers.Initialized)
-            return;
-
-        Managers.RunData.LevelUpOccurred -= OnLevelUp;
+        if (Managers.Initialized)
+            Managers.RunData.LevelUpOccurred -= OnLevelUp;
     }
 }

@@ -9,18 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a5040c62e23b34d802c26fa7131eb4, type: 3}
-  m_Name: StageSpawnData01
-  m_EditorClassIdentifier: Assembly-CSharp::StageSpawnData
-  stageId: 1
-  waveCount: 3
-  waveDuration: 180
-  maxCount: 100
+  m_Script: {fileID: 11500000, guid: 04dd5dbe069e414c9fa911506665222e, type: 3}
+  m_Name: WaveData01_02
+  m_EditorClassIdentifier: Assembly-CSharp::WaveDataSO
+  duration: 180
   enemies:
-  - prefab: {fileID: 156661654134334344, guid: d34e67caa5860214c8fd580d63045133, type: 3}
+  - prefab: {fileID: 156661654134334344, guid: 3cbea06a3a904bb479e3c6d742809627, type: 3}
     weight: 7
   - prefab: {fileID: 156661654134334344, guid: a0d19dec02bff4d419a7418e8344e080, type: 3}
     weight: 3
-  spawnCount: 10
-  spawnInterval: 2
+  spawnBatchSize: 20
+  spawnInterval: 10
   spawnImmediately: 1

@@ -5,7 +5,8 @@ public enum BattleState
     Playing,
     AugmentSelecting,
     Paused,
-    Cleared
+    Cleared,
+    Failed
 }
 
 public class BattleStateManager
