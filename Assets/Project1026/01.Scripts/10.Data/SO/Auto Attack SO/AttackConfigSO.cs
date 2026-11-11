@@ -8,12 +8,14 @@ public class AttackConfigSO : AttackConfigBaseSO
     [SerializeField] private GameObject prefab;
     [SerializeField] private ProjectilePattern pattern;
     [SerializeField] private bool usePlayerStat;
+    [SerializeField] private bool ignoreCooldownAugment;
     [SerializeField, Min(1)] private int initialProjectileCount = 1;
     #endregion
 
     #region Properties
     public GameObject Prefab => prefab;
     public bool UsePlayerStat => usePlayerStat;
+    public bool IgnoreCooldownAugment => ignoreCooldownAugment;
     public ProjectilePattern Pattern => pattern;
     #endregion
 

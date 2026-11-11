@@ -7,7 +7,6 @@ public class BattleHud : MonoBehaviour
     [SerializeField] private BattleSceneController battleController;
     [SerializeField] private TMP_Text killCountText;
     [SerializeField] private TMP_Text timerText;
-    [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text waveText;
 
     private int killCount;
@@ -27,7 +26,6 @@ public class BattleHud : MonoBehaviour
         if (stageData == null)
             yield break;
 
-        stageText.SetText("{0}¿Â", stageData.StageId);
         RefreshText();
     }
 

@@ -38,7 +38,10 @@ public class ProjectileAttack : ITickAttack
     public void Tick(float deltaTime)
     {
         float speed = config.UsePlayerStat ? Mathf.Max(0f, model.AttackSpeed) : 1f;
-        attackTimer -= deltaTime * speed / model.AutoAttackCooldownMultiplier;
+        float cooldownMultiplier = config.IgnoreCooldownAugment
+            ? model.SoulBookAutoAttackCooldownMultiplier
+            : model.AutoAttackCooldownMultiplier;
+        attackTimer -= deltaTime * speed / cooldownMultiplier;
 
         if (attackTimer > 0f)
             return;

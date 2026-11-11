@@ -40,7 +40,7 @@ public class AuraAttack : IActivatableAttack, ITickAttack
 
     public void Tick(float deltaTime)
     {
-        remainingTime -= deltaTime;
+        remainingTime -= deltaTime / model.AugmentAutoAttackCooldownMultiplier;
         if (remainingTime <= 0f)
             Activate();
     }

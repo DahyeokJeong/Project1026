@@ -92,7 +92,7 @@ public class SummonAttack : IActivatableAttack, ITickAttack
         if (wispData == null && independentData == null)
             return;
 
-        summonTimer = Mathf.Max(0f, summonTimer - deltaTime);
+        summonTimer = Mathf.Max(0f, summonTimer - deltaTime / model.AugmentAutoAttackCooldownMultiplier);
         if (summonTimer <= 0f)
             Activate();
     }

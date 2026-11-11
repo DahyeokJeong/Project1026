@@ -61,6 +61,12 @@ public class PlayerModel : MonoBehaviour
     public float Critical => Mathf.Clamp(baseCritical + Managers.RunData.PlayerCriticalBonus +
         SoulBookLevel(SoulBookNode.CriticalChance) * CriticalChancePerLevel, 0f, 100f);
 
+    public float AugmentAutoAttackCooldownMultiplier =>
+        Mathf.Max(0.01f, Managers.RunData.PlayerAutoAttackCooldownMultiplier);
+
+    public float SoulBookAutoAttackCooldownMultiplier =>
+        Mathf.Max(0.01f, 1f - SoulBookLevel(SoulBookNode.AutoAttackCooldown) * AutoAttackCooldownPerLevel);
+
     public float AutoAttackCooldownMultiplier => Mathf.Max(0.01f, Managers.RunData.PlayerAutoAttackCooldownMultiplier *
         (1f - SoulBookLevel(SoulBookNode.AutoAttackCooldown) * AutoAttackCooldownPerLevel));
     public float MoveSpeed => baseMoveSpeed * Managers.RunData.PlayerMoveSpeedMultiplier *
