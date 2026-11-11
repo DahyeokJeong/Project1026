@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 3761490361371094999}
   - component: {fileID: 2034655861305010630}
   - component: {fileID: 8458517836481200772}
+  - component: {fileID: 9076685503544306476}
   - component: {fileID: 5323097964150650223}
   - component: {fileID: 4977340516919935828}
   - component: {fileID: 1745637549850076173}
@@ -223,9 +224,11 @@ MonoBehaviour:
   dashFrames:
   - {fileID: 21300000, guid: 990a6d9dc4cc04d4ea604193a2c35ce4, type: 3}
   - {fileID: 21300000, guid: 28f0c7209c9fcb94b89477b637e9ad7d, type: 3}
+  currentHp: {fileID: 0}
   currentExp: {fileID: 0}
   expTxt: {fileID: 0}
   levelTxt: {fileID: 0}
+  expFillSmoothTime: 0.18
 --- !u!114 &2809400701567533494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +299,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoAttack
   firePoint: {fileID: 5189062829605544366}
   model: {fileID: 3337697012970844914}
+--- !u!114 &9076685503544306476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855385415582002297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229965fe035ef9542b4a009bb94126ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSceneConfigurator
+  autoAttack: {fileID: 8458517836481200772}
+  augment: {fileID: 2034655861305010630}
+  battleUIObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  interactionRadius: 1.5
+  interactionCanvas: {fileID: 0}
+  interactionCamera: {fileID: 0}
+  interactionFont: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
 --- !u!114 &5323097964150650223
 MonoBehaviour:
   m_ObjectHideFlags: 0

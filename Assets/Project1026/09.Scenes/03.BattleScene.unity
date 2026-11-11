@@ -3437,7 +3437,9 @@ MonoBehaviour:
   mapArea: {fileID: 1330538461}
   agentRadius: 0.3
   padding: 0.1
-  enemyGap: 0.1
+  avoidanceLookAhead: 0.6
+  avoidanceStrength: 0.65
+  flankAngle: 55
   target: {fileID: 133129078}
   enemyLayer:
     serializedVersion: 2
