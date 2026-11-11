@@ -17,30 +17,33 @@ public class EnemyGenerate : MonoBehaviour
 
     #region Fields
     private readonly List<EnemyController> activeEnemies = new();
-    private readonly HashSet<EnemyController> currentWaveEnemies = new();
+    private readonly HashSet<EnemyController> roundEnemies = new();
     private readonly Dictionary<GameObject, EnemyController> enemyCache = new();
     private readonly List<GameObject> destroyedKeys = new();
 
     private EnemySpawnPosition spawnPosition;
-    private StageSpawnData spawnData;
+    private WaveDataSO spawnData;
 
     private float timer;
-    private int totalSpawned;
     private bool isSpawning;
     private bool IsSpawnAreaReady => mapArea != null && mapArea.IsReady && area != null && area.IsReady;
     #endregion
 
     #region Properties
     public bool IsSpawning => isSpawning;
-    public bool HasSpawnedAll => spawnData != null && totalSpawned >= spawnData.MaxCount;
     public int ActiveEnemyCount => activeEnemies.Count;
-    public int CurrentWaveActiveEnemyCount => currentWaveEnemies.Count;
+    public int RoundSpawnedCount { get; private set; }
+    public int RoundKillCount { get; private set; }
     #endregion
 
-    // Start()에서 자동으로 시작하지 않음.
-    // BattleSceneController가 데이터를 전달한 후 시작.
+    public void BeginRound()
+    {
+        roundEnemies.Clear();
+        RoundSpawnedCount = 0;
+        RoundKillCount = 0;
+    }
 
-    public void StartSpawning(StageSpawnData data)
+    public void StartSpawning(WaveDataSO data)
     {
         if (!CanStartSpawning(data))
             return;
@@ -52,8 +55,6 @@ public class EnemyGenerate : MonoBehaviour
         spawnData = data;
         spawnPosition = new EnemySpawnPosition(mapArea);
 
-        currentWaveEnemies.Clear();
-        totalSpawned = 0;
         timer = spawnData.SpawnInterval;
         isSpawning = true;
 
@@ -61,7 +62,7 @@ public class EnemyGenerate : MonoBehaviour
             SpawnBatch();
     }
 
-    private bool CanStartSpawning(StageSpawnData data)
+    private bool CanStartSpawning(WaveDataSO data)
     {
         if (isSpawning || data == null)
             return false;
@@ -69,7 +70,7 @@ public class EnemyGenerate : MonoBehaviour
         if (!IsSpawnAreaReady)
             return false;
 
-        if (data.MaxCount <= 0 || data.SpawnCount <= 0 || data.SpawnInterval <= 0f)
+        if (data.SpawnBatchSize <= 0 || data.SpawnInterval <= 0f)
             return false;
 
         foreach (var entry in data.Enemies)
@@ -86,7 +87,7 @@ public class EnemyGenerate : MonoBehaviour
         if (!Managers.BattleState.CanUpdate)
             return;
 
-        if (!isSpawning || HasSpawnedAll)
+        if (!isSpawning)
             return;
 
         timer -= Time.deltaTime;
@@ -104,15 +105,11 @@ public class EnemyGenerate : MonoBehaviour
             return;
 
         activeEnemies.RemoveAll(IsInactiveEnemy);
-        currentWaveEnemies.RemoveWhere(IsInactiveEnemy);
+        roundEnemies.RemoveWhere(IsInactiveEnemy);
 
         ClearDestroyedCache();
 
-        int available = Mathf.Max(0,spawnData.MaxCount - totalSpawned);
-
-        int count = Mathf.Min(spawnData.SpawnCount, available);
-
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < spawnData.SpawnBatchSize; i++)
         {
             if (!spawnPosition.TryGetPosition(spawnClearance, positionAttempts, out Vector2 position))
                 continue;
@@ -148,8 +145,8 @@ public class EnemyGenerate : MonoBehaviour
 
         enemy.Initialize(area, this);
         activeEnemies.Add(enemy);
-        currentWaveEnemies.Add(enemy);
-        totalSpawned++;
+        roundEnemies.Add(enemy);
+        RoundSpawnedCount++;
     }
 
     public void StopSpawning()
@@ -166,7 +163,9 @@ public class EnemyGenerate : MonoBehaviour
             return false;
 
         activeEnemies.Remove(enemy);
-        currentWaveEnemies.Remove(enemy);
+        if (roundEnemies.Remove(enemy))
+            RoundKillCount++;
+
         return true;
     }
 

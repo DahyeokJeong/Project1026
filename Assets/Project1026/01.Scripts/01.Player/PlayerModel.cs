@@ -31,13 +31,6 @@ public class PlayerModel : MonoBehaviour
     private bool initialized;
     #endregion
 
-    #region Dash Settings
-    [Header("Dash Setting")]
-    [SerializeField] private float dashDistance = 3f;
-    [SerializeField] private float dashDuration = 0.5f;
-    [SerializeField] private float dashCooldown = 3f;
-    #endregion
-
     #region Properties
     public int MaxHp =>
         baseMaxHp + Managers.RunData.PlayerMaxHpBonus;
@@ -73,9 +66,6 @@ public class PlayerModel : MonoBehaviour
         (1f + SoulBookLevel(SoulBookNode.MoveSpeed) * MoveSpeedPerLevel);
 
     public Vector2 LastMoveDirection { get; set; }
-    public float DashDistance => dashDistance;
-    public float DashDuration => dashDuration;
-    public float DashCooldown => dashCooldown;
     public float MaxExp { get; private set; }
     public float CurrentExp => Managers.RunData.CurrentExp;
     public int Level => Managers.RunData.Level;

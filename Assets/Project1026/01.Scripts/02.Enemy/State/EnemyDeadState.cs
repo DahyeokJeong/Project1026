@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class EnemyDeadState : IState
 {
-    private float duration = 0.3f;
-    private float flashDuration = 0.06f;
+    private const float FlashDuration = 0.06f;
+    private readonly EnemyController enemy;
     private float elapsed;
-    private EnemyController enemy;
 
     public EnemyDeadState(EnemyController enemy)
     {
@@ -20,18 +19,8 @@ public class EnemyDeadState : IState
 
     public void Tick()
     {
-        bool wasFlashing = elapsed < flashDuration;
         elapsed += Time.deltaTime;
-
-        if (elapsed < flashDuration)
-            return;
-
-        if (wasFlashing)
-            enemy.View.BeginDeathEffect();
-
-        enemy.View.SetDeathFade((elapsed - flashDuration) / (duration - flashDuration));
-
-        if (elapsed >= duration)
+        if (elapsed >= FlashDuration)
             enemy.CompleteDeath();
     }
 
