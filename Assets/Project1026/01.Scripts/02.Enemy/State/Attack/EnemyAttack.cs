@@ -13,6 +13,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private GameObject rangedPrefab;
 
     public event System.Action<Vector2> AttackPerformed;
+    public Vector2 FirePosition => firePoint.position;
 
     private Vector2 dir;
     private float angle;

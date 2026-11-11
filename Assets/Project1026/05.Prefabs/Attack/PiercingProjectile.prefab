@@ -113,7 +113,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
-  hitRadius: 0.3
+  hitRadius: 0.43
   maxPierceCount: 0
 --- !u!114 &5641740122377128318
 MonoBehaviour:

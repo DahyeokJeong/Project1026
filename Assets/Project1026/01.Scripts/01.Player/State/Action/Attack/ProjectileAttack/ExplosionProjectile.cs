@@ -60,7 +60,6 @@ public class ExplosionProjectile : ProjectileBase
             if(!target.gameObject.activeInHierarchy)
                 continue;
 
-            Managers.Pool.Pop(explosionPrefab, transform.position, Quaternion.identity);
             Explode();
             return;
         }
@@ -70,6 +69,10 @@ public class ExplosionProjectile : ProjectileBase
     {
         Vector2 center = transform.position;
         Vector2 radius = explosionRadius * explosionRadiusMultiplier;
+        GameObject effect = Managers.Pool.Pop(explosionPrefab, center, Quaternion.identity);
+        if (effect != null && effect.TryGetComponent(out ExplosionEffect explosionEffect))
+            explosionEffect.SetSize(radius * 2f);
+
         float searchRadius = Mathf.Max(radius.x, radius.y);
 
         Physics2D.OverlapCircle(center, searchRadius, contactFilter, hits);

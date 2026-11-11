@@ -26,8 +26,6 @@ public class EnemyController : MonoBehaviour
     [Header("attack & chase")]
     [SerializeField] private GameObject attackPrefab;
 
-    [Header("Enmey Ranged Radius")]
-    [SerializeField, Min(0.1f)] private float fireRaius = 0.3f;
     #endregion
 
     #region ExpPrefab
@@ -158,17 +156,13 @@ public class EnemyController : MonoBehaviour
         if(target == null)
             return false;
 
-        Vector2 origin = transform.position;
-        Vector2 shot = (Vector2)target.position - origin;
-        if (shot.sqrMagnitude > range * range)
+        Vector2 targetPosition = target.position;
+        Vector2 position = transform.position;
+        if ((targetPosition - position).sqrMagnitude > range * range)
             return false;
 
-        if(model.AttackType == EnemyAttackType.Melee)
-        {
-            return Physics2D.Linecast(origin, target.position, NavArea.Obstacle).collider == null;
-        }
-
-        return Physics2D.CircleCast(origin, fireRaius, shot.normalized, shot.magnitude, NavArea.Obstacle).collider == null;
+        Vector2 origin = model.AttackType == EnemyAttackType.Ranged ? attack.FirePosition : position;
+        return Physics2D.Linecast(origin, targetPosition, NavArea.Obstacle).collider == null;
     }
 
     private void OnDisable()

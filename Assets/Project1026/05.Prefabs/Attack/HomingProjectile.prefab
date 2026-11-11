@@ -114,7 +114,7 @@ MonoBehaviour:
     m_Bits: 2147483648
   searchRadius: 5
   turnSpeed: 360
-  hitRadius: 0.3
+  hitRadius: 0.43
 --- !u!114 &8340046552492993676
 MonoBehaviour:
   m_ObjectHideFlags: 0

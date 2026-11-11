@@ -38,6 +38,7 @@ public class NavigationArea : MonoBehaviour
     public NavigationGrid Grid { get; private set; }
     #endregion
 
+    private CapsuleCollider2D targetCollider;
     private FlowField flowField;
     private Vector2Int? lastTargetCell;
     public bool IsReady => mapArea != null && mapArea.IsReady && Grid != null && flowField != null;
@@ -71,6 +72,7 @@ public class NavigationArea : MonoBehaviour
         flowField = new FlowField(Grid);
         separation = new EnemySeparation(mapArea, Grid, agentRadius, padding, enemyLayer);
 
+        CacheTargetCollider();
         RefreshObstacles();
     }
 
@@ -80,7 +82,6 @@ public class NavigationArea : MonoBehaviour
             return;
 
         Physics2D.SyncTransforms();
-        float clearance = agentRadius + padding;
 
         for(int x = 0; x < Grid.Width; ++x)
         {
@@ -89,7 +90,7 @@ public class NavigationArea : MonoBehaviour
                 Vector2Int cell = new Vector2Int(x, y);
                 Vector2 center = Grid.GetCellCenter(cell);
 
-                Grid.SetWalkable(cell, mapArea.CanPlace(center, clearance));
+                Grid.SetWalkable(cell, CanPlaceNavigationAgent(center));
             }
         }
         RefreshFlowField(true);
@@ -109,58 +110,57 @@ public class NavigationArea : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        RefreshFlowField(true);
+        CacheTargetCollider();
+        RefreshObstacles();
     }
 
-    public Vector2 GetDirection(EnemyController enemy, ref Vector2 approachOffset)
+    public Vector2 GetDirection(EnemyController enemy, ref Vector2? flankDestination)
     {
         Vector2 position = enemy.transform.position;
         Vector2 direction = GetPathDirection(position);
         if (direction == Vector2.zero || avoidanceLookAhead <= 0f || avoidanceStrength <= 0f)
-            return direction;
-
-        if (approachOffset != Vector2.zero &&
-            TryGetApproachDirection(enemy, position, approachOffset, out Vector2 flankDirection))
         {
-            return flankDirection;
+            flankDestination = null;
+            return direction;
         }
-
-        approachOffset = Vector2.zero;
 
         Vector2 avoided = separation.Steer(enemy, direction, avoidanceLookAhead,
             avoidanceStrength, enemies, out bool pathCrowded);
-        if (pathCrowded &&
-            TryFindFlank(enemy, position, avoided, direction, out approachOffset, out flankDirection))
+        if (!pathCrowded || IsLocalStepClear(enemy, position, direction))
+        {
+            flankDestination = null;
+            return direction;
+        }
+
+        if (flankDestination.HasValue &&
+            TryGetApproachDirection(enemy, position, flankDestination.Value, out Vector2 flankDirection))
         {
             return flankDirection;
         }
 
-        if (pathCrowded)
+        flankDestination = null;
+        if (TryFindFlank(enemy, position, avoided, direction, out Vector2 destination, out flankDirection))
         {
-            if (IsLocalStepClear(enemy, position, direction))
-                return direction;
-            if (avoided != direction && IsLocalStepClear(enemy, position, avoided))
-                return avoided;
-
-            // A short sideways step can open a route around the front row.
-            Vector2 side = Vector2.Perpendicular(direction);
-            if (Vector2.Dot(avoided, side) < 0f)
-                side = -side;
-
-            float sideStepDistance = Mathf.Min(Grid.CellSize, avoidanceLookAhead);
-            if (IsLocalStepClear(enemy, position, side, sideStepDistance))
-                return side;
-            if (IsLocalStepClear(enemy, position, -side, sideStepDistance))
-                return -side;
-
-            return Vector2.zero;
+            flankDestination = destination;
+            return flankDirection;
         }
 
-        if (avoided == direction)
-            return direction;
+        if (avoided != direction && IsLocalStepClear(enemy, position, avoided))
+            return avoided;
 
-        return IsLocalStepClear(enemy, position, avoided) ? avoided : direction;
+        Vector2 side = Vector2.Perpendicular(direction);
+        if (Vector2.Dot(avoided, side) < 0f)
+            side = -side;
+
+        float sideStepDistance = Mathf.Min(Grid.CellSize, avoidanceLookAhead);
+        if (IsLocalStepClear(enemy, position, side, sideStepDistance))
+            return side;
+        if (IsLocalStepClear(enemy, position, -side, sideStepDistance))
+            return -side;
+
+        return Vector2.zero;
     }
+
 
     private bool IsLocalStepClear(EnemyController enemy, Vector2 position, Vector2 direction)
     {
@@ -172,14 +172,12 @@ public class NavigationArea : MonoBehaviour
         if (direction == Vector2.zero)
             return false;
 
-        float clearance = agentRadius + padding;
-        return mapArea.CanPlace(position + direction * distance, clearance) &&
-            Physics2D.CircleCast(position, clearance, direction, distance, Obstacle).collider == null &&
+        return IsObstaclePathClear(position, position + direction * distance) &&
             separation.IsApproachClear(enemy, direction, distance, enemies);
     }
 
     private bool TryFindFlank(EnemyController enemy, Vector2 position, Vector2 avoided,
-        Vector2 direction, out Vector2 offset, out Vector2 flankDirection)
+        Vector2 direction, out Vector2 destination, out Vector2 flankDirection)
     {
         Vector2 radial = (position - (Vector2)target.position).normalized;
         float approachRadius = Mathf.Max(agentRadius, enemy.Model.AttackRange - padding);
@@ -189,43 +187,45 @@ public class NavigationArea : MonoBehaviour
         for (int step = 1; step <= 2; step++)
         {
             float angle = flankAngle * step * preferredSide;
-            offset = (Vector2)(Quaternion.Euler(0f, 0f, angle) * radial) * approachRadius;
-            if (TryGetApproachDirection(enemy, position, offset, out flankDirection))
+            destination = GetFlankDestination(position, radial, angle, approachRadius);
+            if (TryGetApproachDirection(enemy, position, destination, out flankDirection))
                 return true;
 
-            offset = (Vector2)(Quaternion.Euler(0f, 0f, -angle) * radial) * approachRadius;
-            if (TryGetApproachDirection(enemy, position, offset, out flankDirection))
+            destination = GetFlankDestination(position, radial, -angle, approachRadius);
+            if (TryGetApproachDirection(enemy, position, destination, out flankDirection))
                 return true;
         }
 
         // When the inner approaches are blocked, advance around the outside of the crowd.
         float outerRadius = Vector2.Distance(position, target.position);
         float outerAngle = flankAngle * 0.5f * preferredSide;
-        offset = (Vector2)(Quaternion.Euler(0f, 0f, outerAngle) * radial) * outerRadius;
-        if (TryGetApproachDirection(enemy, position, offset, out flankDirection))
+        destination = GetFlankDestination(position, radial, outerAngle, outerRadius);
+        if (TryGetApproachDirection(enemy, position, destination, out flankDirection))
             return true;
 
-        offset = (Vector2)(Quaternion.Euler(0f, 0f, -outerAngle) * radial) * outerRadius;
-        if (TryGetApproachDirection(enemy, position, offset, out flankDirection))
+        destination = GetFlankDestination(position, radial, -outerAngle, outerRadius);
+        if (TryGetApproachDirection(enemy, position, destination, out flankDirection))
             return true;
 
-        offset = Vector2.zero;
+        destination = Vector2.zero;
         flankDirection = Vector2.zero;
         return false;
     }
 
-    private bool TryGetApproachDirection(EnemyController enemy, Vector2 position, Vector2 offset,
+    private Vector2 GetFlankDestination(Vector2 position, Vector2 radial, float angle, float radius)
+    {
+        Vector2 offset = (Vector2)(Quaternion.Euler(0f, 0f, angle) * radial) * radius;
+        return Vector2.MoveTowards(position, (Vector2)target.position + offset, avoidanceLookAhead);
+    }
+
+    private bool TryGetApproachDirection(EnemyController enemy, Vector2 position, Vector2 destination,
         out Vector2 direction)
     {
-        Vector2 destination = (Vector2)target.position + offset;
         Vector2 delta = destination - position;
         float distance = delta.magnitude;
         direction = delta.normalized;
-        float clearance = agentRadius + padding;
-
-        return distance > Grid.CellSize * 0.5f &&
-            mapArea.CanPlace(destination, clearance) &&
-            Physics2D.CircleCast(position, clearance, direction, distance, Obstacle).collider == null &&
+        return distance > Mathf.Min(Grid.CellSize, avoidanceLookAhead) * 0.5f &&
+            IsObstaclePathClear(position, destination) &&
             separation.IsApproachClear(enemy, direction, distance, enemies);
     }
 
@@ -236,25 +236,100 @@ public class NavigationArea : MonoBehaviour
 
         Vector2 destination = target.position;
         Vector2 toTarget = destination - pos;
-        float distance = toTarget.magnitude;
 
-        if (distance <= Mathf.Epsilon)
+        if (toTarget == Vector2.zero)
             return Vector2.zero;
 
-        float clearance = agentRadius + padding;
-        Vector2 direction = toTarget / distance;
-
-        if (mapArea.TryGetInserBounds(clearance, out Vector2 min, out Vector2 max)
-            && pos.x >= min.x && pos.x <= max.x && pos.y >= min.y && pos.y <= max.y
-            && destination.x >= min.x && destination.x <= max.x
-            && destination.y >= min.y && destination.y <= max.y
-            && Physics2D.CircleCast(pos, clearance, direction, distance, Obstacle).collider == null)
-        {
-            return direction;
-        }
+        if (IsObstaclePathClear(pos, destination))
+            return toTarget.normalized;
 
         return flowField.GetDirection(pos);
     }
+
+    private void CacheTargetCollider()
+    {
+        targetCollider = null;
+        if (target != null && target.TryGetComponent(out CapsuleCollider2D capsule) && !capsule.isTrigger)
+            targetCollider = capsule;
+    }
+
+    private bool CanPlaceNavigationAgent(Vector2 position)
+    {
+        if (targetCollider == null)
+            return mapArea.CanPlace(position, agentRadius + padding);
+
+        if (!mapArea.TryGetInserBounds(0f, out Vector2 min, out Vector2 max) ||
+            position.x < min.x || position.x > max.x || position.y < min.y || position.y > max.y)
+            return false;
+
+        Vector2 offset = targetCollider.transform.TransformVector(targetCollider.offset);
+        return Physics2D.OverlapCapsule(position + offset, GetNavigationCapsuleSize(),
+            targetCollider.direction, targetCollider.transform.eulerAngles.z, Obstacle) == null;
+    }
+
+    private bool IsObstaclePathClear(Vector2 start, Vector2 destination)
+    {
+        if (!CanPlaceNavigationAgent(destination))
+            return false;
+
+        Vector2 delta = destination - start;
+        float distance = delta.magnitude;
+        if (distance <= Mathf.Epsilon)
+            return true;
+
+        Vector2 direction = delta / distance;
+        if (targetCollider == null)
+            return Physics2D.CircleCast(start, agentRadius + padding, direction, distance, Obstacle).collider == null;
+
+        Vector2 offset = targetCollider.transform.TransformVector(targetCollider.offset);
+        return Physics2D.CapsuleCast(start + offset, GetNavigationCapsuleSize(), targetCollider.direction,
+            targetCollider.transform.eulerAngles.z, direction, distance, Obstacle).collider == null;
+    }
+
+    private Vector2 GetNavigationCapsuleSize()
+    {
+        Vector3 scale = targetCollider.transform.lossyScale;
+        return Vector2.Scale(targetCollider.size, new Vector2(Mathf.Abs(scale.x), Mathf.Abs(scale.y)));
+    }
+
+    private Vector2Int? FindApproachCell(Vector2Int blockedCell, Vector2 destination)
+    {
+        const int searchRadius = 3;
+        Vector2Int? nearest = null;
+        Vector2Int? nearestWithClearPath = null;
+        float nearestDistance = float.PositiveInfinity;
+        float nearestClearDistance = float.PositiveInfinity;
+        bool canStandAtDestination = CanPlaceNavigationAgent(destination);
+
+        for (int y = -searchRadius; y <= searchRadius; y++)
+        {
+            for (int x = -searchRadius; x <= searchRadius; x++)
+            {
+                Vector2Int candidate = blockedCell + new Vector2Int(x, y);
+                if (!Grid.IsWalkable(candidate))
+                    continue;
+
+                Vector2 center = Grid.GetCellCenter(candidate);
+                float distance = (center - destination).sqrMagnitude;
+                if (distance < nearestDistance)
+                {
+                    nearest = candidate;
+                    nearestDistance = distance;
+                }
+
+                if (canStandAtDestination && distance < nearestClearDistance &&
+                    IsObstaclePathClear(center, destination))
+                {
+                    nearestWithClearPath = candidate;
+                    nearestClearDistance = distance;
+                }
+            }
+        }
+
+        // A player touching an obstacle can fail the final cast while nearby cells remain reachable.
+        return nearestWithClearPath ?? nearest;
+    }
+
 
     private void RefreshFlowField(bool force = false)
     {
@@ -265,7 +340,7 @@ public class NavigationArea : MonoBehaviour
 
         if (target != null && Grid.TryWorldToCell(target.position, out Vector2Int cell))
         {
-            targetCell = cell;
+            targetCell = Grid.IsWalkable(cell) ? cell : FindApproachCell(cell, target.position);
         }
 
         if (!force && targetCell == lastTargetCell)
