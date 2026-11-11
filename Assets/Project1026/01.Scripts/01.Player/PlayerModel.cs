@@ -190,6 +190,12 @@ public class PlayerModel : MonoBehaviour
     }
     private static int SoulBookLevel(SoulBookNode node) => Managers.GameState.GetSoulBookLevel(node);
 
+    public static float GetRequiredExp(float baseExp, int level)
+    {
+        const float increasePerLevel = 30f;
+        return baseExp + Mathf.Max(0, level - 1) * increasePerLevel;
+    }
+
     public int CalculateExp(RunDataManager runData, float amount)
     {
         if (!initialized ||
@@ -204,12 +210,14 @@ public class PlayerModel : MonoBehaviour
 
         runData.CurrentExp += amount * (1f + SoulBookLevel(SoulBookNode.ExperienceGain) * ExperienceGainPerLevel);
 
-        while (runData.CurrentExp >= MaxExp)
+        float requiredExp = GetRequiredExp(MaxExp, runData.Level);
+        while (runData.CurrentExp >= requiredExp)
         {
-            runData.CurrentExp -= MaxExp;
+            runData.CurrentExp -= requiredExp;
             runData.Level++;
 
             levelUpCount++;
+            requiredExp = GetRequiredExp(MaxExp, runData.Level);
         }
 
         return levelUpCount;
