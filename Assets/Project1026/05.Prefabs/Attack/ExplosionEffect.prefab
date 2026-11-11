@@ -105,4 +105,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5e8d9e17f8c8849b06b8212d711d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionEffect
-  lifeTime: 0.15
+  lifeTime: 0.42
+  useGroundImpactVisual: 1

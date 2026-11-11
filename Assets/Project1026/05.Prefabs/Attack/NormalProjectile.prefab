@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2731029333833793000}
   - component: {fileID: 8918685349986795296}
   - component: {fileID: 8340046552492993676}
+  - component: {fileID: 2176744857961637281}
   m_Layer: 0
   m_Name: NormalProjectile
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,13 +114,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 8
   hitRadius: 0.43
-  wallRadius: 0.1
-  wallOffset: 0.02
-  maxBouncePerFrame: 3
 --- !u!114 &8340046552492993676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,3 +133,21 @@ MonoBehaviour:
   wallRadius: 0.1
   wallOffset: 0.02
   maxCollisionsPerFrame: 3
+--- !u!114 &2176744857961637281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424283817944284668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9a18a83e5ec634481634cc0d496c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileHoming
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2147483648
+  homingByDefault: 1
+  searchRadius: 5
+  turnSpeed: 360

@@ -122,120 +122,114 @@
         },
         {
             "Key": "AUG012",
-            "NameKO": "유도탄 습득",
-            "DescriptionKO": "적을 추적하는 자동 공격을 습득합니다.",
-            "Category": "Augment"
-        },
-        {
-            "Key": "AUG013",
             "NameKO": "번개 낙하 습득",
             "DescriptionKO": "번개가 떨어져 범위 피해를 주는 자동 공격을 습득합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG014",
+            "Key": "AUG013",
             "NameKO": "파동 습득",
             "DescriptionKO": "주변으로 퍼지는 파동 자동 공격을 습득합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG015",
+            "Key": "AUG014",
             "NameKO": "회전 소환수 습득",
             "DescriptionKO": "플레이어 주위를 도는 소환수를 습득합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG016",
+            "Key": "AUG015",
             "NameKO": "독립 소환수 습득",
             "DescriptionKO": "적을 찾아 공격하는 소환수를 습득합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG017",
+            "Key": "AUG016",
             "NameKO": "일반탄 수 증가",
             "DescriptionKO": "일반 공격의 투사체 수가 1 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG018",
+            "Key": "AUG017",
             "NameKO": "관통탄 수 증가",
             "DescriptionKO": "관통 공격의 투사체 수가 1 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG019",
+            "Key": "AUG018",
             "NameKO": "일반 공격 피해 증가",
             "DescriptionKO": "일반 공격의 피해량이 5 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG020",
+            "Key": "AUG019",
             "NameKO": "관통 공격 피해 증가",
             "DescriptionKO": "관통 공격의 피해량이 5 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG021",
+            "Key": "AUG020",
             "NameKO": "오라 공격 범위 증가",
             "DescriptionKO": "화염 장판의 오라 범위가 30% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG022",
+            "Key": "AUG021",
             "NameKO": "바람 칼날 투사체 크기 증가",
             "DescriptionKO": "바람 칼날의 투사체 크기가 10% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG023",
+            "Key": "AUG022",
             "NameKO": "화염구 폭발 범위 증가",
             "DescriptionKO": "화염구의 폭발 범위가 20% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG024",
+            "Key": "AUG023",
             "NameKO": "화염구 유도 기능 추가",
             "DescriptionKO": "화염구가 적을 자동으로 추적합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG025",
+            "Key": "AUG024",
             "NameKO": "지진 파동 범위 증가",
             "DescriptionKO": "지진의 파동 범위가 30% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG026",
+            "Key": "AUG025",
             "NameKO": "낙뢰 수 증가",
             "DescriptionKO": "낙뢰의 수가 1개 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG027",
+            "Key": "AUG026",
             "NameKO": "낙뢰 크기 증가",
             "DescriptionKO": "낙뢰의 크기가 20% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG028",
+            "Key": "AUG027",
             "NameKO": "회오리 소환 지속시간 증가",
             "DescriptionKO": "회오리의 소환 지속시간이 20% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG029",
+            "Key": "AUG028",
             "NameKO": "회오리 소환 수 증가",
             "DescriptionKO": "소환하는 회오리의 수가 1개 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG030",
+            "Key": "AUG029",
             "NameKO": "도깨비불 공격속도 증가",
             "DescriptionKO": "도깨비불의 투사체 공격속도가 10% 증가합니다.",
             "Category": "Augment"
         },
         {
-            "Key": "AUG031",
+            "Key": "AUG030",
             "NameKO": "도깨비불 투사체 수 증가",
             "DescriptionKO": "도깨비불이 발사하는 투사체 수가 1개 증가합니다.",
             "Category": "Augment"

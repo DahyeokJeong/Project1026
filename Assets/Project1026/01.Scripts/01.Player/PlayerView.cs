@@ -11,7 +11,6 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private Sprite[] dashFrames;
     [SerializeField] private Image currentHp;
     [SerializeField] private RectTransform currentExp;
-    [SerializeField] private TMP_Text expTxt;
     [SerializeField] private TMP_Text levelTxt;
     [SerializeField, Min(0.01f)] private float expFillSmoothTime = 0.18f;
     #endregion
@@ -28,7 +27,7 @@ public class PlayerView : MonoBehaviour
 
     public void InitExp(float maxExp)
     {
-        expView.Init(currentExp, expTxt, levelTxt, maxExp, expFillSmoothTime);
+        expView.Init(currentExp, levelTxt, maxExp, expFillSmoothTime);
     }
 
     private void Update()
@@ -40,9 +39,6 @@ public class PlayerView : MonoBehaviour
     {
         if (currentExp != null)
             currentExp.gameObject.SetActive(visible);
-
-        if (expTxt != null)
-            expTxt.gameObject.SetActive(visible);
 
         if (levelTxt != null)
             levelTxt.gameObject.SetActive(visible);

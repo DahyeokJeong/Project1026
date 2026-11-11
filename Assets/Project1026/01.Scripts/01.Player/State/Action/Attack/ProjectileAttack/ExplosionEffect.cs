@@ -4,13 +4,14 @@ public class ExplosionEffect : MonoBehaviour
 {
     #region Settings
     [Header("Settings")]
-    [SerializeField, Min(0.01f)] private float lifeTime = 0.25f;
+    [SerializeField, Min(0.01f)] private float lifeTime = 0.42f;
     [SerializeField] private bool useGroundImpactVisual = true;
     #endregion
 
     #region Fields
     private float timer;
     private SpriteRenderer visualRenderer;
+    private Color initialColor;
     private GroundImpactVisual groundImpactVisual;
     private Vector2 impactRadius;
     #endregion
@@ -18,6 +19,8 @@ public class ExplosionEffect : MonoBehaviour
     private void Awake()
     {
         visualRenderer = GetComponent<SpriteRenderer>();
+        if (visualRenderer != null)
+            initialColor = visualRenderer.color;
     }
 
     public void SetSize(Vector2 diameter)
@@ -42,6 +45,8 @@ public class ExplosionEffect : MonoBehaviour
         timer = lifeTime;
         impactRadius = Vector2.zero;
         groundImpactVisual?.Hide();
+        if (visualRenderer != null)
+            visualRenderer.color = initialColor;
     }
 
     private void Update()
@@ -50,7 +55,15 @@ public class ExplosionEffect : MonoBehaviour
             return;
 
         timer -= Time.deltaTime;
-        UpdateGroundImpact(1f - Mathf.Clamp01(timer / lifeTime));
+        float progress = 1f - Mathf.Clamp01(timer / lifeTime);
+        if (visualRenderer != null)
+        {
+            Color color = initialColor;
+            color.a *= 1f - Mathf.InverseLerp(0.18f / 0.42f, 0.31f / 0.42f, progress);
+            visualRenderer.color = color;
+        }
+
+        UpdateGroundImpact(progress);
 
         if (timer <= 0f)
         {
@@ -68,7 +81,8 @@ public class ExplosionEffect : MonoBehaviour
 
         groundImpactVisual ??= new GroundImpactVisual(transform, visualRenderer);
         Color color = Color.Lerp(new Color(1f, 0.93f, 0.68f), new Color(1f, 0.34f, 0.08f), progress);
-        color.a = 1f - progress;
-        groundImpactVisual.Show(impactRadius * Mathf.Lerp(0.4f, 1f, progress * 2f), color);
+        color.a = 1f - Mathf.InverseLerp(0.18f / 0.42f, 1f, progress);
+        float expansion = Mathf.InverseLerp(0f, 0.08f / 0.42f, progress);
+        groundImpactVisual.Show(impactRadius * Mathf.Lerp(0.4f, 1f, expansion), color);
     }
 }

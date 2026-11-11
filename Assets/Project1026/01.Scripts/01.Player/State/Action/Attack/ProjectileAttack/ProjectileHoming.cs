@@ -6,6 +6,7 @@ public class ProjectileHoming : MonoBehaviour
     #region Settings
     [Header("Homing Settings")]
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private bool homingByDefault;
     [SerializeField, Min(0f)] private float searchRadius = 5f;
     [SerializeField, Min(0f)] private float turnSpeed = 360f;
     #endregion
@@ -28,12 +29,12 @@ public class ProjectileHoming : MonoBehaviour
     private void OnEnable()
     {
         target = null;
-        homingEnabled = false;
+        homingEnabled = homingByDefault;
     }
 
     public void SetHomingEnabled(bool enabled)
     {
-        homingEnabled = enabled;
+        homingEnabled = homingByDefault || enabled;
     }
 
     public Vector2 GetDirection(Vector2 currentDirection)

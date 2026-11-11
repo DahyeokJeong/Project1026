@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6523325766518554056}
   - component: {fileID: 8943616692216685008}
   - component: {fileID: -1814431228203730395}
+  - component: {fileID: 7239448816213520138}
   m_Layer: 0
   m_Name: Fire_Wisp_Projectile
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
   moveSpeed: 7
   lifeTime: 3
   baseDamage: 0
+  damageMultiplier: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
@@ -131,3 +133,21 @@ MonoBehaviour:
   wallRadius: 0.1
   wallOffset: 0.02
   maxCollisionsPerFrame: 3
+--- !u!114 &7239448816213520138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209742996739000159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9a18a83e5ec634481634cc0d496c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileHoming
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2147483648
+  homingByDefault: 1
+  searchRadius: 5
+  turnSpeed: 360

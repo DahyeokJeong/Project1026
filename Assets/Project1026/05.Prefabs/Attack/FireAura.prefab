@@ -131,12 +131,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireAura
   damageMultiplier: 0.5
   tickInterval: 1
-  duration: 6
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
   hitArea: {fileID: 8405486937854877558}
   positionOffset: {x: 0, y: 0.5}
+  duration: 6
 --- !u!70 &8405486937854877558
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

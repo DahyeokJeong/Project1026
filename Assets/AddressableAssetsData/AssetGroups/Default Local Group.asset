@@ -126,12 +126,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9139600bd299ab24ea73057b4dc8bcf3
-    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Homing.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AttackConfigs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93b4d84c7224f544da16a5ce00233e2a
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerAttackSpeed.asset
     m_ReadOnly: 0
@@ -176,12 +170,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b36c181db56732f4593ad04dadede6b7
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Player Stat/SO_Augment_PlayerMoveSpeed.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AugmentEffects
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4dac3526af27ea4ba4b681299f90f0a
-    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_HomingAcquire.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects

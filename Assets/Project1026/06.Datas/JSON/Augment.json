@@ -62,120 +62,114 @@
         },
         {
             "Id": "AUG012",
-            "ConfigKey": "SO_Augment_HomingAcquire",
-            "AttackConfigKey": "SO_Attack_Homing",
-            "Value": 1
-        },
-        {
-            "Id": "AUG013",
             "ConfigKey": "SO_Augment_LightningFallingAcquire",
             "AttackConfigKey": "SO_Attack_LightningFalling",
             "Value": 1
         },
         {
-            "Id": "AUG014",
+            "Id": "AUG013",
             "ConfigKey": "SO_Augment_WaveAcquire",
             "AttackConfigKey": "SO_Attack_Wave",
             "Value": 1
         },
         {
-            "Id": "AUG015",
+            "Id": "AUG014",
             "ConfigKey": "SO_Augment_OrbitSummonAcquire",
             "AttackConfigKey": "SO_Attack_OrbitSummon",
             "Value": 1
         },
         {
-            "Id": "AUG016",
+            "Id": "AUG015",
             "ConfigKey": "SO_Augment_IndependentSummonAcquire",
             "AttackConfigKey": "SO_Attack_IndependentSummon",
             "Value": 1
         },
         {
-            "Id": "AUG017",
+            "Id": "AUG016",
             "ConfigKey": "SO_Augment_NormalCount",
             "AttackConfigKey": "SO_Attack_Normal",
             "Value": 1
         },
         {
-            "Id": "AUG018",
+            "Id": "AUG017",
             "ConfigKey": "SO_Augment_PiercingCount",
             "AttackConfigKey": "SO_Attack_Piercing",
             "Value": 1
         },
         {
-            "Id": "AUG019",
+            "Id": "AUG018",
             "ConfigKey": "SO_Augment_NormalDamage",
             "AttackConfigKey": "SO_Attack_Normal",
             "Value": 5
         },
         {
-            "Id": "AUG020",
+            "Id": "AUG019",
             "ConfigKey": "SO_Augment_PiercingDamage",
             "AttackConfigKey": "SO_Attack_Piercing",
             "Value": 5
         },
         {
-            "Id": "AUG021",
+            "Id": "AUG020",
             "ConfigKey": "SO_Augment_FireAuraRange",
             "AttackConfigKey": "SO_Attack_FireAura",
             "Value": 30
         },
         {
-            "Id": "AUG022",
+            "Id": "AUG021",
             "ConfigKey": "SO_Augment_PiercingSize",
             "AttackConfigKey": "SO_Attack_Piercing",
             "Value": 10
         },
         {
-            "Id": "AUG023",
+            "Id": "AUG022",
             "ConfigKey": "SO_Augment_ExplosionRange",
             "AttackConfigKey": "SO_Attack_Explosion",
             "Value": 20
         },
         {
-            "Id": "AUG024",
+            "Id": "AUG023",
             "ConfigKey": "SO_Augment_FireballHoming",
             "AttackConfigKey": "SO_Attack_Explosion",
             "Value": 1
         },
         {
-            "Id": "AUG025",
+            "Id": "AUG024",
             "ConfigKey": "SO_Augment_WaveRange",
             "AttackConfigKey": "SO_Attack_Wave",
             "Value": 30
         },
         {
-            "Id": "AUG026",
+            "Id": "AUG025",
             "ConfigKey": "SO_Augment_FallingCount",
             "AttackConfigKey": "SO_Attack_LightningFalling",
             "Value": 1
         },
         {
-            "Id": "AUG027",
+            "Id": "AUG026",
             "ConfigKey": "SO_Augment_FallingSize",
             "AttackConfigKey": "SO_Attack_LightningFalling",
             "Value": 20
         },
         {
-            "Id": "AUG028",
+            "Id": "AUG027",
             "ConfigKey": "SO_Augment_IndependentSummonDuration",
             "AttackConfigKey": "SO_Attack_IndependentSummon",
             "Value": 20
         },
         {
-            "Id": "AUG029",
+            "Id": "AUG028",
             "ConfigKey": "SO_Augment_IndependentSummonCount",
             "AttackConfigKey": "SO_Attack_IndependentSummon",
             "Value": 1
         },
         {
-            "Id": "AUG030",
+            "Id": "AUG029",
             "ConfigKey": "SO_Augment_OrbitSummonAttackSpeed",
             "AttackConfigKey": "SO_Attack_OrbitSummon",
             "Value": 10
         },
         {
-            "Id": "AUG031",
+            "Id": "AUG030",
             "ConfigKey": "SO_Augment_OrbitSummonProjectileCount",
             "AttackConfigKey": "SO_Attack_OrbitSummon",
             "Value": 1

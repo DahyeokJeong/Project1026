@@ -6,7 +6,6 @@ public class PlayerExpView
 {
     private RectTransform currentExp;
     private Image fillImage;
-    private TMP_Text expTxt;
     private TMP_Text levelTxt;
     private float baseExp;
     private float displayedProgress;
@@ -15,12 +14,11 @@ public class PlayerExpView
     private float fillVelocity;
     private bool hasTarget;
 
-    public void Init(RectTransform currentExp, TMP_Text expTxt, TMP_Text levelTxt, float amount,
+    public void Init(RectTransform currentExp, TMP_Text levelTxt, float amount,
         float smoothTime)
     {
         this.currentExp = currentExp;
         fillImage = currentExp != null ? currentExp.GetComponent<Image>() : null;
-        this.expTxt = expTxt;
         this.levelTxt = levelTxt;
         baseExp = amount;
 
@@ -75,8 +73,6 @@ public class PlayerExpView
             currentExp.anchorMax = new Vector2(ratio, 1f);
 
         float maxExp = PlayerModel.GetRequiredExp(baseExp, completedLevels + 1);
-        if (expTxt != null)
-            expTxt.text = $"{ratio * maxExp:F1} / {maxExp}";
         if (levelTxt != null)
             levelTxt.text = $"Lv.{completedLevels + 1}";
     }
