@@ -3365,7 +3365,7 @@ GameObject:
   - component: {fileID: 1404462413}
   - component: {fileID: 1404462412}
   m_Layer: 0
-  m_Name: "\uC131\uBB38 \uC0C1\uD638\uC791\uC6A9 \uBC94\uC704"
+  m_Name: Castle_Door_Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
