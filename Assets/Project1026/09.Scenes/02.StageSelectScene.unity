@@ -703,7 +703,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "스테이지 선택"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -960,7 +960,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "←"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1217,7 +1217,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "스테이지 1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1429,7 +1429,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "도전 가능"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1642,7 +1642,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "잠김"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1974,7 +1974,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "스테이지 2"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2186,7 +2186,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "이전 스테이지 클리어 후 개방"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2399,7 +2399,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "잠김"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2731,7 +2731,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "스테이지 3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2943,7 +2943,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "이전 스테이지 클리어 후 개방"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3156,7 +3156,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "잠김"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3518,7 +3518,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "스테이지 1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3730,7 +3730,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "황혼이 내려앉은 마을\n준비가 되면 입장하기를 눌러주세요."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3987,7 +3987,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "입장하기"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

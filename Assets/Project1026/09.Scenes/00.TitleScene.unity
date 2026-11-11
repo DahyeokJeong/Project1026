@@ -750,8 +750,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAC8C\uC784 \uC2DC\uC791"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

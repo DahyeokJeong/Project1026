@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 434f0e03f1f505443a224391411ead89
+guid: 595c20a680a2f704d969fcc40fd4aee0
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Maplestory
+  - DNF Forged Blade
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

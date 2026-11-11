@@ -320,7 +320,7 @@ MonoBehaviour:
   interactionRadius: 1.5
   interactionCanvas: {fileID: 0}
   interactionCamera: {fileID: 0}
-  interactionFont: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  interactionFont: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
 --- !u!114 &5323097964150650223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   interactionRadius: 1.5
   interactionCanvas: {fileID: 0}
   interactionCamera: {fileID: 0}
-  interactionFont: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  interactionFont: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
 --- !u!114 &4977340516919935828
 MonoBehaviour:
   m_ObjectHideFlags: 0
