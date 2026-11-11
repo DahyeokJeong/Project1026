@@ -10,19 +10,24 @@ public class ChaseCamera : MonoBehaviour
     [Header("Follow Settings")]
     [SerializeField] private float followSpeed = 5f;
 
+    [SerializeField] private BattleCameraBounds cameraBounds;
+
     private void LateUpdate()
     {
-        if (target == null)
+        if (target == null && cameraBounds == null)
             return;
 
-        Vector3 targetPosition = new Vector3(
-            target.position.x,
-            target.position.y,
-            transform.position.z);
+        Vector3 position = transform.position;
 
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetPosition,
-            followSpeed * Time.deltaTime);
+        if (target != null)
+        {
+            Vector3 targetPosition = new Vector3(target.position.x, target.position.y, position.z);
+            position = Vector3.Lerp(position, targetPosition, followSpeed * Time.deltaTime);
+        }
+
+        if (cameraBounds != null)
+            position = cameraBounds.Constrain(position);
+
+        transform.position = position;
     }
 }

@@ -144,7 +144,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
-  hitRadius: 1.5
+  hitRadius: 1.358
   visualRenderer: {fileID: 8011878112511495004}
   fallFrames:
   - {fileID: 21300000, guid: ac1afc93b34bf01458e19c1bf919f783, type: 3}

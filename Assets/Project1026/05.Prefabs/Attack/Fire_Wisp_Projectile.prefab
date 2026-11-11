@@ -112,7 +112,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483648
-  hitRadius: 0.3
+  hitRadius: 0.43
 --- !u!114 &-1814431228203730395
 MonoBehaviour:
   m_ObjectHideFlags: 0

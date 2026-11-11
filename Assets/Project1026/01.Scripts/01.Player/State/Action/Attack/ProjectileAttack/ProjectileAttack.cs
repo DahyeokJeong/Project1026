@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class ProjectileAttack : ITickAttack
 {
@@ -9,11 +9,14 @@ public class ProjectileAttack : ITickAttack
     #endregion
 
     #region Attack Settings
+    private const float TargetSearchRadius = 5f;
     private readonly float attackInterval;
     private readonly ProjectileAttackRuntimeData data;
+    private readonly ContactFilter2D enemyFilter;
     #endregion
 
     #region Fields
+    private readonly List<Collider2D> targetHits = new();
     private float attackTimer;
     #endregion
 
@@ -24,6 +27,10 @@ public class ProjectileAttack : ITickAttack
         this.config = config;
         this.attackInterval = Mathf.Max(0.01f, attackInterval);
         this.data = data;
+
+        ContactFilter2D filter = new ContactFilter2D { useTriggers = true };
+        filter.SetLayerMask(LayerMask.GetMask("Enemy"));
+        enemyFilter = filter;
 
         attackTimer = this.attackInterval;
     }
@@ -47,18 +54,47 @@ public class ProjectileAttack : ITickAttack
         if (count <= 0)
             return;
 
+        Vector2 direction = GetLaunchDirection();
         switch(config.Pattern)
         {
             case ProjectilePattern.Parallel:
-                FireParallel(count);
+                FireParallel(count, direction);
                 break;
             case ProjectilePattern.Spread:
-                FireSpread(count);
+                FireSpread(count, direction);
                 break;
             case ProjectilePattern.Homing:
-                FireHoming(count);
+                FireHoming(count, direction);
                 break;
         }
+    }
+
+    private Vector2 GetLaunchDirection()
+    {
+        Vector2 playerPosition = model.transform.position;
+        Vector2 launchPosition = firePoint.position;
+        Physics2D.OverlapCircle(playerPosition, TargetSearchRadius, enemyFilter, targetHits);
+
+        float nearestDistance = TargetSearchRadius * TargetSearchRadius;
+        Vector2 direction = model.LastMoveDirection.normalized;
+
+        foreach (Collider2D hit in targetHits)
+        {
+            if (!Managers.Damage.TryGetTarget(hit.transform, out Transform target) ||
+                !target.gameObject.activeInHierarchy)
+                continue;
+
+            Vector2 targetPosition = target.position;
+            float distance = (targetPosition - playerPosition).sqrMagnitude;
+            Vector2 aim = targetPosition - launchPosition;
+            if (distance > nearestDistance || aim == Vector2.zero)
+                continue;
+
+            nearestDistance = distance;
+            direction = aim.normalized;
+        }
+
+        return direction;
     }
 
     private void SpawnProjectile(Vector2 position, Vector2 direction)
@@ -81,12 +117,11 @@ public class ProjectileAttack : ITickAttack
         }
     }
 
-    private void FireParallel(int count)
+    private void FireParallel(int count, Vector2 direction)
     {
         float spacing = 0.4f;
         float startOffset = -(count - 1) * spacing * 0.5f;
 
-        Vector2 direction = model.LastMoveDirection.normalized;
         Vector2 side = new Vector2(-direction.y, direction.x);
 
         for (int i = 0; i < count; i++)
@@ -99,7 +134,7 @@ public class ProjectileAttack : ITickAttack
         }
     }
 
-    private void FireSpread(int count)
+    private void FireSpread(int count, Vector2 direction)
     {
         float angleSpacing = 15f;
         float startAngle = -(count - 1) * angleSpacing * 0.5f;
@@ -107,16 +142,14 @@ public class ProjectileAttack : ITickAttack
         for (int i = 0; i < count; i++)
         {
             float angle = startAngle + i * angleSpacing;
-            Vector2 direction = Quaternion.Euler(0f, 0f, angle) * model.LastMoveDirection;
+            Vector2 spreadDirection = Quaternion.Euler(0f, 0f, angle) * direction;
 
-            SpawnProjectile(firePoint.position, direction);
+            SpawnProjectile(firePoint.position, spreadDirection);
         }
     }
 
-    private void FireHoming(int count)
+    private void FireHoming(int count, Vector2 direction)
     {
-        Vector2 direction = model.LastMoveDirection.normalized;
-
         for(int i = 0; i < count; ++i)
         {
             SpawnProjectile(firePoint.position, direction);
