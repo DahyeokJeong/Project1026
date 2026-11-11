@@ -731,7 +731,7 @@ MonoBehaviour:
   interactionRadius: 1.5
   interactionCanvas: {fileID: 288710255}
   interactionCamera: {fileID: 454663522}
-  interactionFont: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  interactionFont: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
 --- !u!4 &317582160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5530833077823482181, guid: 21dffa55c546a544385d6c7a8e4d2c8a, type: 3}
@@ -796,8 +796,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 / 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1743,8 +1743,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC99D\uAC15 \uC0C1\uC138 \uC124\uBA85"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2096,8 +2096,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC99D\uAC15 \uC0C1\uC138 \uC124\uBA85"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3276,8 +3276,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC99D\uAC15 \uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3365,7 +3365,7 @@ GameObject:
   - component: {fileID: 1404462413}
   - component: {fileID: 1404462412}
   m_Layer: 0
-  m_Name: "\uC131\uBB38 \uC0C1\uD638\uC791\uC6A9 \uBC94\uC704"
+  m_Name: Castle_Door_Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3611,8 +3611,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC99D\uAC15 \uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4347,8 +4347,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lv. 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4750,8 +4750,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC99D\uAC15 \uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4931,8 +4931,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3 UP
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5068,8 +5068,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC99D\uAC15 \uC0C1\uC138 \uC124\uBA85"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
-  m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  m_sharedMaterial: {fileID: -8943609907743459984, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5256,7 +5256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SaveNPCDialogue
   canvas: {fileID: 288710255}
   saveController: {fileID: 1985634246}
-  koreanFont: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  koreanFont: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
 --- !u!61 &2058754986
 BoxCollider2D:
   m_ObjectHideFlags: 0

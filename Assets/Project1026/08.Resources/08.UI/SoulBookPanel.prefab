@@ -48,4 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07e4b46c0854ea39a1c4c1657f30d12, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SoulBookPanelUI
-  koreanFont: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
+  koreanFont: {fileID: 11400000, guid: 4924fb2ffc5bf1841acbddd8b59604e0, type: 2}
+  nodeIcons:
+  - {fileID: 2800000, guid: 0f898ad0b85cc294291c314e0ed85f72, type: 3}
+  - {fileID: 2800000, guid: 686b676bacf8a86418d46d29a35c9b2f, type: 3}
+  - {fileID: 2800000, guid: 486a8f8eeb6f8204e8d204c6f8081c8e, type: 3}
+  - {fileID: 2800000, guid: 3a260adcfa279f64086dcaa7a9e32e29, type: 3}
+  - {fileID: 2800000, guid: 74a46b08ef006fe449b008d5cb387f55, type: 3}
+  - {fileID: 2800000, guid: 44b77caf6bb55a543ba3d278e623af6b, type: 3}
+  - {fileID: 2800000, guid: 06bf9d5a978b8f6439248576c3e3357a, type: 3}
+  - {fileID: 2800000, guid: a121d4da65d26b445950548efe92a098, type: 3}
+  - {fileID: 2800000, guid: 8f2c2d8795c81f243b4c0e7300efb27d, type: 3}
+  - {fileID: 2800000, guid: d3078799eecce3e48950efb6e0db7cc5, type: 3}
