@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RoundData01_02
   m_EditorClassIdentifier: Assembly-CSharp::RoundDataSO
   waves:
-  - {fileID: 11400000, guid: c90cb953215231c46a40d5a9a59bf31b, type: 2}
-  - {fileID: 11400000, guid: 748da4f274b34154f89529b7f97bc5dd, type: 2}
-  - {fileID: 11400000, guid: 5da3fa8ea5c196447ad14e60b3301b53, type: 2}
+  - {fileID: 11400000, guid: b66daf1f5c5881442bf2fa6130f9cfcb, type: 2}
+  - {fileID: 11400000, guid: f697fce44b7c21f499f5ac655dfdcad5, type: 2}
+  - {fileID: 11400000, guid: 4f66385ae5d5cee478ff21381c1da20a, type: 2}

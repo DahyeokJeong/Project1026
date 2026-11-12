@@ -15,3 +15,4 @@ MonoBehaviour:
   stageId: 1
   rounds:
   - {fileID: 11400000, guid: 98e7a29d5e1ac3447a42ed29b987fbb1, type: 2}
+  - {fileID: 11400000, guid: 7a496263741f66d45ba27321c086764e, type: 2}

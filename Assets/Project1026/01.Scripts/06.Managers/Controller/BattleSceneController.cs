@@ -139,6 +139,11 @@ public class BattleSceneController : MonoBehaviour
         EndBattle(true);
     }
 
+    public void End()
+    {
+        EndBattle(false);
+    }
+
     private void EndBattle(bool cleared)
     {
         battleRunning = false;
@@ -146,7 +151,10 @@ public class BattleSceneController : MonoBehaviour
         Managers.BattleState.SetState(cleared ? BattleState.Cleared : BattleState.Failed);
 
         if (cleared)
+        {
             Managers.GameState.CompleteBattleStage(currentStageData.StageId);
+            // 클리어시 셀렉트 화면으로 이동 or 유지
+        }
 
         Managers.RunData.Reset();
         Managers.Scene.LoadGame("01.LobbyScene");
