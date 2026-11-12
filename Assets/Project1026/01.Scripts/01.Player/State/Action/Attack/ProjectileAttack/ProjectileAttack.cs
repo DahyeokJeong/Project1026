@@ -57,19 +57,7 @@ public class ProjectileAttack : ITickAttack
         if (count <= 0)
             return;
 
-        Vector2 direction = GetLaunchDirection();
-        switch(config.Pattern)
-        {
-            case ProjectilePattern.Parallel:
-                FireParallel(count, direction);
-                break;
-            case ProjectilePattern.Spread:
-                FireSpread(count, direction);
-                break;
-            case ProjectilePattern.Homing:
-                FireHoming(count, direction);
-                break;
-        }
+        FireSpread(count, GetLaunchDirection());
     }
 
     private Vector2 GetLaunchDirection()
@@ -120,23 +108,6 @@ public class ProjectileAttack : ITickAttack
         }
     }
 
-    private void FireParallel(int count, Vector2 direction)
-    {
-        float spacing = 0.4f;
-        float startOffset = -(count - 1) * spacing * 0.5f;
-
-        Vector2 side = new Vector2(-direction.y, direction.x);
-
-        for (int i = 0; i < count; i++)
-        {
-            float offset = startOffset + i * spacing;
-            Vector2 spawnPosition =
-                (Vector2)firePoint.position + side * offset;
-
-            SpawnProjectile(spawnPosition, direction);
-        }
-    }
-
     private void FireSpread(int count, Vector2 direction)
     {
         float angleSpacing = 15f;
@@ -148,14 +119,6 @@ public class ProjectileAttack : ITickAttack
             Vector2 spreadDirection = Quaternion.Euler(0f, 0f, angle) * direction;
 
             SpawnProjectile(firePoint.position, spreadDirection);
-        }
-    }
-
-    private void FireHoming(int count, Vector2 direction)
-    {
-        for(int i = 0; i < count; ++i)
-        {
-            SpawnProjectile(firePoint.position, direction);
         }
     }
 }

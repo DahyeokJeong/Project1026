@@ -17,7 +17,6 @@ MonoBehaviour:
   interval: 1.4
   initiallyOwned: 1
   prefab: {fileID: 6424283817944284668, guid: f414981c6e649244e99c1ed5c2f0c7f3, type: 3}
-  pattern: 2
   usePlayerStat: 1
   ignoreCooldownAugment: 1
   initialProjectileCount: 1

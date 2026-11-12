@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3158295381166669339}
   - component: {fileID: 917030584790514646}
   - component: {fileID: 4727290965583411148}
+  - component: {fileID: 681240210054145822}
   m_Layer: 0
   m_Name: ExplosionEffect
   m_TagString: Untagged
@@ -107,3 +108,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionEffect
   lifeTime: 0.42
   useGroundImpactVisual: 1
+  impactParticles: {fileID: 681240210054145822}
+--- !u!114 &681240210054145822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192837210289080540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959572d1d8534671ae8654fa6d711d21, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactParticleBurst
+  referenceRenderer: {fileID: 917030584790514646}
+  particleMaterial: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  spawnRadiusFraction: 0.7
+  particleCount: 32
+  lightColor: {r: 1, g: 0.98, b: 0.68, a: 1}
+  accentColor: {r: 1, g: 0.52, b: 0.13, a: 1}
+  lifetime: {x: 0.22, y: 0.39}
+  particleSize: {x: 0.14, y: 0.25}
+  spreadSpeed: 2

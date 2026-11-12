@@ -6,6 +6,7 @@ public class ExplosionEffect : MonoBehaviour
     [Header("Settings")]
     [SerializeField, Min(0.01f)] private float lifeTime = 0.42f;
     [SerializeField] private bool useGroundImpactVisual = true;
+    [SerializeField] private ImpactParticleBurst impactParticles;
     #endregion
 
     #region Fields
@@ -38,6 +39,7 @@ public class ExplosionEffect : MonoBehaviour
         transform.localScale = scale;
         impactRadius = diameter * 0.5f;
         UpdateGroundImpact(0f);
+        impactParticles?.Play(impactRadius);
     }
 
     private void OnEnable()

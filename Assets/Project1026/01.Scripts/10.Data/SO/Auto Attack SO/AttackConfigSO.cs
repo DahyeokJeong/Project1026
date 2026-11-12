@@ -6,7 +6,6 @@ public class AttackConfigSO : AttackConfigBaseSO
     #region Attack Settings
     [Header("Projectile Settings")]
     [SerializeField] private GameObject prefab;
-    [SerializeField] private ProjectilePattern pattern;
     [SerializeField] private bool usePlayerStat;
     [SerializeField] private bool ignoreCooldownAugment;
     [SerializeField, Min(1)] private int initialProjectileCount = 1;
@@ -16,7 +15,6 @@ public class AttackConfigSO : AttackConfigBaseSO
     public GameObject Prefab => prefab;
     public bool UsePlayerStat => usePlayerStat;
     public bool IgnoreCooldownAugment => ignoreCooldownAugment;
-    public ProjectilePattern Pattern => pattern;
     #endregion
 
     public override AttackRuntimeData CreateRuntimeData(bool initiallyOwned)
@@ -28,13 +26,13 @@ public class AttackConfigSO : AttackConfigBaseSO
     {
         if (prefab == null || firePoint == null || model == null)
         {
-            Debug.LogError($"[AttackConfigSO] Åõ»çÃ¼ °ø°ÝÀÇ ÇÊ¼ö ÂüÁ¶°¡ ¾ø½À´Ï´Ù: {name}", this);
+            Debug.LogError($"[AttackConfigSO] ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½: {name}", this);
             return null;
         }
 
         if (data is not ProjectileAttackRuntimeData projectileData)
         {
-            Debug.LogError($"[AttackConfigSO] ·±Å¸ÀÓ µ¥ÀÌÅÍ Å¸ÀÔÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù: {ConfigKey}", this);
+            Debug.LogError($"[AttackConfigSO] ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½: {ConfigKey}", this);
             return null;
         }
 

@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 6603465446860044626}
   - component: {fileID: 1704069014990538751}
   - component: {fileID: 5641740122377128318}
+  - component: {fileID: 4905001200024576381}
+  - component: {fileID: 4905001200024576382}
+  - component: {fileID: 4905001200024576383}
   m_Layer: 0
   m_Name: PiercingProjectile
   m_TagString: Untagged
@@ -83,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 9e2065c9fda1b764fb0a43f0dfbdff2d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8063456e7726425e9bfb83ec00aa564f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,3 +136,54 @@ MonoBehaviour:
   wallRadius: 0.1
   wallOffset: 0.02
   maxCollisionsPerFrame: 3
+--- !u!114 &4905001200024576381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719453655010788331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5e579bdf6c45f99df44d317cd59670, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::WindKnifeAfterimage
+  streakSprites:
+  - {fileID: 21300000, guid: ea4cc6705cd64188981bffac25427002, type: 3}
+  - {fileID: 21300000, guid: 233955f80c3f4f588a861141865396c2, type: 3}
+  streakLifetime: 0.19
+  repeatInterval: 0.26
+  stagger: 0.055
+  speedRatio: 0.65
+--- !u!114 &4905001200024576382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719453655010788331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8781a220df32457389756e025c0b4ede, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpriteAnimation
+  frames:
+  - {fileID: 9037493359644798075, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
+  - {fileID: 4990445515237617851, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
+  - {fileID: 6862549602844021160, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
+  - {fileID: -6271070668211180444, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
+  frameDuration: 0.06
+--- !u!114 &4905001200024576383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6719453655010788331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa76713c1c748139c84cc99794ea4ec, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::WindKnifeParticleTrail
+  emitterOffset: {x: -0.55, y: 0}
+  particlesPerUnit: 8

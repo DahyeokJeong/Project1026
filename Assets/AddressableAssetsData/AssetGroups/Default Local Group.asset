@@ -239,12 +239,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f85c5d365d55cd74988b7c90e050e24d
-    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Piercing.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AttackConfigs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb8501fe38b01b546a4d1037726fdf07
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_LightningFalling.asset
     m_ReadOnly: 0

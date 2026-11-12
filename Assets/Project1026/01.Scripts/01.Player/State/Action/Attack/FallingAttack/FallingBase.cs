@@ -29,7 +29,10 @@ public abstract class FallingBase : MonoBehaviour
 
     #region Properties
     protected float Damage => damage;
+    protected float FallDuration => Mathf.Max(0.01f, fallDuration);
+    protected virtual float TimeToLand => FallDuration;
     protected virtual float LandingDuration => 0f;
+    protected virtual bool MoveVisualDuringFall => true;
     #endregion
 
     protected virtual void OnEnable()
@@ -37,7 +40,7 @@ public abstract class FallingBase : MonoBehaviour
         state = FallState.Inactive;
         elapsedTime = 0f;
 
-        if (visual != null)
+        if (MoveVisualDuringFall && visual != null)
             visual.localPosition = Vector3.up * fallHeight;
     }
 
@@ -51,7 +54,7 @@ public abstract class FallingBase : MonoBehaviour
         elapsedTime = 0f;
         state = FallState.Falling;
 
-        if (visual != null)
+        if (MoveVisualDuringFall && visual != null)
             visual.localPosition = Vector3.up * fallHeight;
 
         OnFallProgress(0f);
@@ -77,9 +80,9 @@ public abstract class FallingBase : MonoBehaviour
             return;
         }
 
-        float progress = Mathf.Clamp01(elapsedTime / Mathf.Max(0.01f, fallDuration));
+        float progress = Mathf.Clamp01(elapsedTime / TimeToLand);
 
-        if (visual != null)
+        if (MoveVisualDuringFall && visual != null)
             visual.localPosition = Vector3.Lerp(Vector3.up * fallHeight, Vector3.zero, progress);
 
         if (progress < 1f)

@@ -11,8 +11,10 @@ public class LightningFalling : FallingBase
     [Header("Sprite Animation")]
     [SerializeField] private SpriteRenderer visualRenderer;
     [SerializeField] private Sprite[] fallFrames;
-    [SerializeField, Min(0.01f)] private float landingFrameDuration = 0.1f;
+    [SerializeField] private SpriteRenderer[] afterimageBranches = System.Array.Empty<SpriteRenderer>();
+    [SerializeField, Min(0.01f)] private float afterimageDuration = 0.26f;
     [SerializeField] private bool useGroundImpactVisual = true;
+    [SerializeField] private ImpactParticleBurst impactParticles;
     #endregion
 
     #region Fields
@@ -20,16 +22,28 @@ public class LightningFalling : FallingBase
     private readonly HashSet<Transform> hitTargets = new();
     private ContactFilter2D contactFilter;
     private Vector3 initialVisualScale;
+    private Vector3[] afterimageStartPositions;
     private float sizeMultiplier = 1f;
     private GroundImpactVisual groundImpactVisual;
     #endregion
 
-    protected override float LandingDuration => Mathf.Max(0.01f, landingFrameDuration) * 2f;
+    protected override bool MoveVisualDuringFall => false;
+    protected override float TimeToLand => StrikeFrameDuration * 2f;
+    protected override float LandingDuration => StrikeFrameDuration + Mathf.Max(0.01f, afterimageDuration);
+
+    private float StrikeFrameDuration => FallDuration / 3f;
 
     private void Awake()
     {
         if (visualRenderer != null)
             initialVisualScale = visualRenderer.transform.localScale;
+
+        afterimageStartPositions = new Vector3[afterimageBranches.Length];
+        for (int i = 0; i < afterimageBranches.Length; i++)
+        {
+            if (afterimageBranches[i] != null)
+                afterimageStartPositions[i] = afterimageBranches[i].transform.localPosition;
+        }
 
         contactFilter = new ContactFilter2D();
         contactFilter.SetLayerMask(enemyLayer);
@@ -42,6 +56,15 @@ public class LightningFalling : FallingBase
         hitTargets.Clear();
         SetSizeBonus(0f);
         SetFrame(0);
+        if (visualRenderer != null)
+            visualRenderer.enabled = true;
+
+        foreach (SpriteRenderer branch in afterimageBranches)
+        {
+            if (branch != null)
+                branch.enabled = false;
+        }
+
         groundImpactVisual?.Hide();
     }
 
@@ -60,33 +83,69 @@ public class LightningFalling : FallingBase
 
     protected override void OnFallProgress(float progress)
     {
-        bool firstFrame = progress < 0.5f;
-        SetFrame(firstFrame ? 0 : 1);
-        if (visualRenderer != null)
-            visualRenderer.transform.position -= GetStrikeOffset(firstFrame ? 0f : 0.08f);
+        SetFrame(progress < 0.5f ? 0 : 1);
+        if (visualRenderer != null && fallFrames != null && fallFrames.Length > 1 && fallFrames[1] != null)
+        {
+            Sprite fullStrike = fallFrames[1];
+            Transform visual = visualRenderer.transform;
+            float strikeHeight = fullStrike.rect.height / fullStrike.pixelsPerUnit;
+            Vector3 top = transform.position + visual.TransformVector(Vector3.up * strikeHeight);
+            visual.position = top - GetStrikeOffset(1f);
+        }
 
-        ShowGroundImpact(1f, new Color(0.55f, 0.75f, 1f, Mathf.Lerp(0.12f, 0.35f, progress)));
+        ShowGroundImpact(new Color(0.55f, 0.75f, 1f, Mathf.Lerp(0.12f, 0.35f, progress)));
     }
 
     protected override void OnLandingProgress(float progress)
     {
-        bool impactFrame = progress < 0.5f;
-        SetFrame(impactFrame ? 2 : 3);
-        ShowGroundImpact(Mathf.Lerp(0.55f, 1f, progress * 2f), new Color(0.85f, 0.93f, 1f, 1f - progress));
+        float elapsed = progress * LandingDuration;
+        ShowGroundImpact(new Color(0.85f, 0.93f, 1f, 1f - progress));
 
-        if (visualRenderer == null || fallFrames == null || fallFrames.Length <= 2 || fallFrames[2] == null)
+        if (visualRenderer == null)
             return;
 
-        // Use the impact frame for both landing frames so the fading frame retains its proportions.
-        Transform visual = visualRenderer.transform;
-        float parentScale = visual.parent != null ? Mathf.Abs(visual.parent.lossyScale.x) : 1f;
-        float impactWidth = fallFrames[2].bounds.size.x * Mathf.Abs(initialVisualScale.x) * parentScale;
-        if (impactWidth <= 0f)
+        if (elapsed < StrikeFrameDuration)
+        {
+            SetFrame(2);
+            visualRenderer.transform.position = transform.position - GetStrikeOffset(0.13f);
             return;
+        }
 
-        float scale = 2f * hitRadius * sizeMultiplier / impactWidth;
-        visual.localScale = new Vector3(initialVisualScale.x * scale, initialVisualScale.y * scale, initialVisualScale.z);
-        visual.position = transform.position - GetStrikeOffset(impactFrame ? 0.13f : 0.5f);
+        ShowAfterimage(elapsed - StrikeFrameDuration);
+    }
+
+    private void ShowAfterimage(float elapsed)
+    {
+        float progress = Mathf.Clamp01(elapsed / Mathf.Max(0.01f, afterimageDuration));
+        visualRenderer.enabled = false;
+        visualRenderer.transform.position = transform.position;
+
+        const float spreadDistance = 0.42f;
+        float remaining = 1f - progress;
+        float distance = spreadDistance * (1f - remaining * remaining * remaining);
+
+        for (int i = 0; i < afterimageBranches.Length; i++)
+        {
+            SpriteRenderer branch = afterimageBranches[i];
+            if (branch == null)
+                continue;
+
+            Vector3 startPosition = afterimageStartPositions[i];
+            Vector3 centerOffset = branch.sprite != null ? branch.sprite.bounds.center : Vector3.zero;
+            Vector3 center = startPosition + centerOffset;
+            Vector3 direction = new Vector3(Mathf.Sign(center.x), Mathf.Sign(center.y), 0f).normalized;
+            Vector3 position = startPosition + direction * distance;
+
+            float flashInterval = 0.045f + 0.008f * i;
+            float cycle = (elapsed + 0.009f * i) / flashInterval;
+            float flash = 1f - Mathf.Clamp01(Mathf.Repeat(cycle, 1f) * 4f);
+            Color color = visualRenderer.color;
+            color.a *= remaining * Mathf.Lerp(0.48f, 1f, flash);
+
+            branch.transform.localPosition = position;
+            branch.color = color;
+            branch.enabled = true;
+        }
     }
 
     private Vector3 GetStrikeOffset(float normalizedHeight)
@@ -100,7 +159,7 @@ public class LightningFalling : FallingBase
         return visualRenderer.transform.TransformVector(offset);
     }
 
-    private void ShowGroundImpact(float scale, Color color)
+    private void ShowGroundImpact(Color color)
     {
         if (!useGroundImpactVisual || visualRenderer == null)
         {
@@ -109,7 +168,7 @@ public class LightningFalling : FallingBase
         }
 
         groundImpactVisual ??= new GroundImpactVisual(transform, visualRenderer);
-        groundImpactVisual.Show(Vector2.one * (hitRadius * sizeMultiplier * scale), color);
+        groundImpactVisual.Show(Vector2.one * (hitRadius * sizeMultiplier), color);
     }
 
     private void SetFrame(int index)
@@ -124,6 +183,8 @@ public class LightningFalling : FallingBase
 
     protected override void OnLanded()
     {
+        impactParticles?.Play(Vector2.one * (hitRadius * sizeMultiplier));
+
         hitTargets.Clear();
 
         int count = Physics2D.OverlapCircle(
