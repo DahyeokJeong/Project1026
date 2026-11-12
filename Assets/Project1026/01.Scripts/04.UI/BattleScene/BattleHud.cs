@@ -11,6 +11,7 @@ public class BattleHud : MonoBehaviour
     [SerializeField] private Image roundProgressFill;
     [SerializeField] private RectTransform waveTrack;
     [SerializeField] private TMP_Text waveLabelTemplate;
+    [SerializeField] private RectTransform[] waveLabelAnchors;
 
     private static readonly Color ActiveWaveColor = new(1f, 0.81f, 0.35f);
     private static readonly Color InactiveWaveColor = new(0.92f, 0.78f, 0.62f);
@@ -82,10 +83,26 @@ public class BattleHud : MonoBehaviour
             elapsed += waves[index].Duration;
             float end = elapsed / totalDuration;
             RectTransform rect = label.rectTransform;
-            rect.anchorMin = new Vector2(start, 1f);
-            rect.anchorMax = new Vector2(end, 1f);
-            rect.anchoredPosition = new Vector2(0f, 16f);
-            rect.sizeDelta = new Vector2(0f, 28f);
+            RectTransform labelAnchor = waveLabelAnchors != null &&
+                index < waveLabelAnchors.Length ? waveLabelAnchors[index] : null;
+
+            if (labelAnchor != null)
+            {
+                rect.SetParent(labelAnchor, false);
+                rect.anchorMin = Vector2.zero;
+                rect.anchorMax = Vector2.one;
+                rect.offsetMin = Vector2.zero;
+                rect.offsetMax = Vector2.zero;
+            }
+            else
+            {
+                rect.SetParent(waveTrack, false);
+                rect.anchorMin = new Vector2(start, 1f);
+                rect.anchorMax = new Vector2(end, 1f);
+                rect.anchoredPosition = new Vector2(0f, 16f);
+                rect.sizeDelta = new Vector2(0f, 28f);
+            }
+
             label.SetText("웨이브 {0}", index + 1);
 
             if (index < waves.Count - 1)

@@ -15,7 +15,7 @@ MonoBehaviour:
   configKey: SO_Attack_Normal
   icon: {fileID: 21300000, guid: 099153bacea8e16469f17f60bb14516a, type: 3}
   interval: 0.7
-  initiallyOwned: 0
+  initiallyOwned: 1
   prefab: {fileID: 6424283817944284668, guid: f414981c6e649244e99c1ed5c2f0c7f3, type: 3}
   pattern: 2
   usePlayerStat: 1
