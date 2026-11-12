@@ -20,7 +20,15 @@ public class PlayerAugment : MonoBehaviour
             return false;
         }
 
-        return effect.CanApply(auto, data) && effect.TryApply(auto, data);
+        if (!effect.CanApply(auto, data) || !effect.TryApply(auto, data))
+            return false;
+
+        if (effect is AcquireAttackEffectSO)
+            Managers.RunData.RecordAcquiredAttack(data.AttackConfigKey);
+        else
+            Managers.RunData.RecordAugment(augmentId);
+
+        return true;
     }
 
     public void Apply(string augmentId)

@@ -9,11 +9,6 @@ public class RunDataManager
     private PlayerView view;
     #endregion
 
-    #region Properties
-    public float CurrentExp { get; set; }
-    public int Level { get; set; } = 1;
-    #endregion
-
     #region Events
     public event Action<int> LevelUpOccurred;
     #endregion
@@ -112,6 +107,19 @@ public class RunDataManager
     }
     #endregion
 
+    #region Fields
+    private readonly Dictionary<string, int> acquiredAugmentCounts = new();
+    private readonly HashSet<string> acquiredAttackKeys = new();
+    #endregion
+
+    #region Properties
+    public float CurrentExp { get; set; }
+    public int Level { get; set; } = 1;
+
+    public IReadOnlyDictionary<string, int> AcquiredAugmentCounts => acquiredAugmentCounts;
+    public IReadOnlyCollection<string> AcquiredAttackKeys => acquiredAttackKeys;
+    #endregion
+
     public void SetPlayer(PlayerModel model, PlayerView view)
     {
         this.model = model;
@@ -149,6 +157,17 @@ public class RunDataManager
         LevelUpOccurred?.Invoke(levelUpCount);
     }
 
+    public void RecordAugment(string augmentId)
+    {
+        acquiredAugmentCounts.TryGetValue(augmentId, out int count);
+        acquiredAugmentCounts[augmentId] = count + 1;
+    }
+
+    public void RecordAcquiredAttack(string attackConfigKey)
+    {
+        acquiredAttackKeys.Add(attackConfigKey);
+    }
+
     public void Reset()
     {
         CurrentExp = 0f;
@@ -156,6 +175,8 @@ public class RunDataManager
 
         ResetPlayerStats();
         attackData.Clear();
+        acquiredAugmentCounts.Clear();
+        acquiredAttackKeys.Clear();
 
         LevelUpOccurred = null;
         model = null;

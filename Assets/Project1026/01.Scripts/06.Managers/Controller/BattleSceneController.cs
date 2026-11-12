@@ -148,6 +148,7 @@ public class BattleSceneController : MonoBehaviour
         if (cleared)
             Managers.GameState.CompleteBattleStage(currentStageData.StageId);
 
+        Managers.RunData.Reset();
         Managers.Scene.LoadGame("01.LobbyScene");
     }
 
