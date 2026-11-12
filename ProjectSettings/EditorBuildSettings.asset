@@ -23,12 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project1026/09.Scenes/LoadingScene.unity
     guid: 367d17e67a2e8c9429f8879212af10df
-  - enabled: 1
-    path: Assets/Project1026/09.Scenes/99.DAHK.unity
-    guid: c3aa44022798f5741bdb5c2f45222955
-  - enabled: 1
-    path: Assets/Project1026/09.Scenes/99.JIHO.unity
-    guid: 0e70d26ef85f29f4283184f1de9c4524
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 032850f8e2c070a4389748b01b1cf81e, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
