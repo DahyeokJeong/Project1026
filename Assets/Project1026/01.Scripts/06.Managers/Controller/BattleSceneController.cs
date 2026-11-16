@@ -19,6 +19,9 @@ public class BattleSceneController : MonoBehaviour
     private float remainingLaterWavesDuration;
     private bool battleRunning;
     private bool waitingForRoundKills;
+    private GwaegangWhiteTiger boss;
+    private BossBattleUI bossUI;
+    public bool IsBossBattle => boss != null;
 
     public RoundDataSO CurrentRoundData => currentStageData == null ? null : currentStageData.Rounds[roundIndex];
 
@@ -68,6 +71,9 @@ public class BattleSceneController : MonoBehaviour
         }
 
         if (!Managers.BattleState.CanUpdate)
+            return;
+
+        if (IsBossBattle)
             return;
 
         if (waitingForRoundKills)
@@ -136,6 +142,11 @@ public class BattleSceneController : MonoBehaviour
             return;
         }
 
+        if (currentStageData.BossPrefab != null)
+        {
+            if (!StartBossBattle()) EndBattle(false);
+            return;
+        }
         EndBattle(true);
     }
 
@@ -146,13 +157,20 @@ public class BattleSceneController : MonoBehaviour
 
     private void EndBattle(bool cleared)
     {
+        if (!battleRunning) return;
         battleRunning = false;
         enemyGenerate.StopSpawning();
         Managers.BattleState.SetState(cleared ? BattleState.Cleared : BattleState.Failed);
 
         if (cleared)
         {
+            int beforeReward = Managers.GameState.SoulEssence;
             Managers.GameState.CompleteBattleStage(currentStageData.StageId);
+            if (IsBossBattle)
+            {
+                bossUI.ShowReward(Managers.GameState.SoulEssence - beforeReward, ReturnToLobby);
+                return;
+            }
             // 클리어시 셀렉트 화면으로 이동 or 유지
         }
 
@@ -160,6 +178,44 @@ public class BattleSceneController : MonoBehaviour
         Managers.Scene.LoadGame("01.LobbyScene");
     }
 
+    private bool StartBossBattle()
+    {
+        NavigationArea area = FindAnyObjectByType<NavigationArea>();
+        MapArea map = FindAnyObjectByType<MapArea>();
+        Vector2 origin = player.transform.position;
+        Vector2 spawn = origin;
+        bool found = false;
+        for (int ring = 0; ring < 3 && !found; ring++)
+        for (int i = 0; i < 16; i++)
+        {
+            float angle = i * Mathf.PI / 8f;
+            Vector2 candidate = origin + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * (6f + ring);
+            if (map != null && !map.CanPlace(candidate, 0.8f)) continue;
+            spawn = candidate;
+            found = true;
+            break;
+        }
+        if (!found)
+        {
+            Debug.LogError("No valid boss spawn position.", this);
+            return false;
+        }
+        waitingForRoundKills = false;
+        boss = Instantiate(currentStageData.BossPrefab, spawn, Quaternion.identity);
+        boss.Initialize(player, area, map);
+        boss.Defeated += OnBossDefeated;
+        bossUI = gameObject.AddComponent<BossBattleUI>();
+        bossUI.Bind(boss);
+        return true;
+    }
+
+    private void OnBossDefeated() => EndBattle(true);
+
+    private void ReturnToLobby()
+    {
+        Managers.RunData.Reset();
+        Managers.Scene.LoadGame("01.LobbyScene");
+    }
     private bool TryGetStageData(int stageId, out StageDataSO selectedData)
     {
         selectedData = null;
@@ -216,6 +272,7 @@ public class BattleSceneController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (boss != null) boss.Defeated -= OnBossDefeated;
         if (Managers.Initialized)
             Managers.RunData.LevelUpOccurred -= OnLevelUp;
     }

@@ -229,7 +229,7 @@ public class NavigationArea : MonoBehaviour
             separation.IsApproachClear(enemy, direction, distance, enemies);
     }
 
-    private Vector2 GetPathDirection(Vector2 pos)
+    public Vector2 GetPathDirection(Vector2 pos)
     {
         if (!IsReady || target == null)
             return Vector2.zero;

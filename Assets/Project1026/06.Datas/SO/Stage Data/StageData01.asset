@@ -16,3 +16,4 @@ MonoBehaviour:
   rounds:
   - {fileID: 11400000, guid: 98e7a29d5e1ac3447a42ed29b987fbb1, type: 2}
   - {fileID: 11400000, guid: 7a496263741f66d45ba27321c086764e, type: 2}
+  bossPrefab: {fileID: 5040365995663814448, guid: 4a58a61c31f66e14a985b5a3156d45c2, type: 3}
