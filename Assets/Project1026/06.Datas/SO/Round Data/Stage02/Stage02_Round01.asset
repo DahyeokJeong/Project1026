@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319e71ad8ec64131ad6cae83ec7dcd78, type: 3}
+  m_Name: Stage02_Round01
+  m_EditorClassIdentifier: Assembly-CSharp::RoundDataSO
+  waves:
+  - {fileID: 11400000, guid: b66daf1f5c5881442bf2fa6130f9cfcb, type: 2}
+  - {fileID: 11400000, guid: 45a82be84b1160f42a4adf3cf2fb3cbf, type: 2}
+  - {fileID: 11400000, guid: fd87aa29f1642824c92124d53e4b5521, type: 2}

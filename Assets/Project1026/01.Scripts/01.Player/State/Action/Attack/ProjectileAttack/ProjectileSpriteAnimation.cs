@@ -5,6 +5,7 @@ public sealed class ProjectileSpriteAnimation : MonoBehaviour
 {
     [SerializeField] private Sprite[] frames;
     [SerializeField, Min(0.01f)] private float frameDuration = 0.06f;
+    [SerializeField] private bool playOutsideBattle;
 
     private SpriteRenderer spriteRenderer;
     private float elapsed;
@@ -23,7 +24,8 @@ public sealed class ProjectileSpriteAnimation : MonoBehaviour
 
     private void Update()
     {
-        if (frames == null || frames.Length < 2 || !Managers.BattleState.CanUpdate)
+        if (frames == null || frames.Length < 2 ||
+            (!playOutsideBattle && !Managers.BattleState.CanUpdate))
             return;
 
         float duration = Mathf.Max(0.01f, frameDuration);

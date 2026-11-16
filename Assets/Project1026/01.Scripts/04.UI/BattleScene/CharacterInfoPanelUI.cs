@@ -42,9 +42,15 @@ public class CharacterInfoPanelUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Managers.BattleState.SetState(BattleState.Paused);
         RefreshStat();
         RefreshAugments();
         RefreshAutoAttacks();
+    }
+
+    private void OnDisable()
+    {
+        Managers.BattleState.SetState(BattleState.Playing);
     }
 
     private void RefreshStat()
@@ -87,7 +93,7 @@ public class CharacterInfoPanelUI : MonoBehaviour
             CharacterInfoRowUI row = Instantiate(augmentRowTemplate, augmentContent);
             row.BindAugment(
                 LocalizationHelper.GetName(data.Id),
-                LocalizationHelper.GetDescription(data.Id),
+                LocalizationHelper.GetDescription(data.Id, entry.Value),
                 icon,
                 entry.Value);
 

@@ -44,6 +44,7 @@ public sealed class StageCardCarousel : ScrollRect
 
         snapIndex = Mathf.Clamp(index, 0, cards.Length - 1);
         snapVelocity = 0f;
+        StopMovement();
         SetCenteredCard(null);
     }
 
@@ -124,13 +125,19 @@ public sealed class StageCardCarousel : ScrollRect
             }
             else
             {
-                float current = horizontalNormalizedPosition * lastIndex;
+                if (appliedSpacing <= 0f)
+                    return;
+
+                StopMovement();
+                float current = -content.anchoredPosition.x / appliedSpacing;
                 float next = Mathf.SmoothDamp(
                     current, snapIndex, ref snapVelocity,
                     0.15f, Mathf.Infinity, Time.unscaledDeltaTime);
 
                 bool settled = Mathf.Abs(next - snapIndex) < 0.001f;
-                horizontalNormalizedPosition = (settled ? snapIndex : next) / lastIndex;
+                // ScrollRect ignores sub-0.01 position changes, which can prevent settling.
+                content.anchoredPosition = new Vector2(
+                    -(settled ? snapIndex : next) * appliedSpacing, 0f);
 
                 if (settled)
                 {
