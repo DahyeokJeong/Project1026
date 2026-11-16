@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dd5dbe069e414c9fa911506665222e, type: 3}
   m_Name: Stage01_Round02_Wave01
   m_EditorClassIdentifier: Assembly-CSharp::WaveDataSO
-  duration: 20
+  duration: 60
   enemies:
   - prefab: {fileID: 156661654134334344, guid: e3defc9d22c546088034a4f3848473de, type: 3}
     weight: 7
   - prefab: {fileID: 156661654134334344, guid: ec5e851cd742a3943af204b108bd255e, type: 3}
     weight: 3
-  spawnBatchSize: 1
-  spawnInterval: 1
+  spawnBatchSize: 10
+  spawnInterval: 2
   spawnImmediately: 1

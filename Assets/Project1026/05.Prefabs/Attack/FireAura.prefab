@@ -136,7 +136,7 @@ MonoBehaviour:
     m_Bits: 2147483648
   hitArea: {fileID: 8405486937854877558}
   positionOffset: {x: 0, y: 0.5}
-  duration: 6
+  duration: 3
 --- !u!70 &8405486937854877558
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

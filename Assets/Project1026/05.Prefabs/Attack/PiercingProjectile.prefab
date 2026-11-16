@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f7841f07b571d44962eb7cedf374a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PiercingProjectile
-  moveSpeed: 6
+  moveSpeed: 10
   lifeTime: 0
   baseDamage: 0
   damageMultiplier: 1
