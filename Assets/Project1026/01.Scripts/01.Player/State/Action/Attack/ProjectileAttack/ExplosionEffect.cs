@@ -12,6 +12,7 @@ public class ExplosionEffect : MonoBehaviour
     #region Fields
     private float timer;
     private SpriteRenderer visualRenderer;
+    private bool usesSpriteAnimation;
     private Color initialColor;
     private GroundImpactVisual groundImpactVisual;
     private Vector2 impactRadius;
@@ -20,6 +21,7 @@ public class ExplosionEffect : MonoBehaviour
     private void Awake()
     {
         visualRenderer = GetComponent<SpriteRenderer>();
+        usesSpriteAnimation = GetComponent<ProjectileSpriteAnimation>() != null;
         if (visualRenderer != null)
             initialColor = visualRenderer.color;
     }
@@ -58,7 +60,7 @@ public class ExplosionEffect : MonoBehaviour
 
         timer -= Time.deltaTime;
         float progress = 1f - Mathf.Clamp01(timer / lifeTime);
-        if (visualRenderer != null)
+        if (!usesSpriteAnimation && visualRenderer != null)
         {
             Color color = initialColor;
             color.a *= 1f - Mathf.InverseLerp(0.18f / 0.42f, 0.31f / 0.42f, progress);
@@ -67,7 +69,7 @@ public class ExplosionEffect : MonoBehaviour
 
         UpdateGroundImpact(progress);
 
-        if (timer <= 0f)
+        if (!usesSpriteAnimation && timer <= 0f)
         {
             Managers.Pool.Push(gameObject);
         }

@@ -1,0 +1,858 @@
+fileFormatVersion: 2
+guid: 3fbef3ea4d208c04c82ca160a5e19f62
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7929627498649007268
+    second: VillageScene_Structure_Portal_Teal_04_0
+  - first:
+      213: -1495282031982854650
+    second: VillageScene_Structure_Portal_Teal_04_1
+  - first:
+      213: -259101336108195956
+    second: VillageScene_Structure_Portal_Teal_04_2
+  - first:
+      213: 5877292771522808186
+    second: VillageScene_Structure_Portal_Teal_04_3
+  - first:
+      213: -7608120807797907312
+    second: VillageScene_Structure_Portal_Teal_04_4
+  - first:
+      213: 2761365484670312565
+    second: VillageScene_Structure_Portal_Teal_04_5
+  - first:
+      213: 2946051999237718849
+    second: VillageScene_Structure_Portal_Teal_04_6
+  - first:
+      213: 3472686349975529866
+    second: VillageScene_Structure_Portal_Teal_04_7
+  - first:
+      213: -1027829646393165976
+    second: VillageScene_Structure_Portal_Teal_04_8
+  - first:
+      213: -2259956184760672850
+    second: VillageScene_Structure_Portal_Teal_04_9
+  - first:
+      213: -8161939295965250979
+    second: VillageScene_Structure_Portal_Teal_04_10
+  - first:
+      213: 8801346033522471224
+    second: VillageScene_Structure_Portal_Teal_04_11
+  - first:
+      213: 4940369488928356900
+    second: VillageScene_Structure_Portal_Teal_04_12
+  - first:
+      213: 3453370678899199355
+    second: VillageScene_Structure_Portal_Teal_04_13
+  - first:
+      213: -2447679834287926925
+    second: VillageScene_Structure_Portal_Teal_04_14
+  - first:
+      213: -4320550682047891939
+    second: VillageScene_Structure_Portal_Teal_04_15
+  - first:
+      213: -6263518433342891337
+    second: VillageScene_Structure_Portal_Teal_04_16
+  - first:
+      213: 6257986082905575533
+    second: VillageScene_Structure_Portal_Teal_04_17
+  - first:
+      213: 638078100802338261
+    second: VillageScene_Structure_Portal_Teal_04_18
+  - first:
+      213: -2814537935186418258
+    second: VillageScene_Structure_Portal_Teal_04_19
+  - first:
+      213: -4114395947439289450
+    second: VillageScene_Structure_Portal_Teal_04_20
+  - first:
+      213: -3367003610726173809
+    second: VillageScene_Structure_Portal_Teal_04_21
+  - first:
+      213: 8609478451228985191
+    second: VillageScene_Structure_Portal_Teal_04_22
+  - first:
+      213: 4599622810572988449
+    second: VillageScene_Structure_Portal_Teal_04_23
+  - first:
+      213: -434986790203846651
+    second: VillageScene_Structure_Portal_Teal_04_24
+  - first:
+      213: -3251723390066276178
+    second: VillageScene_Structure_Portal_Teal_04_25
+  - first:
+      213: 3254218771382557833
+    second: VillageScene_Structure_Portal_Teal_04_26
+  - first:
+      213: 8289494400588966022
+    second: VillageScene_Structure_Portal_Teal_04_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 351
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a4b4227232bb0e60800000000000000
+      internalID: 7929627498649007268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_1
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 501
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e33ac0ae0bf3be0800000000000000
+      internalID: -1495282031982854650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_2
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 477
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8f117425bc776cf0800000000000000
+      internalID: -259101336108195956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_3
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 460
+        width: 27
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a79869fe2a6509150800000000000000
+      internalID: 5877292771522808186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 431
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 090a2f25f668a6690800000000000000
+      internalID: -7608120807797907312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_5
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 375
+        width: 35
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5706cc82747525620800000000000000
+      internalID: 2761365484670312565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_6
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 369
+        width: 38
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143c4683faa72e820800000000000000
+      internalID: 2946051999237718849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 403
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a89a3a216d5713030800000000000000
+      internalID: 3472686349975529866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_8
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 397
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 867be1dd16a6cb1f0800000000000000
+      internalID: -1027829646393165976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 359
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead946fd2d503a0e0800000000000000
+      internalID: -2259956184760672850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_10
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 377
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5a70b14477fabe80800000000000000
+      internalID: -8161939295965250979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 313
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83176610699a42a70800000000000000
+      internalID: 8801346033522471224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_12
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 327
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42ab0ceffd7bf8440800000000000000
+      internalID: 4940369488928356900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_13
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 215
+        width: 35
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7d4981f556dcef20800000000000000
+      internalID: 3453370678899199355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_14
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 259
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3719169b828180ed0800000000000000
+      internalID: -2447679834287926925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 139
+        width: 25
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d16b672cb025a04c0800000000000000
+      internalID: -4320550682047891939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_16
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 143
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ba5c70ab238319a0800000000000000
+      internalID: -6263518433342891337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_17
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 141
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d60dce8af25d8d650800000000000000
+      internalID: 6257986082905575533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_18
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 153
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dd7749e6a8ead800800000000000000
+      internalID: 638078100802338261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 101
+        width: 19
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea52a56f8a0c0f8d0800000000000000
+      internalID: -2814537935186418258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_20
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 97
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69b039f4faab6e6c0800000000000000
+      internalID: -4114395947439289450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12
+        width: 39
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8375312e000641d0800000000000000
+      internalID: -3367003610726173809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_22
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 71
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76742e259030b7770800000000000000
+      internalID: 8609478451228985191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_23
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 11
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 120acfc839425df30800000000000000
+      internalID: 4599622810572988449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_24
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50099e7a1dd96f9f0800000000000000
+      internalID: -434986790203846651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_25
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 13
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea8454b1ece8fd2d0800000000000000
+      internalID: -3251723390066276178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_26
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 0
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98c5aa12bbe492d20800000000000000
+      internalID: 3254218771382557833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VillageScene_Structure_Portal_Teal_04_27
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 5
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 688e1badc333a0370800000000000000
+      internalID: 8289494400588966022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      VillageScene_Structure_Portal_Teal_04_0: 7929627498649007268
+      VillageScene_Structure_Portal_Teal_04_1: -1495282031982854650
+      VillageScene_Structure_Portal_Teal_04_10: -8161939295965250979
+      VillageScene_Structure_Portal_Teal_04_11: 8801346033522471224
+      VillageScene_Structure_Portal_Teal_04_12: 4940369488928356900
+      VillageScene_Structure_Portal_Teal_04_13: 3453370678899199355
+      VillageScene_Structure_Portal_Teal_04_14: -2447679834287926925
+      VillageScene_Structure_Portal_Teal_04_15: -4320550682047891939
+      VillageScene_Structure_Portal_Teal_04_16: -6263518433342891337
+      VillageScene_Structure_Portal_Teal_04_17: 6257986082905575533
+      VillageScene_Structure_Portal_Teal_04_18: 638078100802338261
+      VillageScene_Structure_Portal_Teal_04_19: -2814537935186418258
+      VillageScene_Structure_Portal_Teal_04_2: -259101336108195956
+      VillageScene_Structure_Portal_Teal_04_20: -4114395947439289450
+      VillageScene_Structure_Portal_Teal_04_21: -3367003610726173809
+      VillageScene_Structure_Portal_Teal_04_22: 8609478451228985191
+      VillageScene_Structure_Portal_Teal_04_23: 4599622810572988449
+      VillageScene_Structure_Portal_Teal_04_24: -434986790203846651
+      VillageScene_Structure_Portal_Teal_04_25: -3251723390066276178
+      VillageScene_Structure_Portal_Teal_04_26: 3254218771382557833
+      VillageScene_Structure_Portal_Teal_04_27: 8289494400588966022
+      VillageScene_Structure_Portal_Teal_04_3: 5877292771522808186
+      VillageScene_Structure_Portal_Teal_04_4: -7608120807797907312
+      VillageScene_Structure_Portal_Teal_04_5: 2761365484670312565
+      VillageScene_Structure_Portal_Teal_04_6: 2946051999237718849
+      VillageScene_Structure_Portal_Teal_04_7: 3472686349975529866
+      VillageScene_Structure_Portal_Teal_04_8: -1027829646393165976
+      VillageScene_Structure_Portal_Teal_04_9: -2259956184760672850
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

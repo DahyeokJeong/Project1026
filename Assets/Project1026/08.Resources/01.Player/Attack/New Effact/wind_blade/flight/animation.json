@@ -1,0 +1,184 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 4,
+  "assetVersion": "v12",
+  "id": "02_wind",
+  "sheet": "sheet.png",
+  "sheetSha256": "ce7e8868aad7054164df623a49367ce2d068ad2cc21f012bdc905677f2456157",
+  "sheetWidth": 1774,
+  "sheetHeight": 887,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": null,
+  "frameHeight": null,
+  "variableFrameSize": true,
+  "frameWidthRange": [
+    443,
+    444
+  ],
+  "frameHeightRange": [
+    443,
+    444
+  ],
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivot": {
+    "x": 0.9,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pivotUnity": [
+    0.9,
+    0.5
+  ],
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "fps": 16,
+  "frameDurationMs": [
+    62.5,
+    62.5,
+    62.5,
+    62.5,
+    62.5,
+    62.5,
+    62.5,
+    62.5
+  ],
+  "totalDurationMs": 500,
+  "loop": true,
+  "alpha": "Original straight RGBA preserved without recolor, threshold, or alpha edits.",
+  "packaging": "Approved generated 1774x887 sheet copied byte-for-byte. Explicit integer frame rectangles use floor boundaries; resulting frames vary by one pixel. Never slice using a fixed cell width.",
+  "provenance": {
+    "generationTool": "built-in image_gen",
+    "sourceSheet": "C:\\Users\\User\\Desktop\\Project1026\\ArtDrafts\\WindVFX_v12\\wind-blade-sheet.png",
+    "sourceSheetByteIdentical": true,
+    "sourceSheetSha256": "ce7e8868aad7054164df623a49367ce2d068ad2cc21f012bdc905677f2456157",
+    "approval": "User approved new wind-blade and tornado designs in this chat."
+  },
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "encodedFrames": 8,
+    "delaysMs": [
+      60,
+      70,
+      60,
+      60,
+      60,
+      70,
+      60,
+      60
+    ],
+    "timingResolutionMs": 10,
+    "width": 444,
+    "height": 444
+  },
+  "frames": [
+    {
+      "name": "frame_00",
+      "file": "frames/frame_00.png",
+      "index": 0,
+      "x": 0,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 62.5,
+      "pngSha256": "a309c387e8637b04b801e388bd42ca5174374cbf486c58b636814ca1763bd684"
+    },
+    {
+      "name": "frame_01",
+      "file": "frames/frame_01.png",
+      "index": 1,
+      "x": 443,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 62.5,
+      "pngSha256": "2045eb308a8b335f7e09ee2d08ed90ae5fa18ac725be338daca3d9bdab99a24d"
+    },
+    {
+      "name": "frame_02",
+      "file": "frames/frame_02.png",
+      "index": 2,
+      "x": 887,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 62.5,
+      "pngSha256": "5e1396b589d44ef219c386527430580e6af6b5cad98ad8d6d342a3e88645040e"
+    },
+    {
+      "name": "frame_03",
+      "file": "frames/frame_03.png",
+      "index": 3,
+      "x": 1330,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 62.5,
+      "pngSha256": "e51b6fd4391e30547650df8b04ae556a43e62bb9cd57c359f56dceab14848508"
+    },
+    {
+      "name": "frame_04",
+      "file": "frames/frame_04.png",
+      "index": 4,
+      "x": 0,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 62.5,
+      "pngSha256": "156e3768f68ec7f93d4aa00ac97d5a0ee2fbd04bd99969dccd4b6a77d52406db"
+    },
+    {
+      "name": "frame_05",
+      "file": "frames/frame_05.png",
+      "index": 5,
+      "x": 443,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 62.5,
+      "pngSha256": "dcdeddb8552e6e77c01ec68c405a955b351c5be7aa1a184def06b3d2dec1a67b"
+    },
+    {
+      "name": "frame_06",
+      "file": "frames/frame_06.png",
+      "index": 6,
+      "x": 887,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 62.5,
+      "pngSha256": "e74987f3190c5fc8a12874980f088e8db2935f326686446d7bb55f230c4fd478"
+    },
+    {
+      "name": "frame_07",
+      "file": "frames/frame_07.png",
+      "index": 7,
+      "x": 1330,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 62.5,
+      "pngSha256": "67f91bfd3aeda7474e8a0c3ec1db23420febc233f214758c5f73613f157b6869"
+    }
+  ],
+  "name": "Wind Blade / Flight"
+}

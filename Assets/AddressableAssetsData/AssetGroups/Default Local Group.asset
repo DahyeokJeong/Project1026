@@ -79,20 +79,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 56da87fa8f6d7b241b741d41fe79cbe1
-    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Wave.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AttackConfigs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 570e300a2545ff145b9273c0a8d97f7c
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_FireAuraAcquire.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AugmentEffects
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5d360e526ada56f4ca88623af7d18e7b
-    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_WaveRange.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
@@ -203,12 +191,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - AugmentEffects
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ce43d54ebfdf9b84abc9c9df426ecd7a
-    m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Acquire/SO_Augment_WaveAcquire.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - AugmentEffects
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d364bf6fe8c27ed4eb6209e01e9b90bb
     m_Address: Assets/Project1026/06.Datas/SO/Augment Data/Increase/SO_Augment_PiercingCount.asset
     m_ReadOnly: 0
@@ -238,6 +220,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - AugmentEffects
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f85c5d365d55cd74988b7c90e050e24d
+    m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_Piercing.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttackConfigs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb8501fe38b01b546a4d1037726fdf07
     m_Address: Assets/Project1026/06.Datas/SO/Auto Attack Data/SO_Attack_LightningFalling.asset

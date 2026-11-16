@@ -1,0 +1,184 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 4,
+  "revision": "v13-final",
+  "id": "03_fireball",
+  "name": "Fireball / Flight",
+  "sheet": "sheet.png",
+  "sheetSha256": "68b05c7ee49b57b697c3739bc33ddcf05e42c02dcd76d737cef56f65eb978558",
+  "sheetWidth": 1774,
+  "sheetHeight": 887,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": null,
+  "frameHeight": null,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivotUnity": [
+    0.68,
+    0.5
+  ],
+  "fps": 24,
+  "frameDurationMs": [
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664
+  ],
+  "totalDurationMs": 333.3333333333333,
+  "loop": true,
+  "frames": [
+    {
+      "index": 0,
+      "name": "frame_00",
+      "file": "frames/frame_00.png",
+      "x": 0,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "b28fc39adc1f148b7b41e63c0abb8ecadbbd273047e61849af4d131db68f42e6"
+    },
+    {
+      "index": 1,
+      "name": "frame_01",
+      "file": "frames/frame_01.png",
+      "x": 443,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "5c47475280156bb008951061b73d88c5d223430cae5e80be4c049862fb40ca0d"
+    },
+    {
+      "index": 2,
+      "name": "frame_02",
+      "file": "frames/frame_02.png",
+      "x": 887,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "b20a86286ff57bdae081299ce8e953ad95deed62bb41ff4a1a4fef7355ba7cb5"
+    },
+    {
+      "index": 3,
+      "name": "frame_03",
+      "file": "frames/frame_03.png",
+      "x": 1330,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "318bb9411d1faba84750bda4ccc21ba92df06b1441d29958095518b2c55638cb"
+    },
+    {
+      "index": 4,
+      "name": "frame_04",
+      "file": "frames/frame_04.png",
+      "x": 0,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "6d2e6679031daab7e80a21131d4c9274d1330b0eed99f43bd24950a839d232c2"
+    },
+    {
+      "index": 5,
+      "name": "frame_05",
+      "file": "frames/frame_05.png",
+      "x": 443,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "3db7289363f3b272758526014752f4090d3072fcb473c27c8000bdd1754c71eb"
+    },
+    {
+      "index": 6,
+      "name": "frame_06",
+      "file": "frames/frame_06.png",
+      "x": 887,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "290e570f941744e76db9e8f94986e39cb339a55bb01257134ccf8a168d401b72"
+    },
+    {
+      "index": 7,
+      "name": "frame_07",
+      "file": "frames/frame_07.png",
+      "x": 1330,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "951fc0d3c3dbc88f4d65ea3d185dd15345de737fb0e33852636ae43377c493d0"
+    }
+  ],
+  "packaging": "Approved v13 artwork. Native sheet bytes and exact RGBA frame crops preserved without stretching, resampling, recoloring, or alpha changes. Explicit per-frame rectangles are authoritative.",
+  "variableFrameSize": true,
+  "frameWidthRange": [
+    443,
+    444
+  ],
+  "frameHeightRange": [
+    443,
+    444
+  ],
+  "pivot": {
+    "x": 0.68,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "provenance": {
+    "sourceFolder": "C:\\Users\\User\\Desktop\\Project1026\\ArtDrafts\\VFX_Revision_v13\\03_fireball",
+    "sourceSheetByteIdentical": true,
+    "sourceSheetSha256": "68b05c7ee49b57b697c3739bc33ddcf05e42c02dcd76d737cef56f65eb978558",
+    "generationTool": "built-in image_gen"
+  },
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "sourceFrames": 8,
+    "encodedFrames": 8,
+    "delaysMs": [
+      40,
+      40,
+      50,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "timingResolutionMs": 10,
+    "width": 444,
+    "height": 444,
+    "lossyPalette": true
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 4,
+  "revision": "v13-final",
+  "id": "10_wisp_projectile",
+  "name": "Wisp / Projectile",
+  "sheet": "sheet.png",
+  "sheetSha256": "818e937ce7e12e1b711b37463a374e6307473cf95adf4a5c06a9a722620cee74",
+  "sheetWidth": 1774,
+  "sheetHeight": 887,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": null,
+  "frameHeight": null,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivotUnity": [
+    0.7,
+    0.5
+  ],
+  "fps": 24,
+  "frameDurationMs": [
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664
+  ],
+  "totalDurationMs": 333.3333333333333,
+  "loop": true,
+  "frames": [
+    {
+      "index": 0,
+      "name": "frame_00",
+      "file": "frames/frame_00.png",
+      "x": 0,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "1223b27e66a4f139a412e82d63b1bb1039bfa720cbc2dffc564cc33cf732888b"
+    },
+    {
+      "index": 1,
+      "name": "frame_01",
+      "file": "frames/frame_01.png",
+      "x": 443,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "77f59edfac64e2b4d38f48a2d7ac1869c8bc681f66356878d39b8a52bd2a922e"
+    },
+    {
+      "index": 2,
+      "name": "frame_02",
+      "file": "frames/frame_02.png",
+      "x": 887,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "91f2f99a0233065ae101bbeaccab58cf22aec4dce87afcee4e3d20c5d92f269f"
+    },
+    {
+      "index": 3,
+      "name": "frame_03",
+      "file": "frames/frame_03.png",
+      "x": 1330,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "cac78bf38ec0672f5c3d5905caba132a7fbd92913dd70540dfbd24d1d4cffec1"
+    },
+    {
+      "index": 4,
+      "name": "frame_04",
+      "file": "frames/frame_04.png",
+      "x": 0,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "a86724ad0529aab1f1a4a3d6eec1b22837abdfcabefd915506ebcda169831ee4"
+    },
+    {
+      "index": 5,
+      "name": "frame_05",
+      "file": "frames/frame_05.png",
+      "x": 443,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "52121e6e89de7b741ec7520017b37582bbe18e1df7e3d69ef1206e1d033a6312"
+    },
+    {
+      "index": 6,
+      "name": "frame_06",
+      "file": "frames/frame_06.png",
+      "x": 887,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "c0ec816c769fae8e3d5e5b8d0d8fd9e0fa411600a4a148ace6e82224cbb16d1d"
+    },
+    {
+      "index": 7,
+      "name": "frame_07",
+      "file": "frames/frame_07.png",
+      "x": 1330,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 41.666666666666664,
+      "pngSha256": "3bcb22afab2f9575fa9ae898aabc2f096aef32bd503c74b1370a77b99b5f37dd"
+    }
+  ],
+  "packaging": "Approved v13 artwork. Native sheet bytes and exact RGBA frame crops preserved without stretching, resampling, recoloring, or alpha changes. Explicit per-frame rectangles are authoritative.",
+  "variableFrameSize": true,
+  "frameWidthRange": [
+    443,
+    444
+  ],
+  "frameHeightRange": [
+    443,
+    444
+  ],
+  "pivot": {
+    "x": 0.7,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "provenance": {
+    "sourceFolder": "C:\\Users\\User\\Desktop\\Project1026\\ArtDrafts\\VFX_Revision_v13\\10_wisp_projectile",
+    "sourceSheetByteIdentical": true,
+    "sourceSheetSha256": "818e937ce7e12e1b711b37463a374e6307473cf95adf4a5c06a9a722620cee74",
+    "generationTool": "built-in image_gen"
+  },
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "sourceFrames": 8,
+    "encodedFrames": 8,
+    "delaysMs": [
+      40,
+      40,
+      50,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "timingResolutionMs": 10,
+    "width": 444,
+    "height": 444,
+    "lossyPalette": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "rows": 2,
+  "frameWidth": 154,
+  "fps": 24,
+  "source": "approved runtime RGBA, nearest-neighbor size bake",
+  "frameCount": 8,
+  "frameHeight": 154,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "pixelsPerUnit": 64,
+  "frames": [
+    {
+      "x": 0,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_00"
+    },
+    {
+      "x": 154,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_01"
+    },
+    {
+      "x": 308,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_02"
+    },
+    {
+      "x": 462,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_03"
+    },
+    {
+      "x": 0,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_04"
+    },
+    {
+      "x": 154,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_05"
+    },
+    {
+      "x": 308,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_06"
+    },
+    {
+      "x": 462,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_07"
+    }
+  ],
+  "compression": "None",
+  "id": "01_energy",
+  "columns": 4,
+  "image": "sheet.png",
+  "filterMode": "Point",
+  "pivotUnity": [
+    0.74,
+    0.5
+  ],
+  "historicalImage": "01_energy.png"
+}

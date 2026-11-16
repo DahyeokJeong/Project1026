@@ -3,235 +3,235 @@
         {
             "Key": "STAT001",
             "NameKO": "체력",
-            "DescriptionKO": "플레이어의 체력입니다. 체력이 0 이하가 되면 캐릭터가 사망합니다.",
+            "DescriptionKO": "플레이어의 체력",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT002",
             "NameKO": "체력 재생량 증가",
-            "DescriptionKO": "초당 회복되는 플레이어의 체력 재생량이 증가합니다.",
+            "DescriptionKO": "플레이어의 초당 체력 재생량 증가",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT003",
             "NameKO": "공격력",
-            "DescriptionKO": "플레이어의 공격력입니다.",
+            "DescriptionKO": "플레이어의 공격력",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT004",
             "NameKO": "기본공격 사거리",
-            "DescriptionKO": "플레이어의 기본 공격 사거리입니다.",
+            "DescriptionKO": "플레이어의 기본 공격 사거리",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT005",
             "NameKO": "공격속도",
-            "DescriptionKO": "속도에 따라 초당 공격 횟수를 나타냅니다.",
+            "DescriptionKO": "초당 공격 횟수",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT006",
             "NameKO": "방어력",
-            "DescriptionKO": "플레이어의 방어력입니다. 피격 시 합연산으로 적용됩니다.",
+            "DescriptionKO": "플레이어의 방어력",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT007",
             "NameKO": "이동속도",
-            "DescriptionKO": "이동 속도에 따라 초당 이동 거리가 결정됩니다.",
+            "DescriptionKO": "초당 이동 거리",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT008",
             "NameKO": "크리티컬 확률",
-            "DescriptionKO": "기본 공격과 스킬 공격에 크리티컬이 적용될 확률입니다.",
+            "DescriptionKO": "기본 공격 및 스킬 공격의 크리티컬 확률",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT009",
             "NameKO": "최대 경험치",
-            "DescriptionKO": "크리티컬 발동 시 적에게 주는 피해에 적용됩니다.",
+            "DescriptionKO": "크리티컬 발동 시 적에게 주는 피해에 적용",
             "Category": "PlayerStat"
         },
         {
             "Key": "STAT010",
             "NameKO": "스킬 재사용 대기시간 감소",
-            "DescriptionKO": "유저가 보유한 스킬의 재사용 대기시간을 감소시킵니다.",
+            "DescriptionKO": "보유 스킬의 재사용 대기시간 감소",
             "Category": "PlayerStat"
         },
         {
             "Key": "AUG001",
             "NameKO": "공격력 증가",
-            "DescriptionKO": "플레이어 공격력이 5 증가하여 모든 자동 공격에 적용됩니다.",
+            "DescriptionKO": "공격력 +5",
             "Category": "Augment"
         },
         {
             "Key": "AUG002",
             "NameKO": "최대 체력 증가",
-            "DescriptionKO": "최대 체력이 50 증가합니다.",
+            "DescriptionKO": "최대 체력 +50",
             "Category": "Augment"
         },
         {
             "Key": "AUG004",
             "NameKO": "공격속도 증가",
-            "DescriptionKO": "공격속도가 10% 증가합니다.",
+            "DescriptionKO": "공격속도 +10%",
             "Category": "Augment"
         },
         {
             "Key": "AUG005",
             "NameKO": "방어력 증가",
-            "DescriptionKO": "방어력이 3 증가합니다.",
+            "DescriptionKO": "방어력 +3",
             "Category": "Augment"
         },
         {
             "Key": "AUG006",
             "NameKO": "이동속도 증가",
-            "DescriptionKO": "이동속도가 10% 증가합니다.",
+            "DescriptionKO": "이동속도 +10%",
             "Category": "Augment"
         },
         {
             "Key": "AUG007",
             "NameKO": "크리티컬 확률 증가",
-            "DescriptionKO": "크리티컬 확률이 10%p 증가합니다.",
+            "DescriptionKO": "크리티컬 확률 +10%",
             "Category": "Augment"
         },
         {
             "Key": "AUG008",
             "NameKO": "자동 공격 재사용 감소",
-            "DescriptionKO": "자동 공격 재사용이 1% 감소합니다.",
+            "DescriptionKO": "자동 공격 재사용 대기시간 -5%",
             "Category": "Augment"
         },
         {
             "Key": "AUG009",
-            "NameKO": "관통 공격 획득",
-            "DescriptionKO": "관통탄 1발을 발사하는 자동 공격을 획득합니다.",
+            "NameKO": "바람 칼날 공격 획득",
+            "DescriptionKO": "날아가며 적을 관통하는 바람 칼날을 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG010",
             "NameKO": "화염 오라 공격 획득",
-            "DescriptionKO": "주변 적에게 주기적으로 피해를 주는 화염 오라를 습득합니다.",
+            "DescriptionKO": "주변 적에게 주기적으로 피해를 주는 화염 오라를 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG011",
-            "NameKO": "폭발탄 습득",
-            "DescriptionKO": "적중 시 폭발하는 자동 공격을 습득합니다.",
+            "NameKO": "화염구 획득",
+            "DescriptionKO": "적과 충돌 시 폭발하는 폭발탄을 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG012",
-            "NameKO": "번개 낙하 습득",
-            "DescriptionKO": "번개가 떨어져 범위 피해를 주는 자동 공격을 습득합니다.",
+            "NameKO": "번개 낙하 획득",
+            "DescriptionKO": "범위 피해를 주는 번개 낙하를 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG013",
-            "NameKO": "파동 습득",
-            "DescriptionKO": "주변으로 퍼지는 파동 자동 공격을 습득합니다.",
+            "NameKO": "파동 획득",
+            "DescriptionKO": "주변으로 퍼지는 파동을 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG014",
-            "NameKO": "회전 소환수 습득",
-            "DescriptionKO": "플레이어 주위를 도는 소환수를 습득합니다.",
+            "NameKO": "도깨비불 획득",
+            "DescriptionKO": "하재준의 주위를 공전하며 투사체를 발사하는 도깨비불 소환수를 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG015",
-            "NameKO": "독립 소환수 습득",
-            "DescriptionKO": "적을 찾아 공격하는 소환수를 습득합니다.",
+            "NameKO": "회오리 획득",
+            "DescriptionKO": "일정 시간동안 움직이며 적을 공격하는 회오리 획득",
             "Category": "Augment"
         },
         {
             "Key": "AUG016",
             "NameKO": "일반탄 수 증가",
-            "DescriptionKO": "일반 공격의 투사체 수가 1 증가합니다.",
+            "DescriptionKO": "기본 공격 투사체 +1",
             "Category": "Augment"
         },
         {
             "Key": "AUG017",
-            "NameKO": "관통탄 수 증가",
-            "DescriptionKO": "관통 공격의 투사체 수가 1 증가합니다.",
+            "NameKO": "바람 칼날 수 증가",
+            "DescriptionKO": "바람 칼날 투사체 +1",
             "Category": "Augment"
         },
         {
             "Key": "AUG018",
             "NameKO": "일반 공격 피해 증가",
-            "DescriptionKO": "일반 공격의 피해량이 5 증가합니다.",
+            "DescriptionKO": "기본 공격 피해량 +5",
             "Category": "Augment"
         },
         {
             "Key": "AUG019",
-            "NameKO": "관통 공격 피해 증가",
-            "DescriptionKO": "관통 공격의 피해량이 5 증가합니다.",
+            "NameKO": "바람 칼날 피해 증가",
+            "DescriptionKO": "바람 칼날 피해량 +5",
             "Category": "Augment"
         },
         {
             "Key": "AUG020",
             "NameKO": "오라 공격 범위 증가",
-            "DescriptionKO": "화염 장판의 오라 범위가 30% 증가합니다.",
+            "DescriptionKO": "화염 장판 오라 범위 +30%",
             "Category": "Augment"
         },
         {
             "Key": "AUG021",
             "NameKO": "바람 칼날 투사체 크기 증가",
-            "DescriptionKO": "바람 칼날의 투사체 크기가 10% 증가합니다.",
+            "DescriptionKO": "바람 칼날 투사체 크기 +10%",
             "Category": "Augment"
         },
         {
             "Key": "AUG022",
             "NameKO": "화염구 폭발 범위 증가",
-            "DescriptionKO": "화염구의 폭발 범위가 20% 증가합니다.",
+            "DescriptionKO": "화염구 폭발 범위 +20%",
             "Category": "Augment"
         },
         {
             "Key": "AUG023",
             "NameKO": "화염구 유도 기능 추가",
-            "DescriptionKO": "화염구가 적을 자동으로 추적합니다.",
+            "DescriptionKO": "화염구 적 자동 추적",
             "Category": "Augment"
         },
         {
             "Key": "AUG024",
             "NameKO": "지진 파동 범위 증가",
-            "DescriptionKO": "지진의 파동 범위가 30% 증가합니다.",
+            "DescriptionKO": "지진 파동 범위 +30%",
             "Category": "Augment"
         },
         {
             "Key": "AUG025",
             "NameKO": "낙뢰 수 증가",
-            "DescriptionKO": "낙뢰의 수가 1개 증가합니다.",
+            "DescriptionKO": "낙뢰 수 +1",
             "Category": "Augment"
         },
         {
             "Key": "AUG026",
             "NameKO": "낙뢰 크기 증가",
-            "DescriptionKO": "낙뢰의 크기가 20% 증가합니다.",
+            "DescriptionKO": "낙뢰 크기 +20%",
             "Category": "Augment"
         },
         {
             "Key": "AUG027",
             "NameKO": "회오리 소환 지속시간 증가",
-            "DescriptionKO": "회오리의 소환 지속시간이 20% 증가합니다.",
+            "DescriptionKO": "회오리 소환 지속시간 +20%",
             "Category": "Augment"
         },
         {
             "Key": "AUG028",
             "NameKO": "회오리 소환 수 증가",
-            "DescriptionKO": "소환하는 회오리의 수가 1개 증가합니다.",
+            "DescriptionKO": "회오리 소환 수 +1",
             "Category": "Augment"
         },
         {
             "Key": "AUG029",
             "NameKO": "도깨비불 공격속도 증가",
-            "DescriptionKO": "도깨비불의 투사체 공격속도가 10% 증가합니다.",
+            "DescriptionKO": "도깨비불 투사체 공격속도 +10%",
             "Category": "Augment"
         },
         {
             "Key": "AUG030",
             "NameKO": "도깨비불 투사체 수 증가",
-            "DescriptionKO": "도깨비불이 발사하는 투사체 수가 1개 증가합니다.",
+            "DescriptionKO": "도깨비불 투사체 +1",
             "Category": "Augment"
         }
     ]

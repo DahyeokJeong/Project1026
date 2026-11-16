@@ -1,0 +1,172 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 3,
+  "id": "09_water",
+  "sheet": "sheet.png",
+  "sheetSha256": "2cf1bb4aed46ca99b2f71bad8295bc43392a67784ec544c9cabf116e4f347265",
+  "sourceMetadata": "source_metadata.json",
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivotUnity": [
+    0.76,
+    0.5
+  ],
+  "pivot": {
+    "x": 0.76,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "fps": 12,
+  "frameDurationMs": [
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333
+  ],
+  "totalDurationMs": 666.6666666666666,
+  "loop": true,
+  "loopSource": "Collection playback setting for sustained/flight effects; source v7 metadata omitted loop.",
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "encodedFrames": 8,
+    "delaysMs": [
+      80,
+      90,
+      80,
+      80,
+      90,
+      80,
+      80,
+      90
+    ],
+    "timingResolutionMs": 10
+  },
+  "packaging": "Existing native-size sheet copied byte-for-byte; individual frame PNGs extracted without resampling, repaint or alpha changes.",
+  "frames": [
+    {
+      "x": 0,
+      "width": 96,
+      "height": 96,
+      "yTop": 0,
+      "yUnity": 96,
+      "name": "frame_00",
+      "index": 0,
+      "file": "frames/frame_00.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "e7292df776d5f2b5763b561d737b44291206a3a7dc9e85dd4e8fc908095455ed",
+      "rgbaSha256": "41def6387f821821a7135b666e2bca0f5de9fa19ab28f56470f6a0634bfd092e"
+    },
+    {
+      "x": 96,
+      "width": 96,
+      "height": 96,
+      "yTop": 0,
+      "yUnity": 96,
+      "name": "frame_01",
+      "index": 1,
+      "file": "frames/frame_01.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "a07322a79325b049e08c7e2f55fb655d787ac0e8567980b76fe553df078f3c2f",
+      "rgbaSha256": "411ae6155fc0f22f66edd07e1a9d3bbd0e309e5b97ce5872c9a84160ed3c06b6"
+    },
+    {
+      "x": 192,
+      "width": 96,
+      "height": 96,
+      "yTop": 0,
+      "yUnity": 96,
+      "name": "frame_02",
+      "index": 2,
+      "file": "frames/frame_02.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "3191f406a0504a26ce6bdd75b741e254f9056007de5b515c27e358ea6d8eaff9",
+      "rgbaSha256": "4b3a46b6d330b93c595efcc2f01e67f62a5c05b48bc5e20d856296bcfab62450"
+    },
+    {
+      "x": 288,
+      "width": 96,
+      "height": 96,
+      "yTop": 0,
+      "yUnity": 96,
+      "name": "frame_03",
+      "index": 3,
+      "file": "frames/frame_03.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "c2bd6cac848eaed981f89cb9b2d7b671e3652a69760aaeaf2397b94c7633ea38",
+      "rgbaSha256": "37360bc7084d459167af1ebf37bf865fd3f49db269f69dc8f0487ce8e38c0aa2"
+    },
+    {
+      "x": 0,
+      "width": 96,
+      "height": 96,
+      "yTop": 96,
+      "yUnity": 0,
+      "name": "frame_04",
+      "index": 4,
+      "file": "frames/frame_04.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "5d0ec5d530e17aabcc7038db59268300e1d6fef4a32a5a17b642d4a29a380e8d",
+      "rgbaSha256": "b79cd40cc7c820fff4a3b24b3f0bdccefd487e2210b2dd00196725691bf124fe"
+    },
+    {
+      "x": 96,
+      "width": 96,
+      "height": 96,
+      "yTop": 96,
+      "yUnity": 0,
+      "name": "frame_05",
+      "index": 5,
+      "file": "frames/frame_05.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "ad83be94db3685c72abf61989cbf848ae7ed05dba776bc742bc187904545ac97",
+      "rgbaSha256": "c2e3460c7c79c14ad7eb969128e23562846f0e708cf994db698cb80997a62dc0"
+    },
+    {
+      "x": 192,
+      "width": 96,
+      "height": 96,
+      "yTop": 96,
+      "yUnity": 0,
+      "name": "frame_06",
+      "index": 6,
+      "file": "frames/frame_06.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "070b539742ac71ba5483d4ab5516176abbb1cdba0662b0823b22a4ceb92917b2",
+      "rgbaSha256": "866772005e20df31a07297f626174e46e14fd4d87bcf1bc08144fc4470ba25d5"
+    },
+    {
+      "x": 288,
+      "width": 96,
+      "height": 96,
+      "yTop": 96,
+      "yUnity": 0,
+      "name": "frame_07",
+      "index": 7,
+      "file": "frames/frame_07.png",
+      "durationMs": 83.33333333333333,
+      "pngSha256": "fb6457bedd1ed812339786e35f3e1830e0d4e1053453ee53d5b65b47a96dda82",
+      "rgbaSha256": "fe1ad91d14884c280c1787683b4af5397b544bcd1ffee8acc8207eb452ccb55d"
+    }
+  ],
+  "name": "Water Orb"
+}

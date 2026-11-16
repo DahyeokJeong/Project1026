@@ -7,6 +7,7 @@ public class WispProjectile : ProjectileBase
     #region Settings
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField, Min(0.01f)] private float hitRadius = 0.3f;
+    [SerializeField] private GameObject impactPrefab;
     #endregion
 
     #region Fields
@@ -31,17 +32,21 @@ public class WispProjectile : ProjectileBase
         if (!gameObject.activeInHierarchy)
             return;
 
-        Transform target = FindHitTarget();
+        Transform target = FindHitTarget(out Vector2 impactPosition);
         if (target == null)
             return;
 
         Managers.Damage.ApplyDamage(target, Damage);
+        if (impactPrefab != null)
+            Managers.Pool.Pop(impactPrefab, impactPosition, Quaternion.identity);
+
         Release();
     }
 
-    private Transform FindHitTarget()
+    private Transform FindHitTarget(out Vector2 impactPosition)
     {
         Vector2 position = transform.position;
+        impactPosition = position;
         Physics2D.OverlapCircle(position, hitRadius, enemyFilter, hitBuffer);
 
         Transform nearest = null;
@@ -55,12 +60,14 @@ public class WispProjectile : ProjectileBase
             if (!candidate.gameObject.activeInHierarchy)
                 continue;
 
-            float distance = (hit.ClosestPoint(position) - position).sqrMagnitude;
+            Vector2 closestPoint = hit.ClosestPoint(position);
+            float distance = (closestPoint - position).sqrMagnitude;
             if (distance >= nearestDistance)
                 continue;
 
             nearest = candidate;
             nearestDistance = distance;
+            impactPosition = closestPoint;
         }
 
         return nearest;

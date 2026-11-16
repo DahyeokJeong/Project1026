@@ -20,10 +20,14 @@ public static class LocalizationHelper
         return data != null ? data.NameKO : key;
     }
 
-    public static string GetDescription(string key)
+    public static string GetDescription(string key, int augmentLevel = 1)
     {
         LocalizationData data = Get(key);
 
-        return data != null ? data.DescriptionKO : string.Empty;
+        string description = data?.DescriptionKO ?? string.Empty;
+        if (description.Contains("{bonusValue}") && AugmentHelper.Get(key) is AugmentData augment)
+            return description.Replace("{bonusValue}", (augment.Value * augmentLevel).ToString());
+
+        return description;
     }
 }

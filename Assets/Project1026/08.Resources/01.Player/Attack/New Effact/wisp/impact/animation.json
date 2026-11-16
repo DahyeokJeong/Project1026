@@ -1,0 +1,221 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 4,
+  "revision": "v20-reuse-basic-hit",
+  "id": "13_wisp_hit",
+  "name": "Wisp / Impact",
+  "sheet": "sheet.png",
+  "sheetSha256": "840e810da0ebe0a3327924349eb3e4d9a997d89494079721d74d226573dc0fdd",
+  "sheetWidth": 616,
+  "sheetHeight": 308,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": 154,
+  "frameHeight": 154,
+  "variableFrameSize": false,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivotUnity": [
+    0.5,
+    0.5
+  ],
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "fps": 24,
+  "frameDurationMs": [
+    41.666667,
+    41.666667,
+    41.666667,
+    41.666667,
+    41.666667,
+    41.666667,
+    41.666667,
+    41.666667
+  ],
+  "totalDurationMs": 333.333336,
+  "loop": false,
+  "frames": [
+    {
+      "index": 0,
+      "name": "frame_00",
+      "file": "frames/frame_00.png",
+      "x": 0,
+      "yTop": 0,
+      "yUnity": 154,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "40ae1a07efb363fd4f1bd7fdc50107ff7e131df2f38e79829c6eb56a8a22d49e"
+    },
+    {
+      "index": 1,
+      "name": "frame_01",
+      "file": "frames/frame_01.png",
+      "x": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "ab269ef66319dd78fb20aa83efede7983b1ca75c0c660fbcf81cf53314d67ef2"
+    },
+    {
+      "index": 2,
+      "name": "frame_02",
+      "file": "frames/frame_02.png",
+      "x": 308,
+      "yTop": 0,
+      "yUnity": 154,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "31e35dd9ee0b648cef5c0b3468e4e15446f2d1746199b32f1c6da8c81e4eb3ca"
+    },
+    {
+      "index": 3,
+      "name": "frame_03",
+      "file": "frames/frame_03.png",
+      "x": 462,
+      "yTop": 0,
+      "yUnity": 154,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "c8068fd3f4e353c1741006f74ced27af7e5d50bbbfb9f0171f941409230ba250"
+    },
+    {
+      "index": 4,
+      "name": "frame_04",
+      "file": "frames/frame_04.png",
+      "x": 0,
+      "yTop": 154,
+      "yUnity": 0,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "fa3d34b53639d45d7a11f80721773daede630b149c57b8b59acf820cfdb384f4"
+    },
+    {
+      "index": 5,
+      "name": "frame_05",
+      "file": "frames/frame_05.png",
+      "x": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "9fec3050d2fb9b122f931e5f6c367e2f3e4b28ea76297f6f8edcc5cf68a90325"
+    },
+    {
+      "index": 6,
+      "name": "frame_06",
+      "file": "frames/frame_06.png",
+      "x": 308,
+      "yTop": 154,
+      "yUnity": 0,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "022cae3d7d4c9960daa40e1c028757bd7688b5f3b143ca1455c6f1c76adef640"
+    },
+    {
+      "index": 7,
+      "name": "frame_07",
+      "file": "frames/frame_07.png",
+      "x": 462,
+      "yTop": 154,
+      "yUnity": 0,
+      "width": 154,
+      "height": 154,
+      "durationMs": 41.666667,
+      "pngSha256": "e44d35ab1212d34fec19a50f798c4cf820f72df356d1babaa882ba2a455d1e6e"
+    }
+  ],
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "delaysMs": [
+      40,
+      40,
+      50,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "lossyPalette": true
+  },
+  "reusedFrom": {
+    "assetId": "11_energy_hit",
+    "folder": "basic_attack/impact",
+    "sheetSha256": "840e810da0ebe0a3327924349eb3e4d9a997d89494079721d74d226573dc0fdd",
+    "previewSha256": "2f66565bc01b0fb8090e2f8b0c5eabea3446d48f0408f861ace3ebf32b0b1462",
+    "originalFrameHashes": [
+      {
+        "index": 0,
+        "sourceFile": "frames/frame_00.png",
+        "targetFile": "frames/frame_00.png",
+        "sha256": "40ae1a07efb363fd4f1bd7fdc50107ff7e131df2f38e79829c6eb56a8a22d49e"
+      },
+      {
+        "index": 1,
+        "sourceFile": "frames/frame_01.png",
+        "targetFile": "frames/frame_01.png",
+        "sha256": "ab269ef66319dd78fb20aa83efede7983b1ca75c0c660fbcf81cf53314d67ef2"
+      },
+      {
+        "index": 2,
+        "sourceFile": "frames/frame_02.png",
+        "targetFile": "frames/frame_02.png",
+        "sha256": "31e35dd9ee0b648cef5c0b3468e4e15446f2d1746199b32f1c6da8c81e4eb3ca"
+      },
+      {
+        "index": 3,
+        "sourceFile": "frames/frame_03.png",
+        "targetFile": "frames/frame_03.png",
+        "sha256": "c8068fd3f4e353c1741006f74ced27af7e5d50bbbfb9f0171f941409230ba250"
+      },
+      {
+        "index": 4,
+        "sourceFile": "frames/frame_04.png",
+        "targetFile": "frames/frame_04.png",
+        "sha256": "fa3d34b53639d45d7a11f80721773daede630b149c57b8b59acf820cfdb384f4"
+      },
+      {
+        "index": 5,
+        "sourceFile": "frames/frame_05.png",
+        "targetFile": "frames/frame_05.png",
+        "sha256": "9fec3050d2fb9b122f931e5f6c367e2f3e4b28ea76297f6f8edcc5cf68a90325"
+      },
+      {
+        "index": 6,
+        "sourceFile": "frames/frame_06.png",
+        "targetFile": "frames/frame_06.png",
+        "sha256": "022cae3d7d4c9960daa40e1c028757bd7688b5f3b143ca1455c6f1c76adef640"
+      },
+      {
+        "index": 7,
+        "sourceFile": "frames/frame_07.png",
+        "targetFile": "frames/frame_07.png",
+        "sha256": "e44d35ab1212d34fec19a50f798c4cf820f72df356d1babaa882ba2a455d1e6e"
+      }
+    ]
+  },
+  "packaging": "Existing basic attack hit sheet, frame PNGs, and preview GIF reused byte-for-byte. Only frame filenames and asset identity changed. Legacy rectangles normalized to explicit top-left and Unity coordinates."
+}

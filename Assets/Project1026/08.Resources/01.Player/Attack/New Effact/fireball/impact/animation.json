@@ -1,0 +1,284 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 1,
+  "id": "12_fire_hit",
+  "source": "source_original.png",
+  "sourceSha256": "7bb855b63cd74d48845649e32df4e8d5b53edb0879de254853d4647833ac4993",
+  "sheet": "sheet.png",
+  "sheetSha256": "046b4db1025ee972e7a88730b26a933e869172f370fe0143a5a80b1f4c77f984",
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": 192,
+  "frameHeight": 192,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivot": {
+    "x": 0.5,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "fps": 24,
+  "loop": false,
+  "filter": "point / nearest",
+  "alpha": "straight RGBA; no threshold or cleanup",
+  "resampling": "source pixel centers mapped directly onto fractional 4x2 cells; nearest RGBA tuple copied unchanged",
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "delaysMs": [
+      40,
+      40,
+      50,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "lossyPalette": true
+  },
+  "frames": [
+    {
+      "name": "frame_00",
+      "file": "frames/frame_00.png",
+      "index": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "b9588c2cf8593d8ea39f96d62fdcd30156fb8461f0f8d7f73d66e9040dfa8598",
+      "rgbaSha256": "f28d2b447e4d202a726d75489fbb8f72cb1f520b13c9555479cee0859a0585e9",
+      "alpha128": {
+        "pixelCount": 736,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 77,
+          "y": 78,
+          "width": 44,
+          "height": 43
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.517773,
+          "y": 0.517964
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_01",
+      "file": "frames/frame_01.png",
+      "index": 1,
+      "rect": {
+        "x": 192,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "0abcdbc2e543fa981e3bc26e9765fcfc0f11551ccde1d912efa26065d61be5de",
+      "rgbaSha256": "e31ef56fe92af3af752715b431e2359899347b770b829fd7085c37faafc797c2",
+      "alpha128": {
+        "pixelCount": 3236,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 60,
+          "y": 70,
+          "width": 72,
+          "height": 63
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.510865,
+          "y": 0.525247
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_02",
+      "file": "frames/frame_02.png",
+      "index": 2,
+      "rect": {
+        "x": 384,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "385c938de141df3047e40201e88dc284efcc657eb357fde0d237a00b153af7fc",
+      "rgbaSha256": "df4911a765e677ded0785e89e76ef7a835fec1f53390e9951442f02c5e9b776c",
+      "alpha128": {
+        "pixelCount": 7165,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 40,
+          "y": 50,
+          "width": 109,
+          "height": 97
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.505185,
+          "y": 0.512306
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_03",
+      "file": "frames/frame_03.png",
+      "index": 3,
+      "rect": {
+        "x": 576,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "e1f15f8b361769133b72b8eeee28927f34aa8f66e6d2ca6c7dcb0f81f731e172",
+      "rgbaSha256": "eb015e3a3837539493f720ac897c20f9e72417c5cdc6e8584ff85cc9705b69e1",
+      "alpha128": {
+        "pixelCount": 4984,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 48,
+          "y": 54,
+          "width": 99,
+          "height": 88
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.514142,
+          "y": 0.50451
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_04",
+      "file": "frames/frame_04.png",
+      "index": 4,
+      "rect": {
+        "x": 0,
+        "y": 192,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "e6027ee698767db2f1a60b8a191310ac1ff5340c0603bcf7d0ec882c6c933348",
+      "rgbaSha256": "a9d6b963a5745884f024cd7bfc8cd9b33bda4ea6855d18666c7ffe8b45c7b4a2",
+      "alpha128": {
+        "pixelCount": 2648,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 61,
+          "y": 59,
+          "width": 78,
+          "height": 72
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.50529,
+          "y": 0.487418
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_05",
+      "file": "frames/frame_05.png",
+      "index": 5,
+      "rect": {
+        "x": 192,
+        "y": 192,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "8730d4d32f0f4ea7709d0cf4a26f37fc05c5662c8b72df81491d73e8f80efd30",
+      "rgbaSha256": "1e5649de9a6aa7071f6346410bdfe3a4d89cd7a38b3ce0999ca2a7ec5b099032",
+      "alpha128": {
+        "pixelCount": 1587,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 65,
+          "y": 72,
+          "width": 63,
+          "height": 54
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.493393,
+          "y": 0.528005
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_06",
+      "file": "frames/frame_06.png",
+      "index": 6,
+      "rect": {
+        "x": 384,
+        "y": 192,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "d3db37a31738deb3c55be117d74cd50582253a0066615476995c88b47c82fe73",
+      "rgbaSha256": "a1e66ff449c207687db26cfd939c80d65ad782d3a6afef02cc2348100699e0d2",
+      "alpha128": {
+        "pixelCount": 127,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 80,
+          "y": 84,
+          "width": 30,
+          "height": 26
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.491931,
+          "y": 0.500384
+        },
+        "borderPixelFraction": 0
+      }
+    },
+    {
+      "name": "frame_07",
+      "file": "frames/frame_07.png",
+      "index": 7,
+      "rect": {
+        "x": 576,
+        "y": 192,
+        "width": 192,
+        "height": 192
+      },
+      "durationMs": 41.666667,
+      "pngSha256": "b9aa6a762f6bcdbeb640a1e8e883907dff97583886f879a8ba9cac004a242e33",
+      "rgbaSha256": "2e7fc8207150474a8bec4d8ee11eba274bc212064e8c768f471d4368a6870bd8",
+      "alpha128": {
+        "pixelCount": 30,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 92,
+          "y": 95,
+          "width": 5,
+          "height": 6
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.492139,
+          "y": 0.509752
+        },
+        "borderPixelFraction": 0
+      }
+    }
+  ],
+  "name": "Fireball / Impact"
+}

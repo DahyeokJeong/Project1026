@@ -13,7 +13,7 @@ public class CharacterInfoRowUI : MonoBehaviour
     {
         BindAutoAttack(title, icon);
         effectText.text = description;
-        countText.text = $"¡¿{count}";
+        countText.text = $"LV.{count}";
     }
 
     public void BindAutoAttack(string title, Sprite icon)

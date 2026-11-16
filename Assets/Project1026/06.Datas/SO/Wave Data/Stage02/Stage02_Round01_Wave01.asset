@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dd5dbe069e414c9fa911506665222e, type: 3}
+  m_Name: Stage02_Round01_Wave01
+  m_EditorClassIdentifier: Assembly-CSharp::WaveDataSO
+  duration: 5
+  enemies:
+  - prefab: {fileID: 156661654134334344, guid: 1c3ddf49c24443ac884b0c1be90d41cc, type: 3}
+    weight: 7
+  - prefab: {fileID: 156661654134334344, guid: 2abd85af7f498634b802811e24850c97, type: 3}
+    weight: 3
+  spawnBatchSize: 1
+  spawnInterval: 1
+  spawnImmediately: 1

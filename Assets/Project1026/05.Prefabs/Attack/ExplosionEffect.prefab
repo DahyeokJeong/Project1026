@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3158295381166669339}
+  - component: {fileID: 8100000000000000001}
   - component: {fileID: 917030584790514646}
   - component: {fileID: 4727290965583411148}
   - component: {fileID: 681240210054145822}
@@ -34,6 +35,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8100000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192837210289080540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8781a220df32457389756e025c0b4ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpriteAnimation
+  frames:
+  - {fileID: 21300000, guid: 511195b6bfb6bda488cadd017c0b94ba, type: 3}
+  - {fileID: 21300000, guid: d9a6cc23ac10ffe4cb53e7c7cb2b8620, type: 3}
+  - {fileID: 21300000, guid: d24383d37a9493e41a357f837fc14f19, type: 3}
+  - {fileID: 21300000, guid: 007e06f9180a7ec45b1278caaee6ff9a, type: 3}
+  - {fileID: 21300000, guid: 6b57a4d2f814de3418659dfe4665e0c5, type: 3}
+  - {fileID: 21300000, guid: 70c12e8cf05d8c04db852e73a8e654d9, type: 3}
+  - {fileID: 21300000, guid: 025ce92dad0f6f14da096644450d3f2b, type: 3}
+  - {fileID: 21300000, guid: 60a5b67b86182014ab137d446755b239, type: 3}
+  frameDuration: 0.041666668
+  playOutsideBattle: 0
+  returnToPoolAfterPlayback: 1
 --- !u!212 &917030584790514646
 SpriteRenderer:
   serializedVersion: 3
@@ -79,11 +104,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 676396531
-  m_SortingLayer: 1
+  m_SortingLayerID: 222443097
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 47441cadb65218c4b9a7dc48b1d137b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 511195b6bfb6bda488cadd017c0b94ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5e8d9e17f8c8849b06b8212d711d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionEffect
-  lifeTime: 0.42
+  lifeTime: 0.33333334
   useGroundImpactVisual: 1
   impactParticles: {fileID: 681240210054145822}
 --- !u!114 &681240210054145822
@@ -119,7 +144,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 959572d1d8534671ae8654fa6d711d21, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactParticleBurst
   referenceRenderer: {fileID: 917030584790514646}
   particleMaterial: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
