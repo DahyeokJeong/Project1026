@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1381436974518869977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8621410289461553394}
+  m_Layer: 0
+  m_Name: Sorting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8621410289461553394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381436974518869977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.88, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4785460353846724060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3530950055281727504
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +42,7 @@ GameObject:
   - component: {fileID: 4785460353846724060}
   - component: {fileID: 8011878112511495004}
   - component: {fileID: 5183330479849103263}
+  - component: {fileID: 4018958642627781784}
   m_Layer: 0
   m_Name: OrbitSummon
   m_TagString: Untagged
@@ -30,7 +62,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8621410289461553394}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8011878112511495004
@@ -82,7 +115,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: bc38be8c71b06274b8ede59ffc688dce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a15439b878a377c41add55cae3991bc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,8 +148,28 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8943616692216685008, guid: edfb2f0a4a4b48b46b9637f7cf0b4b13, type: 3}
   spriteRenderer: {fileID: 8011878112511495004}
   idleFrames:
-  - {fileID: 21300000, guid: bc38be8c71b06274b8ede59ffc688dce, type: 3}
-  - {fileID: 21300000, guid: 2379ff484184427429ea00ea5d6ef4ab, type: 3}
-  - {fileID: 21300000, guid: b704db0ffbbc60b46a8108f6aeec5d33, type: 3}
-  - {fileID: 21300000, guid: 469f82a89be664c4e94a0ab490cd21a8, type: 3}
-  framesPerSecond: 8
+  - {fileID: 21300000, guid: a15439b878a377c41add55cae3991bc8, type: 3}
+  - {fileID: 21300000, guid: 206232b5aa2ba864988576aeae18d9fc, type: 3}
+  - {fileID: 21300000, guid: 105ba822233df094bbfca68856f80d9c, type: 3}
+  - {fileID: 21300000, guid: 9c8c81215b826c64993a0135c0ba5e37, type: 3}
+  - {fileID: 21300000, guid: 4f5d7af2055fb6c4893a6d2925a1dffa, type: 3}
+  - {fileID: 21300000, guid: 86c9af9d7daed814dad06b7a21f0d4fe, type: 3}
+  - {fileID: 21300000, guid: 96aaeca209e3b53489d3bc5254b915ac, type: 3}
+  - {fileID: 21300000, guid: 3ef5b76bb962bdc43b9cc40e481512a2, type: 3}
+  framesPerSecond: 14
+--- !u!114 &4018958642627781784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3530950055281727504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce066210fbdd9e4e8438b26012c85b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSorting
+  sr:
+  - {fileID: 8011878112511495004}
+  sortingPoint: {fileID: 8621410289461553394}
+  isDynamic: 1

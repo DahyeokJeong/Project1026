@@ -1,0 +1,172 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 3,
+  "id": "01_energy",
+  "sheet": "sheet.png",
+  "sheetSha256": "31629beb3670a7a5b5ff4a28007cdd7fc1a4d74cdbafe31da44406ce345836e4",
+  "sourceMetadata": "source_metadata.json",
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": 154,
+  "frameHeight": 154,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivotUnity": [
+    0.74,
+    0.5
+  ],
+  "pivot": {
+    "x": 0.74,
+    "y": 0.5,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "fps": 24,
+  "frameDurationMs": [
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664,
+    41.666666666666664
+  ],
+  "totalDurationMs": 333.3333333333333,
+  "loop": true,
+  "loopSource": "Collection playback setting for sustained/flight effects; source v7 metadata omitted loop.",
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "encodedFrames": 8,
+    "delaysMs": [
+      40,
+      40,
+      50,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "timingResolutionMs": 10
+  },
+  "packaging": "Existing native-size sheet copied byte-for-byte; individual frame PNGs extracted without resampling, repaint or alpha changes.",
+  "frames": [
+    {
+      "x": 0,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_00",
+      "index": 0,
+      "file": "frames/frame_00.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "8dbe8864cc0730f7256bc32407ede5b70e113180d74ecc8322cd9da9798ebb06",
+      "rgbaSha256": "595e5f47289a68fcebcaafd7af1db6fbfb36baf29d9a4a6e5759e1a0db62360c"
+    },
+    {
+      "x": 154,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_01",
+      "index": 1,
+      "file": "frames/frame_01.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "01028056090647bcbb33d1f92837d7b9bf1a76c9cd04ace3281caa26d834595b",
+      "rgbaSha256": "8bd914563aff3e06adb9506cfa91aa849010dbf08db95236739c0f77738b0c19"
+    },
+    {
+      "x": 308,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_02",
+      "index": 2,
+      "file": "frames/frame_02.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "566920630e86ccbe64cdd76614f21abe5a5e3776d58eb650896a9e2302e6e0b5",
+      "rgbaSha256": "a2c72d92a28c444e6b74393717a0a829b5a7015aca218336714c58d52a82cb58"
+    },
+    {
+      "x": 462,
+      "width": 154,
+      "height": 154,
+      "yTop": 0,
+      "yUnity": 154,
+      "name": "frame_03",
+      "index": 3,
+      "file": "frames/frame_03.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "34983132989908138dc068098f89f0679e340c14c8b0da19786ba78816f624af",
+      "rgbaSha256": "c64ce51feb5de9fc4986513bf13c22ed01b61b8eff4b7127ec114691b8556df8"
+    },
+    {
+      "x": 0,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_04",
+      "index": 4,
+      "file": "frames/frame_04.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "12419a957e04a69adb21c6248ddbd6d1a9a2d815c3184a8a4fb1f5b0b6ab0250",
+      "rgbaSha256": "fa4dd462ab5b43c96321da018510d07fb5818de4e0e3b5bed0fd7183d73ff78f"
+    },
+    {
+      "x": 154,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_05",
+      "index": 5,
+      "file": "frames/frame_05.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "1a605b4d8e0831d574d014d78aaf6f7135febe8cd6785f03ae6f5dfefa3ea742",
+      "rgbaSha256": "661bcbf74a98853717fd2f089e0aa9dd9254944de58d158e457a77a821c5bed8"
+    },
+    {
+      "x": 308,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_06",
+      "index": 6,
+      "file": "frames/frame_06.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "fb9f676b611ab8cdf72ce49d6d45942d025ece65a82c9cfa1371b4d70fb40efa",
+      "rgbaSha256": "6eee448d96c42c5db55bfc712c903c0c65562550676c20855b7417084c9dfa5e"
+    },
+    {
+      "x": 462,
+      "width": 154,
+      "height": 154,
+      "yTop": 154,
+      "yUnity": 0,
+      "name": "frame_07",
+      "index": 7,
+      "file": "frames/frame_07.png",
+      "durationMs": 41.666666666666664,
+      "pngSha256": "65c66a041d5f2500ed79ca90de363cd38c4fbecf9b462fc05af25fcb9ff2ae94",
+      "rgbaSha256": "1a9f7837aa50f841e0930423a4c2db55bd3f74df68c9d548f49460a5db98e020"
+    }
+  ],
+  "name": "Basic Attack / Flight"
+}

@@ -9,6 +9,7 @@ public class PiercingProjectile : ProjectileBase
     [Header("Piercing Settings")]
     [SerializeField] private float hitRadius = 0.2f;
     [SerializeField] private int maxPierceCount = 3;
+    [SerializeField] private GameObject impactPrefab;
     #endregion
 
     #region Fields
@@ -64,7 +65,10 @@ public class PiercingProjectile : ProjectileBase
             if (!target.gameObject.activeInHierarchy || !hitTargets.Add(target))
                 continue;
 
+            Vector2 impactPosition = hit.ClosestPoint(transform.position);
             Managers.Damage.ApplyDamage(target, Damage);
+            if (impactPrefab != null)
+                Managers.Pool.Pop(impactPrefab, impactPosition, Quaternion.identity);
 
             if (maxPierceCount > 0 && hitTargets.Count >= maxPierceCount)
             {

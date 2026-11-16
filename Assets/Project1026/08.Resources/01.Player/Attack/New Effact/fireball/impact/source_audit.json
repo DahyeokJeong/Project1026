@@ -1,0 +1,525 @@
+{
+  "id": "12_fire_hit",
+  "source": "source_original.png",
+  "sourceSha256": "7bb855b63cd74d48845649e32df4e8d5b53edb0879de254853d4647833ac4993",
+  "sourceSize": {
+    "width": 1774,
+    "height": 887
+  },
+  "sourceCell": {
+    "width": 443.5,
+    "height": 443.5
+  },
+  "sourceUniqueFrames": 8,
+  "opaqueBorderPixelsByFrame": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "alpha128Bounds": [
+    {
+      "x": 177,
+      "y": 180,
+      "width": 102,
+      "height": 99
+    },
+    {
+      "x": 140,
+      "y": 161,
+      "width": 165,
+      "height": 146
+    },
+    {
+      "x": 92,
+      "y": 115,
+      "width": 253,
+      "height": 224
+    },
+    {
+      "x": 111,
+      "y": 124,
+      "width": 228,
+      "height": 203
+    },
+    {
+      "x": 141,
+      "y": 137,
+      "width": 179,
+      "height": 167
+    },
+    {
+      "x": 150,
+      "y": 167,
+      "width": 147,
+      "height": 124
+    },
+    {
+      "x": 185,
+      "y": 195,
+      "width": 69,
+      "height": 59
+    },
+    {
+      "x": 213,
+      "y": 220,
+      "width": 12,
+      "height": 13
+    }
+  ],
+  "brightFrontCentroids": [
+    null,
+    null,
+    {
+      "x": 0.65963,
+      "y": 0.512194
+    },
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "sourceFrames": [
+    {
+      "index": 0,
+      "sourceRectInteger": {
+        "x": 0,
+        "y": 0,
+        "width": 443,
+        "height": 443
+      },
+      "sourceRectFractional": {
+        "x": 0,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "b3d256f4a247224bd7b165365a3f2216f4ac20b888b0e5117f22cb035e274e47",
+      "alphaHistogram": {
+        "zero": 187762,
+        "oneToTwo": 3813,
+        "threeTo127": 824,
+        "atLeast128": 3850,
+        "fullyOpaque": 23
+      },
+      "alpha1": {
+        "pixelCount": 8487,
+        "cellBorderPixelCount": 36,
+        "localBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 443,
+          "height": 443
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.517955,
+          "y": 0.518859
+        },
+        "borderPixelFraction": 0.004242
+      },
+      "alpha128": {
+        "pixelCount": 3850,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 177,
+          "y": 180,
+          "width": 102,
+          "height": 99
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.518157,
+          "y": 0.518633
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    },
+    {
+      "index": 1,
+      "sourceRectInteger": {
+        "x": 443,
+        "y": 0,
+        "width": 444,
+        "height": 443
+      },
+      "sourceRectFractional": {
+        "x": 443.5,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "634e089dc1b3b81797c0fdbe127f96f3ef3222a4a35aab837227696389b99f4e",
+      "alphaHistogram": {
+        "zero": 176020,
+        "oneToTwo": 2113,
+        "threeTo127": 1290,
+        "atLeast128": 17269,
+        "fullyOpaque": 225
+      },
+      "alpha1": {
+        "pixelCount": 20672,
+        "cellBorderPixelCount": 43,
+        "localBounds": {
+          "x": 0,
+          "y": 12,
+          "width": 444,
+          "height": 431
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.511149,
+          "y": 0.525271
+        },
+        "borderPixelFraction": 0.00208
+      },
+      "alpha128": {
+        "pixelCount": 17269,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 140,
+          "y": 161,
+          "width": 165,
+          "height": 146
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.511213,
+          "y": 0.525239
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    },
+    {
+      "index": 2,
+      "sourceRectInteger": {
+        "x": 887,
+        "y": 0,
+        "width": 443,
+        "height": 443
+      },
+      "sourceRectFractional": {
+        "x": 887,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "4bdf41f380552a3f844c91bb5b5a2c035fd273978007a63f866dda679b4cc9ff",
+      "alphaHistogram": {
+        "zero": 153347,
+        "oneToTwo": 2557,
+        "threeTo127": 1925,
+        "atLeast128": 38420,
+        "fullyOpaque": 248
+      },
+      "alpha1": {
+        "pixelCount": 42902,
+        "cellBorderPixelCount": 35,
+        "localBounds": {
+          "x": 1,
+          "y": 25,
+          "width": 442,
+          "height": 418
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.504899,
+          "y": 0.512532
+        },
+        "borderPixelFraction": 0.000816
+      },
+      "alpha128": {
+        "pixelCount": 38420,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 92,
+          "y": 115,
+          "width": 253,
+          "height": 224
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.505107,
+          "y": 0.512528
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": {
+        "x": 0.65963,
+        "y": 0.512194
+      }
+    },
+    {
+      "index": 3,
+      "sourceRectInteger": {
+        "x": 1330,
+        "y": 0,
+        "width": 444,
+        "height": 443
+      },
+      "sourceRectFractional": {
+        "x": 1330.5,
+        "y": 0,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "fc5e58946d4df7c401679983161db65ef89fa732f8ca33b504867ce94f3c4908",
+      "alphaHistogram": {
+        "zero": 162408,
+        "oneToTwo": 4780,
+        "threeTo127": 2951,
+        "atLeast128": 26553,
+        "fullyOpaque": 228
+      },
+      "alpha1": {
+        "pixelCount": 34284,
+        "cellBorderPixelCount": 25,
+        "localBounds": {
+          "x": 0,
+          "y": 3,
+          "width": 444,
+          "height": 440
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.514293,
+          "y": 0.504823
+        },
+        "borderPixelFraction": 0.000729
+      },
+      "alpha128": {
+        "pixelCount": 26553,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 111,
+          "y": 124,
+          "width": 228,
+          "height": 203
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.514592,
+          "y": 0.504654
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    },
+    {
+      "index": 4,
+      "sourceRectInteger": {
+        "x": 0,
+        "y": 443,
+        "width": 443,
+        "height": 444
+      },
+      "sourceRectFractional": {
+        "x": 0,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "2eea11084b4bb526325e8b968feeaafcd4ecf32d1524bc440ab1ae241ccaea6a",
+      "alphaHistogram": {
+        "zero": 176926,
+        "oneToTwo": 3249,
+        "threeTo127": 2487,
+        "atLeast128": 14030,
+        "fullyOpaque": 202
+      },
+      "alpha1": {
+        "pixelCount": 19766,
+        "cellBorderPixelCount": 33,
+        "localBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 443,
+          "height": 444
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.505152,
+          "y": 0.488271
+        },
+        "borderPixelFraction": 0.00167
+      },
+      "alpha128": {
+        "pixelCount": 14030,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 141,
+          "y": 137,
+          "width": 179,
+          "height": 167
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.505328,
+          "y": 0.488032
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    },
+    {
+      "index": 5,
+      "sourceRectInteger": {
+        "x": 443,
+        "y": 443,
+        "width": 444,
+        "height": 444
+      },
+      "sourceRectFractional": {
+        "x": 443.5,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "efe5854423f646513f6f88cb29450f82fd44fd3803eb481dd31aac37a627c793",
+      "alphaHistogram": {
+        "zero": 183881,
+        "oneToTwo": 3352,
+        "threeTo127": 1428,
+        "atLeast128": 8475,
+        "fullyOpaque": 149
+      },
+      "alpha1": {
+        "pixelCount": 13255,
+        "cellBorderPixelCount": 39,
+        "localBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 444,
+          "height": 444
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.494602,
+          "y": 0.528432
+        },
+        "borderPixelFraction": 0.002942
+      },
+      "alpha128": {
+        "pixelCount": 8475,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 150,
+          "y": 167,
+          "width": 147,
+          "height": 124
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.494282,
+          "y": 0.528808
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    },
+    {
+      "index": 6,
+      "sourceRectInteger": {
+        "x": 887,
+        "y": 443,
+        "width": 443,
+        "height": 444
+      },
+      "sourceRectFractional": {
+        "x": 887,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "b0d359ff979457c93e9cd266b0b46220fcd1df5e2c60663a6da508abcc83c719",
+      "alphaHistogram": {
+        "zero": 192757,
+        "oneToTwo": 2894,
+        "threeTo127": 338,
+        "atLeast128": 703,
+        "fullyOpaque": 1
+      },
+      "alpha1": {
+        "pixelCount": 3935,
+        "cellBorderPixelCount": 28,
+        "localBounds": {
+          "x": 1,
+          "y": 0,
+          "width": 437,
+          "height": 428
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.489626,
+          "y": 0.50075
+        },
+        "borderPixelFraction": 0.007116
+      },
+      "alpha128": {
+        "pixelCount": 703,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 185,
+          "y": 195,
+          "width": 69,
+          "height": 59
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.490556,
+          "y": 0.50054
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    },
+    {
+      "index": 7,
+      "sourceRectInteger": {
+        "x": 1330,
+        "y": 443,
+        "width": 444,
+        "height": 444
+      },
+      "sourceRectFractional": {
+        "x": 1330.5,
+        "y": 443.5,
+        "width": 443.5,
+        "height": 443.5
+      },
+      "rgbaSha256": "1b3dd8832ff7492e16bbde93f457453dc847368b6cd25c4378d6bf1a259bc64d",
+      "alphaHistogram": {
+        "zero": 194490,
+        "oneToTwo": 2346,
+        "threeTo127": 146,
+        "atLeast128": 154,
+        "fullyOpaque": 0
+      },
+      "alpha1": {
+        "pixelCount": 2646,
+        "cellBorderPixelCount": 12,
+        "localBounds": {
+          "x": 16,
+          "y": 0,
+          "width": 416,
+          "height": 396
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.489562,
+          "y": 0.509409
+        },
+        "borderPixelFraction": 0.004535
+      },
+      "alpha128": {
+        "pixelCount": 154,
+        "cellBorderPixelCount": 0,
+        "localBounds": {
+          "x": 213,
+          "y": 220,
+          "width": 12,
+          "height": 13
+        },
+        "alphaWeightedCentroid": {
+          "x": 0.493623,
+          "y": 0.510039
+        },
+        "borderPixelFraction": 0
+      },
+      "brightFrontCentroid": null
+    }
+  ],
+  "historicalSource": "12_fire_hit.png"
+}

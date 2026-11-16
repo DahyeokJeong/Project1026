@@ -6,6 +6,7 @@ public class NormalProjectile : ProjectileBase
     #region Settings
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float hitRadius = 0.3f;
+    [SerializeField] private GameObject impactPrefab;
     #endregion
 
     #region Fields
@@ -51,7 +52,11 @@ public class NormalProjectile : ProjectileBase
             if (!target.gameObject.activeInHierarchy)
                 continue;
 
+            Vector2 impactPosition = hit.ClosestPoint(transform.position);
             Managers.Damage.ApplyDamage(target, Damage);
+            if (impactPrefab != null)
+                Managers.Pool.Pop(impactPrefab, impactPosition, Quaternion.identity);
+
             Release();
             return;
         }

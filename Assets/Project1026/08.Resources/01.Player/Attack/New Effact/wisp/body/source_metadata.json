@@ -1,0 +1,90 @@
+{
+  "rows": 2,
+  "frameWidth": 134,
+  "fps": 14,
+  "source": "approved runtime RGBA, nearest-neighbor size bake",
+  "frameCount": 8,
+  "frameHeight": 134,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "pixelsPerUnit": 64,
+  "frames": [
+    {
+      "x": 0,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_00"
+    },
+    {
+      "x": 134,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_01"
+    },
+    {
+      "x": 268,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_02"
+    },
+    {
+      "x": 402,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_03"
+    },
+    {
+      "x": 0,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_04"
+    },
+    {
+      "x": 134,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_05"
+    },
+    {
+      "x": 268,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_06"
+    },
+    {
+      "x": 402,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_07"
+    }
+  ],
+  "compression": "None",
+  "id": "07_wisp",
+  "columns": 4,
+  "image": "sheet.png",
+  "filterMode": "Point",
+  "pivotUnity": [
+    0.5,
+    0.24
+  ],
+  "historicalImage": "07_wisp.png"
+}

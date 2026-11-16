@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6603465446860044626}
   - component: {fileID: 1704069014990538751}
   - component: {fileID: 5641740122377128318}
-  - component: {fileID: 4905001200024576381}
   - component: {fileID: 4905001200024576382}
   - component: {fileID: 4905001200024576383}
   m_Layer: 0
@@ -86,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 8063456e7726425e9bfb83ec00aa564f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3cf96758f1c55e64e8e19d22c5133719, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,8 +115,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483712
-  hitRadius: 0.43
-  maxPierceCount: 0
+  hitRadius: 0.9
+  maxPierceCount: 3
+  impactPrefab: {fileID: 6424283817944284668, guid: 765d2cdfa657440686d891983f2a6475, type: 3}
 --- !u!114 &5641740122377128318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,25 +136,6 @@ MonoBehaviour:
   wallRadius: 0.1
   wallOffset: 0.02
   maxCollisionsPerFrame: 3
---- !u!114 &4905001200024576381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6719453655010788331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5e579bdf6c45f99df44d317cd59670, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::WindKnifeAfterimage
-  streakSprites:
-  - {fileID: 21300000, guid: ea4cc6705cd64188981bffac25427002, type: 3}
-  - {fileID: 21300000, guid: 233955f80c3f4f588a861141865396c2, type: 3}
-  streakLifetime: 0.19
-  repeatInterval: 0.26
-  stagger: 0.055
-  speedRatio: 0.65
 --- !u!114 &4905001200024576382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,14 +146,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8781a220df32457389756e025c0b4ede, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpriteAnimation
   frames:
-  - {fileID: 9037493359644798075, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
-  - {fileID: 4990445515237617851, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
-  - {fileID: 6862549602844021160, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
-  - {fileID: -6271070668211180444, guid: 418dac567a73442994a3623b72a8d6fb, type: 3}
-  frameDuration: 0.06
+  - {fileID: 21300000, guid: 3cf96758f1c55e64e8e19d22c5133719, type: 3}
+  - {fileID: 21300000, guid: 32c37ed8616d8e34e8d67b2fe6c5c0d0, type: 3}
+  - {fileID: 21300000, guid: 6d36b1ad41c6b834c89a803865d7d56e, type: 3}
+  - {fileID: 21300000, guid: 2bf13c91f6975bc4ebb498338e59b3c6, type: 3}
+  - {fileID: 21300000, guid: 17f96eada33859b428adbc2ef71c077d, type: 3}
+  - {fileID: 21300000, guid: 0a67dacd9aeada844ae50e1034f06fdf, type: 3}
+  - {fileID: 21300000, guid: ba4dbedce895ad346968ab815f418ea0, type: 3}
+  - {fileID: 21300000, guid: 2b6c9460f8e984b4691be02d63003ba2, type: 3}
+  frameDuration: 0.0625
+  playOutsideBattle: 0
+  returnToPoolAfterPlayback: 0
 --- !u!114 &4905001200024576383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +170,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa76713c1c748139c84cc99794ea4ec, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindKnifeParticleTrail
   emitterOffset: {x: -0.55, y: 0}
   particlesPerUnit: 8

@@ -1,0 +1,184 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 4,
+  "assetVersion": "v12",
+  "id": "08_tornado",
+  "sheet": "sheet.png",
+  "sheetSha256": "b95e891ab2d428f5079da586c8d8424e1fea206fc0bd9b29a8de0b080c9bde4c",
+  "sheetWidth": 1774,
+  "sheetHeight": 887,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": null,
+  "frameHeight": null,
+  "variableFrameSize": true,
+  "frameWidthRange": [
+    443,
+    444
+  ],
+  "frameHeightRange": [
+    443,
+    444
+  ],
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivot": {
+    "x": 0.5,
+    "y": 0.095,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pivotUnity": [
+    0.5,
+    0.095
+  ],
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "fps": 12,
+  "frameDurationMs": [
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333,
+    83.33333333333333
+  ],
+  "totalDurationMs": 666.6666666666666,
+  "loop": true,
+  "alpha": "Original straight RGBA preserved without recolor, threshold, or alpha edits.",
+  "packaging": "Approved generated 1774x887 sheet copied byte-for-byte. Explicit integer frame rectangles use floor boundaries; resulting frames vary by one pixel. Never slice using a fixed cell width.",
+  "provenance": {
+    "generationTool": "built-in image_gen",
+    "sourceSheet": "C:\\Users\\User\\Desktop\\Project1026\\ArtDrafts\\WindVFX_v12\\tornado-sheet.png",
+    "sourceSheetByteIdentical": true,
+    "sourceSheetSha256": "b95e891ab2d428f5079da586c8d8424e1fea206fc0bd9b29a8de0b080c9bde4c",
+    "approval": "User approved new wind-blade and tornado designs in this chat."
+  },
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "encodedFrames": 8,
+    "delaysMs": [
+      80,
+      90,
+      80,
+      80,
+      90,
+      80,
+      80,
+      90
+    ],
+    "timingResolutionMs": 10,
+    "width": 444,
+    "height": 444
+  },
+  "frames": [
+    {
+      "name": "frame_00",
+      "file": "frames/frame_00.png",
+      "index": 0,
+      "x": 0,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "4eb059345e88ac0b805be65e30702f7fd92f50bdbfdc35c76950fe9e15dabc77"
+    },
+    {
+      "name": "frame_01",
+      "file": "frames/frame_01.png",
+      "index": 1,
+      "x": 443,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "7547c2e628d32068a73265513c8f3e936b33696bd23677fcc42983617cdce93a"
+    },
+    {
+      "name": "frame_02",
+      "file": "frames/frame_02.png",
+      "index": 2,
+      "x": 887,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 443,
+      "height": 443,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "58dabacd7b0bfa47756a4ac9db1fbcc40c03f89677bab91e294eb84345b096ad"
+    },
+    {
+      "name": "frame_03",
+      "file": "frames/frame_03.png",
+      "index": 3,
+      "x": 1330,
+      "yTop": 0,
+      "yUnity": 444,
+      "width": 444,
+      "height": 443,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "f3ff2280df2386bb0af5ee81bb5c39b23398be187f25188b77cf0a777bd426e8"
+    },
+    {
+      "name": "frame_04",
+      "file": "frames/frame_04.png",
+      "index": 4,
+      "x": 0,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "1cee3adf60a4b749310f49254a70c49b87fd03f7a25a26bfcb5da4d224104906"
+    },
+    {
+      "name": "frame_05",
+      "file": "frames/frame_05.png",
+      "index": 5,
+      "x": 443,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "9817754629eb3503b27e95ee27c4b36b2dbfb4ec0769aa3e36160a7db9ecf652"
+    },
+    {
+      "name": "frame_06",
+      "file": "frames/frame_06.png",
+      "index": 6,
+      "x": 887,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 443,
+      "height": 444,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "33c74103e5c706bd5c490ba0f8dc46db0157dd18d6f57b8c092bb4df850cb9e3"
+    },
+    {
+      "name": "frame_07",
+      "file": "frames/frame_07.png",
+      "index": 7,
+      "x": 1330,
+      "yTop": 443,
+      "yUnity": 0,
+      "width": 444,
+      "height": 444,
+      "durationMs": 83.33333333333333,
+      "pngSha256": "b7e54dda8e30b07cd7ac4167ac9c5abbc3aa955f4746aa339b0ceb7d1e786831"
+    }
+  ],
+  "name": "Tornado"
+}

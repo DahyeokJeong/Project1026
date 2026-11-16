@@ -1,0 +1,172 @@
+{
+  "format": "portable-pixel-vfx",
+  "version": 3,
+  "id": "07_wisp",
+  "sheet": "sheet.png",
+  "sheetSha256": "baa3e17abe59de4b4896915b995d218c6ee120e8d7f964f3fcafaf409f22dae5",
+  "sourceMetadata": "source_metadata.json",
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "frameWidth": 134,
+  "frameHeight": 134,
+  "rectOrigin": "top-left",
+  "frameOrder": "left-to-right, then top-to-bottom",
+  "pivotUnity": [
+    0.5,
+    0.24
+  ],
+  "pivot": {
+    "x": 0.5,
+    "y": 0.24,
+    "normalized": true,
+    "origin": "bottom-left"
+  },
+  "pixelsPerUnit": 64,
+  "transformScale": [
+    1,
+    1,
+    1
+  ],
+  "filterMode": "Point",
+  "compression": "None",
+  "fps": 14,
+  "frameDurationMs": [
+    71.42857142857143,
+    71.42857142857143,
+    71.42857142857143,
+    71.42857142857143,
+    71.42857142857143,
+    71.42857142857143,
+    71.42857142857143,
+    71.42857142857143
+  ],
+  "totalDurationMs": 571.4285714285714,
+  "loop": true,
+  "loopSource": "Collection playback setting for sustained/flight effects; source v7 metadata omitted loop.",
+  "preview": {
+    "file": "preview.gif",
+    "background": "#17212e",
+    "repeatingForReview": true,
+    "encodedFrames": 8,
+    "delaysMs": [
+      70,
+      70,
+      70,
+      80,
+      70,
+      70,
+      70,
+      70
+    ],
+    "timingResolutionMs": 10
+  },
+  "packaging": "Existing native-size sheet copied byte-for-byte; individual frame PNGs extracted without resampling, repaint or alpha changes.",
+  "frames": [
+    {
+      "x": 0,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_00",
+      "index": 0,
+      "file": "frames/frame_00.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "044c3c61850452a9dcb9855bcdce52c1de585fa28f41a4de963a48942bbe6b1c",
+      "rgbaSha256": "c4a9c98c4b843e8b95273a2871f5f8ac5efc999a118fff3d0850f48d3c2d2e1d"
+    },
+    {
+      "x": 134,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_01",
+      "index": 1,
+      "file": "frames/frame_01.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "5d4b6df24a30d1f86c7e86f3bad3c105716dfdbb1e8463ae7c870db90dd33033",
+      "rgbaSha256": "e36a83544b7eb9a56368ac3deeca7e55f667ad385045693113d5ef2ad88deea2"
+    },
+    {
+      "x": 268,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_02",
+      "index": 2,
+      "file": "frames/frame_02.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "7b96662d8e511f1ae6ff9bb87d75657134e0855425713d97098b2ea0dbe96e8f",
+      "rgbaSha256": "78e873a94f08159b54dcbca323100af9b79606c21416ab0e79587f2c66295564"
+    },
+    {
+      "x": 402,
+      "width": 134,
+      "height": 134,
+      "yTop": 0,
+      "yUnity": 134,
+      "name": "frame_03",
+      "index": 3,
+      "file": "frames/frame_03.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "b7cbab53c258daf3587afb8101033474b01a9eac68c278366324546bed46cc88",
+      "rgbaSha256": "fed6083cadbea1f138f7ada718b43cc287dd39ca58dd73ac1c50cf4f76418ca3"
+    },
+    {
+      "x": 0,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_04",
+      "index": 4,
+      "file": "frames/frame_04.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "07b550aad3878b3944c66789d5f06f0c9363fe2dbee86c00dea64c2ed972e4f8",
+      "rgbaSha256": "66421292a19f7f3b86bc1f645ed9ac5e9d1dcdca860bfca68f093ef85cb01b6d"
+    },
+    {
+      "x": 134,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_05",
+      "index": 5,
+      "file": "frames/frame_05.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "7fa18f792ef5c23cb1980350a124e3debb73d128d67059711c0d6d4083d267ea",
+      "rgbaSha256": "2138708a73c156e22d02483c41d83a284953a206ecd2270c3d3c5840eabf71be"
+    },
+    {
+      "x": 268,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_06",
+      "index": 6,
+      "file": "frames/frame_06.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "ddde58fcb9f80b292985ab403bffeea757fa9345439c3d0c40683a8e91ed9885",
+      "rgbaSha256": "d5a40bc5d9c0a5d9ad16ca5aecde12e93548558557e79c8c55f5fe0bf2907e43"
+    },
+    {
+      "x": 402,
+      "width": 134,
+      "height": 134,
+      "yTop": 134,
+      "yUnity": 0,
+      "name": "frame_07",
+      "index": 7,
+      "file": "frames/frame_07.png",
+      "durationMs": 71.42857142857143,
+      "pngSha256": "8f500f7b6d5d1995af151fb4b981bdf0152791f13d9247bc5205e060557b5cb9",
+      "rgbaSha256": "e77936b3abcc518173167daa48f364ab51e76e4c8cc355c024e576c33361a188"
+    }
+  ],
+  "name": "Wisp / Body"
+}

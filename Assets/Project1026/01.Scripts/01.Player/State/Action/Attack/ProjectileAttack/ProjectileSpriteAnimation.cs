@@ -6,6 +6,7 @@ public sealed class ProjectileSpriteAnimation : MonoBehaviour
     [SerializeField] private Sprite[] frames;
     [SerializeField, Min(0.01f)] private float frameDuration = 0.06f;
     [SerializeField] private bool playOutsideBattle;
+    [SerializeField] private bool returnToPoolAfterPlayback;
 
     private SpriteRenderer spriteRenderer;
     private float elapsed;
@@ -24,12 +25,21 @@ public sealed class ProjectileSpriteAnimation : MonoBehaviour
 
     private void Update()
     {
-        if (frames == null || frames.Length < 2 ||
+        if (frames == null || frames.Length == 0 ||
+            (frames.Length == 1 && !returnToPoolAfterPlayback) ||
             (!playOutsideBattle && !Managers.BattleState.CanUpdate))
             return;
 
         float duration = Mathf.Max(0.01f, frameDuration);
-        elapsed = Mathf.Repeat(elapsed + Time.deltaTime, duration * frames.Length);
+        float totalDuration = duration * frames.Length;
+        elapsed += Time.deltaTime;
+        if (returnToPoolAfterPlayback && elapsed >= totalDuration)
+        {
+            Managers.Pool.Push(gameObject);
+            return;
+        }
+
+        elapsed = Mathf.Repeat(elapsed, totalDuration);
         int index = Mathf.Min(Mathf.FloorToInt(elapsed / duration), frames.Length - 1);
         Sprite frame = frames[index];
         if (spriteRenderer.sprite != frame)
