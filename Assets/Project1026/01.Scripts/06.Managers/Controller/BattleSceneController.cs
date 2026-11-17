@@ -11,6 +11,8 @@ public class BattleSceneController : MonoBehaviour
     [Header("Stage Data")]
     [SerializeField] private List<StageDataSO> stageSpawnDatas = new();
 
+    [SerializeField] private StageDataSO endlessSpawnData;
+
     private StageDataSO currentStageData;
     private int roundIndex;
     private int waveIndex;
@@ -18,7 +20,21 @@ public class BattleSceneController : MonoBehaviour
     private float roundDuration;
     private float remainingLaterWavesDuration;
     private bool battleRunning;
-    private bool waitingForRoundKills;
+    public bool IsEndless { get; private set; }
+    public int Cycle { get; private set; } = 1;
+    public int TotalWave { get; private set; }
+    public float SurvivalTime { get; private set; }
+    public float WaveTimeRemaining => waveTimeRemaining;
+    public float WaveProgress => currentStageData == null
+        ? 0f
+        : Mathf.Clamp01(1f - waveTimeRemaining / CurrentWaveData.Duration);
+    public bool IsOvertime => IsBossBattle && boss.CurrentHp > 0f && waveTimeRemaining <= 0f;
+
+    private WaveDataSO CurrentWaveData => CurrentRoundData.Waves[waveIndex];
+    private bool IsFinalWave => roundIndex + 1 == currentStageData.Rounds.Count &&
+        waveIndex + 1 == RoundWaveCount;
+    public bool IsSpecialWave => currentStageData != null &&
+        (CurrentWaveData.BossPrefab != null || (IsFinalWave && currentStageData.BossPrefab != null));
     private GwaegangWhiteTiger boss;
     private BossBattleUI bossUI;
     public bool IsBossBattle => boss != null;
@@ -42,15 +58,19 @@ public class BattleSceneController : MonoBehaviour
             return;
 
         int stageId = Managers.GameState.SelectedStage;
-        if (player == null || !TryGetStageData(stageId, out StageDataSO data))
+        IsEndless = Managers.GameState.IsEndlessSelected;
+        StageDataSO data = endlessSpawnData;
+        bool hasData = IsEndless ? data != null : TryGetStageData(stageId, out data);
+        string contentName = IsEndless ? "endless mode" : $"stage {stageId}";
+        if (player == null || !hasData)
         {
-            Debug.LogError($"Battle setup is missing a player or a unique stage asset for stage {stageId}.", this);
+            Debug.LogError($"Battle setup is missing a player or a stage asset for {contentName}.", this);
             return;
         }
 
         if (!HasValidRounds(data))
         {
-            Debug.LogError($"Stage {stageId} must have rounds with valid waves and durations.", data);
+            Debug.LogError($"Battle data for {contentName} must have rounds with valid waves and durations.", data);
             return;
         }
 
@@ -73,24 +93,15 @@ public class BattleSceneController : MonoBehaviour
         if (!Managers.BattleState.CanUpdate)
             return;
 
-        if (IsBossBattle)
-            return;
-
-        if (waitingForRoundKills)
-        {
-            TryCompleteRound();
-            return;
-        }
-
+        SurvivalTime += Time.deltaTime;
         waveTimeRemaining = Mathf.Max(0f, waveTimeRemaining - Time.deltaTime);
         RoundTimeRemaining = Mathf.Max(0f, remainingLaterWavesDuration + waveTimeRemaining);
-        if (waveTimeRemaining <= 0f)
+        if (waveTimeRemaining <= 0f && !IsSpecialWave)
             EndCurrentWave();
     }
 
     private void StartRound()
     {
-        waitingForRoundKills = false;
         waveIndex = 0;
         roundDuration = 0f;
         foreach (WaveDataSO wave in CurrentRoundData.Waves)
@@ -103,10 +114,26 @@ public class BattleSceneController : MonoBehaviour
 
     private void StartWave()
     {
-        WaveDataSO wave = CurrentRoundData.Waves[waveIndex];
+        WaveDataSO wave = CurrentWaveData;
+        TotalWave++;
         waveTimeRemaining = wave.Duration;
-        remainingLaterWavesDuration = Mathf.Max(0f, RoundTimeRemaining - wave.Duration);
-        enemyGenerate.StartSpawning(wave);
+        remainingLaterWavesDuration = 0f;
+        for (int index = waveIndex + 1; index < RoundWaveCount; index++)
+            remainingLaterWavesDuration += CurrentRoundData.Waves[index].Duration;
+        RoundTimeRemaining = remainingLaterWavesDuration + waveTimeRemaining;
+        int previousCycles = Cycle - 1;
+        enemyGenerate.StartSpawning(wave, TotalWave == 1,
+            1f + previousCycles * currentStageData.EndlessHpPerCycle,
+            1f + previousCycles * currentStageData.EndlessDamagePerCycle,
+            previousCycles * currentStageData.EndlessBatchPerCycle,
+            previousCycles * currentStageData.EndlessEliteChancePerCycle);
+
+        if (enemyGenerate.IsSpawning && IsSpecialWave &&
+            !StartBossBattle(wave.BossPrefab != null ? wave.BossPrefab : currentStageData.BossPrefab))
+        {
+            EndBattle(false);
+            return;
+        }
 
         if (!enemyGenerate.IsSpawning)
         {
@@ -126,15 +153,6 @@ public class BattleSceneController : MonoBehaviour
             return;
         }
 
-        waitingForRoundKills = true;
-        TryCompleteRound();
-    }
-
-    private void TryCompleteRound()
-    {
-        if (enemyGenerate.RoundKillCount < enemyGenerate.RoundSpawnedCount)
-            return;
-
         if (roundIndex + 1 < currentStageData.Rounds.Count)
         {
             roundIndex++;
@@ -142,11 +160,15 @@ public class BattleSceneController : MonoBehaviour
             return;
         }
 
-        if (currentStageData.BossPrefab != null)
+        if (IsEndless)
         {
-            if (!StartBossBattle()) EndBattle(false);
+            Cycle++;
+            Managers.RunData.QueueRequiredExpIncrease((Cycle - 1) * currentStageData.EndlessExpPerCycle);
+            roundIndex = 0;
+            StartRound();
             return;
         }
+
         EndBattle(true);
     }
 
@@ -162,23 +184,30 @@ public class BattleSceneController : MonoBehaviour
         enemyGenerate.StopSpawning();
         Managers.BattleState.SetState(cleared ? BattleState.Cleared : BattleState.Failed);
 
-        if (cleared)
+        if (IsEndless)
+        {
+            if (Managers.GameState.RecordEndlessResult(SurvivalTime, TotalWave))
+                Managers.Save.SaveGame();
+        }
+        else if (cleared)
         {
             int beforeReward = Managers.GameState.SoulEssence;
             Managers.GameState.CompleteBattleStage(currentStageData.StageId);
+            if (Application.isPlaying)
+                Managers.Save.SaveGame();
+
             if (IsBossBattle)
             {
                 bossUI.ShowReward(Managers.GameState.SoulEssence - beforeReward, ReturnToLobby);
                 return;
             }
-            // 클리어시 셀렉트 화면으로 이동 or 유지
         }
 
         Managers.RunData.Reset();
         Managers.Scene.LoadGame("01.LobbyScene");
     }
 
-    private bool StartBossBattle()
+    private bool StartBossBattle(GwaegangWhiteTiger prefab)
     {
         NavigationArea area = FindAnyObjectByType<NavigationArea>();
         MapArea map = FindAnyObjectByType<MapArea>();
@@ -200,16 +229,40 @@ public class BattleSceneController : MonoBehaviour
             Debug.LogError("No valid boss spawn position.", this);
             return false;
         }
-        waitingForRoundKills = false;
-        boss = Instantiate(currentStageData.BossPrefab, spawn, Quaternion.identity);
-        boss.Initialize(player, area, map);
+        boss = Instantiate(prefab, spawn, Quaternion.identity);
+        boss.Initialize(player, area, map,
+            1f + (Cycle - 1) * currentStageData.EndlessHpPerCycle,
+            1f + (Cycle - 1) * currentStageData.EndlessDamagePerCycle);
         boss.Defeated += OnBossDefeated;
         bossUI = gameObject.AddComponent<BossBattleUI>();
         bossUI.Bind(boss);
         return true;
     }
 
-    private void OnBossDefeated() => EndBattle(true);
+    private void OnBossDefeated()
+    {
+        if (!battleRunning || boss == null)
+            return;
+
+        boss.Defeated -= OnBossDefeated;
+        if (player.IsDead)
+        {
+            EndBattle(false);
+            return;
+        }
+
+        if (!IsEndless && IsFinalWave)
+        {
+            EndBattle(true);
+            return;
+        }
+
+        Destroy(boss.gameObject);
+        Destroy(bossUI);
+        boss = null;
+        bossUI = null;
+        EndCurrentWave();
+    }
 
     private void ReturnToLobby()
     {

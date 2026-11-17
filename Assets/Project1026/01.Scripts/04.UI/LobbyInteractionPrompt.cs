@@ -73,7 +73,9 @@ public sealed class LobbyInteractionPrompt
     public void Hide()
     {
         target = null;
-        badge.gameObject.SetActive(false);
+        targetRenderer = null;
+        if (badge != null)
+            badge.gameObject.SetActive(false);
     }
 
     private static RectTransform AddImage(Transform parent, string name, Color color,

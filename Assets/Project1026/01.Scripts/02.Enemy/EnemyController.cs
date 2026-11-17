@@ -58,9 +58,11 @@ public class EnemyController : MonoBehaviour
     public static event System.Action<EnemyGenerate> EnemyDead;
     #endregion
 
-    public void Initialize(NavigationArea area, EnemyGenerate generate)
+    public void Initialize(NavigationArea area, EnemyGenerate generate, bool elite = false,
+        float hpMultiplier = 1f, float damageMultiplier = 1f, float expMultiplier = 1f)
     {
-        Model.Init();
+        Model.Init(hpMultiplier, damageMultiplier, expMultiplier);
+        view.SetElite(elite);
         MovementCollider = GetComponent<Collider2D>();
         NavArea?.Unregister(this);
         NavArea = area;

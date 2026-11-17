@@ -20,7 +20,7 @@ public class RunDataManager
     {
         if (config == null || string.IsNullOrWhiteSpace(config.ConfigKey))
         {
-            Debug.LogError("[RunDataManager] °ø°Ý ¼³Á¤ ¶Ç´Â ½Äº° Å°°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("[RunDataManager] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½Äºï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return null;
         }
 
@@ -31,7 +31,7 @@ public class RunDataManager
         data = config.CreateRuntimeData(initiallyOwned);
         if (data == null)
         {
-            Debug.LogError($"[RunDataManager] °ø°Ý ·±Å¸ÀÓ µ¥ÀÌÅÍ »ý¼º¿¡ ½ÇÆÐÇß½À´Ï´Ù: {key}");
+            Debug.LogError($"[RunDataManager] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½: {key}");
             return null;
         }
 
@@ -115,6 +115,22 @@ public class RunDataManager
     #region Properties
     public float CurrentExp { get; set; }
     public int Level { get; set; } = 1;
+    private float requiredExpIncrease;
+    private float queuedRequiredExpIncrease;
+
+    public float GetRequiredExp(float baseExp) => baseExp + requiredExpIncrease;
+
+    public void QueueRequiredExpIncrease(float increase)
+    {
+        queuedRequiredExpIncrease = increase;
+        if (CurrentExp <= 0f)
+            ApplyQueuedRequiredExpIncrease();
+    }
+
+    public void ApplyQueuedRequiredExpIncrease()
+    {
+        requiredExpIncrease = queuedRequiredExpIncrease;
+    }
 
     public IReadOnlyDictionary<string, int> AcquiredAugmentCounts => acquiredAugmentCounts;
     public IReadOnlyCollection<string> AcquiredAttackKeys => acquiredAttackKeys;
@@ -126,8 +142,8 @@ public class RunDataManager
         this.view = view;
 
         RefreshPlayerHp(model);
-        view.InitExp(model.MaxExp);
-        view.SetExp(CurrentExp, Level);
+        view.InitExp();
+        view.SetExp(CurrentExp, Level, GetRequiredExp(model.MaxExp));
     }
 
     public void RefreshPlayerHp(PlayerModel player)
@@ -143,7 +159,7 @@ public class RunDataManager
 
         int levelUpCount = model.CalculateExp(this, amount);
 
-        view?.SetExp(CurrentExp, Level);
+        view?.SetExp(CurrentExp, Level, GetRequiredExp(model.MaxExp));
 
         if (levelUpCount > 0)
             OnLevelUp(levelUpCount);
@@ -171,6 +187,7 @@ public class RunDataManager
     public void Reset()
     {
         CurrentExp = 0f;
+        requiredExpIncrease = queuedRequiredExpIncrease = 0f;
         Level = 1;
 
         ResetPlayerStats();

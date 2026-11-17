@@ -18,6 +18,10 @@ MonoBehaviour:
     weight: 7
   - prefab: {fileID: 156661654134334344, guid: ec5e851cd742a3943af204b108bd255e, type: 3}
     weight: 3
-  spawnBatchSize: 10
-  spawnInterval: 2
+  spawnBatchSize: 16
+  spawnInterval: 1.35
   spawnImmediately: 1
+  activeEnemyLimit: 65
+  hpMultiplier: 1.18
+  expMultiplier: 1.15
+  eliteChance: 0.08

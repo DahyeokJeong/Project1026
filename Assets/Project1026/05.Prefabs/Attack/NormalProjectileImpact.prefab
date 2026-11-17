@@ -103,17 +103,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8781a220df32457389756e025c0b4ede, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpriteAnimation
   frames:
-  - {fileID: 21300000, guid: c82e93429e9893540aacefbe08ddb57c, type: 3}
-  - {fileID: 21300000, guid: 4895f87f2bcfa224baa413f3b5a12846, type: 3}
-  - {fileID: 21300000, guid: 29685f8604a1aef4fa86aa60a86a664e, type: 3}
-  - {fileID: 21300000, guid: 71a7d304dfc43904caff2996b5abb6d3, type: 3}
-  - {fileID: 21300000, guid: fc161cffc6a4253449aa13186341f718, type: 3}
-  - {fileID: 21300000, guid: 6e06622d7bd172d4984f5270485c27e1, type: 3}
-  - {fileID: 21300000, guid: 972d01b8084465b41ba4876e824ed957, type: 3}
-  - {fileID: 21300000, guid: 2c4c1b6812530984db83b34f9cbbbc0c, type: 3}
-  frameDuration: 0.0416666667
+  - {fileID: 21300000, guid: 921354eee23bb354794c709cb4c61b6a, type: 3}
+  - {fileID: 21300000, guid: 90ce7b22d1380704b8322403cf61e912, type: 3}
+  - {fileID: 21300000, guid: 92b01f5b5b2884d429373ca56cc8d332, type: 3}
+  - {fileID: 21300000, guid: b3d8ec4f41ef23848b335d3b3a9022c5, type: 3}
+  - {fileID: 21300000, guid: 1185c080e1d261848bcfa4d1df757f17, type: 3}
+  - {fileID: 21300000, guid: 81be1dc7e6c912b4c9d3705b6fc0feb7, type: 3}
+  - {fileID: 21300000, guid: 9640b32a6093bde4ca093bb6f02d31da, type: 3}
+  - {fileID: 21300000, guid: 780cb18f46b7b5049b70f29145ed2b10, type: 3}
+  frameDuration: 0.041666668
   playOutsideBattle: 0
   returnToPoolAfterPlayback: 1

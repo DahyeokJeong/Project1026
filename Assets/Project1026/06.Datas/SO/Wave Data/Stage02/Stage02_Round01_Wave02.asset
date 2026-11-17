@@ -18,6 +18,6 @@ MonoBehaviour:
     weight: 7
   - prefab: {fileID: 156661654134334344, guid: 2abd85af7f498634b802811e24850c97, type: 3}
     weight: 3
-  spawnBatchSize: 1
-  spawnInterval: 1
+  spawnBatchSize: 6
+  spawnInterval: 0.95
   spawnImmediately: 1

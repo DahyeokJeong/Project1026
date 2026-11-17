@@ -23,9 +23,9 @@ public class PlayerView : MonoBehaviour
         animationView.Init(animator, bodyRenderer);
     }
 
-    public void InitExp(float maxExp)
+    public void InitExp()
     {
-        expView.Init(currentExp, levelTxt, maxExp, expFillSmoothTime);
+        expView.Init(currentExp, levelTxt, expFillSmoothTime);
     }
 
     private void Update()
@@ -58,8 +58,8 @@ public class PlayerView : MonoBehaviour
             currentHp.fillAmount = maximum > 0f ? Mathf.Clamp01(current / maximum) : 0f;
     }
 
-    public void SetExp(float currentExp, int currentLevel)
+    public void SetExp(float currentExp, int currentLevel, float maxExp)
     {
-        expView.SetExp(currentExp, currentLevel);
+        expView.SetExp(currentExp, currentLevel, maxExp);
     }
 }

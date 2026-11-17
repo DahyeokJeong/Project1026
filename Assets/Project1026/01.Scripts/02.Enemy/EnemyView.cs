@@ -5,6 +5,7 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Material hitFlash;
     [SerializeField] private Material deathMaterial;
+    [SerializeField] private EliteSpriteAtlas eliteSpriteAtlas;
 
     [Header("Animation")]
     [SerializeField] private EnemyModel model;
@@ -33,6 +34,8 @@ public class EnemyView : MonoBehaviour
     private static readonly int FadeId = Shader.PropertyToID("_Fade");
 
     private Material normalMaterial;
+    private Sprite currentFrame;
+    private bool isElite;
     private MaterialPropertyBlock deathProperties;
 
     public bool HasDeathEffect => deathMaterial != null;
@@ -55,7 +58,7 @@ public class EnemyView : MonoBehaviour
         deadTime = 0f;
         playingDeath = false;
         IsDeathAnimationComplete = false;
-        spriteRenderer.sprite = idleSprite;
+        SetFrame(idleSprite);
         spriteRenderer.flipX = idleFlip;
 
         if (attack != null && attackFrames != null && attackFrames.Length > 0)
@@ -78,7 +81,7 @@ public class EnemyView : MonoBehaviour
         {
             deadTime += Time.deltaTime;
             int frame = Mathf.FloorToInt(deadTime / Mathf.Max(0.01f, deadFrameDuration));
-            spriteRenderer.sprite = deadFrames[Mathf.Min(frame, deadFrames.Length - 1)];
+            SetFrame(deadFrames[Mathf.Min(frame, deadFrames.Length - 1)]);
             IsDeathAnimationComplete = frame >= deadFrames.Length;
             playingDeath = !IsDeathAnimationComplete;
             return;
@@ -92,7 +95,7 @@ public class EnemyView : MonoBehaviour
             int frame = Mathf.Min(
                 Mathf.FloorToInt((1f - attackTime / Mathf.Max(0.01f, attackDuration)) * attackFrames.Length),
                 attackFrames.Length - 1);
-            spriteRenderer.sprite = attackFrames[frame];
+            SetFrame(attackFrames[frame]);
             attackTime -= Time.deltaTime;
             return;
         }
@@ -112,19 +115,19 @@ public class EnemyView : MonoBehaviour
             if (idleFrames != null && idleFrames.Length > 0)
             {
                 int idleFrame = Mathf.FloorToInt(idleTime / Mathf.Max(0.01f, idleFrameDuration)) % idleFrames.Length;
-                spriteRenderer.sprite = idleFrames[idleFrame];
+                SetFrame(idleFrames[idleFrame]);
                 idleTime += Time.deltaTime;
             }
             else
             {
-                spriteRenderer.sprite = idleSprite;
+                SetFrame(idleSprite);
             }
             return;
         }
 
         idleTime = 0f;
         int moveFrame = Mathf.FloorToInt(moveTime / Mathf.Max(0.01f, moveFrameDuration)) % moveFrames.Length;
-        spriteRenderer.sprite = moveFrames[moveFrame];
+        SetFrame(moveFrames[moveFrame]);
         moveTime += Time.deltaTime;
     }
 
@@ -138,7 +141,7 @@ public class EnemyView : MonoBehaviour
         movementHoldTime = 0f;
         idleTime = 0f;
         attackTime = Mathf.Max(0.01f, attackDuration);
-        spriteRenderer.sprite = attackFrames[0];
+        SetFrame(attackFrames[0]);
     }
 
     public void SetMovementFacing(Vector2 direction)
@@ -157,6 +160,28 @@ public class EnemyView : MonoBehaviour
             spriteRenderer.flipX = idleFlip ^ (horizontal < 0f);
     }
 
+    public void SetElite(bool elite)
+    {
+        isElite = elite;
+        ApplyFrame();
+    }
+
+    private void SetFrame(Sprite frame)
+    {
+        if (currentFrame == frame)
+            return;
+
+        currentFrame = frame;
+        ApplyFrame();
+    }
+
+    private void ApplyFrame()
+    {
+        spriteRenderer.sprite = isElite && eliteSpriteAtlas != null
+            ? eliteSpriteAtlas.GetOutlined(currentFrame)
+            : currentFrame;
+    }
+
     public void SetHitFlash(bool active)
     {
         spriteRenderer.sharedMaterial = active ? hitFlash : normalMaterial;
@@ -170,7 +195,7 @@ public class EnemyView : MonoBehaviour
         playingDeath = deadFrames != null && deadFrames.Length > 0;
         IsDeathAnimationComplete = !playingDeath;
         if (playingDeath)
-            spriteRenderer.sprite = deadFrames[0];
+            SetFrame(deadFrames[0]);
     }
 
     public void BeginDeathEffect()
@@ -193,6 +218,9 @@ public class EnemyView : MonoBehaviour
         if (attack != null)
             attack.AttackPerformed -= OnAttackPerformed;
 
+        isElite = false;
+        currentFrame = null;
+        spriteRenderer.sprite = idleSprite;
         spriteRenderer.SetPropertyBlock(null);
         spriteRenderer.sharedMaterial = normalMaterial;
     }

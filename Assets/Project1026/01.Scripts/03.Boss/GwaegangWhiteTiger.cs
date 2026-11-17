@@ -20,16 +20,20 @@ public sealed class GwaegangWhiteTiger : MonoBehaviour
     private bool hitApplied, deathReported;
     public ActionState State { get; private set; }
     public float CurrentHp { get; private set; }
-    public float MaxHp => maxHp;
+    public float MaxHp { get; private set; }
+    private float runtimeAttackPower;
     public event Action Defeated;
 
-    public void Initialize(PlayerModel target, NavigationArea area, MapArea bounds)
+    public void Initialize(PlayerModel target, NavigationArea area, MapArea bounds,
+        float hpMultiplier = 1f, float damageMultiplier = 1f)
     {
         player = target;
         navigation = area;
         map = bounds;
         hurtbox = GetComponent<Collider2D>();
-        CurrentHp = maxHp;
+        MaxHp = maxHp * hpMultiplier;
+        CurrentHp = MaxHp;
+        runtimeAttackPower = attackPower * damageMultiplier;
         clock = 0f;
         nextClaw = 2f;
         nextStomp = 10f;
@@ -173,7 +177,7 @@ public sealed class GwaegangWhiteTiger : MonoBehaviour
     }
     private void DamagePlayer(float multiplier)
     {
-        if (!player.IsDead) Managers.Damage.ApplyDamage(player.transform, Mathf.Floor(attackPower * multiplier + 0.5f));
+        if (!player.IsDead) Managers.Damage.ApplyDamage(player.transform, Mathf.Floor(runtimeAttackPower * multiplier + 0.5f));
     }
     private void CreateWarning()
     {

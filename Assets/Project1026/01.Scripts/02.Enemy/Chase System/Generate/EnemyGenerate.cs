@@ -25,6 +25,10 @@ public class EnemyGenerate : MonoBehaviour
     private WaveDataSO spawnData;
 
     private float timer;
+    private float hpMultiplier;
+    private float damageMultiplier;
+    private float eliteChance;
+    private int batchSize;
     private bool isSpawning;
     private bool IsSpawnAreaReady => mapArea != null && mapArea.IsReady && area != null && area.IsReady;
     #endregion
@@ -43,7 +47,8 @@ public class EnemyGenerate : MonoBehaviour
         RoundKillCount = 0;
     }
 
-    public void StartSpawning(WaveDataSO data)
+    public void StartSpawning(WaveDataSO data, bool allowImmediate = true,
+        float cycleHp = 1f, float cycleDamage = 1f, int extraBatch = 0, float extraEliteChance = 0f)
     {
         if (!CanStartSpawning(data))
             return;
@@ -55,10 +60,15 @@ public class EnemyGenerate : MonoBehaviour
         spawnData = data;
         spawnPosition = new EnemySpawnPosition(mapArea);
 
+        hpMultiplier = data.HpMultiplier * cycleHp;
+        damageMultiplier = cycleDamage;
+        eliteChance = Mathf.Min(data.EliteChance + extraEliteChance, data.EliteChanceLimit);
+        // Keep each tick bounded even after several endless cycles.
+        batchSize = data.SpawnBatchSize + Mathf.Min(extraBatch, data.SpawnBatchSize);
         timer = spawnData.SpawnInterval;
         isSpawning = true;
 
-        if (spawnData.SpawnImmediately)
+        if (allowImmediate && spawnData.SpawnImmediately)
             SpawnBatch();
     }
 
@@ -109,7 +119,8 @@ public class EnemyGenerate : MonoBehaviour
 
         ClearDestroyedCache();
 
-        for (int i = 0; i < spawnData.SpawnBatchSize; i++)
+        int count = Mathf.Min(batchSize, spawnData.ActiveEnemyLimit - ActiveEnemyCount);
+        for (int i = 0; i < count; i++)
         {
             if (!spawnPosition.TryGetPosition(spawnClearance, positionAttempts, out Vector2 position))
                 continue;
@@ -143,7 +154,11 @@ public class EnemyGenerate : MonoBehaviour
             enemyCache[obj] = enemy;
         }
 
-        enemy.Initialize(area, this);
+        bool elite = Random.value < eliteChance;
+        enemy.Initialize(area, this, elite,
+            hpMultiplier * (elite ? spawnData.EliteHpMultiplier : 1f),
+            damageMultiplier,
+            spawnData.ExpMultiplier * (elite ? spawnData.EliteExpMultiplier : 1f));
         activeEnemies.Add(enemy);
         roundEnemies.Add(enemy);
         RoundSpawnedCount++;

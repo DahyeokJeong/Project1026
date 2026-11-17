@@ -154,7 +154,7 @@ public class PlayerModel : MonoBehaviour
         }
 
         Debug.LogError(
-            $"[PlayerModel] PlayerStatÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù. ID: {id}",
+            $"[PlayerModel] PlayerStatï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ID: {id}",
             this);
 
         return 0f;
@@ -168,11 +168,11 @@ public class PlayerModel : MonoBehaviour
         currentHp = Mathf.Max(0f, currentHp - finalDamage);
         Managers.RunData.RefreshPlayerHp(this);
 
-        Debug.Log($"[PlayerModel] ÇöÀç Ã¼·Â: {currentHp}", this);
+        Debug.Log($"[PlayerModel] ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½: {currentHp}", this);
 
         if (IsDead)
         {
-            // ½ÇÁ¦ »ç¸Á Ã³¸®´Â ±âÁ¸ °ÔÀÓ Èå¸§¿¡ ¸ÂÃç ¿¬°á
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½å¸§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 
@@ -185,12 +185,6 @@ public class PlayerModel : MonoBehaviour
         Managers.RunData.RefreshPlayerHp(this);
     }
     private static int SoulBookLevel(SoulBookNode node) => Managers.GameState.GetSoulBookLevel(node);
-
-    public static float GetRequiredExp(float baseExp, int level)
-    {
-        const float increasePerLevel = 30f;
-        return baseExp + Mathf.Max(0, level - 1) * increasePerLevel;
-    }
 
     public int CalculateExp(RunDataManager runData, float amount)
     {
@@ -206,14 +200,15 @@ public class PlayerModel : MonoBehaviour
 
         runData.CurrentExp += amount * (1f + SoulBookLevel(SoulBookNode.ExperienceGain) * ExperienceGainPerLevel);
 
-        float requiredExp = GetRequiredExp(MaxExp, runData.Level);
+        float requiredExp = runData.GetRequiredExp(MaxExp);
         while (runData.CurrentExp >= requiredExp)
         {
             runData.CurrentExp -= requiredExp;
             runData.Level++;
+            runData.ApplyQueuedRequiredExpIncrease();
 
             levelUpCount++;
-            requiredExp = GetRequiredExp(MaxExp, runData.Level);
+            requiredExp = runData.GetRequiredExp(MaxExp);
         }
 
         return levelUpCount;

@@ -7,6 +7,7 @@ public class LoadingUI : MonoBehaviour
     [Header("Component")]
     [SerializeField] private Slider loadingSlider;
     [SerializeField] private Image background;
+    [SerializeField] private BackgroundDecoration backgroundDecoration;
 
     [Header("Background")]
     [SerializeField] private Sprite villageBackground;
@@ -43,28 +44,34 @@ public class LoadingUI : MonoBehaviour
 
         string sceneName = Managers.Scene.TargetSceneName;
         Sprite selectedSprite = null;
+        int decorationIndex = -1;
 
         switch (sceneName)
         {
             case "01.LobbyScene":
                 selectedSprite = villageBackground;
+                decorationIndex = 0;
                 break;
 
             case "03.BattleScene":
-                int stage = Managers.GameState.SelectedStage;
+                // Endless currently shares the Stage 3 loading artwork.
+                int stage = Managers.GameState.IsEndlessSelected ? 3 : Managers.GameState.SelectedStage;
 
                 switch (stage)
                 {
                     case 1:
                         selectedSprite = stage1Background;
+                        decorationIndex = 1;
                         break;
 
                     case 2:
                         selectedSprite = stage2Background;
+                        decorationIndex = 2;
                         break;
 
                     case 3:
                         selectedSprite = stage3Background;
+                        decorationIndex = 3;
                         break;
                 }
                 break;
@@ -72,6 +79,8 @@ public class LoadingUI : MonoBehaviour
 
         if (selectedSprite != null)
             background.sprite = selectedSprite;
+
+        backgroundDecoration?.Show(selectedSprite != null ? decorationIndex : -1);
     }
 
     private void SetProgress(float progress)

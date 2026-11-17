@@ -26,17 +26,17 @@ public class EnemyModel : MonoBehaviour
         Init();
     }
 
-    public void Init()
+    public void Init(float hpMultiplier = 1f, float damageMultiplier = 1f, float expMultiplier = 1f)
     {
-        MaxHp = data.MaxHp;
+        MaxHp = data.MaxHp * hpMultiplier;
         CurrentHp = MaxHp;
-        AttackDamage = data.AttackDamage;
+        AttackDamage = data.AttackDamage * damageMultiplier;
         AttackRange = data.AttackRange;
         Defense = data.Defense;
         AttackInerval = data.AttackSpeed;
         MoveSpeed = data.MoveSpeed;
         AttackType = data.AttackType;
-        RewardExp = data.RewardExp;
+        RewardExp = data.RewardExp * expMultiplier;
         IsHit = false;
     }
 

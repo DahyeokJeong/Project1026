@@ -330,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoadingUI
   loadingSlider: {fileID: 1394833648}
   background: {fileID: 637389700}
+  backgroundDecoration: {fileID: 6111000003}
   villageBackground: {fileID: 21300000, guid: 01f566f34bd9eb747afdd6c21225e1ad, type: 3}
   stage1Background: {fileID: 21300000, guid: e065b9ba84b90e045a10846f37508c83, type: 3}
   stage2Background: {fileID: 21300000, guid: 3c044b32e38b3c24aba98963ef89bcf2, type: 3}
@@ -476,7 +477,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6111000002}
   m_Father: {fileID: 402089787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -915,6 +917,184 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067810429}
   m_CullTransparentMesh: 1
+--- !u!1 &6111000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6111000002}
+  - component: {fileID: 6111000003}
+  m_Layer: 5
+  m_Name: Background Decoration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6111000002
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6111000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 637389702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6111000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6111000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae925ab8d0894e81a02ceeb662436830, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundDecoration
+  initialEffect: -1
+  effects:
+  - sprite: {fileID: 21300000, guid: c72c66a534f54d17905c553c839563a4, type: 3}
+    tint: {r: 1, g: 0.93, b: 0.96, a: 0.78}
+    flicker: 0
+    tracks:
+    - start: {x: 0.062, y: 0.91}
+      end: {x: 0.22, y: 0.65}
+      size: {x: 0.016, y: 0.022}
+      duration: 3.9
+      phase: 0.27
+      rotation: -32
+      rotationTravel: 95
+    - start: {x: 0.15, y: 0.98}
+      end: {x: 0.33, y: 0.73}
+      size: {x: 0.013, y: 0.018}
+      duration: 4.7
+      phase: 0.53
+      rotation: 20
+      rotationTravel: -95
+    - start: {x: 0.23, y: 0.98}
+      end: {x: 0.38, y: 0.68}
+      size: {x: 0.017, y: 0.021}
+      duration: 5.1
+      phase: 0.19
+      rotation: 24
+      rotationTravel: 75
+    - start: {x: 0.31, y: 0.98}
+      end: {x: 0.44, y: 0.81}
+      size: {x: 0.012, y: 0.02}
+      duration: 4.4
+      phase: 0.72
+      rotation: -30
+      rotationTravel: 110
+    - start: {x: 0.1, y: 0.97}
+      end: {x: 0.22, y: 0.77}
+      size: {x: 0.012, y: 0.017}
+      duration: 3.4
+      phase: 0.64
+      rotation: 35
+      rotationTravel: 110
+  - sprite: {fileID: 21300000, guid: e1e449d48f3e47cc8f93c570628817ed, type: 3}
+    tint: {r: 0.49, g: 0.38, b: 0.49, a: 0.36}
+    flicker: 0
+    tracks:
+    - start: {x: 0.562, y: 0.693}
+      end: {x: 0.719, y: 0.841}
+      size: {x: 0.145, y: 0.102}
+      duration: 5.6
+      phase: 0.3
+      rotation: 24
+      rotationTravel: 5
+    - start: {x: 0.657, y: 0.762}
+      end: {x: 0.814, y: 0.914}
+      size: {x: 0.19, y: 0.118}
+      duration: 6.6
+      phase: 0.57
+      rotation: 25
+      rotationTravel: 6
+    - start: {x: 0.764, y: 0.85}
+      end: {x: 0.903, y: 0.962}
+      size: {x: 0.18, y: 0.116}
+      duration: 7.2
+      phase: 0.34
+      rotation: 29
+      rotationTravel: -7
+  - sprite: {fileID: 21300000, guid: 9a4c80fc20a34f5b89c0bea7b20a091c, type: 3}
+    tint: {r: 1, g: 0.55, b: 0.22, a: 0.84}
+    flicker: 0
+    tracks:
+    - start: {x: 0.846, y: 0.1}
+      end: {x: 0.818, y: 0.28}
+      size: {x: 0.018, y: 0.028}
+      duration: 2.6
+      phase: 0.36
+      rotation: 10
+      rotationTravel: 21
+    - start: {x: 0.871, y: 0.14}
+      end: {x: 0.91, y: 0.31}
+      size: {x: 0.013, y: 0.023}
+      duration: 2.9
+      phase: 0.51
+      rotation: 25
+      rotationTravel: 30
+    - start: {x: 0.809, y: 0.09}
+      end: {x: 0.794, y: 0.23}
+      size: {x: 0.017, y: 0.029}
+      duration: 2.4
+      phase: 0.7
+      rotation: 5
+      rotationTravel: -32
+    - start: {x: 0.909, y: 0.165}
+      end: {x: 0.923, y: 0.33}
+      size: {x: 0.015, y: 0.023}
+      duration: 3.3
+      phase: 0.29
+      rotation: 21
+      rotationTravel: 28
+    - start: {x: 0.821, y: 0.125}
+      end: {x: 0.854, y: 0.282}
+      size: {x: 0.013, y: 0.022}
+      duration: 2.7
+      phase: 0.62
+      rotation: 24
+      rotationTravel: 12
+  - sprite: {fileID: 21300000, guid: 13865b1a3cae4d6182c8dc51ec97acfc, type: 3}
+    tint: {r: 0.21, g: 0.9, b: 1, a: 0.62}
+    flicker: 1
+    tracks:
+    - start: {x: 0.254, y: 0.547}
+      end: {x: 0.254, y: 0.547}
+      size: {x: 0.085, y: 0.15}
+      duration: 1.2
+      phase: 0.17
+      rotation: 0
+      rotationTravel: 0
+    - start: {x: 0.701, y: 0.532}
+      end: {x: 0.701, y: 0.532}
+      size: {x: 0.07, y: 0.128}
+      duration: 1.41
+      phase: 0.55
+      rotation: 0
+      rotationTravel: 0
+    - start: {x: 0.556, y: 0.497}
+      end: {x: 0.556, y: 0.497}
+      size: {x: 0.032, y: 0.058}
+      duration: 1.83
+      phase: 0.58
+      rotation: 0
+      rotationTravel: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

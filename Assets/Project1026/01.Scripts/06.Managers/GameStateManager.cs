@@ -19,12 +19,17 @@ public class GameStateManager
 #endif
 
     private readonly HashSet<int> clearedStages = new();
+    private readonly List<EndlessRecord> legacyEndlessRecords = new();
     private readonly HashSet<string> completedEvents = new();
     private readonly int[] soulBookLevels = new int[(int)SoulBookNode.AreaAttack + 1];
     #endregion
 
     #region Properties
     public int SelectedStage { get; private set; }
+    public bool IsEndlessSelected { get; private set; }
+    public bool IsEndlessUnlocked => IsStageCleared(3);
+    public float EndlessBestSurvivalTime { get; private set; }
+    public int EndlessHighestWave { get; private set; }
     public int SoulEssence { get; private set; } = StartingSoulEssence;
     #endregion
 
@@ -50,6 +55,27 @@ public class GameStateManager
             return false;
 
         SelectedStage = stageId;
+        IsEndlessSelected = false;
+        return true;
+    }
+
+    public bool SelectEndless()
+    {
+        if (!IsEndlessUnlocked)
+            return false;
+
+        SelectedStage = 0;
+        IsEndlessSelected = true;
+        return true;
+    }
+
+    public bool RecordEndlessResult(float survivalSeconds, int wave)
+    {
+        if (survivalSeconds <= EndlessBestSurvivalTime && wave <= EndlessHighestWave)
+            return false;
+
+        EndlessBestSurvivalTime = Math.Max(EndlessBestSurvivalTime, survivalSeconds);
+        EndlessHighestWave = Math.Max(EndlessHighestWave, wave);
         return true;
     }
 
@@ -142,6 +168,9 @@ public class GameStateManager
         return new SaveData
         {
             clearedStages = new List<int>(clearedStages),
+            endlessRecords = new List<EndlessRecord>(legacyEndlessRecords),
+            endlessBestSurvivalTime = EndlessBestSurvivalTime,
+            endlessHighestWave = EndlessHighestWave,
             completedEvents = new List<string>(completedEvents),
             soulEssence = SoulEssence,
             soulBookLevels = new List<int>(soulBookLevels)
@@ -154,6 +183,7 @@ public class GameStateManager
             return;
 
         clearedStages.Clear();
+        legacyEndlessRecords.Clear();
         completedEvents.Clear();
 
         if(saveData.clearedStages != null)
@@ -161,6 +191,12 @@ public class GameStateManager
 
         if(saveData.completedEvents != null)
             completedEvents.UnionWith(saveData.completedEvents);
+
+        if (saveData.endlessRecords != null)
+            legacyEndlessRecords.AddRange(saveData.endlessRecords);
+
+        EndlessBestSurvivalTime = Math.Max(0f, saveData.endlessBestSurvivalTime);
+        EndlessHighestWave = Math.Max(0, saveData.endlessHighestWave);
 
         SoulEssence = saveData.soulEssence;
         Array.Clear(soulBookLevels, 0, soulBookLevels.Length);
@@ -172,6 +208,7 @@ public class GameStateManager
         }
 
         SelectedStage = 0;
+        IsEndlessSelected = false;
 
         ProgressChanged?.Invoke();
     }
@@ -179,10 +216,14 @@ public class GameStateManager
     public void Clear()
     {
         clearedStages.Clear();
+        legacyEndlessRecords.Clear();
         completedEvents.Clear();
         SoulEssence = StartingSoulEssence;
+        EndlessBestSurvivalTime = 0f;
+        EndlessHighestWave = 0;
         Array.Clear(soulBookLevels, 0, soulBookLevels.Length);
         SelectedStage = 0;
+        IsEndlessSelected = false;
     }
 
     public void StartNewGame()

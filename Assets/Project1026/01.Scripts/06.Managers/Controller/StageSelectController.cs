@@ -22,9 +22,20 @@ public class StageSelectController : MonoBehaviour
         "푸른 정기가 흐르는 숲"
     };
 
-    private int selectedStage = 1;
-    private bool isLeaving;
+    [SerializeField] private UnityEngine.UI.Button endlessButton;
+    [SerializeField] private GameObject endlessSelectionFrame;
+    [SerializeField] private GameObject endlessLockBadge;
+    [SerializeField] private GameObject endlessArtwork;
+    [SerializeField] private TextMeshProUGUI endlessStatus;
+    [SerializeField] private TextMeshProUGUI endlessRecord;
 
+    private const string EndlessName = "무한 모드";
+    private const string EndlessUnlockHint = "스테이지 3 클리어 후 개방";
+
+    private int selectedCardIndex;
+    private bool IsEndlessCardSelected => selectedCardIndex == stageButtons.Length;
+    private int SelectedStageId => selectedCardIndex + 1;
+    private bool isLeaving;
     private void Awake()
     {
         for (int i = 0; i < stageButtons.Length; i++)
@@ -33,12 +44,15 @@ public class StageSelectController : MonoBehaviour
             stageButtons[i].onClick.AddListener(() => OnClickStage(id));
         }
 
+        endlessButton.onClick.AddListener(() => FocusCard(stageButtons.Length));
+
         if (carousel != null)
         {
-            var cards = new RectTransform[stageButtons.Length];
+            var cards = new RectTransform[stageButtons.Length + 1];
             for (int i = 0; i < stageButtons.Length; i++)
                 cards[i] = (RectTransform)stageButtons[i].transform.parent;
 
+            cards[stageButtons.Length] = (RectTransform)endlessButton.transform.parent;
             carousel.SetCards(cards);
         }
 
@@ -77,64 +91,84 @@ public class StageSelectController : MonoBehaviour
 
     public void OnClickStage(int stageId)
     {
-        if (isLeaving || stageId < 1 || stageId > stageButtons.Length ||
-            !Managers.GameState.IsStageUnlocked(stageId))
+        if (stageId >= 1 && stageId <= stageButtons.Length && Managers.GameState.IsStageUnlocked(stageId))
+            FocusCard(stageId - 1);
+    }
+
+    private void FocusCard(int cardIndex)
+    {
+        if (isLeaving)
             return;
 
         if (carousel != null)
         {
-            carousel.Focus(stageId - 1);
+            carousel.Focus(cardIndex);
             return;
         }
 
-        selectedStage = stageId;
+        selectedCardIndex = cardIndex;
         RefreshButtons();
     }
 
     private void OnCenteredCardChanged(int? cardIndex)
     {
         if (cardIndex.HasValue)
-            selectedStage = cardIndex.Value + 1;
+            selectedCardIndex = cardIndex.Value;
 
         RefreshButtons();
     }
 
+    private bool HasCenteredSelection => carousel == null || carousel.CenteredCardIndex == selectedCardIndex;
+
     private bool CanEnterSelectedStage()
     {
-        return !isLeaving &&
-            selectedStage >= 1 &&
-            selectedStage <= stageButtons.Length &&
-            (carousel == null || carousel.CenteredCardIndex == selectedStage - 1) &&
-            Managers.GameState.IsStageUnlocked(selectedStage);
+        return !isLeaving && HasCenteredSelection &&
+            (IsEndlessCardSelected ? Managers.GameState.IsEndlessUnlocked :
+                Managers.GameState.IsStageUnlocked(SelectedStageId));
     }
 
     private void RefreshButtons()
     {
-        bool hasCenteredSelection = carousel == null ||
-            carousel.CenteredCardIndex == selectedStage - 1;
-
+        GameStateManager state = Managers.GameState;
         for (int i = 0; i < stageButtons.Length; i++)
         {
             int id = i + 1;
-            bool unlocked = Managers.GameState.IsStageUnlocked(id);
+            bool unlocked = state.IsStageUnlocked(id);
 
             stageButtons[i].interactable = unlocked && !isLeaving;
-            selectionFrames[i].SetActive(hasCenteredSelection && id == selectedStage && unlocked);
+            selectionFrames[i].SetActive(HasCenteredSelection && i == selectedCardIndex && unlocked);
             lockBadges[i].SetActive(!unlocked);
             stageStatus[i].text = !unlocked ? $"스테이지 {id - 1} 클리어 후 개방" :
-                Managers.GameState.IsStageCleared(id) ? "클리어 완료" : "도전 가능";
+                state.IsStageCleared(id) ? "클리어 완료" : "도전 가능";
         }
 
-        if (selectedStage >= 1 && selectedStage <= stageButtons.Length)
-        {
-            selectedTitle.text = $"스테이지 {selectedStage}";
-            string description = selectedStage <= StageDescriptions.Length
-                ? StageDescriptions[selectedStage - 1]
-                : selectedTitle.text;
+        bool endlessUnlocked = state.IsEndlessUnlocked;
+        endlessButton.interactable = !isLeaving;
+        endlessSelectionFrame.SetActive(HasCenteredSelection && IsEndlessCardSelected);
+        endlessLockBadge.SetActive(!endlessUnlocked);
+        endlessArtwork.SetActive(endlessUnlocked);
+        endlessStatus.gameObject.SetActive(!endlessUnlocked);
+        endlessStatus.text = EndlessUnlockHint;
+        endlessRecord.gameObject.SetActive(endlessUnlocked);
+        int seconds = Mathf.FloorToInt(state.EndlessBestSurvivalTime);
+        endlessRecord.text = state.EndlessHighestWave > 0 || state.EndlessBestSurvivalTime > 0f
+            ? $"최고 {seconds / 60:00}:{seconds % 60:00} · {state.EndlessHighestWave}파"
+            : "최고 기록 없음";
 
-            stageDescription.text = description + (Managers.GameState.IsStageUnlocked(selectedStage)
-                ? "\n준비가 되면 입장하기를 눌러주세요."
-                : $"\n스테이지 {selectedStage - 1} 클리어 후 개방됩니다.");
+        if (IsEndlessCardSelected)
+        {
+            selectedTitle.text = EndlessName;
+            stageDescription.text = "끝없이 몰려오는 요괴에게 도전하고 생존 기록을 세우세요." +
+                (endlessUnlocked ? "" : $"\n{EndlessUnlockHint}");
+        }
+        else
+        {
+            int id = SelectedStageId;
+            selectedTitle.text = $"스테이지 {id}";
+            string description = id <= StageDescriptions.Length ? StageDescriptions[id - 1] : selectedTitle.text;
+            stageDescription.text = state.IsStageUnlocked(id)
+                ? description
+                : $"{description}\n스테이지 {id - 1} 클리어 후 개방";
         }
 
         enterButton.interactable = CanEnterSelectedStage();
@@ -143,11 +177,16 @@ public class StageSelectController : MonoBehaviour
 
     public void EnterSelectedStage()
     {
-        if (!CanEnterSelectedStage() || !Managers.GameState.SelectStage(selectedStage))
+        if (!CanEnterSelectedStage())
+            return;
+
+        GameStateManager state = Managers.GameState;
+        if (!(IsEndlessCardSelected ? state.SelectEndless() : state.SelectStage(SelectedStageId)))
             return;
 
         isLeaving = true;
         RefreshButtons();
+        Managers.RunData.Reset();
         Managers.Scene.LoadGame("03.BattleScene");
     }
 

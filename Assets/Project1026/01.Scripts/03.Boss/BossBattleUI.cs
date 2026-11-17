@@ -23,7 +23,7 @@ public sealed class BossBattleUI : MonoBehaviour
         var scaler = root.GetComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
-        healthPanel = Panel("Boss health", root.transform, new Vector2(0.25f, 0.86f), new Vector2(0.75f, 0.96f), new Color(0.06f, 0.04f, 0.04f, 0.92f));
+        healthPanel = Panel("Boss health", root.transform, new Vector2(0.25f, 0.77f), new Vector2(0.75f, 0.85f), new Color(0.06f, 0.04f, 0.04f, 0.92f));
         Label("괴강백호", healthPanel.transform, new Vector2(0, 0.55f), Vector2.one, 28);
         var track = Panel("Health track", healthPanel.transform, new Vector2(0.04f, 0.18f), new Vector2(0.96f, 0.47f), new Color(0.16f, 0.1f, 0.1f));
         fill = Panel("Health fill", track.transform, Vector2.zero, Vector2.one, new Color(0.75f, 0.12f, 0.12f)).GetComponent<Image>();
