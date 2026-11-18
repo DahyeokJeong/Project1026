@@ -30,7 +30,7 @@ public class PlayerAnimationView
     private void UpdateFacing(float horizontal)
     {
         if (bodyRenderer != null && Mathf.Abs(horizontal) > 0.01f)
-            bodyRenderer.flipX = horizontal < 0f;
+            bodyRenderer.flipX = horizontal > 0f;
     }
 
     public void SetIdleAnimation()
