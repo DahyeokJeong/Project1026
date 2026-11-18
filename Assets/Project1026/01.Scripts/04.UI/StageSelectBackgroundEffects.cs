@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public sealed class StageSelectBackgroundEffects : MonoBehaviour
 {
+    private static readonly int SkyMotionEnabled = Shader.PropertyToID("_SkyMotionEnabled");
+
     [Serializable]
     private sealed class DriftLayer
     {
@@ -58,6 +60,9 @@ public sealed class StageSelectBackgroundEffects : MonoBehaviour
     [SerializeField] private DriftLayer fogFront;
 
     private RectTransform effectsRect;
+    private Image backgroundImage;
+    private Material originalSkyMaterial;
+    private Material runtimeSkyMaterial;
     private double elapsed;
 
     private void Awake()
@@ -69,14 +74,49 @@ public sealed class StageSelectBackgroundEffects : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!Application.IsPlaying(gameObject))
+            return;
+
+        EnableSkyMotion();
         elapsed = 0;
         ApplyLayers();
+    }
+
+    private void OnDisable()
+    {
+        if (runtimeSkyMaterial == null)
+            return;
+
+        if (backgroundImage != null && backgroundImage.material == runtimeSkyMaterial)
+            backgroundImage.material = originalSkyMaterial;
+
+        Destroy(runtimeSkyMaterial);
+        runtimeSkyMaterial = null;
+        originalSkyMaterial = null;
+        backgroundImage = null;
     }
 
     private void LateUpdate()
     {
         elapsed += Time.unscaledDeltaTime;
         ApplyLayers();
+    }
+
+    private void EnableSkyMotion()
+    {
+        Transform parent = transform.parent;
+        if (parent == null || !parent.TryGetComponent(out Image image))
+            return;
+
+        Material source = image.material;
+        if (source == null || !source.HasProperty(SkyMotionEnabled))
+            return;
+
+        backgroundImage = image;
+        originalSkyMaterial = source;
+        runtimeSkyMaterial = new Material(source);
+        runtimeSkyMaterial.SetFloat(SkyMotionEnabled, 1f);
+        backgroundImage.material = runtimeSkyMaterial;
     }
 
     private void ApplyLayers()

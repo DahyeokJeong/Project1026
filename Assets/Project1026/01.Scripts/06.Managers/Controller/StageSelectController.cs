@@ -25,7 +25,6 @@ public class StageSelectController : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Button endlessButton;
     [SerializeField] private GameObject endlessSelectionFrame;
     [SerializeField] private GameObject endlessLockBadge;
-    [SerializeField] private GameObject endlessArtwork;
     [SerializeField] private TextMeshProUGUI endlessStatus;
     [SerializeField] private TextMeshProUGUI endlessRecord;
 
@@ -36,6 +35,8 @@ public class StageSelectController : MonoBehaviour
     private bool IsEndlessCardSelected => selectedCardIndex == stageButtons.Length;
     private int SelectedStageId => selectedCardIndex + 1;
     private bool isLeaving;
+    private ColorBlock endlessUnlockedColors;
+    private ColorBlock endlessLockedColors;
     private void Awake()
     {
         for (int i = 0; i < stageButtons.Length; i++)
@@ -44,6 +45,14 @@ public class StageSelectController : MonoBehaviour
             stageButtons[i].onClick.AddListener(() => OnClickStage(id));
         }
 
+        endlessUnlockedColors = endlessButton.colors;
+        endlessLockedColors = endlessUnlockedColors;
+        // Apply the disabled tint in every selectable state so the locked card still accepts clicks.
+        Color lockedTint = endlessUnlockedColors.disabledColor;
+        endlessLockedColors.normalColor = lockedTint;
+        endlessLockedColors.highlightedColor = lockedTint;
+        endlessLockedColors.pressedColor = lockedTint;
+        endlessLockedColors.selectedColor = lockedTint;
         endlessButton.onClick.AddListener(() => FocusCard(stageButtons.Length));
 
         if (carousel != null)
@@ -144,9 +153,9 @@ public class StageSelectController : MonoBehaviour
 
         bool endlessUnlocked = state.IsEndlessUnlocked;
         endlessButton.interactable = !isLeaving;
-        endlessSelectionFrame.SetActive(HasCenteredSelection && IsEndlessCardSelected);
+        endlessButton.colors = endlessUnlocked ? endlessUnlockedColors : endlessLockedColors;
+        endlessSelectionFrame.SetActive(HasCenteredSelection && IsEndlessCardSelected && endlessUnlocked);
         endlessLockBadge.SetActive(!endlessUnlocked);
-        endlessArtwork.SetActive(endlessUnlocked);
         endlessStatus.gameObject.SetActive(!endlessUnlocked);
         endlessStatus.text = EndlessUnlockHint;
         endlessRecord.gameObject.SetActive(endlessUnlocked);

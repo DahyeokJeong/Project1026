@@ -7,6 +7,7 @@ Shader "Project1026/UI/Stage Select Sky"
         _Color ("Tint", Color) = (1,1,1,1)
         _Motion ("Horizontal Travel (pixels)", Range(0,32)) = 26
         _Speed ("Motion Speed", Range(0,2)) = 1
+        [HideInInspector] _SkyMotionEnabled ("Sky Motion Enabled", Float) = 0
     }
 
     SubShader
@@ -39,6 +40,7 @@ Shader "Project1026/UI/Stage Select Sky"
             fixed4 _Color;
             float _Motion;
             float _Speed;
+            float _SkyMotionEnabled;
 
             struct Input
             {
@@ -66,7 +68,7 @@ Shader "Project1026/UI/Stage Select Sky"
             fixed4 Frag(Varyings input) : SV_Target
             {
                 UNITY_BRANCH
-                if (input.uv.y < 0.66)
+                if (_SkyMotionEnabled < 0.5 || input.uv.y < 0.66)
                     return tex2D(_MainTex, input.uv) * input.color;
 
                 float mask = tex2D(_SkyMask, input.uv).r;
